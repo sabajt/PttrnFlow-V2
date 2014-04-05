@@ -58,6 +58,15 @@
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
+    CCSpriteBatchNode *audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:@"audioObjects.png"];
+    [self addChild:audioObjectsBatch];
+    
+    CCSprite *arrowSprite = [CCSprite spriteWithImageNamed:@"arrow_up.png"];
+    arrowSprite.position = ccp(100, 100);
+    arrowSprite.color = [CCColor yellowColor];
+    [audioObjectsBatch addChild:arrowSprite];
 
     // done
 	return self;
