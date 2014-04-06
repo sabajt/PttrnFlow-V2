@@ -224,6 +224,43 @@
 		3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3399661718F0B47A000F4522 /* userInterface-hd.png */; };
 		3399662018F0B47A000F4522 /* userInterface.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3399661818F0B47A000F4522 /* userInterface.plist */; };
 		3399662118F0B47A000F4522 /* userInterface.png in Resources */ = {isa = PBXBuildFile; fileRef = 3399661918F0B47A000F4522 /* userInterface.png */; };
+		3399667B18F0B60C000F4522 /* PFLAudioResponderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */; };
+		3399667C18F0B60C000F4522 /* PFLAudioResponderTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */; };
+		3399667D18F0B60C000F4522 /* PFLArrowSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662918F0B60C000F4522 /* PFLArrowSprite.m */; };
+		3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662B18F0B60C000F4522 /* PFLAudioPadSprite.m */; };
+		3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662E18F0B60C000F4522 /* PFLEntrySprite.m */; };
+		3399668018F0B60C000F4522 /* PFLGearSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663018F0B60C000F4522 /* PFLGearSprite.m */; };
+		3399668118F0B60C000F4522 /* PFLSynthSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663218F0B60C000F4522 /* PFLSynthSprite.m */; };
+		3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663718F0B60C000F4522 /* PFLBasicButton.m */; };
+		3399668518F0B60C000F4522 /* PFLTileSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663B18F0B60C000F4522 /* PFLTileSprite.m */; };
+		3399668618F0B60C000F4522 /* PFLToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663D18F0B60C000F4522 /* PFLToggleButton.m */; };
+		3399668818F0B60C000F4522 /* PFLTransitionSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664118F0B60C000F4522 /* PFLTransitionSlide.m */; };
+		3399668918F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */; };
+		3399668A18F0B60C000F4522 /* PFLPuzzleControlsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */; };
+		3399668B18F0B60C000F4522 /* PFLPuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */; };
+		3399668C18F0B60C000F4522 /* PFLPuzzleSetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */; };
+		3399668D18F0B60C000F4522 /* PFLScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664C18F0B60C000F4522 /* PFLScrollLayer.m */; };
+		3399668E18F0B60C000F4522 /* PFLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664F18F0B60C000F4522 /* PFLEvent.m */; };
+		3399668F18F0B60C000F4522 /* PFLGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665118F0B60C000F4522 /* PFLGlyph.m */; };
+		3399669018F0B60C000F4522 /* PFLKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665318F0B60C000F4522 /* PFLKeyframe.m */; };
+		3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665518F0B60C000F4522 /* PFLMultiSample.m */; };
+		3399669218F0B60C000F4522 /* PFLPuzzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665718F0B60C000F4522 /* PFLPuzzle.m */; };
+		3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665918F0B60C000F4522 /* PFLPuzzleSet.m */; };
+		3399669418F0B60C000F4522 /* PFLSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665B18F0B60C000F4522 /* PFLSample.m */; };
+		3399669518F0B60C000F4522 /* AVAudioPlayer+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */; };
+		3399669618F0B60C000F4522 /* PFLPatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666018F0B60C000F4522 /* PFLPatchController.m */; };
+		3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */; };
+		3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666518F0B60C000F4522 /* PFLSolutionButton.m */; };
+		3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */; };
+		3399669A18F0B60C000F4522 /* CCSprite+PFLEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */; };
+		3399669B18F0B60C000F4522 /* NSArray+PFLCompareObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666C18F0B60C000F4522 /* NSArray+PFLCompareObjects.m */; };
+		3399669C18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666E18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m */; };
+		3399669D18F0B60C000F4522 /* NSString+PFLDegrees.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667018F0B60C000F4522 /* NSString+PFLDegrees.m */; };
+		3399669E18F0B60C000F4522 /* PFLColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667218F0B60C000F4522 /* PFLColorUtils.m */; };
+		3399669F18F0B60C000F4522 /* PFLCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667418F0B60C000F4522 /* PFLCoord.m */; };
+		339966A018F0B60C000F4522 /* PFLGameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667618F0B60C000F4522 /* PFLGameConstants.m */; };
+		339966A118F0B60C000F4522 /* PFLGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667818F0B60C000F4522 /* PFLGeometry.m */; };
+		339966A218F0B60C000F4522 /* PFLJsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667A18F0B60C000F4522 /* PFLJsonUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -677,6 +714,81 @@
 		3399661718F0B47A000F4522 /* userInterface-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-hd.png"; sourceTree = "<group>"; };
 		3399661818F0B47A000F4522 /* userInterface.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userInterface.plist; sourceTree = "<group>"; };
 		3399661918F0B47A000F4522 /* userInterface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInterface.png; sourceTree = "<group>"; };
+		3399662318F0B60C000F4522 /* PFLAudioResponderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderStepController.h; sourceTree = "<group>"; };
+		3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderStepController.m; sourceTree = "<group>"; };
+		3399662518F0B60C000F4522 /* PFLAudioResponderTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderTouchController.h; sourceTree = "<group>"; };
+		3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderTouchController.m; sourceTree = "<group>"; };
+		3399662818F0B60C000F4522 /* PFLArrowSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLArrowSprite.h; sourceTree = "<group>"; };
+		3399662918F0B60C000F4522 /* PFLArrowSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLArrowSprite.m; sourceTree = "<group>"; };
+		3399662A18F0B60C000F4522 /* PFLAudioPadSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioPadSprite.h; sourceTree = "<group>"; };
+		3399662B18F0B60C000F4522 /* PFLAudioPadSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioPadSprite.m; sourceTree = "<group>"; };
+		3399662C18F0B60C000F4522 /* PFLAudioResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponder.h; sourceTree = "<group>"; };
+		3399662D18F0B60C000F4522 /* PFLEntrySprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLEntrySprite.h; sourceTree = "<group>"; };
+		3399662E18F0B60C000F4522 /* PFLEntrySprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLEntrySprite.m; sourceTree = "<group>"; };
+		3399662F18F0B60C000F4522 /* PFLGearSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGearSprite.h; sourceTree = "<group>"; };
+		3399663018F0B60C000F4522 /* PFLGearSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGearSprite.m; sourceTree = "<group>"; };
+		3399663118F0B60C000F4522 /* PFLSynthSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSynthSprite.h; sourceTree = "<group>"; };
+		3399663218F0B60C000F4522 /* PFLSynthSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSynthSprite.m; sourceTree = "<group>"; };
+		3399663618F0B60C000F4522 /* PFLBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLBasicButton.h; sourceTree = "<group>"; };
+		3399663718F0B60C000F4522 /* PFLBasicButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLBasicButton.m; sourceTree = "<group>"; };
+		3399663A18F0B60C000F4522 /* PFLTileSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLTileSprite.h; sourceTree = "<group>"; };
+		3399663B18F0B60C000F4522 /* PFLTileSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLTileSprite.m; sourceTree = "<group>"; };
+		3399663C18F0B60C000F4522 /* PFLToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLToggleButton.h; sourceTree = "<group>"; };
+		3399663D18F0B60C000F4522 /* PFLToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLToggleButton.m; sourceTree = "<group>"; };
+		3399664018F0B60C000F4522 /* PFLTransitionSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLTransitionSlide.h; sourceTree = "<group>"; };
+		3399664118F0B60C000F4522 /* PFLTransitionSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLTransitionSlide.m; sourceTree = "<group>"; };
+		3399664318F0B60C000F4522 /* PFLPuzzleBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleBackgroundLayer.h; sourceTree = "<group>"; };
+		3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleBackgroundLayer.m; sourceTree = "<group>"; };
+		3399664518F0B60C000F4522 /* PFLPuzzleControlsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleControlsLayer.h; sourceTree = "<group>"; };
+		3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleControlsLayer.m; sourceTree = "<group>"; };
+		3399664718F0B60C000F4522 /* PFLPuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleLayer.h; sourceTree = "<group>"; };
+		3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleLayer.m; sourceTree = "<group>"; };
+		3399664918F0B60C000F4522 /* PFLPuzzleSetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetLayer.h; sourceTree = "<group>"; };
+		3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetLayer.m; sourceTree = "<group>"; };
+		3399664B18F0B60C000F4522 /* PFLScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLScrollLayer.h; sourceTree = "<group>"; };
+		3399664C18F0B60C000F4522 /* PFLScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLScrollLayer.m; sourceTree = "<group>"; };
+		3399664E18F0B60C000F4522 /* PFLEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLEvent.h; sourceTree = "<group>"; };
+		3399664F18F0B60C000F4522 /* PFLEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLEvent.m; sourceTree = "<group>"; };
+		3399665018F0B60C000F4522 /* PFLGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGlyph.h; sourceTree = "<group>"; };
+		3399665118F0B60C000F4522 /* PFLGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGlyph.m; sourceTree = "<group>"; };
+		3399665218F0B60C000F4522 /* PFLKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLKeyframe.h; sourceTree = "<group>"; };
+		3399665318F0B60C000F4522 /* PFLKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLKeyframe.m; sourceTree = "<group>"; };
+		3399665418F0B60C000F4522 /* PFLMultiSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLMultiSample.h; sourceTree = "<group>"; };
+		3399665518F0B60C000F4522 /* PFLMultiSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLMultiSample.m; sourceTree = "<group>"; };
+		3399665618F0B60C000F4522 /* PFLPuzzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzle.h; sourceTree = "<group>"; };
+		3399665718F0B60C000F4522 /* PFLPuzzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzle.m; sourceTree = "<group>"; };
+		3399665818F0B60C000F4522 /* PFLPuzzleSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSet.h; sourceTree = "<group>"; };
+		3399665918F0B60C000F4522 /* PFLPuzzleSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSet.m; sourceTree = "<group>"; };
+		3399665A18F0B60C000F4522 /* PFLSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSample.h; sourceTree = "<group>"; };
+		3399665B18F0B60C000F4522 /* PFLSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSample.m; sourceTree = "<group>"; };
+		3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAudioPlayer+Utils.h"; sourceTree = "<group>"; };
+		3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAudioPlayer+Utils.m"; sourceTree = "<group>"; };
+		3399665F18F0B60C000F4522 /* PFLPatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPatchController.h; sourceTree = "<group>"; };
+		3399666018F0B60C000F4522 /* PFLPatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPatchController.m; sourceTree = "<group>"; };
+		3399666218F0B60C000F4522 /* PFLPuzzleSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetCell.h; sourceTree = "<group>"; };
+		3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetCell.m; sourceTree = "<group>"; };
+		3399666418F0B60C000F4522 /* PFLSolutionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSolutionButton.h; sourceTree = "<group>"; };
+		3399666518F0B60C000F4522 /* PFLSolutionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSolutionButton.m; sourceTree = "<group>"; };
+		3399666718F0B60C000F4522 /* CCNode+PFLGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLGrid.h"; sourceTree = "<group>"; };
+		3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+PFLGrid.m"; sourceTree = "<group>"; };
+		3399666918F0B60C000F4522 /* CCSprite+PFLEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+PFLEffects.h"; sourceTree = "<group>"; };
+		3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+PFLEffects.m"; sourceTree = "<group>"; };
+		3399666B18F0B60C000F4522 /* NSArray+PFLCompareObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PFLCompareObjects.h"; sourceTree = "<group>"; };
+		3399666C18F0B60C000F4522 /* NSArray+PFLCompareObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PFLCompareObjects.m"; sourceTree = "<group>"; };
+		3399666D18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PFLAudioResponderUtils.h"; sourceTree = "<group>"; };
+		3399666E18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PFLAudioResponderUtils.m"; sourceTree = "<group>"; };
+		3399666F18F0B60C000F4522 /* NSString+PFLDegrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PFLDegrees.h"; sourceTree = "<group>"; };
+		3399667018F0B60C000F4522 /* NSString+PFLDegrees.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PFLDegrees.m"; sourceTree = "<group>"; };
+		3399667118F0B60C000F4522 /* PFLColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLColorUtils.h; sourceTree = "<group>"; };
+		3399667218F0B60C000F4522 /* PFLColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLColorUtils.m; sourceTree = "<group>"; };
+		3399667318F0B60C000F4522 /* PFLCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLCoord.h; sourceTree = "<group>"; };
+		3399667418F0B60C000F4522 /* PFLCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLCoord.m; sourceTree = "<group>"; };
+		3399667518F0B60C000F4522 /* PFLGameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGameConstants.h; sourceTree = "<group>"; };
+		3399667618F0B60C000F4522 /* PFLGameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGameConstants.m; sourceTree = "<group>"; };
+		3399667718F0B60C000F4522 /* PFLGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGeometry.h; sourceTree = "<group>"; };
+		3399667818F0B60C000F4522 /* PFLGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGeometry.m; sourceTree = "<group>"; };
+		3399667918F0B60C000F4522 /* PFLJsonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLJsonUtils.h; sourceTree = "<group>"; };
+		3399667A18F0B60C000F4522 /* PFLJsonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLJsonUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1565,6 +1677,14 @@
 		339965E718F0A8E0000F4522 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3399662218F0B60C000F4522 /* Audio Responder Controllers */,
+				3399662718F0B60C000F4522 /* Audio Responders */,
+				3399663318F0B60C000F4522 /* Generic Nodes */,
+				3399664218F0B60C000F4522 /* Layers */,
+				3399664D18F0B60C000F4522 /* Models */,
+				3399665C18F0B60C000F4522 /* PD Interface */,
+				3399666118F0B60C000F4522 /* UI Nodes */,
+				3399666618F0B60C000F4522 /* Utils */,
 				339965E818F0A8E0000F4522 /* AppDelegate.h */,
 				339965E918F0A8E0000F4522 /* AppDelegate.m */,
 				339965EB18F0A8E0000F4522 /* HelloWorldScene.h */,
@@ -1617,6 +1737,145 @@
 				3399661918F0B47A000F4522 /* userInterface.png */,
 			);
 			path = userInterface;
+			sourceTree = "<group>";
+		};
+		3399662218F0B60C000F4522 /* Audio Responder Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3399662318F0B60C000F4522 /* PFLAudioResponderStepController.h */,
+				3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */,
+				3399662518F0B60C000F4522 /* PFLAudioResponderTouchController.h */,
+				3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */,
+			);
+			name = "Audio Responder Controllers";
+			path = "Classes/Audio Responder Controllers";
+			sourceTree = "<group>";
+		};
+		3399662718F0B60C000F4522 /* Audio Responders */ = {
+			isa = PBXGroup;
+			children = (
+				3399662818F0B60C000F4522 /* PFLArrowSprite.h */,
+				3399662918F0B60C000F4522 /* PFLArrowSprite.m */,
+				3399662A18F0B60C000F4522 /* PFLAudioPadSprite.h */,
+				3399662B18F0B60C000F4522 /* PFLAudioPadSprite.m */,
+				3399662C18F0B60C000F4522 /* PFLAudioResponder.h */,
+				3399662D18F0B60C000F4522 /* PFLEntrySprite.h */,
+				3399662E18F0B60C000F4522 /* PFLEntrySprite.m */,
+				3399662F18F0B60C000F4522 /* PFLGearSprite.h */,
+				3399663018F0B60C000F4522 /* PFLGearSprite.m */,
+				3399663118F0B60C000F4522 /* PFLSynthSprite.h */,
+				3399663218F0B60C000F4522 /* PFLSynthSprite.m */,
+			);
+			name = "Audio Responders";
+			path = "Classes/Audio Responders";
+			sourceTree = "<group>";
+		};
+		3399663318F0B60C000F4522 /* Generic Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				3399663618F0B60C000F4522 /* PFLBasicButton.h */,
+				3399663718F0B60C000F4522 /* PFLBasicButton.m */,
+				3399663A18F0B60C000F4522 /* PFLTileSprite.h */,
+				3399663B18F0B60C000F4522 /* PFLTileSprite.m */,
+				3399663C18F0B60C000F4522 /* PFLToggleButton.h */,
+				3399663D18F0B60C000F4522 /* PFLToggleButton.m */,
+				3399664018F0B60C000F4522 /* PFLTransitionSlide.h */,
+				3399664118F0B60C000F4522 /* PFLTransitionSlide.m */,
+			);
+			name = "Generic Nodes";
+			path = "Classes/Generic Nodes";
+			sourceTree = "<group>";
+		};
+		3399664218F0B60C000F4522 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				3399664318F0B60C000F4522 /* PFLPuzzleBackgroundLayer.h */,
+				3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */,
+				3399664518F0B60C000F4522 /* PFLPuzzleControlsLayer.h */,
+				3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */,
+				3399664718F0B60C000F4522 /* PFLPuzzleLayer.h */,
+				3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */,
+				3399664918F0B60C000F4522 /* PFLPuzzleSetLayer.h */,
+				3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */,
+				3399664B18F0B60C000F4522 /* PFLScrollLayer.h */,
+				3399664C18F0B60C000F4522 /* PFLScrollLayer.m */,
+			);
+			name = Layers;
+			path = Classes/Layers;
+			sourceTree = "<group>";
+		};
+		3399664D18F0B60C000F4522 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3399664E18F0B60C000F4522 /* PFLEvent.h */,
+				3399664F18F0B60C000F4522 /* PFLEvent.m */,
+				3399665018F0B60C000F4522 /* PFLGlyph.h */,
+				3399665118F0B60C000F4522 /* PFLGlyph.m */,
+				3399665218F0B60C000F4522 /* PFLKeyframe.h */,
+				3399665318F0B60C000F4522 /* PFLKeyframe.m */,
+				3399665418F0B60C000F4522 /* PFLMultiSample.h */,
+				3399665518F0B60C000F4522 /* PFLMultiSample.m */,
+				3399665618F0B60C000F4522 /* PFLPuzzle.h */,
+				3399665718F0B60C000F4522 /* PFLPuzzle.m */,
+				3399665818F0B60C000F4522 /* PFLPuzzleSet.h */,
+				3399665918F0B60C000F4522 /* PFLPuzzleSet.m */,
+				3399665A18F0B60C000F4522 /* PFLSample.h */,
+				3399665B18F0B60C000F4522 /* PFLSample.m */,
+			);
+			name = Models;
+			path = Classes/Models;
+			sourceTree = "<group>";
+		};
+		3399665C18F0B60C000F4522 /* PD Interface */ = {
+			isa = PBXGroup;
+			children = (
+				3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */,
+				3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */,
+				3399665F18F0B60C000F4522 /* PFLPatchController.h */,
+				3399666018F0B60C000F4522 /* PFLPatchController.m */,
+			);
+			name = "PD Interface";
+			path = "Classes/PD Interface";
+			sourceTree = "<group>";
+		};
+		3399666118F0B60C000F4522 /* UI Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				3399666218F0B60C000F4522 /* PFLPuzzleSetCell.h */,
+				3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */,
+				3399666418F0B60C000F4522 /* PFLSolutionButton.h */,
+				3399666518F0B60C000F4522 /* PFLSolutionButton.m */,
+			);
+			name = "UI Nodes";
+			path = "Classes/UI Nodes";
+			sourceTree = "<group>";
+		};
+		3399666618F0B60C000F4522 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3399666718F0B60C000F4522 /* CCNode+PFLGrid.h */,
+				3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */,
+				3399666918F0B60C000F4522 /* CCSprite+PFLEffects.h */,
+				3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */,
+				3399666B18F0B60C000F4522 /* NSArray+PFLCompareObjects.h */,
+				3399666C18F0B60C000F4522 /* NSArray+PFLCompareObjects.m */,
+				3399666D18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.h */,
+				3399666E18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m */,
+				3399666F18F0B60C000F4522 /* NSString+PFLDegrees.h */,
+				3399667018F0B60C000F4522 /* NSString+PFLDegrees.m */,
+				3399667118F0B60C000F4522 /* PFLColorUtils.h */,
+				3399667218F0B60C000F4522 /* PFLColorUtils.m */,
+				3399667318F0B60C000F4522 /* PFLCoord.h */,
+				3399667418F0B60C000F4522 /* PFLCoord.m */,
+				3399667518F0B60C000F4522 /* PFLGameConstants.h */,
+				3399667618F0B60C000F4522 /* PFLGameConstants.m */,
+				3399667718F0B60C000F4522 /* PFLGeometry.h */,
+				3399667818F0B60C000F4522 /* PFLGeometry.m */,
+				3399667918F0B60C000F4522 /* PFLJsonUtils.h */,
+				3399667A18F0B60C000F4522 /* PFLJsonUtils.m */,
+			);
+			name = Utils;
+			path = Classes/Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1736,7 +1995,9 @@
 				339963EF18F0A8DF000F4522 /* CCParticleBatchNode.m in Sources */,
 				3399656718F0A8E0000F4522 /* CCBReader.m in Sources */,
 				3399651718F0A8DF000F4522 /* CCButton.m in Sources */,
+				3399669D18F0B60C000F4522 /* NSString+PFLDegrees.m in Sources */,
 				339964C218F0A8DF000F4522 /* OALAudioActions.m in Sources */,
+				3399668A18F0B60C000F4522 /* PFLPuzzleControlsLayer.m in Sources */,
 				3399650718F0A8DF000F4522 /* NSMutableArray+WeakReferences.m in Sources */,
 				3399648118F0A8DF000F4522 /* CCGLView.m in Sources */,
 				3399654B18F0A8DF000F4522 /* mat4.c in Sources */,
@@ -1748,11 +2009,15 @@
 				3399641418F0A8DF000F4522 /* CCResponder.m in Sources */,
 				339963AB18F0A8DE000F4522 /* CCClippingNode.m in Sources */,
 				3399643E18F0A8DF000F4522 /* CCSpriteBatchNode.m in Sources */,
+				3399668B18F0B60C000F4522 /* PFLPuzzleLayer.m in Sources */,
 				3399646218F0A8DF000F4522 /* CCTransition.m in Sources */,
+				3399668118F0B60C000F4522 /* PFLSynthSprite.m in Sources */,
+				339966A018F0B60C000F4522 /* PFLGameConstants.m in Sources */,
 				3399644118F0A8DF000F4522 /* CCSpriteFrame.m in Sources */,
 				339963D518F0A8DE000F4522 /* CCNodeColor.m in Sources */,
 				339964AE18F0A8DF000F4522 /* TransformUtils.m in Sources */,
 				3399644F18F0A8DF000F4522 /* CCTextureCache.m in Sources */,
+				3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */,
 				3399647A18F0A8DF000F4522 /* CCAppDelegate.m in Sources */,
 				3399647E18F0A8DF000F4522 /* CCDirectorMac.m in Sources */,
 				339963B218F0A8DE000F4522 /* ccDeprecated.m in Sources */,
@@ -1760,12 +2025,16 @@
 				339963BD18F0A8DE000F4522 /* CCDrawNode.m in Sources */,
 				3399648E18F0A8DF000F4522 /* CCFileUtils.m in Sources */,
 				3399651118F0A8DF000F4522 /* OALTools.m in Sources */,
+				3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */,
 				339963C718F0A8DE000F4522 /* ccGLStateCache.m in Sources */,
 				339964BF18F0A8DF000F4522 /* OALActionManager.m in Sources */,
 				3399641E18F0A8DF000F4522 /* CCScheduler.m in Sources */,
+				3399669218F0B60C000F4522 /* PFLPuzzle.m in Sources */,
 				339963F218F0A8DF000F4522 /* CCParticleExamples.m in Sources */,
 				3399652418F0A8DF000F4522 /* CCSlider.m in Sources */,
 				3399645F18F0A8DF000F4522 /* CCTMXXMLParser.m in Sources */,
+				3399668918F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m in Sources */,
+				3399668018F0B60C000F4522 /* PFLGearSprite.m in Sources */,
 				3399649F18F0A8DF000F4522 /* CGPointExtension.m in Sources */,
 				3399652A18F0A8DF000F4522 /* CCTextField.m in Sources */,
 				3399649518F0A8DF000F4522 /* CCProfiling.m in Sources */,
@@ -1773,9 +2042,12 @@
 				3399645218F0A8DF000F4522 /* CCTexturePVR.m in Sources */,
 				3399656118F0A8E0000F4522 /* CCBAnimationManager.m in Sources */,
 				3399654518F0A8DF000F4522 /* mat4stack.c in Sources */,
+				3399668818F0B60C000F4522 /* PFLTransitionSlide.m in Sources */,
 				339963E418F0A8DE000F4522 /* CCNode.m in Sources */,
+				3399668D18F0B60C000F4522 /* PFLScrollLayer.m in Sources */,
 				339963CF18F0A8DE000F4522 /* CCLabelBMFont.m in Sources */,
 				3399638D18F0A8DE000F4522 /* CCActionEase.m in Sources */,
+				3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */,
 				3399639C18F0A8DE000F4522 /* CCActionTween.m in Sources */,
 				3399650A18F0A8DF000F4522 /* NSMutableDictionary+WeakReferences.m in Sources */,
 				339963E718F0A8DE000F4522 /* CCNode+Debug.m in Sources */,
@@ -1786,28 +2058,41 @@
 				3399649C18F0A8DF000F4522 /* CCVertex.m in Sources */,
 				339964D818F0A8DF000F4522 /* ALBuffer.m in Sources */,
 				339964A518F0A8DF000F4522 /* NSThread+performBlock.m in Sources */,
+				3399668518F0B60C000F4522 /* PFLTileSprite.m in Sources */,
+				3399669418F0B60C000F4522 /* PFLSample.m in Sources */,
 				3399643018F0A8DF000F4522 /* CCShaderCache.m in Sources */,
 				3399656D18F0A8E0000F4522 /* CCBSequenceProperty.m in Sources */,
+				3399669C18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m in Sources */,
 				339965F018F0A8E0000F4522 /* IntroScene.m in Sources */,
 				3399647418F0A8DF000F4522 /* CCGLView.m in Sources */,
 				3399643718F0A8DF000F4522 /* CCSprite.m in Sources */,
 				3399639318F0A8DE000F4522 /* CCActionInterval.m in Sources */,
+				3399668618F0B60C000F4522 /* PFLToggleButton.m in Sources */,
 				3399640218F0A8DF000F4522 /* CCPhysicsJoint.m in Sources */,
+				3399667D18F0B60C000F4522 /* PFLArrowSprite.m in Sources */,
 				339963E018F0A8DE000F4522 /* CCMotionStreak.m in Sources */,
 				3399639018F0A8DE000F4522 /* CCActionInstant.m in Sources */,
+				3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */,
 				3399648A18F0A8DF000F4522 /* base64.c in Sources */,
 				339964C918F0A8DF000F4522 /* OALAudioTrack.m in Sources */,
 				3399640C18F0A8DF000F4522 /* CCProgressNode.m in Sources */,
 				339963FF18F0A8DF000F4522 /* CCPhysicsBody.m in Sources */,
+				3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */,
 				3399648418F0A8DF000F4522 /* CCWindow.m in Sources */,
 				3399639918F0A8DE000F4522 /* CCActionProgressTimer.m in Sources */,
+				3399669618F0B60C000F4522 /* PFLPatchController.m in Sources */,
+				3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */,
 				3399654F18F0A8DF000F4522 /* plane.c in Sources */,
 				339964D218F0A8DF000F4522 /* OALSimpleAudio.m in Sources */,
 				339963C418F0A8DE000F4522 /* CCGLProgram.m in Sources */,
 				339965E618F0A8E0000F4522 /* main.m in Sources */,
+				3399668E18F0B60C000F4522 /* PFLEvent.m in Sources */,
 				339964F918F0A8DF000F4522 /* OALAudioSession.m in Sources */,
+				3399668F18F0B60C000F4522 /* PFLGlyph.m in Sources */,
+				339966A118F0B60C000F4522 /* PFLGeometry.m in Sources */,
 				3399657018F0A8E0000F4522 /* CCBLocalizationManager.m in Sources */,
 				3399645C18F0A8DF000F4522 /* CCTiledMapObjectGroup.m in Sources */,
+				3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */,
 				3399655918F0A8E0000F4522 /* vec3.c in Sources */,
 				339963DC18F0A8DE000F4522 /* CCLayoutBox.m in Sources */,
 				339963D918F0A8DE000F4522 /* CCLayout.m in Sources */,
@@ -1819,17 +2104,22 @@
 				339964E718F0A8DF000F4522 /* ALListener.m in Sources */,
 				339963C018F0A8DE000F4522 /* ccFPSImages.m in Sources */,
 				3399649718F0A8DF000F4522 /* ccUtils.c in Sources */,
+				3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */,
 				3399640818F0A8DF000F4522 /* CCPhysicsShape.m in Sources */,
 				3399641018F0A8DF000F4522 /* CCRenderTexture.m in Sources */,
 				3399639618F0A8DE000F4522 /* CCActionManager.m in Sources */,
 				3399643A18F0A8DF000F4522 /* CCSprite9Slice.m in Sources */,
 				3399644C18F0A8DF000F4522 /* CCTextureAtlas.m in Sources */,
+				3399669F18F0B60C000F4522 /* PFLCoord.m in Sources */,
 				3399650D18F0A8DF000F4522 /* OALAudioFile.m in Sources */,
 				3399643318F0A8DF000F4522 /* ccShaders.m in Sources */,
 				3399654718F0A8DF000F4522 /* matrix.c in Sources */,
+				339966A218F0B60C000F4522 /* PFLJsonUtils.m in Sources */,
+				3399669518F0B60C000F4522 /* AVAudioPlayer+Utils.m in Sources */,
 				3399645918F0A8DF000F4522 /* CCTiledMapLayer.m in Sources */,
 				339965ED18F0A8E0000F4522 /* HelloWorldScene.m in Sources */,
 				3399654D18F0A8DF000F4522 /* neon_matrix_impl.c in Sources */,
+				3399667B18F0B60C000F4522 /* PFLAudioResponderStepController.m in Sources */,
 				339963D218F0A8DE000F4522 /* CCLabelTTF.m in Sources */,
 				3399648718F0A8DF000F4522 /* NSEvent+CC.m in Sources */,
 				339964E418F0A8DF000F4522 /* ALDevice.m in Sources */,
@@ -1841,11 +2131,14 @@
 				339964CC18F0A8DF000F4522 /* OALAudioTrackNotifications.m in Sources */,
 				3399655118F0A8DF000F4522 /* quaternion.c in Sources */,
 				3399640518F0A8DF000F4522 /* CCPhysicsNode.m in Sources */,
+				3399668C18F0B60C000F4522 /* PFLPuzzleSetLayer.m in Sources */,
 				339964EB18F0A8DF000F4522 /* ALSoundSourcePool.m in Sources */,
 				339963FA18F0A8DF000F4522 /* CCParticleSystemBase.m in Sources */,
 				3399649118F0A8DF000F4522 /* CCColor.m in Sources */,
 				339964DE18F0A8DF000F4522 /* ALChannelSource.m in Sources */,
+				3399669A18F0B60C000F4522 /* CCSprite+PFLEffects.m in Sources */,
 				3399638A18F0A8DE000F4522 /* CCActionCatmullRom.m in Sources */,
+				3399667C18F0B60C000F4522 /* PFLAudioResponderTouchController.m in Sources */,
 				339964A218F0A8DF000F4522 /* NSAttributedString+CCAdditions.m in Sources */,
 				3399656418F0A8E0000F4522 /* CCBKeyframe.m in Sources */,
 				3399651E18F0A8DF000F4522 /* CCControlTextureFactory.m in Sources */,
@@ -1870,6 +2163,9 @@
 				339964DB18F0A8DF000F4522 /* ALCaptureDevice.m in Sources */,
 				3399641718F0A8DF000F4522 /* CCResponderManager.m in Sources */,
 				339963AF18F0A8DE000F4522 /* CCConfiguration.m in Sources */,
+				3399669E18F0B60C000F4522 /* PFLColorUtils.m in Sources */,
+				3399669B18F0B60C000F4522 /* NSArray+PFLCompareObjects.m in Sources */,
+				3399669018F0B60C000F4522 /* PFLKeyframe.m in Sources */,
 				339964F218F0A8DF000F4522 /* ALWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
