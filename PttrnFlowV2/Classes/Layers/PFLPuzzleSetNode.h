@@ -11,7 +11,7 @@
 
 @class PFLPuzzleSet;
 
-@interface PFLPuzzleSetLayer : PFLScrollNode <PFLPuzzleSetCellDelegate>
+@interface PFLPuzzleSetNode : PFLScrollNode <PFLPuzzleSetCellDelegate>
 
 @property (strong, nonatomic) NSArray *mapNames;
 

@@ -238,7 +238,7 @@
 		3399668918F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */; };
 		3399668A18F0B60C000F4522 /* PFLPuzzleControlsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */; };
 		3399668B18F0B60C000F4522 /* PFLPuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */; };
-		3399668C18F0B60C000F4522 /* PFLPuzzleSetLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */; };
+		3399668C18F0B60C000F4522 /* PFLPuzzleSetNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664A18F0B60C000F4522 /* PFLPuzzleSetNode.m */; };
 		3399668D18F0B60C000F4522 /* PFLScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664C18F0B60C000F4522 /* PFLScrollNode.m */; };
 		3399668E18F0B60C000F4522 /* PFLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664F18F0B60C000F4522 /* PFLEvent.m */; };
 		3399668F18F0B60C000F4522 /* PFLGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665118F0B60C000F4522 /* PFLGlyph.m */; };
@@ -796,8 +796,8 @@
 		3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleControlsLayer.m; sourceTree = "<group>"; };
 		3399664718F0B60C000F4522 /* PFLPuzzleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleLayer.h; sourceTree = "<group>"; };
 		3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleLayer.m; sourceTree = "<group>"; };
-		3399664918F0B60C000F4522 /* PFLPuzzleSetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetLayer.h; sourceTree = "<group>"; };
-		3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetLayer.m; sourceTree = "<group>"; };
+		3399664918F0B60C000F4522 /* PFLPuzzleSetNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetNode.h; sourceTree = "<group>"; };
+		3399664A18F0B60C000F4522 /* PFLPuzzleSetNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetNode.m; sourceTree = "<group>"; };
 		3399664B18F0B60C000F4522 /* PFLScrollNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLScrollNode.h; sourceTree = "<group>"; };
 		3399664C18F0B60C000F4522 /* PFLScrollNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLScrollNode.m; sourceTree = "<group>"; };
 		3399664E18F0B60C000F4522 /* PFLEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLEvent.h; sourceTree = "<group>"; };
@@ -1903,8 +1903,8 @@
 				3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */,
 				3399664718F0B60C000F4522 /* PFLPuzzleLayer.h */,
 				3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */,
-				3399664918F0B60C000F4522 /* PFLPuzzleSetLayer.h */,
-				3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */,
+				3399664918F0B60C000F4522 /* PFLPuzzleSetNode.h */,
+				3399664A18F0B60C000F4522 /* PFLPuzzleSetNode.m */,
 				3399664B18F0B60C000F4522 /* PFLScrollNode.h */,
 				3399664C18F0B60C000F4522 /* PFLScrollNode.m */,
 			);
@@ -2361,7 +2361,7 @@
 				339964CC18F0A8DF000F4522 /* OALAudioTrackNotifications.m in Sources */,
 				3399655118F0A8DF000F4522 /* quaternion.c in Sources */,
 				3399640518F0A8DF000F4522 /* CCPhysicsNode.m in Sources */,
-				3399668C18F0B60C000F4522 /* PFLPuzzleSetLayer.m in Sources */,
+				3399668C18F0B60C000F4522 /* PFLPuzzleSetNode.m in Sources */,
 				339964EB18F0A8DF000F4522 /* ALSoundSourcePool.m in Sources */,
 				339963FA18F0A8DF000F4522 /* CCParticleSystemBase.m in Sources */,
 				3399649118F0A8DF000F4522 /* CCColor.m in Sources */,

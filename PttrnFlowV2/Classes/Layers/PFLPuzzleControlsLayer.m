@@ -14,7 +14,7 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 #import "PFLTransitionSlide.h"
-#import "PFLPuzzleSetLayer.h"
+#import "PFLPuzzleSetNode.h"
 
 CGFloat const kUIButtonUnitSize = 50;
 CGFloat const kUITimelineStepWidth = 40;
@@ -55,11 +55,11 @@ static NSInteger const kRowLength = 8;
         self.steps = steps;
         
         // batch node
-        CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyUILayer stringByAppendingString:@".png"]];
+        CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
         self.uiBatchNode = uiBatch;
         [self addChild:uiBatch];
         
-        CCSpriteBatchNode *transitionBatch = [CCSpriteBatchNode batchNodeWithFile:@"puzzletransitionlayer.png"];
+        CCSpriteBatchNode *transitionBatch = [CCSpriteBatchNode batchNodeWithFile:@"transitions.png"];
         self.transitionBatchNode = transitionBatch;
         [self addChild:transitionBatch];
         [self createTransitionPadding];
@@ -271,7 +271,7 @@ static NSInteger const kRowLength = 8;
 - (void)basicButtonPressed:(PFLBasicButton *)sender
 {
     if ([sender isEqual:self.exitButton]) {
-        CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet leftPadding:0 rightPadding:0];
+        CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:self.puzzle.puzzleSet leftPadding:0 rightPadding:0];
 //        id transitionScene = [[PFLTransitionSlide alloc] initWithDuration:kTransitionDuration scene:scene above:YES forwards:NO leftPadding:80.0f rightPadding:0.0f];
 //        [[CCDirector sharedDirector] replaceScene:transitionScene];
         [[CCDirector sharedDirector] replaceScene:scene];

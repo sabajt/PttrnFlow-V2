@@ -23,7 +23,6 @@
     self = [super init];
     if (self) {
         self.contentSize = CGSizeMake(320, 50);
-//        self.swallowsTouches = YES;
         self.userInteractionEnabled = YES;
         _index = index;
         
@@ -44,16 +43,18 @@
 //    return (CGRectContainsPoint(rect, touchPosition));
 //}
 
-#pragma mark CCTargetedTouchDelegate
+#pragma mark CCResponder
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    // Must override touchBegan to recieve touchEnded (cocos2d v3 bug?)
+}
 
 //- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    [super ccTouchEnded:touch withEvent:event];
-//    
 //    if ([self containsTouch:touch]) {
-        [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.index];
-//    }
+    [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.index];
 }
 
 @end

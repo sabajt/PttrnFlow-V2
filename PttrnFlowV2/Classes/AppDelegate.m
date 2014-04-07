@@ -11,7 +11,7 @@
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
 #import "PFLPuzzleSet.h"
-#import "PFLPuzzleSetLayer.h"
+#import "PFLPuzzleSetNode.h"
 
 @implementation AppDelegate
 
@@ -61,7 +61,7 @@
 //	[director_ pushScene: [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0]];
     
 	// This method should return the very first scene to be run when your app starts.
-    CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0];
+    CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0];
 //	return [IntroScene scene];
     return scene;
 }

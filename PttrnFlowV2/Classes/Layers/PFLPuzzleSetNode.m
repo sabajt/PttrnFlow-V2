@@ -6,7 +6,7 @@
 //
 //
 
-#import "PFLPuzzleSetLayer.h"
+#import "PFLPuzzleSetNode.h"
 #import "PFLPuzzleLayer.h"
 #import "PFLPuzzle.h"
 #import "PFLAudioResponderTouchController.h"
@@ -15,13 +15,13 @@
 #import "PFLPuzzleBackgroundLayer.h"
 #import "PFLColorUtils.h"
 
-@interface PFLPuzzleSetLayer ()
+@interface PFLPuzzleSetNode ()
 
 @property (strong, nonatomic) PFLPuzzleSet *puzzleSet;
 
 @end
 
-@implementation PFLPuzzleSetLayer
+@implementation PFLPuzzleSetNode
 
 + (CCScene *)sceneWithPuzzleSet:(PFLPuzzleSet *)puzzleSet leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding
 {
@@ -33,7 +33,7 @@
     background.position = ccpSub(background.position, ccp(leftPadding, 0.0f));
     [scene addChild:background];
     
-    PFLPuzzleSetLayer *menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet];
+    PFLPuzzleSetNode *menuLayer = [[PFLPuzzleSetNode alloc] initWithPuzzleSet:puzzleSet];
     [scene addChild:menuLayer];
     return scene;
 }
@@ -42,6 +42,7 @@
 {
     self = [super initWithSize:CGSizeMake(320, 568)];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.puzzleSet = puzzleSet;
         self.allowsScrollHorizontal = NO;
         
