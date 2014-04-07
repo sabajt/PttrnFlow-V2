@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
+#import "PFLPuzzleSet.h"
+#import "PFLPuzzleSetLayer.h"
 
 @implementation AppDelegate
 
@@ -34,7 +36,7 @@
 		// Use a simplified coordinate system that is shared across devices.
 //		CCSetupScreenMode: CCScreenModeFixed,
 		// Run in portrait mode.
-//		CCSetupScreenOrientation: CCScreenOrientationPortrait,
+		CCSetupScreenOrientation: CCScreenOrientationPortrait,
 		// Run at a reduced framerate.
 //		CCSetupAnimationInterval: @(1.0/30.0),
 		// Run the fixed timestep extra fast.
@@ -42,14 +44,26 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
+    
+    // load sprite sheets
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"transitions.plist"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
 	
 	return YES;
 }
 
 -(CCScene *)startScene
 {
+
+    
+    PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
+//	[director_ pushScene: [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0]];
+    
 	// This method should return the very first scene to be run when your app starts.
-	return [IntroScene scene];
+    CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0];
+//	return [IntroScene scene];
+    return scene;
 }
 
 @end

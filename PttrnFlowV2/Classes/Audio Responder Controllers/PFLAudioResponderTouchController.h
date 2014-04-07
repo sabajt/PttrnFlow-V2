@@ -7,12 +7,12 @@
 //
 
 #import "PFLAudioResponder.h"
-#import "PFLScrollLayer.h"
+#import "PFLScrollNode.h"
 
 FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherCoordKey;
 FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherHitNotification;
 
-@interface PFLAudioResponderTouchController : CCNode <ScrollLayerDelegate>
+@interface PFLAudioResponderTouchController : CCNode <PFLScrollNodeDelegate>
 
 @property (assign) BOOL allowScrolling;
 @property (strong, nonatomic) NSArray *areaCells;

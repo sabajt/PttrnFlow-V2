@@ -40,7 +40,7 @@
 
 - (id)initWithPuzzleSet:(PFLPuzzleSet *)puzzleSet
 {
-    self = [super init];
+    self = [super initWithSize:CGSizeMake(320, 568)];
     if (self) {
         self.puzzleSet = puzzleSet;
         self.allowsScrollHorizontal = NO;
