@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>31BC1907-2A75-40C7-9332-8549BDA62491</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PttrnFlowV2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1689F9EA-9031-41F6-BEE8-71C6B36DB825</key>
+		<string>https://github.com/sabajt/PttrnFlow-V2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PttrnFlowV2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1689F9EA-9031-41F6-BEE8-71C6B36DB825</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sabajt/PttrnFlow-V2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1689F9EA-9031-41F6-BEE8-71C6B36DB825</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1689F9EA-9031-41F6-BEE8-71C6B36DB825</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PttrnFlowV2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

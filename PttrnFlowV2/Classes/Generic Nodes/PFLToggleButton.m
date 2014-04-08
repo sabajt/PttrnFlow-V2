@@ -18,8 +18,8 @@
 @property (weak, nonatomic) CCSprite *onSprite;
 
 // using tint colors with one sprite for on / off state
-@property (assign) CCColor* defaultColor;
-@property (assign) CCColor* activeColor;
+@property (strong, nonatomic) CCColor* defaultColor;
+@property (strong, nonatomic) CCColor* activeColor;
 
 @end
 

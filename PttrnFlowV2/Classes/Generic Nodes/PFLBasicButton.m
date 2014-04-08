@@ -14,8 +14,8 @@
 @property (weak, nonatomic) CCSprite *offSprite;
 @property (weak, nonatomic) CCSprite *onSprite;
 @property (weak, nonatomic) id<BasicButtonDelegate> delegate;
-@property (assign) CCColor* defaultColor;
-@property (assign) CCColor* activeColor;
+@property (strong, nonatomic) CCColor* defaultColor;
+@property (strong, nonatomic) CCColor* activeColor;
 @property (assign) BOOL useColor;
 
 @end

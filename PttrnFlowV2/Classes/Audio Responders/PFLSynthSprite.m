@@ -13,8 +13,8 @@
 
 @interface PFLSynthSprite ()
 
-@property (assign) CCColor* defaultColor;
-@property (assign) CCColor* activeColor;
+@property (strong, nonatomic) CCColor* defaultColor;
+@property (strong, nonatomic) CCColor* activeColor;
 @property (strong, nonatomic) PFLEvent *event;
 
 @end

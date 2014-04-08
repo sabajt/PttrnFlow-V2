@@ -30,6 +30,8 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 {
     self = [super init];
     if (self) {
+        self.contentSize = CGSizeMake(320, 568);
+        self.userInteractionEnabled = YES;
         _responders = [NSMutableArray array];
         _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
         self.beatDuration = duration;
@@ -137,7 +139,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 //    return YES;
 }
 
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
     // get grid cell of touch
 //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
@@ -167,7 +169,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     }
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     // get channel
     NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
@@ -185,7 +187,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
 }
 
-- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
 {
     // get channel
     NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
