@@ -47,6 +47,7 @@ static NSInteger const kRowLength = 8;
 {
     self = [super init];
     if (self) {
+        self.contentSize = [[CCDirector sharedDirector] viewSize];
         self.puzzle = puzzle;
         NSString *theme = puzzle.puzzleSet.theme;
         self.delegate = delegate;
