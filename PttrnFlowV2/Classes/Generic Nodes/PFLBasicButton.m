@@ -29,6 +29,7 @@
 {
     self = [super initWithImageNamed:placeholderFrameName];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.delegate = delegate;
         
         CCSprite *offSprite = [CCSprite spriteWithImageNamed:offFrameName];
@@ -53,6 +54,7 @@
 {
     self = [super initWithImageNamed:image];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.delegate = delegate;
         self.defaultColor = defaultColor;
         self.activeColor = activeColor;

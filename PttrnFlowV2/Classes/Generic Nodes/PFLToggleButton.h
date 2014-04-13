@@ -18,7 +18,7 @@
 
 @interface PFLToggleButton : CCSprite
 
-@property (assign) BOOL isOn;
+@property BOOL isOn;
 
 - (id)initWithPlaceholderImage:(NSString *)placeholderImage offImage:(NSString *)offImage onImage:(NSString *)onImage delegate:(id<ToggleButtonDelegate>)delegate;
 - (id)initWithImage:(NSString *)image defaultColor:(CCColor *)defaultColor activeColor:(CCColor*)activeColor delegate:(id<ToggleButtonDelegate>)delegate;

@@ -45,16 +45,38 @@
 
 #pragma mark CCResponder
 
+// Must override touchBegan to recieve touchEnded (cocos2d v3 bug?)
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    // Must override touchBegan to recieve touchEnded (cocos2d v3 bug?)
+    if (self.propogateTouch) {
+        [self.parent touchBegan:touch withEvent:event];
+    }
+}
+
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if (self.propogateTouch) {
+        [self.parent touchMoved:touch withEvent:event];
+    }
 }
 
 //- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    if ([self containsTouch:touch]) {
-    [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.index];
+    if (self.propogateTouch) {
+        [self.parent touchEnded:touch withEvent:event];
+    }
+    
+    if ([self hitTestWithWorldPos:[touch locationInWorld]]) {
+        [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.index];
+    }
+}
+
+- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if (self.propogateTouch) {
+        [self.parent touchCancelled:touch withEvent:event];
+    }
 }
 
 @end

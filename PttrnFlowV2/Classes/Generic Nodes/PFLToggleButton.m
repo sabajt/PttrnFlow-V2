@@ -54,6 +54,7 @@
 {
     self = [super initWithImageNamed:image];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.delegate = delegate;
         self.defaultColor = defaultColor;
         self.activeColor = activeColor;
@@ -83,14 +84,9 @@
 
 #pragma mark - CCTargetedTouchDelegate
 
-//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    if ([super ccTouchBegan:touch withEvent:event]) {
-        [self toggle];
-//        return YES;
-//    }
-//    return NO;
+    [self toggle];
 }
 
 @end

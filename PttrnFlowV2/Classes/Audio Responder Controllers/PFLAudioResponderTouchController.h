@@ -14,7 +14,7 @@ FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherHitNotification;
 
 @interface PFLAudioResponderTouchController : CCNode <PFLScrollNodeDelegate>
 
-@property (assign) BOOL allowScrolling;
+@property BOOL allowScrolling;
 @property (strong, nonatomic) NSArray *areaCells;
 
 - (id)initWithBeatDuration:(CGFloat)duration;

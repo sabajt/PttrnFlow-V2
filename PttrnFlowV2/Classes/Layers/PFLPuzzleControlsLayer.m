@@ -57,6 +57,7 @@ static NSInteger const kRowLength = 8;
         
         // batch node
         CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
+        
         self.uiBatchNode = uiBatch;
         [self addChild:uiBatch];
         

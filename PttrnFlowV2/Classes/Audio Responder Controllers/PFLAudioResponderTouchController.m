@@ -32,6 +32,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     if (self) {
         self.contentSize = CGSizeMake(320, 568);
         self.userInteractionEnabled = YES;
+        self.allowScrolling = YES;
         _responders = [NSMutableArray array];
         _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
         self.beatDuration = duration;
@@ -118,9 +119,10 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 #pragma mark CCTargetedTouchDelegate
 
-//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    [self.parent touchBegan:touch withEvent:event];
+    
     // get grid cell of touch
 //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     CGPoint touchPosition = [touch locationInNode:self];
@@ -135,12 +137,12 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     CFDictionaryAddValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(mutableTouchInfo));
     
     [self hitCell:cell channel:channel];
-    
-//    return YES;
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    [self.parent touchMoved:touch withEvent:event];
+    
     // get grid cell of touch
 //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     CGPoint touchPosition = [touch locationInNode:self];
@@ -171,6 +173,8 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    [self.parent touchEnded:touch withEvent:event];
+    
     // get channel
     NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
     NSString *channel = [touchInfo objectForKey:@"channel"];
@@ -185,10 +189,14 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     [self releaseCell:cell channel:channel];
     
     CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
+    
+    self.allowScrolling = YES;
 }
 
 - (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    [self.parent touchCancelled:touch withEvent:event];
+    
     // get channel
     NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
     NSString *channel = [touchInfo objectForKey:@"channel"];
@@ -203,6 +211,8 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     [self releaseCell:cell channel:channel];
     
     CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
+    
+    self.allowScrolling = YES;
 }
 
 #pragma mark - ScrollLayerDelegate

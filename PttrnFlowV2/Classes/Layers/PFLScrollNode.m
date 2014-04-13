@@ -7,15 +7,20 @@
 //  Adapted with changes from: http://www.sidebolt.com/simulating-uiscrollview-in-cocos2d/
 
 #import "PFLScrollNode.h"
+#import "CCNode+PFLRecursiveTouch.h"
 
 static CGFloat const kClipSpeed = 0.25f;
+static CGFloat const kDefaultCancelDelegateTouchDistance = 10.0f;
 
 @interface PFLScrollNode ()
 
-@property (assign) CGPoint lastTouch;
-@property (assign) BOOL isTouching;
-@property (assign) CGPoint unfilteredVelocity;
-@property (assign) CGPoint velocity;
+@property BOOL hasCancelledDelegateTouch;
+@property BOOL isTouching;
+@property CGPoint lastTouchPosition;
+@property (strong, nonatomic) NSMutableArray *scrollDelegates;
+@property CGPoint startingTouchPosition;
+@property CGPoint unfilteredVelocity;
+@property CGPoint velocity;
 
 @end
 
@@ -27,10 +32,17 @@ static CGFloat const kClipSpeed = 0.25f;
     if (self) {
         self.contentSize = size;
         self.userInteractionEnabled = YES;
-        _allowsScrollHorizontal = YES;
-        _allowsScrollVertical = YES;
+        self.allowsScrollHorizontal = YES;
+        self.allowsScrollVertical = YES;
+        self.cancelDelegateTouchDistance = kDefaultCancelDelegateTouchDistance;
+        self.scrollDelegates = [NSMutableArray array];
     }
     return self;
+}
+
+- (void)addScrollDelegate:(id<PFLScrollNodeDelegate>)delegate
+{
+    [self.scrollDelegates addObject:delegate];
 }
 
 - (CGFloat)elasticPull:(CGFloat)distance
@@ -54,10 +66,12 @@ static CGFloat const kClipSpeed = 0.25f;
 
 - (void)update:(CCTime)dt
 {
-    if ([self.scrollDelegate respondsToSelector:@selector(shouldScroll)] && ![self.scrollDelegate shouldScroll]) {
-        self.velocity = CGPointZero;
-        self.unfilteredVelocity = CGPointZero;
-        return;
+    for (id<PFLScrollNodeDelegate> scrollDelegate in self.scrollDelegates) {
+        if ([scrollDelegate respondsToSelector:@selector(shouldScroll)] && ![scrollDelegate shouldScroll]) {
+            self.velocity = CGPointZero;
+            self.unfilteredVelocity = CGPointZero;
+            return;
+        }
     }
     
 	if (self.isTouching) {
@@ -151,27 +165,40 @@ static CGFloat const kClipSpeed = 0.25f;
         return;
     }
     
-//	self.lastTouch = [self.parent convertTouchToNodeSpace:touch];
-    self.lastTouch = [touch locationInWorld];
-
+    self.lastTouchPosition = [touch locationInWorld];
+    self.startingTouchPosition = [touch locationInWorld];
 	self.isTouching = YES;
+    self.hasCancelledDelegateTouch = NO;
 }
 
 - (void)touchMoved:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    if ([self.scrollDelegate respondsToSelector:@selector(shouldScroll)] && ![self.scrollDelegate shouldScroll]) {
-        self.velocity = CGPointZero;
-        self.unfilteredVelocity = CGPointZero;
-        return;
+    for (id<PFLScrollNodeDelegate> scrollDelegate in self.scrollDelegates) {
+        if ([scrollDelegate respondsToSelector:@selector(shouldScroll)] && ![scrollDelegate shouldScroll]) {
+            self.velocity = CGPointZero;
+            self.unfilteredVelocity = CGPointZero;
+            return;
+        }
+    }
+    
+    CGPoint currentTouch = [touch locationInWorld];
+    
+    if ((fabsf(currentTouch.x - self.startingTouchPosition.x) > self.cancelDelegateTouchDistance ||
+        fabsf(currentTouch.y - self.startingTouchPosition.y) > self.cancelDelegateTouchDistance) &&
+        !self.hasCancelledDelegateTouch)
+    {
+        for (id<PFLScrollNodeDelegate> scrollDelegate in self.scrollDelegates) {
+            if ([scrollDelegate respondsToSelector:@selector(cancelTouch)]) {
+                [scrollDelegate cancelTouch];
+            }
+        }
+        self.hasCancelledDelegateTouch = YES;
     }
     
     // calculate elastic drag while touching
-    
-//	CGPoint currentTouch = [self.parent convertTouchToNodeSpace:touch];
-    CGPoint currentTouch = [touch locationInWorld];
-    
-	self.unfilteredVelocity = ccp(currentTouch.x - self.lastTouch.x, currentTouch.y - self.lastTouch.y);
-    self.lastTouch = currentTouch;
+
+	self.unfilteredVelocity = ccp(currentTouch.x - self.lastTouchPosition.x, currentTouch.y - self.lastTouchPosition.y);
+    self.lastTouchPosition = currentTouch;
     
     CGPoint minPos = self.position;
     CGPoint maxPos = ccp(self.position.x + self.contentSize.width, self.position.y + self.contentSize.height);
@@ -223,6 +250,21 @@ static CGFloat const kClipSpeed = 0.25f;
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
 {
 	self.isTouching = NO;
+}
+
+- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    self.isTouching = NO;
+}
+
+- (BOOL)hitTestWithWorldPos:(CGPoint)pos
+{
+    if (self.ignoreTouchBounds) {
+        return YES;
+    }
+    else {
+        return [super hitTestWithWorldPos:pos];
+    }
 }
 
 @end

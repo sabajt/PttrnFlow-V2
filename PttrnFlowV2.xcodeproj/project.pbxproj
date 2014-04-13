@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */; };
 		3399634118F0A8DE000F4522 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634018F0A8DE000F4522 /* QuartzCore.framework */; };
 		3399634318F0A8DE000F4522 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634218F0A8DE000F4522 /* OpenGLES.framework */; };
 		3399634518F0A8DE000F4522 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634418F0A8DE000F4522 /* OpenAL.framework */; };
@@ -327,6 +328,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLRecursiveTouch.h"; sourceTree = "<group>"; };
+		3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+PFLRecursiveTouch.m"; sourceTree = "<group>"; };
 		3399633D18F0A8DE000F4522 /* PttrnFlowV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PttrnFlowV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3399634018F0A8DE000F4522 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3399634218F0A8DE000F4522 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1981,6 +1984,8 @@
 				3399667818F0B60C000F4522 /* PFLGeometry.m */,
 				3399667918F0B60C000F4522 /* PFLJsonUtils.h */,
 				3399667A18F0B60C000F4522 /* PFLJsonUtils.m */,
+				3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */,
+				3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */,
 			);
 			name = Utils;
 			path = Classes/Utils;
@@ -2247,6 +2252,7 @@
 				339963D518F0A8DE000F4522 /* CCNodeColor.m in Sources */,
 				339964AE18F0A8DF000F4522 /* TransformUtils.m in Sources */,
 				3399644F18F0A8DF000F4522 /* CCTextureCache.m in Sources */,
+				3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */,
 				3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */,
 				3399647A18F0A8DF000F4522 /* CCAppDelegate.m in Sources */,
 				3399647E18F0A8DF000F4522 /* CCDirectorMac.m in Sources */,
@@ -2542,6 +2548,7 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = PttrnFlowV2/Resources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -2566,6 +2573,7 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = PttrnFlowV2/Resources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -2596,6 +2604,7 @@
 				339965F518F0A8E0000F4522 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		339965F618F0A8E0000F4522 /* Build configuration list for PBXNativeTarget "PttrnFlowV2" */ = {
 			isa = XCConfigurationList;
@@ -2604,6 +2613,7 @@
 				339965F818F0A8E0000F4522 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

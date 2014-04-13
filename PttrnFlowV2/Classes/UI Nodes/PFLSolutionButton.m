@@ -23,6 +23,7 @@
 {
     self = [super initWithImageNamed:placeholderImage];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.contentSize = size;
         self.index = index;
         self.delegate = delegate;
@@ -72,16 +73,11 @@
     self.isDisplaced = NO;
 }
 
-//#pragma mark - CCTargetedTouchDelegate
+#pragma mark - Touch
 
-//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    if ([super ccTouchBegan:touch withEvent:event]) {
-        [self press];
-//        return YES;
-//    }
-//    return NO;
+    [self press];
 }
 
 @end

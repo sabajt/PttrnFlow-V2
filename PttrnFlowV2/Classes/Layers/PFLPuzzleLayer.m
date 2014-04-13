@@ -81,8 +81,9 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle background:(PFLPuzzleBackgroundLayer *)backgroundLayer topMargin:(CGFloat)topMargin;
 {
-    self = [super init];
+    self = [super initWithSize:CGSizeMake(320, 568)];
     if (self) {
+        self.ignoreTouchBounds = YES;
         // layer initialized with default content size of screen size...
         // would be better to do figure out best practice and get screen size more explicitly
         self.screenSize = self.contentSize;
@@ -99,7 +100,6 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
         // Setup
         [self addChild:[PFLPatchController sharedMainSynth]]; // must add main synth so it can run actions
-//        self.isTouchEnabled = YES;
         
         self.backgroundLayer = backgroundLayer;
         self.maxCoord = [PFLCoord maxCoord:puzzle.area];
@@ -134,7 +134,8 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
         CGFloat beatDuration = self.beatDuration;
         PFLAudioResponderTouchController *audioTouchDispatcher = [[PFLAudioResponderTouchController alloc] initWithBeatDuration:beatDuration];
         self.audioTouchDispatcher = audioTouchDispatcher;
-        self.scrollDelegate = audioTouchDispatcher;
+        [self addScrollDelegate:audioTouchDispatcher];
+        
         [audioTouchDispatcher clearResponders];
         audioTouchDispatcher.areaCells = puzzle.area;
         [self addChild:audioTouchDispatcher];

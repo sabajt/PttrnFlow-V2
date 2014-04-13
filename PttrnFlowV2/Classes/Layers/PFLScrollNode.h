@@ -10,16 +10,21 @@
 
 @protocol PFLScrollNodeDelegate <NSObject>
 @optional
+// Implement if delegate should cancel its touch after scroll node has moved cancelDelegateTouchDistance
+- (void)cancelTouch;
+// Implement to allow delegate to stop our scrolling
 - (BOOL)shouldScroll;
 @end
 
 @interface PFLScrollNode : CCNode
 
-@property (assign) BOOL allowsScrollHorizontal;
-@property (assign) BOOL allowsScrollVertical;
-@property (assign) CGRect scrollBounds;
-@property (weak, nonatomic) id<PFLScrollNodeDelegate> scrollDelegate;
+@property BOOL allowsScrollHorizontal;
+@property BOOL allowsScrollVertical;
+@property CGFloat cancelDelegateTouchDistance;
+@property BOOL ignoreTouchBounds;
+@property CGRect scrollBounds;
 
 - (id)initWithSize:(CGSize)size;
+- (void)addScrollDelegate:(id<PFLScrollNodeDelegate>)delegate;
 
 @end

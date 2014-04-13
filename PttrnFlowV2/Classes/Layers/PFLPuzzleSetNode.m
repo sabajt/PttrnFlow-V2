@@ -42,7 +42,6 @@
 {
     self = [super initWithSize:CGSizeMake(320, 568)];
     if (self) {
-        self.userInteractionEnabled = YES;
         self.puzzleSet = puzzleSet;
         self.allowsScrollHorizontal = NO;
         
@@ -52,6 +51,7 @@
         int i = 0;
         for (PFLPuzzle *puzzle in self.puzzleSet.puzzles) {
             PFLPuzzleSetCell *cell = [[PFLPuzzleSetCell alloc] initWithIndex:i];
+            cell.propogateTouch = YES;
             cell.anchorPoint = ccp(0.5, 0.5);
             CGFloat yPosition = sideMargins.height + ((i * cell.contentSize.height) + (i * padding.height));
             cell.position = ccp(self.contentSize.width / 2, yPosition);

@@ -20,6 +20,7 @@
 @interface PFLPuzzleSetCell : CCSprite
 
 @property (weak, nonatomic) id<PFLPuzzleSetCellDelegate> menuCellDelegate;
+@property BOOL propogateTouch;
 
 -(id) initWithIndex:(NSInteger)index;
 
