@@ -37,14 +37,8 @@
 
 - (void)loadSamples:(NSArray *)samples
 {
-    self.sampleKey = [NSMutableDictionary dictionary];
     for (NSString *sampleName in samples) {
-        NSArray *comp = [sampleName componentsSeparatedByString:@"."];
-        NSURL *url = [[NSBundle mainBundle] URLForResource:comp[0] withExtension:comp[1]];
-        AVAudioPlayer *audioPlayer = [AVAudioPlayer audioPlayerForURL:url];
-        audioPlayer.delegate = self;
-        [audioPlayer prepareToPlay];
-        [self.sampleKey setObject:audioPlayer forKey:sampleName];
+        [[OALSimpleAudio sharedInstance] preloadEffect:sampleName];
     }
 }
 
@@ -64,9 +58,10 @@
         }
         
         if (event.eventType == PFLEventTypeSample) {
-            AVAudioPlayer *audioPlayer = self.sampleKey[event.file];
-            audioPlayer.currentTime = 0.0;
-            [audioPlayer play];
+            id sound = [[OALSimpleAudio sharedInstance] playEffect:event.file];
+            if (!sound) {
+                CCLOG(@"Error: sound for sample %@ could not be created", event.file);
+            }
         }
         
         if(event.eventType == PFLEventTypeMultiSample) {
