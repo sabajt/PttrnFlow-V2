@@ -13,7 +13,6 @@
 #import "PFLAudioResponderStepController.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
-#import "PFLTransitionSlide.h"
 #import "PFLPuzzleSetNode.h"
 
 CGFloat const kUIButtonUnitSize = 50;

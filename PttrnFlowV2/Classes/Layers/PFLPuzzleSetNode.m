@@ -11,7 +11,6 @@
 #import "PFLPuzzle.h"
 #import "PFLAudioResponderTouchController.h"
 #import "PFLPuzzleSet.h"
-#import "PFLTransitionSlide.h"
 #import "PFLPuzzleBackgroundLayer.h"
 #import "PFLColorUtils.h"
 
