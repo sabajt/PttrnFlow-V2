@@ -235,7 +235,6 @@
 		3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663718F0B60C000F4522 /* PFLBasicButton.m */; };
 		3399668518F0B60C000F4522 /* PFLTileSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663B18F0B60C000F4522 /* PFLTileSprite.m */; };
 		3399668618F0B60C000F4522 /* PFLToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663D18F0B60C000F4522 /* PFLToggleButton.m */; };
-		3399668818F0B60C000F4522 /* PFLTransitionSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664118F0B60C000F4522 /* PFLTransitionSlide.m */; };
 		3399668918F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */; };
 		3399668A18F0B60C000F4522 /* PFLPuzzleControlsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664618F0B60C000F4522 /* PFLPuzzleControlsLayer.m */; };
 		3399668B18F0B60C000F4522 /* PFLPuzzleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664818F0B60C000F4522 /* PFLPuzzleLayer.m */; };
@@ -262,36 +261,6 @@
 		339966A018F0B60C000F4522 /* PFLGameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667618F0B60C000F4522 /* PFLGameConstants.m */; };
 		339966A118F0B60C000F4522 /* PFLGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667818F0B60C000F4522 /* PFLGeometry.m */; };
 		339966A218F0B60C000F4522 /* PFLJsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399667A18F0B60C000F4522 /* PFLJsonUtils.m */; };
-		339966DA18F0DC8D000F4522 /* drum1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A418F0DC8D000F4522 /* drum1.wav */; };
-		339966DB18F0DC8D000F4522 /* drum2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A518F0DC8D000F4522 /* drum2.wav */; };
-		339966DC18F0DC8D000F4522 /* drum3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A618F0DC8D000F4522 /* drum3.wav */; };
-		339966DD18F0DC8D000F4522 /* drum4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A718F0DC8D000F4522 /* drum4.wav */; };
-		339966DE18F0DC8D000F4522 /* marimba-48.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A818F0DC8D000F4522 /* marimba-48.wav */; };
-		339966DF18F0DC8D000F4522 /* marimba-49.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966A918F0DC8D000F4522 /* marimba-49.wav */; };
-		339966E018F0DC8D000F4522 /* marimba-50.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AA18F0DC8D000F4522 /* marimba-50.wav */; };
-		339966E118F0DC8D000F4522 /* marimba-51.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AB18F0DC8D000F4522 /* marimba-51.wav */; };
-		339966E218F0DC8D000F4522 /* marimba-52.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AC18F0DC8D000F4522 /* marimba-52.wav */; };
-		339966E318F0DC8D000F4522 /* marimba-53.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AD18F0DC8D000F4522 /* marimba-53.wav */; };
-		339966E418F0DC8D000F4522 /* marimba-54.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AE18F0DC8D000F4522 /* marimba-54.wav */; };
-		339966E518F0DC8D000F4522 /* marimba-55.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966AF18F0DC8D000F4522 /* marimba-55.wav */; };
-		339966E618F0DC8D000F4522 /* marimba-56.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B018F0DC8D000F4522 /* marimba-56.wav */; };
-		339966E718F0DC8D000F4522 /* marimba-57.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B118F0DC8D000F4522 /* marimba-57.wav */; };
-		339966E818F0DC8D000F4522 /* marimba-58.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B218F0DC8D000F4522 /* marimba-58.wav */; };
-		339966E918F0DC8D000F4522 /* marimba-59.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B318F0DC8D000F4522 /* marimba-59.wav */; };
-		339966EA18F0DC8D000F4522 /* marimba-60.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B418F0DC8D000F4522 /* marimba-60.wav */; };
-		339966EB18F0DC8D000F4522 /* marimba-61.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B518F0DC8D000F4522 /* marimba-61.wav */; };
-		339966EC18F0DC8D000F4522 /* marimba-62.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B618F0DC8D000F4522 /* marimba-62.wav */; };
-		339966ED18F0DC8D000F4522 /* marimba-63.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966B718F0DC8D000F4522 /* marimba-63.wav */; };
-		339966EE18F0DC8D000F4522 /* pfl-piano-1.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966B818F0DC8D000F4522 /* pfl-piano-1.aif */; };
-		339966EF18F0DC8D000F4522 /* pfl-piano-2.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966B918F0DC8D000F4522 /* pfl-piano-2.aif */; };
-		339966F018F0DC8D000F4522 /* pfl-piano-3.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BA18F0DC8D000F4522 /* pfl-piano-3.aif */; };
-		339966F118F0DC8D000F4522 /* pfl-piano-4.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BB18F0DC8D000F4522 /* pfl-piano-4.aif */; };
-		339966F218F0DC8D000F4522 /* pfl-piano-5.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BC18F0DC8D000F4522 /* pfl-piano-5.aif */; };
-		339966F318F0DC8D000F4522 /* pfl-piano-6.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BD18F0DC8D000F4522 /* pfl-piano-6.aif */; };
-		339966F418F0DC8D000F4522 /* pfl-piano-7.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BE18F0DC8D000F4522 /* pfl-piano-7.aif */; };
-		339966F518F0DC8D000F4522 /* pfl-piano-8.aif in Resources */ = {isa = PBXBuildFile; fileRef = 339966BF18F0DC8D000F4522 /* pfl-piano-8.aif */; };
-		339966F618F0DC8D000F4522 /* pttrn1-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966C018F0DC8D000F4522 /* pttrn1-01.wav */; };
-		339966F718F0DC8D000F4522 /* pttrn1-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 339966C118F0DC8D000F4522 /* pttrn1-02.wav */; };
 		3399670618F0DC8D000F4522 /* puzzle0.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D118F0DC8D000F4522 /* puzzle0.json */; };
 		3399670718F0DC8D000F4522 /* puzzle1.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D218F0DC8D000F4522 /* puzzle1.json */; };
 		3399670818F0DC8D000F4522 /* puzzle2.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D318F0DC8D000F4522 /* puzzle2.json */; };
@@ -791,8 +760,6 @@
 		3399663B18F0B60C000F4522 /* PFLTileSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLTileSprite.m; sourceTree = "<group>"; };
 		3399663C18F0B60C000F4522 /* PFLToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLToggleButton.h; sourceTree = "<group>"; };
 		3399663D18F0B60C000F4522 /* PFLToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLToggleButton.m; sourceTree = "<group>"; };
-		3399664018F0B60C000F4522 /* PFLTransitionSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLTransitionSlide.h; sourceTree = "<group>"; };
-		3399664118F0B60C000F4522 /* PFLTransitionSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLTransitionSlide.m; sourceTree = "<group>"; };
 		3399664318F0B60C000F4522 /* PFLPuzzleBackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleBackgroundLayer.h; sourceTree = "<group>"; };
 		3399664418F0B60C000F4522 /* PFLPuzzleBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleBackgroundLayer.m; sourceTree = "<group>"; };
 		3399664518F0B60C000F4522 /* PFLPuzzleControlsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleControlsLayer.h; sourceTree = "<group>"; };
@@ -845,36 +812,6 @@
 		3399667818F0B60C000F4522 /* PFLGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGeometry.m; sourceTree = "<group>"; };
 		3399667918F0B60C000F4522 /* PFLJsonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLJsonUtils.h; sourceTree = "<group>"; };
 		3399667A18F0B60C000F4522 /* PFLJsonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLJsonUtils.m; sourceTree = "<group>"; };
-		339966A418F0DC8D000F4522 /* drum1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drum1.wav; sourceTree = "<group>"; };
-		339966A518F0DC8D000F4522 /* drum2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drum2.wav; sourceTree = "<group>"; };
-		339966A618F0DC8D000F4522 /* drum3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drum3.wav; sourceTree = "<group>"; };
-		339966A718F0DC8D000F4522 /* drum4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drum4.wav; sourceTree = "<group>"; };
-		339966A818F0DC8D000F4522 /* marimba-48.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-48.wav"; sourceTree = "<group>"; };
-		339966A918F0DC8D000F4522 /* marimba-49.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-49.wav"; sourceTree = "<group>"; };
-		339966AA18F0DC8D000F4522 /* marimba-50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-50.wav"; sourceTree = "<group>"; };
-		339966AB18F0DC8D000F4522 /* marimba-51.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-51.wav"; sourceTree = "<group>"; };
-		339966AC18F0DC8D000F4522 /* marimba-52.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-52.wav"; sourceTree = "<group>"; };
-		339966AD18F0DC8D000F4522 /* marimba-53.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-53.wav"; sourceTree = "<group>"; };
-		339966AE18F0DC8D000F4522 /* marimba-54.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-54.wav"; sourceTree = "<group>"; };
-		339966AF18F0DC8D000F4522 /* marimba-55.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-55.wav"; sourceTree = "<group>"; };
-		339966B018F0DC8D000F4522 /* marimba-56.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-56.wav"; sourceTree = "<group>"; };
-		339966B118F0DC8D000F4522 /* marimba-57.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-57.wav"; sourceTree = "<group>"; };
-		339966B218F0DC8D000F4522 /* marimba-58.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-58.wav"; sourceTree = "<group>"; };
-		339966B318F0DC8D000F4522 /* marimba-59.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-59.wav"; sourceTree = "<group>"; };
-		339966B418F0DC8D000F4522 /* marimba-60.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-60.wav"; sourceTree = "<group>"; };
-		339966B518F0DC8D000F4522 /* marimba-61.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-61.wav"; sourceTree = "<group>"; };
-		339966B618F0DC8D000F4522 /* marimba-62.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-62.wav"; sourceTree = "<group>"; };
-		339966B718F0DC8D000F4522 /* marimba-63.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "marimba-63.wav"; sourceTree = "<group>"; };
-		339966B818F0DC8D000F4522 /* pfl-piano-1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-1.aif"; sourceTree = "<group>"; };
-		339966B918F0DC8D000F4522 /* pfl-piano-2.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-2.aif"; sourceTree = "<group>"; };
-		339966BA18F0DC8D000F4522 /* pfl-piano-3.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-3.aif"; sourceTree = "<group>"; };
-		339966BB18F0DC8D000F4522 /* pfl-piano-4.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-4.aif"; sourceTree = "<group>"; };
-		339966BC18F0DC8D000F4522 /* pfl-piano-5.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-5.aif"; sourceTree = "<group>"; };
-		339966BD18F0DC8D000F4522 /* pfl-piano-6.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-6.aif"; sourceTree = "<group>"; };
-		339966BE18F0DC8D000F4522 /* pfl-piano-7.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-7.aif"; sourceTree = "<group>"; };
-		339966BF18F0DC8D000F4522 /* pfl-piano-8.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pfl-piano-8.aif"; sourceTree = "<group>"; };
-		339966C018F0DC8D000F4522 /* pttrn1-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pttrn1-01.wav"; sourceTree = "<group>"; };
-		339966C118F0DC8D000F4522 /* pttrn1-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pttrn1-02.wav"; sourceTree = "<group>"; };
 		339966D118F0DC8D000F4522 /* puzzle0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle0.json; sourceTree = "<group>"; };
 		339966D218F0DC8D000F4522 /* puzzle1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle1.json; sourceTree = "<group>"; };
 		339966D318F0DC8D000F4522 /* puzzle2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle2.json; sourceTree = "<group>"; };
@@ -1890,8 +1827,6 @@
 				3399663B18F0B60C000F4522 /* PFLTileSprite.m */,
 				3399663C18F0B60C000F4522 /* PFLToggleButton.h */,
 				3399663D18F0B60C000F4522 /* PFLToggleButton.m */,
-				3399664018F0B60C000F4522 /* PFLTransitionSlide.h */,
-				3399664118F0B60C000F4522 /* PFLTransitionSlide.m */,
 			);
 			name = "Generic Nodes";
 			path = "Classes/Generic Nodes";
@@ -2008,36 +1943,6 @@
 				33B868F11900313D0071C2B9 /* tech-tonal3.caf */,
 				33B868F21900313D0071C2B9 /* tech-tonal4.caf */,
 				33B868F31900313D0071C2B9 /* tech-tonal5.caf */,
-				339966A418F0DC8D000F4522 /* drum1.wav */,
-				339966A518F0DC8D000F4522 /* drum2.wav */,
-				339966A618F0DC8D000F4522 /* drum3.wav */,
-				339966A718F0DC8D000F4522 /* drum4.wav */,
-				339966A818F0DC8D000F4522 /* marimba-48.wav */,
-				339966A918F0DC8D000F4522 /* marimba-49.wav */,
-				339966AA18F0DC8D000F4522 /* marimba-50.wav */,
-				339966AB18F0DC8D000F4522 /* marimba-51.wav */,
-				339966AC18F0DC8D000F4522 /* marimba-52.wav */,
-				339966AD18F0DC8D000F4522 /* marimba-53.wav */,
-				339966AE18F0DC8D000F4522 /* marimba-54.wav */,
-				339966AF18F0DC8D000F4522 /* marimba-55.wav */,
-				339966B018F0DC8D000F4522 /* marimba-56.wav */,
-				339966B118F0DC8D000F4522 /* marimba-57.wav */,
-				339966B218F0DC8D000F4522 /* marimba-58.wav */,
-				339966B318F0DC8D000F4522 /* marimba-59.wav */,
-				339966B418F0DC8D000F4522 /* marimba-60.wav */,
-				339966B518F0DC8D000F4522 /* marimba-61.wav */,
-				339966B618F0DC8D000F4522 /* marimba-62.wav */,
-				339966B718F0DC8D000F4522 /* marimba-63.wav */,
-				339966B818F0DC8D000F4522 /* pfl-piano-1.aif */,
-				339966B918F0DC8D000F4522 /* pfl-piano-2.aif */,
-				339966BA18F0DC8D000F4522 /* pfl-piano-3.aif */,
-				339966BB18F0DC8D000F4522 /* pfl-piano-4.aif */,
-				339966BC18F0DC8D000F4522 /* pfl-piano-5.aif */,
-				339966BD18F0DC8D000F4522 /* pfl-piano-6.aif */,
-				339966BE18F0DC8D000F4522 /* pfl-piano-7.aif */,
-				339966BF18F0DC8D000F4522 /* pfl-piano-8.aif */,
-				339966C018F0DC8D000F4522 /* pttrn1-01.wav */,
-				339966C118F0DC8D000F4522 /* pttrn1-02.wav */,
 			);
 			name = patches;
 			path = Resources/patches;
@@ -2128,85 +2033,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				339966E418F0DC8D000F4522 /* marimba-54.wav in Resources */,
 				3399661D18F0B47A000F4522 /* transitions.png in Resources */,
 				3399635D18F0A8DE000F4522 /* Default@2x.png in Resources */,
 				3399660D18F0B261000F4522 /* audioObjects-hd.png in Resources */,
 				3399661A18F0B47A000F4522 /* transitions-hd.plist in Resources */,
 				3399670918F0DC8D000F4522 /* puzzle3.json in Resources */,
 				3399660E18F0B261000F4522 /* audioObjects.plist in Resources */,
-				339966EC18F0DC8D000F4522 /* marimba-62.wav in Resources */,
 				33B868F71900313D0071C2B9 /* tech-crash1.caf in Resources */,
-				339966E718F0DC8D000F4522 /* marimba-57.wav in Resources */,
-				339966EB18F0DC8D000F4522 /* marimba-61.wav in Resources */,
 				3399637018F0A8DE000F4522 /* Icon-120.png in Resources */,
 				3399657418F0A8E0000F4522 /* LICENSE_CCBReader.txt in Resources */,
-				339966DB18F0DC8D000F4522 /* drum2.wav in Resources */,
-				339966F318F0DC8D000F4522 /* pfl-piano-6.aif in Resources */,
 				3399636618F0A8DE000F4522 /* Icon@2x.png in Resources */,
-				339966DD18F0DC8D000F4522 /* drum4.wav in Resources */,
 				3399637818F0A8DE000F4522 /* Icon-Small@2x.png in Resources */,
 				3399636A18F0A8DE000F4522 /* Icon-72@2x.png in Resources */,
-				339966EF18F0DC8D000F4522 /* pfl-piano-2.aif in Resources */,
-				339966F018F0DC8D000F4522 /* pfl-piano-3.aif in Resources */,
 				3399670A18F0DC8D000F4522 /* puzzle4.json in Resources */,
 				3399635B18F0A8DE000F4522 /* Default.png in Resources */,
-				339966E618F0DC8D000F4522 /* marimba-56.wav in Resources */,
 				3399636418F0A8DE000F4522 /* Icon.png in Resources */,
-				339966DA18F0DC8D000F4522 /* drum1.wav in Resources */,
 				33B868F91900313D0071C2B9 /* tech-hhclosed2.caf in Resources */,
-				339966DF18F0DC8D000F4522 /* marimba-49.wav in Resources */,
 				33B868FA1900313D0071C2B9 /* tech-hhclosed3.caf in Resources */,
-				339966F518F0DC8D000F4522 /* pfl-piano-8.aif in Resources */,
 				3399637218F0A8DE000F4522 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */,
 				3399660F18F0B261000F4522 /* audioObjects.png in Resources */,
-				339966F718F0DC8D000F4522 /* pttrn1-02.wav in Resources */,
 				3399660C18F0B261000F4522 /* audioObjects-hd.plist in Resources */,
 				3399636118F0A8DE000F4522 /* Default-Landscape~ipad.png in Resources */,
 				33B868FD1900313D0071C2B9 /* tech-tonal1.caf in Resources */,
 				3399670E18F0DC8D000F4522 /* puzzleSet1.json in Resources */,
-				339966EA18F0DC8D000F4522 /* marimba-60.wav in Resources */,
 				3399637618F0A8DE000F4522 /* Icon-Small.png in Resources */,
 				3399661C18F0B47A000F4522 /* transitions.plist in Resources */,
-				339966F618F0DC8D000F4522 /* pttrn1-01.wav in Resources */,
 				33B868F81900313D0071C2B9 /* tech-hhclosed1.caf in Resources */,
 				33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */,
 				3399670B18F0DC8D000F4522 /* puzzle5.json in Resources */,
 				3399670718F0DC8D000F4522 /* puzzle1.json in Resources */,
 				3399637418F0A8DE000F4522 /* Icon-Small-50.png in Resources */,
-				339966DE18F0DC8D000F4522 /* marimba-48.wav in Resources */,
 				3399670818F0DC8D000F4522 /* puzzle2.json in Resources */,
-				339966F218F0DC8D000F4522 /* pfl-piano-5.aif in Resources */,
-				339966F118F0DC8D000F4522 /* pfl-piano-4.aif in Resources */,
 				33B868FB1900313D0071C2B9 /* tech-hhclosed4.caf in Resources */,
 				33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */,
 				3399655D18F0A8E0000F4522 /* LICENSE_Kazmath.txt in Resources */,
-				339966E518F0DC8D000F4522 /* marimba-55.wav in Resources */,
 				3399661B18F0B47A000F4522 /* transitions-hd.png in Resources */,
 				33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */,
-				339966E218F0DC8D000F4522 /* marimba-52.wav in Resources */,
 				3399670D18F0DC8D000F4522 /* puzzleSet0.json in Resources */,
-				339966E118F0DC8D000F4522 /* marimba-51.wav in Resources */,
 				3399636818F0A8DE000F4522 /* Icon-72.png in Resources */,
 				339964B618F0A8DF000F4522 /* LICENSE_cocos2d.txt in Resources */,
-				339966E318F0DC8D000F4522 /* marimba-53.wav in Resources */,
-				339966EE18F0DC8D000F4522 /* pfl-piano-1.aif in Resources */,
 				3399635F18F0A8DE000F4522 /* Default-568h@2x.png in Resources */,
 				3399662018F0B47A000F4522 /* userInterface.plist in Resources */,
 				3399637F18F0A8DE000F4522 /* iTunesArtwork in Resources */,
-				339966ED18F0DC8D000F4522 /* marimba-63.wav in Resources */,
 				3399637A18F0A8DE000F4522 /* Icon-Spotlight-iOS7.png in Resources */,
 				33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */,
 				3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */,
-				339966F418F0DC8D000F4522 /* pfl-piano-7.aif in Resources */,
 				3399662118F0B47A000F4522 /* userInterface.png in Resources */,
-				339966DC18F0DC8D000F4522 /* drum3.wav in Resources */,
-				339966E018F0DC8D000F4522 /* marimba-50.wav in Resources */,
 				3399661E18F0B47A000F4522 /* userInterface-hd.plist in Resources */,
-				339966E818F0DC8D000F4522 /* marimba-58.wav in Resources */,
 				3399636E18F0A8DE000F4522 /* Icon-76@2x.png in Resources */,
-				339966E918F0DC8D000F4522 /* marimba-59.wav in Resources */,
 				339965E218F0A8E0000F4522 /* LICENSE_Chipmunk.txt in Resources */,
 				3399670618F0DC8D000F4522 /* puzzle0.json in Resources */,
 				3399637C18F0A8DE000F4522 /* Icon-Spotlight-iOS7@2x.png in Resources */,
@@ -2278,7 +2153,6 @@
 				3399645218F0A8DF000F4522 /* CCTexturePVR.m in Sources */,
 				3399656118F0A8E0000F4522 /* CCBAnimationManager.m in Sources */,
 				3399654518F0A8DF000F4522 /* mat4stack.c in Sources */,
-				3399668818F0B60C000F4522 /* PFLTransitionSlide.m in Sources */,
 				339963E418F0A8DE000F4522 /* CCNode.m in Sources */,
 				3399668D18F0B60C000F4522 /* PFLScrollNode.m in Sources */,
 				339963CF18F0A8DE000F4522 /* CCLabelBMFont.m in Sources */,

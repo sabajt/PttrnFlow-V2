@@ -68,9 +68,8 @@
 - (void)puzzleSetCellTouchUpInside:(PFLPuzzleSetCell *)cell index:(NSInteger)index
 {
     CCScene *scene = [PFLPuzzleLayer sceneWithPuzzle:self.puzzleSet.puzzles[index] leftPadding:80.0f rightPadding:0.0f];
-//    id transitionScene = [[PFLTransitionSlide alloc] initWithDuration:kTransitionDuration scene:scene above:NO forwards:YES leftPadding:0.0f rightPadding:80.0f];
-//    [[CCDirector sharedDirector] replaceScene:transitionScene];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
+    [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
 }
 
 @end
