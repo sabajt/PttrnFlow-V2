@@ -225,8 +225,6 @@
 		3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3399661718F0B47A000F4522 /* userInterface-hd.png */; };
 		3399662018F0B47A000F4522 /* userInterface.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3399661818F0B47A000F4522 /* userInterface.plist */; };
 		3399662118F0B47A000F4522 /* userInterface.png in Resources */ = {isa = PBXBuildFile; fileRef = 3399661918F0B47A000F4522 /* userInterface.png */; };
-		3399667B18F0B60C000F4522 /* PFLAudioResponderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */; };
-		3399667C18F0B60C000F4522 /* PFLAudioResponderTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */; };
 		3399667D18F0B60C000F4522 /* PFLArrowSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662918F0B60C000F4522 /* PFLArrowSprite.m */; };
 		3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662B18F0B60C000F4522 /* PFLAudioPadSprite.m */; };
 		3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662E18F0B60C000F4522 /* PFLEntrySprite.m */; };
@@ -247,7 +245,6 @@
 		3399669218F0B60C000F4522 /* PFLPuzzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665718F0B60C000F4522 /* PFLPuzzle.m */; };
 		3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665918F0B60C000F4522 /* PFLPuzzleSet.m */; };
 		3399669418F0B60C000F4522 /* PFLSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665B18F0B60C000F4522 /* PFLSample.m */; };
-		3399669618F0B60C000F4522 /* PFLAudioEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666018F0B60C000F4522 /* PFLAudioEventController.m */; };
 		3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */; };
 		3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666518F0B60C000F4522 /* PFLSolutionButton.m */; };
 		3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */; };
@@ -269,6 +266,9 @@
 		3399670C18F0DC8D000F4522 /* puzzle6.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D718F0DC8D000F4522 /* puzzle6.json */; };
 		3399670D18F0DC8D000F4522 /* puzzleSet0.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D818F0DC8D000F4522 /* puzzleSet0.json */; };
 		3399670E18F0DC8D000F4522 /* puzzleSet1.json in Resources */ = {isa = PBXBuildFile; fileRef = 339966D918F0DC8D000F4522 /* puzzleSet1.json */; };
+		339A29A01902AC6D0045CA1A /* PFLAudioEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299B1902AC6D0045CA1A /* PFLAudioEventController.m */; };
+		339A29A11902AC6D0045CA1A /* PFLAudioResponderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299D1902AC6D0045CA1A /* PFLAudioResponderStepController.m */; };
+		339A29A21902AC6D0045CA1A /* PFLAudioResponderTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */; };
 		33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E61900313D0071C2B9 /* tech-chuk1.caf */; };
 		33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E71900313D0071C2B9 /* tech-clap1.caf */; };
 		33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E81900313D0071C2B9 /* tech-clok1.caf */; };
@@ -738,10 +738,6 @@
 		3399661718F0B47A000F4522 /* userInterface-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-hd.png"; sourceTree = "<group>"; };
 		3399661818F0B47A000F4522 /* userInterface.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userInterface.plist; sourceTree = "<group>"; };
 		3399661918F0B47A000F4522 /* userInterface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userInterface.png; sourceTree = "<group>"; };
-		3399662318F0B60C000F4522 /* PFLAudioResponderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderStepController.h; sourceTree = "<group>"; };
-		3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderStepController.m; sourceTree = "<group>"; };
-		3399662518F0B60C000F4522 /* PFLAudioResponderTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderTouchController.h; sourceTree = "<group>"; };
-		3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderTouchController.m; sourceTree = "<group>"; };
 		3399662818F0B60C000F4522 /* PFLArrowSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLArrowSprite.h; sourceTree = "<group>"; };
 		3399662918F0B60C000F4522 /* PFLArrowSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLArrowSprite.m; sourceTree = "<group>"; };
 		3399662A18F0B60C000F4522 /* PFLAudioPadSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioPadSprite.h; sourceTree = "<group>"; };
@@ -783,8 +779,6 @@
 		3399665918F0B60C000F4522 /* PFLPuzzleSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSet.m; sourceTree = "<group>"; };
 		3399665A18F0B60C000F4522 /* PFLSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSample.h; sourceTree = "<group>"; };
 		3399665B18F0B60C000F4522 /* PFLSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSample.m; sourceTree = "<group>"; };
-		3399665F18F0B60C000F4522 /* PFLAudioEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioEventController.h; sourceTree = "<group>"; };
-		3399666018F0B60C000F4522 /* PFLAudioEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioEventController.m; sourceTree = "<group>"; };
 		3399666218F0B60C000F4522 /* PFLPuzzleSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetCell.h; sourceTree = "<group>"; };
 		3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetCell.m; sourceTree = "<group>"; };
 		3399666418F0B60C000F4522 /* PFLSolutionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSolutionButton.h; sourceTree = "<group>"; };
@@ -818,6 +812,12 @@
 		339966D718F0DC8D000F4522 /* puzzle6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle6.json; sourceTree = "<group>"; };
 		339966D818F0DC8D000F4522 /* puzzleSet0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzleSet0.json; sourceTree = "<group>"; };
 		339966D918F0DC8D000F4522 /* puzzleSet1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzleSet1.json; sourceTree = "<group>"; };
+		339A299A1902AC6D0045CA1A /* PFLAudioEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioEventController.h; sourceTree = "<group>"; };
+		339A299B1902AC6D0045CA1A /* PFLAudioEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioEventController.m; sourceTree = "<group>"; };
+		339A299C1902AC6D0045CA1A /* PFLAudioResponderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderStepController.h; sourceTree = "<group>"; };
+		339A299D1902AC6D0045CA1A /* PFLAudioResponderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderStepController.m; sourceTree = "<group>"; };
+		339A299E1902AC6D0045CA1A /* PFLAudioResponderTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderTouchController.h; sourceTree = "<group>"; };
+		339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderTouchController.m; sourceTree = "<group>"; };
 		33B868E61900313D0071C2B9 /* tech-chuk1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-chuk1.caf"; sourceTree = "<group>"; };
 		33B868E71900313D0071C2B9 /* tech-clap1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clap1.caf"; sourceTree = "<group>"; };
 		33B868E81900313D0071C2B9 /* tech-clok1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clok1.caf"; sourceTree = "<group>"; };
@@ -1722,12 +1722,11 @@
 		339965E718F0A8E0000F4522 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3399662218F0B60C000F4522 /* Audio Responder Controllers */,
+				339A29991902AC6D0045CA1A /* Audio Controllers */,
 				3399662718F0B60C000F4522 /* Audio Responders */,
 				3399663318F0B60C000F4522 /* Generic Nodes */,
 				3399664218F0B60C000F4522 /* Layers */,
 				3399664D18F0B60C000F4522 /* Models */,
-				3399665C18F0B60C000F4522 /* PD Interface */,
 				3399666118F0B60C000F4522 /* UI Nodes */,
 				3399666618F0B60C000F4522 /* Utils */,
 				339965E818F0A8E0000F4522 /* AppDelegate.h */,
@@ -1782,18 +1781,6 @@
 				3399661918F0B47A000F4522 /* userInterface.png */,
 			);
 			path = userInterface;
-			sourceTree = "<group>";
-		};
-		3399662218F0B60C000F4522 /* Audio Responder Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				3399662318F0B60C000F4522 /* PFLAudioResponderStepController.h */,
-				3399662418F0B60C000F4522 /* PFLAudioResponderStepController.m */,
-				3399662518F0B60C000F4522 /* PFLAudioResponderTouchController.h */,
-				3399662618F0B60C000F4522 /* PFLAudioResponderTouchController.m */,
-			);
-			name = "Audio Responder Controllers";
-			path = "Classes/Audio Responder Controllers";
 			sourceTree = "<group>";
 		};
 		3399662718F0B60C000F4522 /* Audio Responders */ = {
@@ -1867,16 +1854,6 @@
 			);
 			name = Models;
 			path = Classes/Models;
-			sourceTree = "<group>";
-		};
-		3399665C18F0B60C000F4522 /* PD Interface */ = {
-			isa = PBXGroup;
-			children = (
-				3399665F18F0B60C000F4522 /* PFLAudioEventController.h */,
-				3399666018F0B60C000F4522 /* PFLAudioEventController.m */,
-			);
-			name = "PD Interface";
-			path = "Classes/PD Interface";
 			sourceTree = "<group>";
 		};
 		3399666118F0B60C000F4522 /* UI Nodes */ = {
@@ -1958,6 +1935,20 @@
 			);
 			name = puzzles;
 			path = Resources/puzzles;
+			sourceTree = "<group>";
+		};
+		339A29991902AC6D0045CA1A /* Audio Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				339A299A1902AC6D0045CA1A /* PFLAudioEventController.h */,
+				339A299B1902AC6D0045CA1A /* PFLAudioEventController.m */,
+				339A299C1902AC6D0045CA1A /* PFLAudioResponderStepController.h */,
+				339A299D1902AC6D0045CA1A /* PFLAudioResponderStepController.m */,
+				339A299E1902AC6D0045CA1A /* PFLAudioResponderTouchController.h */,
+				339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */,
+			);
+			name = "Audio Controllers";
+			path = "Classes/Audio Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2106,6 +2097,7 @@
 				3399650718F0A8DF000F4522 /* NSMutableArray+WeakReferences.m in Sources */,
 				3399648118F0A8DF000F4522 /* CCGLView.m in Sources */,
 				3399654B18F0A8DF000F4522 /* mat4.c in Sources */,
+				339A29A11902AC6D0045CA1A /* PFLAudioResponderStepController.m in Sources */,
 				339963A718F0A8DE000F4522 /* CCAtlasNode.m in Sources */,
 				339964F518F0A8DF000F4522 /* OpenALManager.m in Sources */,
 				3399650118F0A8DF000F4522 /* IOSVersion.m in Sources */,
@@ -2154,6 +2146,7 @@
 				3399638D18F0A8DE000F4522 /* CCActionEase.m in Sources */,
 				3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */,
 				3399639C18F0A8DE000F4522 /* CCActionTween.m in Sources */,
+				339A29A21902AC6D0045CA1A /* PFLAudioResponderTouchController.m in Sources */,
 				3399650A18F0A8DF000F4522 /* NSMutableDictionary+WeakReferences.m in Sources */,
 				339963E718F0A8DE000F4522 /* CCNode+Debug.m in Sources */,
 				339963A018F0A8DE000F4522 /* CCAnimation.m in Sources */,
@@ -2185,7 +2178,6 @@
 				3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */,
 				3399648418F0A8DF000F4522 /* CCWindow.m in Sources */,
 				3399639918F0A8DE000F4522 /* CCActionProgressTimer.m in Sources */,
-				3399669618F0B60C000F4522 /* PFLAudioEventController.m in Sources */,
 				3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */,
 				3399654F18F0A8DF000F4522 /* plane.c in Sources */,
 				339964D218F0A8DF000F4522 /* OALSimpleAudio.m in Sources */,
@@ -2223,7 +2215,6 @@
 				3399645918F0A8DF000F4522 /* CCTiledMapLayer.m in Sources */,
 				339965ED18F0A8E0000F4522 /* HelloWorldScene.m in Sources */,
 				3399654D18F0A8DF000F4522 /* neon_matrix_impl.c in Sources */,
-				3399667B18F0B60C000F4522 /* PFLAudioResponderStepController.m in Sources */,
 				339963D218F0A8DE000F4522 /* CCLabelTTF.m in Sources */,
 				3399648718F0A8DF000F4522 /* NSEvent+CC.m in Sources */,
 				339964E418F0A8DF000F4522 /* ALDevice.m in Sources */,
@@ -2241,8 +2232,8 @@
 				3399649118F0A8DF000F4522 /* CCColor.m in Sources */,
 				339964DE18F0A8DF000F4522 /* ALChannelSource.m in Sources */,
 				3399669A18F0B60C000F4522 /* CCSprite+PFLEffects.m in Sources */,
+				339A29A01902AC6D0045CA1A /* PFLAudioEventController.m in Sources */,
 				3399638A18F0A8DE000F4522 /* CCActionCatmullRom.m in Sources */,
-				3399667C18F0B60C000F4522 /* PFLAudioResponderTouchController.m in Sources */,
 				339964A218F0A8DF000F4522 /* NSAttributedString+CCAdditions.m in Sources */,
 				3399656418F0A8E0000F4522 /* CCBKeyframe.m in Sources */,
 				3399651E18F0A8DF000F4522 /* CCControlTextureFactory.m in Sources */,
