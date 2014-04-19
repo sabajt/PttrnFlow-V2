@@ -76,24 +76,6 @@ static NSString *const kTheme = @"theme";
       [combinedSolutionEvents addObject:[NSArray array]];
     }
     
-    //    NSInteger i = 0;
-    //    for (PFLPuzzle *puzzle in self.puzzles)
-    //    {
-    //      NSArray *keyframes = self.keyframeSets[i];
-    //      for (PFLKeyframe *keyframe in keyframes)
-    //      {
-    //        NSInteger s = keyframe.sourceIndex;
-    //        for (NSInteger r = 0; r < keyframe.range; r++)
-    //        {
-    //          NSArray *events = [puzzle solutionEvents][s];
-    //          NSInteger t = keyframe.targetIndex + r;
-    //          combinedSolutionEvents[t] = [combinedSolutionEvents[t] arrayByAddingObjectsFromArray:events];
-    //          s++;
-    //        }
-    //      }
-    //      i++;
-    //    }
-    
     for (PFLKeyframe *keyframe in self.keyframes)
     {
       NSInteger s = keyframe.sourceIndex;

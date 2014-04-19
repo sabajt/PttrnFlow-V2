@@ -1,7 +1,7 @@
 {
 	"name" : "Kewl Puzzle Set",
-	"bpm" : 100,
-	"length" : 4,
+	"bpm" : 120,
+	"length" : 8,
 	"theme" : "purple_light",
 	"puzzles" : 
 	[	
@@ -10,6 +10,8 @@
 			"keyframes" :
 			[
 				{ "source_index" : 0, "target_index" : 0, "range" : 4 },
+				{ "source_index" : 0, "target_index" : 4, "range" : 4 },
+
 			]
 		},
 		{
@@ -17,6 +19,7 @@
 			"keyframes" :
 			[
 				{ "source_index" : 0, "target_index" : 0, "range" : 4 },
+				{ "source_index" : 2, "target_index" : 6, "range" : 2 },
 			]
 		},
 	],
