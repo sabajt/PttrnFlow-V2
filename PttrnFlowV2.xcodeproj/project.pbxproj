@@ -271,6 +271,8 @@
 		339A29A21902AC6D0045CA1A /* PFLAudioResponderTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */; };
 		339A29A51902B9300045CA1A /* audioObjects-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A31902B9300045CA1A /* audioObjects-ipadhd.plist */; };
 		339A29A61902B9300045CA1A /* audioObjects-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */; };
+		339A29A91902C1190045CA1A /* userInterface-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A71902C1190045CA1A /* userInterface-ipadhd.plist */; };
+		339A29AA1902C1190045CA1A /* userInterface-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A81902C1190045CA1A /* userInterface-ipadhd.png */; };
 		33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E61900313D0071C2B9 /* tech-chuk1.caf */; };
 		33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E71900313D0071C2B9 /* tech-clap1.caf */; };
 		33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E81900313D0071C2B9 /* tech-clok1.caf */; };
@@ -822,6 +824,8 @@
 		339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderTouchController.m; sourceTree = "<group>"; };
 		339A29A31902B9300045CA1A /* audioObjects-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipadhd.plist"; sourceTree = "<group>"; };
 		339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioObjects-ipadhd.png"; sourceTree = "<group>"; };
+		339A29A71902C1190045CA1A /* userInterface-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "userInterface-ipadhd.plist"; sourceTree = "<group>"; };
+		339A29A81902C1190045CA1A /* userInterface-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipadhd.png"; sourceTree = "<group>"; };
 		33B868E61900313D0071C2B9 /* tech-chuk1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-chuk1.caf"; sourceTree = "<group>"; };
 		33B868E71900313D0071C2B9 /* tech-clap1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clap1.caf"; sourceTree = "<group>"; };
 		33B868E81900313D0071C2B9 /* tech-clok1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clok1.caf"; sourceTree = "<group>"; };
@@ -1781,6 +1785,8 @@
 		3399661518F0B47A000F4522 /* userInterface */ = {
 			isa = PBXGroup;
 			children = (
+				339A29A71902C1190045CA1A /* userInterface-ipadhd.plist */,
+				339A29A81902C1190045CA1A /* userInterface-ipadhd.png */,
 				3399661618F0B47A000F4522 /* userInterface-hd.plist */,
 				3399661718F0B47A000F4522 /* userInterface-hd.png */,
 				3399661818F0B47A000F4522 /* userInterface.plist */,
@@ -2043,9 +2049,11 @@
 				3399636418F0A8DE000F4522 /* Icon.png in Resources */,
 				33B868F91900313D0071C2B9 /* tech-hhclosed2.caf in Resources */,
 				33B868FA1900313D0071C2B9 /* tech-hhclosed3.caf in Resources */,
+				339A29AA1902C1190045CA1A /* userInterface-ipadhd.png in Resources */,
 				3399637218F0A8DE000F4522 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */,
 				3399660F18F0B261000F4522 /* audioObjects.png in Resources */,
+				339A29A91902C1190045CA1A /* userInterface-ipadhd.plist in Resources */,
 				3399660C18F0B261000F4522 /* audioObjects-hd.plist in Resources */,
 				3399636118F0A8DE000F4522 /* Default-Landscape~ipad.png in Resources */,
 				33B868FD1900313D0071C2B9 /* tech-tonal1.caf in Resources */,
