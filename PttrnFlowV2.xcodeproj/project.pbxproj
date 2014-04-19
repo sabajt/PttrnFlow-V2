@@ -269,6 +269,8 @@
 		339A29A01902AC6D0045CA1A /* PFLAudioEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299B1902AC6D0045CA1A /* PFLAudioEventController.m */; };
 		339A29A11902AC6D0045CA1A /* PFLAudioResponderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299D1902AC6D0045CA1A /* PFLAudioResponderStepController.m */; };
 		339A29A21902AC6D0045CA1A /* PFLAudioResponderTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */; };
+		339A29A51902B9300045CA1A /* audioObjects-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A31902B9300045CA1A /* audioObjects-ipadhd.plist */; };
+		339A29A61902B9300045CA1A /* audioObjects-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */; };
 		33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E61900313D0071C2B9 /* tech-chuk1.caf */; };
 		33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E71900313D0071C2B9 /* tech-clap1.caf */; };
 		33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E81900313D0071C2B9 /* tech-clok1.caf */; };
@@ -818,6 +820,8 @@
 		339A299D1902AC6D0045CA1A /* PFLAudioResponderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderStepController.m; sourceTree = "<group>"; };
 		339A299E1902AC6D0045CA1A /* PFLAudioResponderTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderTouchController.h; sourceTree = "<group>"; };
 		339A299F1902AC6D0045CA1A /* PFLAudioResponderTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderTouchController.m; sourceTree = "<group>"; };
+		339A29A31902B9300045CA1A /* audioObjects-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipadhd.plist"; sourceTree = "<group>"; };
+		339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioObjects-ipadhd.png"; sourceTree = "<group>"; };
 		33B868E61900313D0071C2B9 /* tech-chuk1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-chuk1.caf"; sourceTree = "<group>"; };
 		33B868E71900313D0071C2B9 /* tech-clap1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clap1.caf"; sourceTree = "<group>"; };
 		33B868E81900313D0071C2B9 /* tech-clok1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clok1.caf"; sourceTree = "<group>"; };
@@ -1753,6 +1757,8 @@
 		339965FB18F0AF80000F4522 /* audioObjects */ = {
 			isa = PBXGroup;
 			children = (
+				339A29A31902B9300045CA1A /* audioObjects-ipadhd.plist */,
+				339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */,
 				3399660818F0B261000F4522 /* audioObjects-hd.plist */,
 				3399660918F0B261000F4522 /* audioObjects-hd.png */,
 				3399660A18F0B261000F4522 /* audioObjects.plist */,
@@ -2025,6 +2031,7 @@
 				3399661A18F0B47A000F4522 /* transitions-hd.plist in Resources */,
 				3399670918F0DC8D000F4522 /* puzzle3.json in Resources */,
 				3399660E18F0B261000F4522 /* audioObjects.plist in Resources */,
+				339A29A61902B9300045CA1A /* audioObjects-ipadhd.png in Resources */,
 				33B868F71900313D0071C2B9 /* tech-crash1.caf in Resources */,
 				3399637018F0A8DE000F4522 /* Icon-120.png in Resources */,
 				3399657418F0A8E0000F4522 /* LICENSE_CCBReader.txt in Resources */,
@@ -2069,6 +2076,7 @@
 				3399661E18F0B47A000F4522 /* userInterface-hd.plist in Resources */,
 				3399636E18F0A8DE000F4522 /* Icon-76@2x.png in Resources */,
 				339965E218F0A8E0000F4522 /* LICENSE_Chipmunk.txt in Resources */,
+				339A29A51902B9300045CA1A /* audioObjects-ipadhd.plist in Resources */,
 				3399670618F0DC8D000F4522 /* puzzle0.json in Resources */,
 				3399637C18F0A8DE000F4522 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				3399636C18F0A8DE000F4522 /* Icon-76.png in Resources */,
