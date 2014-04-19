@@ -11,7 +11,7 @@
 #import "PFLAudioResponder.h"
 #import "PFLEntrySprite.h"
 
-@class PFLPuzzle;
+@class PFLPuzzle, PFLAudioEventController;
 
 FOUNDATION_EXPORT NSString *const kNotificationStepUserSequence;
 FOUNDATION_EXPORT NSString *const kNotificationStepSolutionSequence;
@@ -26,7 +26,7 @@ FOUNDATION_EXPORT NSString *const kKeyEmpty;
 
 @property (weak, nonatomic) PFLEntrySprite *entry;
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle;
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
 - (void)addResponder:(id<PFLAudioResponder>)responder;
 - (void)clearResponders;
 

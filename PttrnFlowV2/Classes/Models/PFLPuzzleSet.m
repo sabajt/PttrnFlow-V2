@@ -34,55 +34,81 @@ static NSString *const kTheme = @"theme";
 
 - (id)initWithJson:(NSDictionary *)json
 {
-    self = [super init];
-    if (self) {
-        self.beatDuration = (1.0f / ([json[kBpm] floatValue] / 60.0f));
-        self.bpm = [json[kBpm] integerValue];
-        self.length = [json[kLength] integerValue];
-        self.name = json[kName];
-        self.theme = json[kTheme];
-        
-        NSArray *puzzleMetaData = json[kPuzzles];
-        NSMutableArray *puzzles = [NSMutableArray array];
-        NSMutableArray *keyframeSets = [NSMutableArray array];
-        
-        for (NSDictionary *meta in puzzleMetaData) {
-            PFLPuzzle *puzzle = [PFLPuzzle puzzleFromResource:meta[kFile] puzzleSet:self];
-            [puzzles addObject:puzzle];
-            
-            NSArray *keyframes = [PFLKeyframe keyframesFromArray:meta[kKeyframes]];
-            [keyframeSets addObject:keyframes];
-        }
-        self.puzzles = [NSArray arrayWithArray:puzzles];
-        self.keyframeSets = [NSArray arrayWithArray:keyframeSets];
+  self = [super init];
+  if (self)
+  {
+    self.beatDuration = (1.0f / ([json[kBpm] floatValue] / 60.0f));
+    self.bpm = [json[kBpm] integerValue];
+    self.length = [json[kLength] integerValue];
+    self.name = json[kName];
+    self.theme = json[kTheme];
+    
+    NSMutableArray* puzzles = [NSMutableArray array];
+    NSMutableArray* keyframes = [NSMutableArray array];
+
+    NSArray* allPuzzlesJson = json[kPuzzles];
+    for (NSDictionary* puzzleJson in allPuzzlesJson)
+    {
+      PFLPuzzle* puzzle = [PFLPuzzle puzzleFromResource:puzzleJson[kFile] puzzleSet:self];
+      [puzzles addObject:puzzle];
+      
+      NSArray* keyframeJsonArray = puzzleJson[kKeyframes];
+      for (NSDictionary* keyframeJson in keyframeJsonArray)
+      {
+        PFLKeyframe* keyframe = [PFLKeyframe keyframeWithJson:keyframeJson puzzle:puzzle];
+        [keyframes addObject:keyframe];
+      }
     }
-    return self;
+    
+    self.puzzles = [NSArray arrayWithArray:puzzles];
+    self.keyframes = [NSArray arrayWithArray:keyframes];
+  }
+  return self;
 }
 
-- (NSArray *)combinedSolutionEvents
+- (NSArray*)combinedSolutionEvents
 {
-    if (!_combinedSolutionEvents) {
-        NSMutableArray *combinedSolutionEvents = [NSMutableArray array];
-        for (NSInteger i = 0; i < self.length; i++) {
-            [combinedSolutionEvents addObject:[NSArray array]];
-        }
-        NSInteger i = 0;
-        for (PFLPuzzle *puzzle in self.puzzles) {
-            NSArray *keyframes = self.keyframeSets[i];
-            for (PFLKeyframe *keyframe in keyframes) {
-                NSInteger s = keyframe.sourceIndex;
-                for (NSInteger r = 0; r < keyframe.range; r++) {
-                    NSArray *events = [puzzle solutionEvents][s];
-                    NSInteger t = keyframe.targetIndex + r;
-                    combinedSolutionEvents[t] = [combinedSolutionEvents[t] arrayByAddingObjectsFromArray:events];
-                    s++;
-                }
-            }
-            i++;
-        }
-        _combinedSolutionEvents = [NSArray arrayWithArray:combinedSolutionEvents];
+  if (!_combinedSolutionEvents)
+  {
+    NSMutableArray *combinedSolutionEvents = [NSMutableArray array];
+    for (NSInteger i = 0; i < self.length; i++)
+    {
+      [combinedSolutionEvents addObject:[NSArray array]];
     }
-    return _combinedSolutionEvents;
+    
+    //    NSInteger i = 0;
+    //    for (PFLPuzzle *puzzle in self.puzzles)
+    //    {
+    //      NSArray *keyframes = self.keyframeSets[i];
+    //      for (PFLKeyframe *keyframe in keyframes)
+    //      {
+    //        NSInteger s = keyframe.sourceIndex;
+    //        for (NSInteger r = 0; r < keyframe.range; r++)
+    //        {
+    //          NSArray *events = [puzzle solutionEvents][s];
+    //          NSInteger t = keyframe.targetIndex + r;
+    //          combinedSolutionEvents[t] = [combinedSolutionEvents[t] arrayByAddingObjectsFromArray:events];
+    //          s++;
+    //        }
+    //      }
+    //      i++;
+    //    }
+    
+    for (PFLKeyframe *keyframe in self.keyframes)
+    {
+      NSInteger s = keyframe.sourceIndex;
+      for (NSInteger r = 0; r < keyframe.range; r++)
+      {
+        NSArray *events = [keyframe.puzzle solutionEvents][s];
+        NSInteger t = keyframe.targetIndex + r;
+        combinedSolutionEvents[t] = [combinedSolutionEvents[t] arrayByAddingObjectsFromArray:events];
+        s++;
+      }
+    }
+    
+    _combinedSolutionEvents = [NSArray arrayWithArray:combinedSolutionEvents];
+  }
+  return _combinedSolutionEvents;
 }
 
 @end

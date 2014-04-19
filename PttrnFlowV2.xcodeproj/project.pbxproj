@@ -248,7 +248,7 @@
 		3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665918F0B60C000F4522 /* PFLPuzzleSet.m */; };
 		3399669418F0B60C000F4522 /* PFLSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665B18F0B60C000F4522 /* PFLSample.m */; };
 		3399669518F0B60C000F4522 /* AVAudioPlayer+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */; };
-		3399669618F0B60C000F4522 /* PFLPatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666018F0B60C000F4522 /* PFLPatchController.m */; };
+		3399669618F0B60C000F4522 /* PFLAudioEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666018F0B60C000F4522 /* PFLAudioEventController.m */; };
 		3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */; };
 		3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666518F0B60C000F4522 /* PFLSolutionButton.m */; };
 		3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */; };
@@ -786,8 +786,8 @@
 		3399665B18F0B60C000F4522 /* PFLSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSample.m; sourceTree = "<group>"; };
 		3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAudioPlayer+Utils.h"; sourceTree = "<group>"; };
 		3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAudioPlayer+Utils.m"; sourceTree = "<group>"; };
-		3399665F18F0B60C000F4522 /* PFLPatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPatchController.h; sourceTree = "<group>"; };
-		3399666018F0B60C000F4522 /* PFLPatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPatchController.m; sourceTree = "<group>"; };
+		3399665F18F0B60C000F4522 /* PFLAudioEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioEventController.h; sourceTree = "<group>"; };
+		3399666018F0B60C000F4522 /* PFLAudioEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioEventController.m; sourceTree = "<group>"; };
 		3399666218F0B60C000F4522 /* PFLPuzzleSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetCell.h; sourceTree = "<group>"; };
 		3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetCell.m; sourceTree = "<group>"; };
 		3399666418F0B60C000F4522 /* PFLSolutionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSolutionButton.h; sourceTree = "<group>"; };
@@ -1877,8 +1877,8 @@
 			children = (
 				3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */,
 				3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */,
-				3399665F18F0B60C000F4522 /* PFLPatchController.h */,
-				3399666018F0B60C000F4522 /* PFLPatchController.m */,
+				3399665F18F0B60C000F4522 /* PFLAudioEventController.h */,
+				3399666018F0B60C000F4522 /* PFLAudioEventController.m */,
 			);
 			name = "PD Interface";
 			path = "Classes/PD Interface";
@@ -2190,7 +2190,7 @@
 				3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */,
 				3399648418F0A8DF000F4522 /* CCWindow.m in Sources */,
 				3399639918F0A8DE000F4522 /* CCActionProgressTimer.m in Sources */,
-				3399669618F0B60C000F4522 /* PFLPatchController.m in Sources */,
+				3399669618F0B60C000F4522 /* PFLAudioEventController.m in Sources */,
 				3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */,
 				3399654F18F0A8DF000F4522 /* plane.c in Sources */,
 				339964D218F0A8DF000F4522 /* OALSimpleAudio.m in Sources */,

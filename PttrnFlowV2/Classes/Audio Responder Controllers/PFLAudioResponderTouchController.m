@@ -8,7 +8,7 @@
 
 #import "PFLAudioResponderTouchController.h"
 #import "PFLEvent.h"
-#import "PFLPatchController.h"
+#import "PFLAudioEventController.h"
 #import "PFLCoord.h"
 #import "NSObject+PFLAudioResponderUtils.h"
 #import "PFLAudioPadSprite.h"
@@ -19,49 +19,52 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 @interface PFLAudioResponderTouchController ()
 
-@property (strong, nonatomic) NSMutableArray *responders;
+@property (strong, nonatomic) NSMutableArray* responders;
 @property (assign) CFMutableDictionaryRef trackingTouches;
+@property (weak, nonatomic) PFLAudioEventController* audioEventController;
 
 @end
 
 @implementation PFLAudioResponderTouchController
 
-- (id)initWithBeatDuration:(CGFloat)duration
+- (id)initWithBeatDuration:(CGFloat)duration audioEventController:(PFLAudioEventController*)audioEventController
 {
-    self = [super init];
-    if (self) {
-        self.contentSize = CGSizeMake(320, 568);
-        self.userInteractionEnabled = YES;
-        self.allowScrolling = YES;
-        _responders = [NSMutableArray array];
-        _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-        self.beatDuration = duration;
-    }
-    return self;
+  self = [super init];
+  if (self)
+  {
+    self.audioEventController = audioEventController;
+    self.contentSize = CGSizeMake(320, 568);
+    self.userInteractionEnabled = YES;
+    self.allowScrolling = YES;
+    _responders = [NSMutableArray array];
+    _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    self.beatDuration = duration;
+  }
+  return self;
 }
 
 - (void)addResponder:(id<PFLAudioResponder>)responder
 {
-    [self.responders addObject:responder];
+  [self.responders addObject:responder];
 }
 
 - (void)clearResponders
 {
-    [self.responders removeAllObjects];
+  [self.responders removeAllObjects];
 }
 
-- (void)hitCell:(PFLCoord *)coord channel:(NSString *)channel
+- (void)hitCell:(PFLCoord*)coord channel:(NSString *)channel
 {
-    // collect events from all hit cells
-    NSArray *events = [self hitResponders:self.responders atCoord:coord];
-    
-    // block scrolling the puzzle if there are any events
-    self.allowScrolling = (events.count == 0);
-    
-    // send events to pd
-    [[PFLPatchController sharedMainSynth] receiveEvents:events];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kPFLAudioTouchDispatcherHitNotification object:nil userInfo:@{kPFLAudioTouchDispatcherCoordKey : coord}];
+  // collect events from all hit cells
+  NSArray *events = [self hitResponders:self.responders atCoord:coord];
+  
+  // block scrolling the puzzle if there are any events
+  self.allowScrolling = (events.count == 0);
+  
+  // send events to pd
+  [self.audioEventController receiveEvents:events];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kPFLAudioTouchDispatcherHitNotification object:nil userInfo:@{kPFLAudioTouchDispatcherCoordKey : coord}];
 }
 
 // TODO: currently not being used
@@ -171,26 +174,26 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     }
 }
 
-- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    [self.parent touchEnded:touch withEvent:event];
-    
-    // get channel
-    NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
-    NSString *channel = [touchInfo objectForKey:@"channel"];
-    PFLEvent *audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
-    [[PFLPatchController sharedMainSynth] receiveEvents:@[audioStopEvent]];
-    
-    // get grid cell of touch
-//    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    CGPoint touchPosition = [touch locationInNode:self];
-    
-    PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
-    [self releaseCell:cell channel:channel];
-    
-    CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
-    
-    self.allowScrolling = YES;
+  [self.parent touchEnded:touch withEvent:event];
+
+  // get channel
+  NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
+  NSString *channel = [touchInfo objectForKey:@"channel"];
+  PFLEvent *audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
+  [self.audioEventController receiveEvents:@[audioStopEvent]];
+
+  // get grid cell of touch
+  //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
+  CGPoint touchPosition = [touch locationInNode:self];
+
+  PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
+  [self releaseCell:cell channel:channel];
+
+  CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
+
+  self.allowScrolling = YES;
 }
 
 - (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
@@ -201,10 +204,9 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
     NSString *channel = [touchInfo objectForKey:@"channel"];
     PFLEvent *audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
-    [[PFLPatchController sharedMainSynth] receiveEvents:@[audioStopEvent]];
+    [self.audioEventController receiveEvents:@[audioStopEvent]];
     
     // get grid cell of touch
-//    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
     CGPoint touchPosition = [touch locationInNode:self];
 
     PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
@@ -219,7 +221,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 - (BOOL)shouldScroll
 {
-    return self.allowScrolling;
+  return self.allowScrolling;
 }
 
 @end

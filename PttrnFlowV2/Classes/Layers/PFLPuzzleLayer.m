@@ -16,7 +16,7 @@
 #import "PFLGearSprite.h"
 #import "PFLEntrySprite.h"
 #import "PFLGameConstants.h"
-#import "PFLPatchController.h"
+#import "PFLAudioEventController.h"
 #import "PFLGeometry.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleLayer.h"
@@ -50,6 +50,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 @property (assign) CGRect puzzleBounds;
 @property (assign) CGSize screenSize;
 @property (assign) BOOL shouldDrawGrid; // debugging
+@property (strong, nonatomic) PFLAudioEventController* audioEventController;
 
 @end
 
@@ -57,100 +58,108 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 #pragma mark - setup
 
-+ (CCScene *)sceneWithPuzzle:(PFLPuzzle *)puzzle leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding
++ (CCScene*)sceneWithPuzzle:(PFLPuzzle*)puzzle leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding
 {
-    CCScene *scene = [CCScene node];
-    
-    // background
-    PFLPuzzleBackgroundLayer *background = [PFLPuzzleBackgroundLayer backgroundLayerWithTheme:puzzle.puzzleSet.theme];
-    background.contentSize = CGSizeMake(background.contentSize.width + leftPadding + rightPadding, background.contentSize.height);
-    background.position = ccpSub(background.position, ccp(leftPadding, 0.0f));
-    [scene addChild:background];
-    
-    // gameplay layer
-    static CGFloat controlBarHeight = 80.0f;
-    PFLPuzzleLayer *puzzleLayer = [[PFLPuzzleLayer alloc] initWithPuzzle:puzzle background:background topMargin:controlBarHeight];
-    [scene addChild:puzzleLayer];
-    
-    // controls layer
-    PFLPuzzleControlsLayer *uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher];
-    [scene addChild:uiLayer z:1];
-    
-    return scene;
+  CCScene* scene = [CCScene node];
+  
+  // background
+  PFLPuzzleBackgroundLayer *background = [PFLPuzzleBackgroundLayer backgroundLayerWithTheme:puzzle.puzzleSet.theme];
+  background.contentSize = CGSizeMake(background.contentSize.width + leftPadding + rightPadding, background.contentSize.height);
+  background.position = ccpSub(background.position, ccp(leftPadding, 0.0f));
+  [scene addChild:background];
+  
+  // gameplay layer
+  static CGFloat controlBarHeight = 80.0f;
+  PFLPuzzleLayer *puzzleLayer = [[PFLPuzzleLayer alloc] initWithPuzzle:puzzle background:background topMargin:controlBarHeight];
+  [scene addChild:puzzleLayer];
+  
+  // controls layer
+  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher];
+  [scene addChild:uiLayer z:1];
+  
+  return scene;
 }
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle background:(PFLPuzzleBackgroundLayer *)backgroundLayer topMargin:(CGFloat)topMargin;
 {
-    self = [super initWithSize:CGSizeMake(320, 568)];
-    if (self) {
-        self.ignoreTouchBounds = YES;
-        // layer initialized with default content size of screen size...
-        // would be better to do figure out best practice and get screen size more explicitly
-        self.screenSize = self.contentSize;
-        self.puzzle = puzzle;
-        self.puzzleSet = puzzle.puzzleSet;
-      
-        self.beatDuration = puzzle.puzzleSet.beatDuration;
-        [PFLPatchController sharedMainSynth].beatDuration = self.beatDuration;
-        
-        // Sprite sheet batch nodes
-        CCSpriteBatchNode *audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyAudioObjects stringByAppendingString:@".png"]];
-        [self addChild:audioObjectsBatch];
-        _audioObjectsBatchNode = audioObjectsBatch;
+  self = [super initWithSize:CGSizeMake(320, 568)];
+  if (self)
+  {
+    self.ignoreTouchBounds = YES;
+    // layer initialized with default content size of screen size...
+    // would be better to do figure out best practice and get screen size more explicitly
+    self.screenSize = self.contentSize;
+    self.puzzle = puzzle;
+    self.puzzleSet = puzzle.puzzleSet;
+  
+    self.beatDuration = puzzle.puzzleSet.beatDuration;
+    PFLAudioEventController* audioEventController = [PFLAudioEventController audioEventController];
+    self.audioEventController = audioEventController;
+    [self addChild:self.audioEventController];
+    self.audioEventController.beatDuration = self.beatDuration;
+    
+    // Sprite sheet batch nodes
+    CCSpriteBatchNode *audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyAudioObjects stringByAppendingString:@".png"]];
+    [self addChild:audioObjectsBatch];
+    _audioObjectsBatchNode = audioObjectsBatch;
 
-        // Setup
-        [self addChild:[PFLPatchController sharedMainSynth]]; // must add main synth so it can run actions
-        
-        self.backgroundLayer = backgroundLayer;
-        self.maxCoord = [PFLCoord maxCoord:puzzle.area];
-        self.contentSize = CGSizeMake((self.maxCoord.x + 1) * kSizeGridUnit, (self.maxCoord.y + 1) * kSizeGridUnit);
-        
-        self.puzzleBounds = CGRectMake(kPuzzleBoundsMargin,
-                                       (3 * kUIButtonUnitSize) + kPuzzleBoundsMargin,
-                                       self.screenSize.width - (2 * kPuzzleBoundsMargin),
-                                       self.screenSize.height - (4 * kUIButtonUnitSize) - (2 * kPuzzleBoundsMargin));
-        
-        if (self.contentSize.width >= self.puzzleBounds.size.width) {
-            self.position = ccp(self.puzzleBounds.origin.x, self.position.y);
-        }
-        else {
-            self.allowsScrollHorizontal = NO;
-            CGFloat padding = self.puzzleBounds.size.width - self.contentSize.width;
-            self.position = ccp(self.puzzleBounds.origin.x + (padding / 2), self.position.y);
-        }
-        
-        if (self.contentSize.height >= self.puzzleBounds.size.height) {
-            self.position = ccp(self.position.x, self.puzzleBounds.origin.y);
-        }
-        else {
-            self.allowsScrollVertical = NO;
-            CGFloat padding = self.puzzleBounds.size.height - self.contentSize.height;
-            self.position = ccp(self.position.x, self.puzzleBounds.origin.y + (padding / 2));
-        }
-        self.scrollBounds = CGRectMake(self.position.x, self.position.y, (self.screenSize.width - kPuzzleBoundsMargin) - self.position.x, (self.screenSize.height - kPuzzleBoundsMargin) - self.position.y);
-        CCLOG(@"scroll bounds: %@", NSStringFromCGRect(self.scrollBounds));
-        
-        // audio touch dispatcher
-        CGFloat beatDuration = self.beatDuration;
-        PFLAudioResponderTouchController *audioTouchDispatcher = [[PFLAudioResponderTouchController alloc] initWithBeatDuration:beatDuration];
-        self.audioTouchDispatcher = audioTouchDispatcher;
-        [self addScrollDelegate:audioTouchDispatcher];
-        
-        [audioTouchDispatcher clearResponders];
-        audioTouchDispatcher.areaCells = puzzle.area;
-        [self addChild:audioTouchDispatcher];
-        
-        // sequence dispacher
-        PFLAudioResponderStepController *sequenceDispatcher = [[PFLAudioResponderStepController alloc] initWithPuzzle:puzzle];
-        self.sequenceDispatcher = sequenceDispatcher;
-        [sequenceDispatcher clearResponders];
-        [self addChild:sequenceDispatcher];
-        
-        // create puzzle objects
-        [self createBorderWithAreaCells:puzzle.area];
-        [self createPuzzleObjects:puzzle];        
+    // Setup
+    self.backgroundLayer = backgroundLayer;
+    self.maxCoord = [PFLCoord maxCoord:puzzle.area];
+    self.contentSize = CGSizeMake((self.maxCoord.x + 1) * kSizeGridUnit, (self.maxCoord.y + 1) * kSizeGridUnit);
+    
+    self.puzzleBounds = CGRectMake(kPuzzleBoundsMargin,
+                                   (3 * kUIButtonUnitSize) + kPuzzleBoundsMargin,
+                                   self.screenSize.width - (2 * kPuzzleBoundsMargin),
+                                   self.screenSize.height - (4 * kUIButtonUnitSize) - (2 * kPuzzleBoundsMargin));
+    
+    if (self.contentSize.width >= self.puzzleBounds.size.width)
+    {
+      self.position = ccp(self.puzzleBounds.origin.x, self.position.y);
     }
-    return self;
+    else
+    {
+      self.allowsScrollHorizontal = NO;
+      CGFloat padding = self.puzzleBounds.size.width - self.contentSize.width;
+      self.position = ccp(self.puzzleBounds.origin.x + (padding / 2), self.position.y);
+    }
+    
+    if (self.contentSize.height >= self.puzzleBounds.size.height)
+    {
+      self.position = ccp(self.position.x, self.puzzleBounds.origin.y);
+    }
+    else
+    {
+      self.allowsScrollVertical = NO;
+      CGFloat padding = self.puzzleBounds.size.height - self.contentSize.height;
+      self.position = ccp(self.position.x, self.puzzleBounds.origin.y + (padding / 2));
+    }
+    self.scrollBounds = CGRectMake(self.position.x,
+                                   self.position.y,
+                                   (self.screenSize.width - kPuzzleBoundsMargin) - self.position.x,
+                                   (self.screenSize.height - kPuzzleBoundsMargin) - self.position.y);
+
+    // audio touch dispatcher
+    CGFloat beatDuration = self.beatDuration;
+    PFLAudioResponderTouchController *audioTouchDispatcher = [[PFLAudioResponderTouchController alloc] initWithBeatDuration:beatDuration audioEventController:self.audioEventController];
+    self.audioTouchDispatcher = audioTouchDispatcher;
+    [self addScrollDelegate:audioTouchDispatcher];
+    
+    [audioTouchDispatcher clearResponders];
+    audioTouchDispatcher.areaCells = puzzle.area;
+    [self addChild:audioTouchDispatcher];
+    
+    // sequence dispacher
+    PFLAudioResponderStepController *sequenceDispatcher = [[PFLAudioResponderStepController alloc] initWithPuzzle:puzzle audioEventController:self.audioEventController];
+    self.sequenceDispatcher = sequenceDispatcher;
+    [sequenceDispatcher clearResponders];
+    [self addChild:sequenceDispatcher];
+    
+    // create puzzle objects
+    [self createBorderWithAreaCells:puzzle.area];
+    [self createPuzzleObjects:puzzle];        
+  }
+  return self;
 }
 
 - (void)createBorderWithAreaCells:(NSArray *)areaCells
@@ -377,7 +386,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
             [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
         }
     }
-    [[PFLPatchController sharedMainSynth] loadSamples:allSampleNames];
+    [self.audioEventController loadSamples:allSampleNames];
 }
 
 - (void)animateBacklight:(PFLCoord *)coord
@@ -434,14 +443,14 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 - (void)setupDebug
 {
     // mute PD
-    [PFLPatchController mute:NO];
+    [PFLAudioEventController mute:NO];
     
     // draw grid as defined in our tile map -- does not neccesarily coordinate with gameplay
     // warning: enabling makes many calls to draw cycle -- large maps will lag
     self.shouldDrawGrid = NO;
     
     // layer size reporting:
-    // [self.scheduler scheduleSelector:@selector(reportSize:) forTarget:self interval:0.3 paused:NO repeat:kCCRepeatForever delay:0];
+    // [self.scheduler scheduleSelector:@selector(reportS ize:) forTarget:self interval:0.3 paused:NO repeat:kCCRepeatForever delay:0];
     
     // // draw bounding box over puzzle layer content box
     // CCSprite *rectSprite = [CCSprite rectSpriteWithSize:CGSizeMake(self.contentSize.width, self.contentSize.height) color:ccRED];

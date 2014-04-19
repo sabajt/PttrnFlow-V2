@@ -55,14 +55,8 @@
 
 -(CCScene *)startScene
 {
-
-    
     PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
-//	[director_ pushScene: [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0]];
-    
-	// This method should return the very first scene to be run when your app starts.
     CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0];
-//	return [IntroScene scene];
     return scene;
 }
 

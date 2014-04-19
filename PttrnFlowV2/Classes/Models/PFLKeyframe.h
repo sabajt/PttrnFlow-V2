@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class PFLPuzzle;
+
 @interface PFLKeyframe : NSObject
 
+@property (strong, nonatomic) PFLPuzzle* puzzle;
 @property (assign) NSInteger range;
 @property (assign) NSInteger sourceIndex;
 @property (assign) NSInteger targetIndex;
 
-+ (NSArray *)keyframesFromArray:(NSArray *)array;
-- (id)initWithObject:(NSDictionary *)object;
+//+ (NSArray*)keyframesFromArray:(NSArray*)array puzzle:(PFLPuzzle*)puzzle;
++ (PFLKeyframe*)keyframeWithJson:(NSDictionary*)json puzzle:(PFLPuzzle*)puzzle;
+- (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 
 @end

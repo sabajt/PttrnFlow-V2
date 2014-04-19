@@ -9,6 +9,8 @@
 #import "PFLAudioResponder.h"
 #import "PFLScrollNode.h"
 
+@class PFLAudioEventController;
+
 FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherCoordKey;
 FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherHitNotification;
 
@@ -17,7 +19,7 @@ FOUNDATION_EXPORT NSString *const kPFLAudioTouchDispatcherHitNotification;
 @property BOOL allowScrolling;
 @property (strong, nonatomic) NSArray *areaCells;
 
-- (id)initWithBeatDuration:(CGFloat)duration;
+- (id)initWithBeatDuration:(CGFloat)duration audioEventController:(PFLAudioEventController*)audioEventController;
 - (void)addResponder:(id<PFLAudioResponder>)responder;
 - (void)clearResponders;
 
