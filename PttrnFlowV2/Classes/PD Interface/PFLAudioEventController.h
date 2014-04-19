@@ -7,7 +7,6 @@
 //
 
 #import "cocos2d.h"
-#import "AVAudioPlayer+Utils.h"
 
 @interface PFLAudioEventController : CCNode <AVAudioPlayerDelegate>
 

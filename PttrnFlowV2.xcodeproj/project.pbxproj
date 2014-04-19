@@ -247,7 +247,6 @@
 		3399669218F0B60C000F4522 /* PFLPuzzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665718F0B60C000F4522 /* PFLPuzzle.m */; };
 		3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665918F0B60C000F4522 /* PFLPuzzleSet.m */; };
 		3399669418F0B60C000F4522 /* PFLSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665B18F0B60C000F4522 /* PFLSample.m */; };
-		3399669518F0B60C000F4522 /* AVAudioPlayer+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */; };
 		3399669618F0B60C000F4522 /* PFLAudioEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666018F0B60C000F4522 /* PFLAudioEventController.m */; };
 		3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */; };
 		3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666518F0B60C000F4522 /* PFLSolutionButton.m */; };
@@ -784,8 +783,6 @@
 		3399665918F0B60C000F4522 /* PFLPuzzleSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSet.m; sourceTree = "<group>"; };
 		3399665A18F0B60C000F4522 /* PFLSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSample.h; sourceTree = "<group>"; };
 		3399665B18F0B60C000F4522 /* PFLSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSample.m; sourceTree = "<group>"; };
-		3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVAudioPlayer+Utils.h"; sourceTree = "<group>"; };
-		3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVAudioPlayer+Utils.m"; sourceTree = "<group>"; };
 		3399665F18F0B60C000F4522 /* PFLAudioEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioEventController.h; sourceTree = "<group>"; };
 		3399666018F0B60C000F4522 /* PFLAudioEventController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioEventController.m; sourceTree = "<group>"; };
 		3399666218F0B60C000F4522 /* PFLPuzzleSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleSetCell.h; sourceTree = "<group>"; };
@@ -1875,8 +1872,6 @@
 		3399665C18F0B60C000F4522 /* PD Interface */ = {
 			isa = PBXGroup;
 			children = (
-				3399665D18F0B60C000F4522 /* AVAudioPlayer+Utils.h */,
-				3399665E18F0B60C000F4522 /* AVAudioPlayer+Utils.m */,
 				3399665F18F0B60C000F4522 /* PFLAudioEventController.h */,
 				3399666018F0B60C000F4522 /* PFLAudioEventController.m */,
 			);
@@ -2225,7 +2220,6 @@
 				3399643318F0A8DF000F4522 /* ccShaders.m in Sources */,
 				3399654718F0A8DF000F4522 /* matrix.c in Sources */,
 				339966A218F0B60C000F4522 /* PFLJsonUtils.m in Sources */,
-				3399669518F0B60C000F4522 /* AVAudioPlayer+Utils.m in Sources */,
 				3399645918F0A8DF000F4522 /* CCTiledMapLayer.m in Sources */,
 				339965ED18F0A8E0000F4522 /* HelloWorldScene.m in Sources */,
 				3399654D18F0A8DF000F4522 /* neon_matrix_impl.c in Sources */,
