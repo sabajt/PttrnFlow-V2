@@ -58,20 +58,22 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 #pragma mark - setup
 
-+ (CCScene*)sceneWithPuzzle:(PFLPuzzle*)puzzle leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding
++ (CCScene*)sceneWithPuzzle:(PFLPuzzle*)puzzle
 {
   CCScene* scene = [CCScene node];
   
   // background
   PFLPuzzleBackgroundLayer *background = [PFLPuzzleBackgroundLayer backgroundLayerWithTheme:puzzle.puzzleSet.theme];
-  background.contentSize = CGSizeMake(background.contentSize.width + leftPadding + rightPadding, background.contentSize.height);
-  background.position = ccpSub(background.position, ccp(leftPadding, 0.0f));
+  background.contentSize = CGSizeMake(background.contentSize.width, background.contentSize.height);
+  background.position = ccpSub(background.position, ccp(0.0f, 0.0f));
   [scene addChild:background];
   
   // gameplay layer
   static CGFloat controlBarHeight = 80.0f;
   PFLPuzzleLayer *puzzleLayer = [[PFLPuzzleLayer alloc] initWithPuzzle:puzzle background:background topMargin:controlBarHeight];
   [scene addChild:puzzleLayer];
+//  puzzleLayer.contentSizeType = CCSizeTypeNormalized;
+//  puzzleLayer.positionType = CCPositionTypeNormalized;
   
   // controls layer
   PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher];
@@ -82,13 +84,11 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle background:(PFLPuzzleBackgroundLayer *)backgroundLayer topMargin:(CGFloat)topMargin;
 {
-  self = [super initWithSize:CGSizeMake(320, 568)];
+  self = [super init];
   if (self)
   {
     self.ignoreTouchBounds = YES;
-    // layer initialized with default content size of screen size...
-    // would be better to do figure out best practice and get screen size more explicitly
-    self.screenSize = self.contentSize;
+    self.screenSize = CGSizeMake(320, 568);
     self.puzzle = puzzle;
     self.puzzleSet = puzzle.puzzleSet;
   
@@ -134,7 +134,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       CGFloat padding = self.puzzleBounds.size.height - self.contentSize.height;
       self.position = ccp(self.position.x, self.puzzleBounds.origin.y + (padding / 2));
     }
-    self.scrollBounds = CGRectMake(self.position.x,
+    self.scrollBoundsInPoints = CGRectMake(self.position.x,
                                    self.position.y,
                                    (self.screenSize.width - kPuzzleBoundsMargin) - self.position.x,
                                    (self.screenSize.height - kPuzzleBoundsMargin) - self.position.y);

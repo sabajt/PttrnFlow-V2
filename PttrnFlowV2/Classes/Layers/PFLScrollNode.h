@@ -22,9 +22,8 @@
 @property BOOL allowsScrollVertical;
 @property CGFloat cancelDelegateTouchDistance;
 @property BOOL ignoreTouchBounds;
-@property CGRect scrollBounds;
+@property CGRect scrollBoundsInPoints;
 
-- (id)initWithSize:(CGSize)size;
 - (void)addScrollDelegate:(id<PFLScrollNodeDelegate>)delegate;
 
 @end

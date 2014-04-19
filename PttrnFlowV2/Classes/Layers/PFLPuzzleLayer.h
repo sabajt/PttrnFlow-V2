@@ -19,6 +19,6 @@
 
 @property (weak, nonatomic) CCSpriteBatchNode *audioObjectsBatchNode;
 
-+ (CCScene *)sceneWithPuzzle:(PFLPuzzle *)puzzle leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding;
++ (CCScene *)sceneWithPuzzle:(PFLPuzzle *)puzzle;
 
 @end

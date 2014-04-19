@@ -56,7 +56,7 @@
 -(CCScene *)startScene
 {
     PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
-    CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:puzzleSet leftPadding:0 rightPadding:0];
+    CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:puzzleSet];
     return scene;
 }
 

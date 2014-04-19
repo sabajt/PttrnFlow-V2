@@ -15,6 +15,6 @@
 
 @property (strong, nonatomic) NSArray *mapNames;
 
-+ (CCScene *)sceneWithPuzzleSet:(PFLPuzzleSet *)puzzle leftPadding:(CGFloat)leftPadding rightPadding:(CGFloat)rightPadding;
++ (CCScene *)sceneWithPuzzleSet:(PFLPuzzleSet *)puzzle;
 
 @end

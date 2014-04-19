@@ -272,7 +272,7 @@ static NSInteger const kRowLength = 8;
 - (void)basicButtonPressed:(PFLBasicButton *)sender
 {
     if ([sender isEqual:self.exitButton]) {
-        CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:self.puzzle.puzzleSet leftPadding:0 rightPadding:0];
+        CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:self.puzzle.puzzleSet];
         CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
         [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
     }

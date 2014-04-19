@@ -34,11 +34,12 @@
     return node;
 }
 
-+ (PFLPuzzleBackgroundLayer *)backgroundLayerWithColor:(CCColor *)color
++ (PFLPuzzleBackgroundLayer*)backgroundLayerWithColor:(CCColor*)color
 {
-    // TODO: fix
-    PFLPuzzleBackgroundLayer *node = [CCNodeColor nodeWithColor:color width:320 height:568];
-    return node;
+  PFLPuzzleBackgroundLayer* node = [CCNodeColor nodeWithColor:color];
+  node.contentSizeType = CCSizeTypeNormalized;
+  node.contentSize = CGSizeMake(1.0f, 1.0f);
+  return node;
 }
 
 //- (void)tintToColor:(CCColor)color duration:(ccTime)duration
