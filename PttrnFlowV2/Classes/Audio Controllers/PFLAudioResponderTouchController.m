@@ -14,8 +14,8 @@
 #import "PFLAudioPadSprite.h"
 #import "CCNode+PFLGrid.h"
 
-NSString *const kPFLAudioTouchDispatcherCoordKey = @"coord";
-NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
+NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
+NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
 
 @interface PFLAudioResponderTouchController ()
 
@@ -56,7 +56,7 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 - (void)hitCell:(PFLCoord*)coord channel:(NSString *)channel
 {
   // collect events from all hit cells
-  NSArray *events = [self hitResponders:self.responders atCoord:coord];
+  NSArray* events = [self hitResponders:self.responders atCoord:coord];
   
   // block scrolling the puzzle if there are any events
   self.allowScrolling = (events.count == 0);
@@ -70,108 +70,98 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 // TODO: currently not being used
 - (void)releaseCell:(PFLCoord *)cell channel:(NSString *)channel
 {
-    for (id<PFLAudioResponder> responder in self.responders) {
-        if (([cell isEqualToCoord:[responder audioCell]]) &&
-            [responder respondsToSelector:@selector(audioRelease:)])
-        {
-            [responder audioRelease:1];
-        }
+  for (id<PFLAudioResponder> responder in self.responders)
+  {
+    if (([cell isEqualToCoord:[responder audioCell]]) &&
+        [responder respondsToSelector:@selector(audioRelease:)])
+    {
+      [responder audioRelease:1];
     }
+  }
 }
 
-- (void)changeToCell:(PFLCoord *)toCell fromCell:(PFLCoord *)fromCell channel:(NSString *)channel
+- (void)changeToCell:(PFLCoord*)toCell fromCell:(PFLCoord*)fromCell channel:(NSString*)channel
 {
-    // don't do anything if responders at to cell
-    NSArray *toCellResponders = [self responders:self.responders atCoord:toCell];
-    if (toCellResponders.count > 0) {
-        return;
+  // don't do anything if responders at to cell
+  NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
+  if (toCellResponders.count > 0)
+  {
+      return;
+  }
+  
+  // move any responders to available cell if audio pad is not static
+  PFLAudioPadSprite* pad;
+  NSArray* fromCellResponders = [self responders:self.responders atCoord:fromCell];
+  if (fromCellResponders.count > 0)
+  {
+    NSInteger found = [fromCellResponders indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+      return [obj isKindOfClass:[PFLAudioPadSprite class]];
+    }];
+    if (found != NSNotFound) {
+      pad = fromCellResponders[found];
     }
-    
-    // move any responders to available cell if audio pad is not static
-    PFLAudioPadSprite *pad;
-    NSArray *fromCellResponders = [self responders:self.responders atCoord:fromCell];
-    if (fromCellResponders.count > 0) {
-        NSInteger found = [fromCellResponders indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            return [obj isKindOfClass:[PFLAudioPadSprite class]];
-        }];
-        if (found != NSNotFound) {
-            pad = fromCellResponders[found];
-        }
+  }
+  if (pad && !pad.isStatic && [toCell isCoordInGroup:self.areaCells])
+  {
+    for (CCNode<PFLAudioResponder>* node in fromCellResponders)
+    {
+      node.position = [toCell relativeMidpoint];
+      node.cell = toCell;
     }
-    if (pad && !pad.isStatic && [toCell isCoordInGroup:self.areaCells]) {
-        for (CCNode<PFLAudioResponder> *node in fromCellResponders) {
-            node.position = [toCell relativeMidpoint];
-            node.cell = toCell;
-        }
-    }
+  }
 }
-
-//#pragma mark CCNode SceneManagement
-//
-//- (void)onEnter
-//{
-//    [super onEnter];
-//    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
-//}
-//
-//- (void)onExit
-//{
-//    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-//	[super onExit];
-//}
 
 #pragma mark CCTargetedTouchDelegate
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    [self.parent touchBegan:touch withEvent:event];
-    
-    // get grid cell of touch
-//    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    CGPoint touchPosition = [touch locationInNode:self];
+  [self.parent touchBegan:touch withEvent:event];
+  
+  // get grid cell of touch
+  CGPoint touchPosition = [touch locationInNode:self];
 
-    PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
-    
-    // track touch so we know which events / cell to associate
-    CFIndex count = CFDictionaryGetCount(self.trackingTouches);
-    NSString *channel = [NSString stringWithFormat:@"%ld", count];
-    NSDictionary *touchInfo = @{@"channel" : channel, @"x" : @(cell.x), @"y" : @(cell.y)};
-    NSMutableDictionary *mutableTouchInfo = [NSMutableDictionary dictionaryWithDictionary:touchInfo];
-    CFDictionaryAddValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(mutableTouchInfo));
-    
-    [self hitCell:cell channel:channel];
+  PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  // track touch so we know which events / cell to associate
+  CFIndex count = CFDictionaryGetCount(self.trackingTouches);
+  NSString* channel = [NSString stringWithFormat:@"%ld", count];
+  NSDictionary* touchInfo = @{ @"channel" : channel, @"x" : @(cell.x), @"y" : @(cell.y) };
+  NSMutableDictionary* mutableTouchInfo = [NSMutableDictionary dictionaryWithDictionary:touchInfo];
+  CFDictionaryAddValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(mutableTouchInfo));
+  
+  [self hitCell:cell channel:channel];
 }
 
-- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchMoved:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    [self.parent touchMoved:touch withEvent:event];
+  [self.parent touchMoved:touch withEvent:event];
+  
+  // get grid cell of touch
+  CGPoint touchPosition = [touch locationInNode:self];
+  
+  PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  // get channel and last touched cell of this specific touch
+  NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
+  NSString* channel = [touchInfo objectForKey:@"channel"];
+  NSNumber* x = touchInfo[@"x"];
+  NSNumber* y = [touchInfo objectForKey:@"y"];
+  PFLCoord* lastCell = [PFLCoord coordWithX:[x integerValue] Y:[y integerValue]];
+  
+  // if touch moved to a new cell, update info
+  if (![cell isEqualToCoord:lastCell])
+  {
+    [touchInfo setObject:@(cell.x) forKey:@"x"];
+    [touchInfo setObject:@(cell.y) forKey:@"y"];
+    CFDictionaryReplaceValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(touchInfo));
     
-    // get grid cell of touch
-//    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
-    CGPoint touchPosition = [touch locationInNode:self];
+    // process cell change
+    [self changeToCell:cell fromCell:lastCell channel:channel];
     
-    PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
-    
-    // get channel and last touched cell of this specific touch
-    NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
-    NSString *channel = [touchInfo objectForKey:@"channel"];
-    NSNumber *x = touchInfo[@"x"];
-    NSNumber *y = [touchInfo objectForKey:@"y"];
-    PFLCoord *lastCell = [PFLCoord coordWithX:[x integerValue] Y:[y integerValue]];
-    
-    // if touch moved to a new cell, update info
-    if (![cell isEqualToCoord:lastCell]) {
-        [touchInfo setObject:@(cell.x) forKey:@"x"];
-        [touchInfo setObject:@(cell.y) forKey:@"y"];
-        CFDictionaryReplaceValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(touchInfo));
-        
-        // process cell change
-        [self changeToCell:cell fromCell:lastCell channel:channel];
-        
-        // TODO: hit / release will only be needed when working with PD synths later
-//        [self releaseCell:lastCell channel:channel];
-//        [self hitCell:cell channel:channel];
-    }
+    // TODO: hit / release will only be needed when working with PD synths later
+//  [self releaseCell:lastCell channel:channel];
+//  [self hitCell:cell channel:channel];
+  }
 }
 
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
@@ -179,16 +169,16 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   [self.parent touchEnded:touch withEvent:event];
 
   // get channel
-  NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
-  NSString *channel = [touchInfo objectForKey:@"channel"];
-  PFLEvent *audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
+  NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
+  NSString* channel = [touchInfo objectForKey:@"channel"];
+  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
   [self.audioEventController receiveEvents:@[audioStopEvent]];
 
   // get grid cell of touch
   //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
   CGPoint touchPosition = [touch locationInNode:self];
 
-  PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
+  PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
   [self releaseCell:cell channel:channel];
 
   CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
@@ -196,25 +186,25 @@ NSString *const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   self.allowScrolling = YES;
 }
 
-- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchCancelled:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    [self.parent touchCancelled:touch withEvent:event];
-    
-    // get channel
-    NSMutableDictionary *touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
-    NSString *channel = [touchInfo objectForKey:@"channel"];
-    PFLEvent *audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
-    [self.audioEventController receiveEvents:@[audioStopEvent]];
-    
-    // get grid cell of touch
-    CGPoint touchPosition = [touch locationInNode:self];
+  [self.parent touchCancelled:touch withEvent:event];
+  
+  // get channel
+  NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
+  NSString* channel = [touchInfo objectForKey:@"channel"];
+  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
+  [self.audioEventController receiveEvents:@[audioStopEvent]];
+  
+  // get grid cell of touch
+  CGPoint touchPosition = [touch locationInNode:self];
 
-    PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
-    [self releaseCell:cell channel:channel];
-    
-    CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
-    
-    self.allowScrolling = YES;
+  PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
+  [self releaseCell:cell channel:channel];
+  
+  CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
+  
+  self.allowScrolling = YES;
 }
 
 #pragma mark - ScrollLayerDelegate
