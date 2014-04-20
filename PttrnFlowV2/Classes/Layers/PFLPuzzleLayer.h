@@ -15,7 +15,7 @@
 @interface PFLPuzzleLayer : PFLScrollNode
 
 @property (weak, nonatomic) PFLAudioResponderStepController *sequenceDispatcher;
-@property (weak, nonatomic) PFLAudioResponderTouchController *audioTouchDispatcher;
+@property (weak, nonatomic) PFLAudioResponderTouchController *audioResponderTouchController;
 
 @property (weak, nonatomic) CCSpriteBatchNode *audioObjectsBatchNode;
 

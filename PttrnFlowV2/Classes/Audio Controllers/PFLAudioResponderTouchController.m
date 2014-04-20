@@ -31,7 +31,7 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 {
   self = [super init];
   if (self)
-  {
+  {    
     self.audioEventController = audioEventController;
     self.contentSize = CGSizeMake(320, 568);
     self.userInteractionEnabled = YES;

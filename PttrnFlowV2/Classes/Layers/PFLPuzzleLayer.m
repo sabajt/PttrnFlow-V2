@@ -141,13 +141,16 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
     // audio touch dispatcher
     CGFloat beatDuration = self.beatDuration;
-    PFLAudioResponderTouchController *audioTouchDispatcher = [[PFLAudioResponderTouchController alloc] initWithBeatDuration:beatDuration audioEventController:self.audioEventController];
-    self.audioTouchDispatcher = audioTouchDispatcher;
-    [self addScrollDelegate:audioTouchDispatcher];
+    PFLAudioResponderTouchController *audioResponderTouchController = [[PFLAudioResponderTouchController alloc] initWithBeatDuration:beatDuration audioEventController:self.audioEventController];
+    audioResponderTouchController.positionType = self.positionType;
+    audioResponderTouchController.contentSizeType = self.contentSizeType;
+    audioResponderTouchController.contentSize = self.contentSize;
+    self.audioResponderTouchController = audioResponderTouchController;
+    [self addScrollDelegate:audioResponderTouchController];
     
-    [audioTouchDispatcher clearResponders];
-    audioTouchDispatcher.areaCells = puzzle.area;
-    [self addChild:audioTouchDispatcher];
+    [audioResponderTouchController clearResponders];
+    audioResponderTouchController.areaCells = puzzle.area;
+    [self addChild:audioResponderTouchController];
     
     // sequence dispacher
     PFLAudioResponderStepController *sequenceDispatcher = [[PFLAudioResponderStepController alloc] initWithPuzzle:puzzle audioEventController:self.audioEventController];
@@ -366,7 +369,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       PFLAudioPadSprite *audioPad = [[PFLAudioPadSprite alloc] initWithGlyph:glyph];
 
       audioPad.position = cellCenter;
-      [self.audioTouchDispatcher addResponder:audioPad];
+      [self.audioResponderTouchController addResponder:audioPad];
       [self.sequenceDispatcher addResponder:audioPad];
       [self.audioObjectsBatchNode addChild:audioPad z:ZOrderAudioBatchPad];
       
@@ -378,7 +381,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
         {
           PFLMultiSample *multiSample = (PFLMultiSample *)object;
           PFLGearSprite *gear = [[PFLGearSprite alloc] initWithGlyph:glyph multiSample:multiSample];
-          [self.audioTouchDispatcher addResponder:gear];
+          [self.audioResponderTouchController addResponder:gear];
           [self.sequenceDispatcher addResponder:gear];
           gear.position = cellCenter;
           [self.audioObjectsBatchNode addChild:gear z:ZOrderAudioBatchGlyph];
@@ -394,7 +397,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       if (glyph.arrow)
       {
         PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithGlyph:glyph];
-        [self.audioTouchDispatcher addResponder:arrow];
+        [self.audioResponderTouchController addResponder:arrow];
         [self.sequenceDispatcher addResponder:arrow];
         arrow.position = cellCenter;
         [self.audioObjectsBatchNode addChild:arrow z:ZOrderAudioBatchGlyph];
@@ -404,7 +407,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       if (glyph.entry)
       {
         PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithGlyph:glyph];
-        [self.audioTouchDispatcher addResponder:entry];
+        [self.audioResponderTouchController addResponder:entry];
         [self.sequenceDispatcher addResponder:entry];
         self.sequenceDispatcher.entry = entry;
         entry.position = cellCenter;
@@ -434,7 +437,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
   [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:kNotificationStepUserSequence object:nil];
-  [notificationCenter addObserver:self selector:@selector(handleAudioTouchDispatcherHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleaudioResponderTouchControllerHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
   [self setupDebug];
 }
 
@@ -455,7 +458,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   }
 }
 
-- (void)handleAudioTouchDispatcherHit:(NSNotification*)notification
+- (void)handleaudioResponderTouchControllerHit:(NSNotification*)notification
 {
   PFLCoord* coord = notification.userInfo[kPFLAudioTouchDispatcherCoordKey];
   if ([coord isCoordInGroup:self.puzzle.area])
