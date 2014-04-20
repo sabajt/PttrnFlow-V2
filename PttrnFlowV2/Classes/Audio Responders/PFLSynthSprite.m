@@ -38,7 +38,7 @@
         
         // CCNode+Grid
         self.cell = cell;
-        self.cellSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
+        self.cellSize = [PFLGameConstants gridUnitSize];
     }
     return self;
 }

@@ -88,7 +88,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   if (self)
   {
     self.ignoreTouchBounds = YES;
-    self.screenSize = CGSizeMake(320, 568);
+    self.screenSize = [[CCDirector sharedDirector] designSize];
     self.puzzle = puzzle;
     self.puzzleSet = puzzle.puzzleSet;
   
@@ -106,7 +106,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     // Setup
     self.backgroundLayer = backgroundLayer;
     self.maxCoord = [PFLCoord maxCoord:puzzle.area];
-    self.contentSize = CGSizeMake((self.maxCoord.x + 1) * kSizeGridUnit, (self.maxCoord.y + 1) * kSizeGridUnit);
+    self.contentSize = CGSizeMake((self.maxCoord.x + 1) * [PFLGameConstants gridUnit], (self.maxCoord.y + 1) * [PFLGameConstants gridUnit]);
     
     self.puzzleBounds = CGRectMake(kPuzzleBoundsMargin,
                                    (3 * kUIButtonUnitSize) + kPuzzleBoundsMargin,
@@ -164,166 +164,185 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (void)createBorderWithAreaCells:(NSArray *)areaCells
 {
-    static NSString *padBorderStraitEdge = @"pad_border_strait_edge.png";
-    static NSString *padBorderStraitRightFill = @"pad_border_strait_right_fill.png";
-    static NSString *padBorderCornerEdge = @"pad_border_corner_edge.png";
-    static NSString *padBorderCornerInsideFill = @"pad_border_corner_inside_fill.png";
-    static NSString *padBorderCornerOutsideFill = @"pad_border_corner_outside_fill.png";
+  static NSString *padBorderStraitEdge = @"pad_border_strait_edge.png";
+  static NSString *padBorderStraitRightFill = @"pad_border_strait_right_fill.png";
+  static NSString *padBorderCornerEdge = @"pad_border_corner_edge.png";
+  static NSString *padBorderCornerInsideFill = @"pad_border_corner_inside_fill.png";
+  static NSString *padBorderCornerOutsideFill = @"pad_border_corner_outside_fill.png";
 
-    for (NSInteger x = -1; x <= self.maxCoord.x; x++) {
-        for (NSInteger y = -1; y <= self.maxCoord.y; y++) {
-            
-            PFLCoord *cell = [PFLCoord coordWithX:x Y:y];
-            
-            // find neighbor corners
-            PFLCoord *bottomleft = [PFLCoord coordWithX:x Y:y];
-            PFLCoord *topLeft = [PFLCoord coordWithX:x Y:y + 1];
-            PFLCoord *bottomRight = [PFLCoord coordWithX:x + 1 Y:y];
-            PFLCoord *topRight = [PFLCoord coordWithX:x + 1 Y:y + 1];
-            
-            BOOL hasBottomLeft = [bottomleft isCoordInGroup:areaCells];
-            BOOL hasTopLeft = [topLeft isCoordInGroup:areaCells];
-            BOOL hasBottomRight = [bottomRight isCoordInGroup:areaCells];
-            BOOL hasTopRight = [topRight isCoordInGroup:areaCells];
-            
-            // cell on every side, fill panel instead of border needed
-            if (hasBottomLeft && hasTopLeft && hasBottomRight && hasTopRight) {
-                CCSprite *padFill = [CCSprite spriteWithImageNamed:@"pad_fill.png"];
-                padFill.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
-                padFill.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
-                [self.audioObjectsBatchNode addChild:padFill z:ZOrderAudioBatchPanelFill];
-                continue;
-            }
-            // cell on no side, nothing needed
-            if (!hasBottomLeft && !hasTopLeft && !hasBottomRight && !hasTopRight) {
-                continue;
-            }
-            
-            CCSprite *border1;
-            CCSprite *fill1;
-            CCSprite *border2;
-            CCSprite *fill2;
-            
-            // strait edge vertical
-            if (hasBottomLeft && hasTopLeft && !hasBottomRight && !hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
-                fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
-                fill1.scale *= -1;
-            }
-            else if (!hasBottomLeft && !hasTopLeft && hasBottomRight && hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
-                fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
-            }
+  for (NSInteger x = -1; x <= self.maxCoord.x; x++)
+  {
+    for (NSInteger y = -1; y <= self.maxCoord.y; y++)
+    {
+      
+      PFLCoord *cell = [PFLCoord coordWithX:x Y:y];
+      
+      // find neighbor corners
+      PFLCoord *bottomleft = [PFLCoord coordWithX:x Y:y];
+      PFLCoord *topLeft = [PFLCoord coordWithX:x Y:y + 1];
+      PFLCoord *bottomRight = [PFLCoord coordWithX:x + 1 Y:y];
+      PFLCoord *topRight = [PFLCoord coordWithX:x + 1 Y:y + 1];
+      
+      BOOL hasBottomLeft = [bottomleft isCoordInGroup:areaCells];
+      BOOL hasTopLeft = [topLeft isCoordInGroup:areaCells];
+      BOOL hasBottomRight = [bottomRight isCoordInGroup:areaCells];
+      BOOL hasTopRight = [topRight isCoordInGroup:areaCells];
+      
+      // cell on every side, fill panel instead of border needed
+      if (hasBottomLeft && hasTopLeft && hasBottomRight && hasTopRight)
+      {
+        CCSprite *padFill = [CCSprite spriteWithImageNamed:@"pad_fill.png"];
+        padFill.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
+        padFill.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
+        [self.audioObjectsBatchNode addChild:padFill z:ZOrderAudioBatchPanelFill];
+        continue;
+      }
+      // cell on no side, nothing needed
+      if (!hasBottomLeft && !hasTopLeft && !hasBottomRight && !hasTopRight)
+      {
+        continue;
+      }
+      
+      CCSprite *border1;
+      CCSprite *fill1;
+      CCSprite *border2;
+      CCSprite *fill2;
+      
+      // strait edge vertical
+      if (hasBottomLeft && hasTopLeft && !hasBottomRight && !hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
+        fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
+        fill1.scale *= -1;
+      }
+      else if (!hasBottomLeft && !hasTopLeft && hasBottomRight && hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
+        fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
+      }
 
-            // strait edge horizontal
-            else if (hasTopLeft && hasTopRight && !hasBottomLeft && !hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
-                border1.rotation = -90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
-                fill1.rotation = -90.0f;
-            }
-            else if (!hasTopLeft && !hasTopRight && hasBottomLeft && hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
-                border1.rotation = 90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
-                fill1.rotation = 90.0f;
-            }
+      // strait edge horizontal
+      else if (hasTopLeft && hasTopRight && !hasBottomLeft && !hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
+        border1.rotation = -90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
+        fill1.rotation = -90.0f;
+      }
+      else if (!hasTopLeft && !hasTopRight && hasBottomLeft && hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderStraitEdge];
+        border1.rotation = 90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderStraitRightFill];
+        fill1.rotation = 90.0f;
+      }
 
-            // top left only
-            else if (hasTopLeft && !hasTopRight && !hasBottomLeft && !hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-            }
-            else if (!hasTopLeft && hasTopRight && hasBottomLeft && hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
-            }
-            
-            // top right only
-            else if (hasTopRight && !hasTopLeft && !hasBottomLeft && !hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = 90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill1.rotation = 90.0f;
-            }
-            else if (!hasTopRight && hasTopLeft && hasBottomLeft && hasBottomRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = 90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
-                fill1.rotation = 90.0f;
-            }
-            
-            // bottom left only
-            else if (hasBottomLeft && !hasBottomRight && !hasTopLeft && !hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = -90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill1.rotation = -90.0f;
-            }
-            else if (!hasBottomLeft && hasBottomRight && hasTopLeft && hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = -90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
-                fill1.rotation = -90.0f;
-            }
-            
-            // bottom right only
-            else if (hasBottomRight && !hasBottomLeft && !hasTopLeft && !hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = 180.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill1.rotation = 180.0f;
-            }
-            else if (!hasBottomRight && hasBottomLeft && hasTopLeft && hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = 180.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
-                fill1.rotation = 180.0f;
-            }
+      // top left only
+      else if (hasTopLeft && !hasTopRight && !hasBottomLeft && !hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+      }
+      else if (!hasTopLeft && hasTopRight && hasBottomLeft && hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
+      }
+      
+      // top right only
+      else if (hasTopRight && !hasTopLeft && !hasBottomLeft && !hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = 90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill1.rotation = 90.0f;
+      }
+      else if (!hasTopRight && hasTopLeft && hasBottomLeft && hasBottomRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = 90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
+        fill1.rotation = 90.0f;
+      }
+      
+      // bottom left only
+      else if (hasBottomLeft && !hasBottomRight && !hasTopLeft && !hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = -90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill1.rotation = -90.0f;
+      }
+      else if (!hasBottomLeft && hasBottomRight && hasTopLeft && hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = -90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
+        fill1.rotation = -90.0f;
+      }
+      
+      // bottom right only
+      else if (hasBottomRight && !hasBottomLeft && !hasTopLeft && !hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = 180.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill1.rotation = 180.0f;
+      }
+      else if (!hasBottomRight && hasBottomLeft && hasTopLeft && hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = 180.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerOutsideFill];
+        fill1.rotation = 180.0f;
+      }
 
-            // both bottom left and top right corner
-            else if (hasBottomLeft && hasTopRight && !hasBottomRight && !hasTopLeft) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = -90.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill1.rotation = -90.0f;
-                
-                border2 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border2.rotation = 90.0f;
-                fill2 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill2.rotation = 90.0f;
-            }
-            
-            // both bottom right and top left cornerh
-            else if (hasBottomRight && hasTopLeft && !hasBottomLeft && !hasTopRight) {
-                border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                border1.rotation = 180.0f;
-                fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-                fill1.rotation = 180.0f;
-                
-                border2 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
-                fill2 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
-            }
-            
-            fill1.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
-            fill1.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
-            [self.audioObjectsBatchNode addChild:fill1 z:ZOrderAudioBatchPanelBorder];
-            
-            border1.color = [PFLColorUtils audioPanelEdgeWithTheme:self.puzzle.puzzleSet.theme];
-            border1.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
-            [self.audioObjectsBatchNode addChild:border1 z:ZOrderAudioBatchPanelBorder];
-            
-            if (border2 != nil) {
-                fill2.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
-                fill2.position = fill1.position;
-                [self.audioObjectsBatchNode addChild:fill2 z:ZOrderAudioBatchPanelBorder];
-                
-                border2.color = [PFLColorUtils audioPanelEdgeWithTheme:self.puzzle.puzzleSet.theme];
-                border2.position = border1.position;
-                [self.audioObjectsBatchNode addChild:border2 z:ZOrderAudioBatchPanelBorder];
-            }
-        }
+      // both bottom left and top right corner
+      else if (hasBottomLeft && hasTopRight && !hasBottomRight && !hasTopLeft)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = -90.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill1.rotation = -90.0f;
+        
+        border2 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border2.rotation = 90.0f;
+        fill2 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill2.rotation = 90.0f;
+      }
+      
+      // both bottom right and top left cornerh
+      else if (hasBottomRight && hasTopLeft && !hasBottomLeft && !hasTopRight)
+      {
+        border1 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        border1.rotation = 180.0f;
+        fill1 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+        fill1.rotation = 180.0f;
+        
+        border2 = [CCSprite spriteWithImageNamed:padBorderCornerEdge];
+        fill2 = [CCSprite spriteWithImageNamed:padBorderCornerInsideFill];
+      }
+      
+      fill1.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
+      fill1.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
+      [self.audioObjectsBatchNode addChild:fill1 z:ZOrderAudioBatchPanelBorder];
+      
+      border1.color = [PFLColorUtils audioPanelEdgeWithTheme:self.puzzle.puzzleSet.theme];
+      border1.position = [[[cell stepInDirection:kDirectionRight] stepInDirection:kDirectionUp] relativePosition];
+      [self.audioObjectsBatchNode addChild:border1 z:ZOrderAudioBatchPanelBorder];
+      
+      if (border2 != nil)
+      {
+        fill2.color = [PFLColorUtils audioPanelFillWithTheme:self.puzzle.puzzleSet.theme];
+        fill2.position = fill1.position;
+        [self.audioObjectsBatchNode addChild:fill2 z:ZOrderAudioBatchPanelBorder];
+        
+        border2.color = [PFLColorUtils audioPanelEdgeWithTheme:self.puzzle.puzzleSet.theme];
+        border2.position = border1.position;
+        [self.audioObjectsBatchNode addChild:border2 z:ZOrderAudioBatchPanelBorder];
+      }
     }
+  }
 }
 
 - (void)createPuzzleObjects:(PFLPuzzle *)puzzle
@@ -335,106 +354,114 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     
     for (PFLGlyph *glyph in glyphs) {
 
-        // cell is the only mandatory field to create an audio pad (empty pad can be used as a puzzle object to just take up space)
-        if (!glyph.cell) {
-            CCLOG(@"SequenceLayer createPuzzleObjects error: 'cell' must not be null on audio pads");
-            return;
-        }
-        CGPoint cellCenter = [glyph.cell relativeMidpoint];
-        
-        // audio pad sprite
-        PFLAudioPadSprite *audioPad = [[PFLAudioPadSprite alloc] initWithGlyph:glyph];
+      // cell is the only mandatory field to create an audio pad (empty pad can be used as a puzzle object to just take up space)
+      if (!glyph.cell)
+      {
+        CCLOG(@"SequenceLayer createPuzzleObjects error: 'cell' must not be null on audio pads");
+        return;
+      }
+      CGPoint cellCenter = [glyph.cell relativeMidpoint];
+      
+      // audio pad sprite
+      PFLAudioPadSprite *audioPad = [[PFLAudioPadSprite alloc] initWithGlyph:glyph];
 
-        audioPad.position = cellCenter;
-        [self.audioTouchDispatcher addResponder:audioPad];
-        [self.sequenceDispatcher addResponder:audioPad];
-        [self.audioObjectsBatchNode addChild:audioPad z:ZOrderAudioBatchPad];
+      audioPad.position = cellCenter;
+      [self.audioTouchDispatcher addResponder:audioPad];
+      [self.sequenceDispatcher addResponder:audioPad];
+      [self.audioObjectsBatchNode addChild:audioPad z:ZOrderAudioBatchPad];
+      
+      if (glyph.audioID)
+      {
+        id object = puzzle.audio[[glyph.audioID integerValue]];
         
-        if (glyph.audioID) {
-            id object = puzzle.audio[[glyph.audioID integerValue]];
-            
-            if ([object isKindOfClass:[PFLMultiSample class]]) {
-                PFLMultiSample *multiSample = (PFLMultiSample *)object;
-                PFLGearSprite *gear = [[PFLGearSprite alloc] initWithGlyph:glyph multiSample:multiSample];
-                [self.audioTouchDispatcher addResponder:gear];
-                [self.sequenceDispatcher addResponder:gear];
-                gear.position = cellCenter;
-                [self.audioObjectsBatchNode addChild:gear z:ZOrderAudioBatchGlyph];
-                
-                for (PFLSample *sample in multiSample.samples) {
-                    [allSampleNames addObject:sample.file];
-                }
-            }
+        if ([object isKindOfClass:[PFLMultiSample class]])
+        {
+          PFLMultiSample *multiSample = (PFLMultiSample *)object;
+          PFLGearSprite *gear = [[PFLGearSprite alloc] initWithGlyph:glyph multiSample:multiSample];
+          [self.audioTouchDispatcher addResponder:gear];
+          [self.sequenceDispatcher addResponder:gear];
+          gear.position = cellCenter;
+          [self.audioObjectsBatchNode addChild:gear z:ZOrderAudioBatchGlyph];
+          
+          for (PFLSample *sample in multiSample.samples)
+          {
+            [allSampleNames addObject:sample.file];
+          }
         }
-        
-        // direction arrow
-        if (glyph.arrow) {
-            PFLArrowSprite *arrow = [[PFLArrowSprite alloc] initWithGlyph:glyph];
-            [self.audioTouchDispatcher addResponder:arrow];
-            [self.sequenceDispatcher addResponder:arrow];
-            arrow.position = cellCenter;
-            [self.audioObjectsBatchNode addChild:arrow z:ZOrderAudioBatchGlyph];
-        }
-        
-        // entry point
-        if (glyph.entry) {
-            PFLEntrySprite *entry = [[PFLEntrySprite alloc] initWithGlyph:glyph];
-            [self.audioTouchDispatcher addResponder:entry];
-            [self.sequenceDispatcher addResponder:entry];
-            self.sequenceDispatcher.entry = entry;
-            entry.position = cellCenter;
-            [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
-        }
+      }
+      
+      // direction arrow
+      if (glyph.arrow)
+      {
+        PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithGlyph:glyph];
+        [self.audioTouchDispatcher addResponder:arrow];
+        [self.sequenceDispatcher addResponder:arrow];
+        arrow.position = cellCenter;
+        [self.audioObjectsBatchNode addChild:arrow z:ZOrderAudioBatchGlyph];
+      }
+      
+      // entry point
+      if (glyph.entry)
+      {
+        PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithGlyph:glyph];
+        [self.audioTouchDispatcher addResponder:entry];
+        [self.sequenceDispatcher addResponder:entry];
+        self.sequenceDispatcher.entry = entry;
+        entry.position = cellCenter;
+        [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
+      }
     }
     [self.audioEventController loadSamples:allSampleNames];
 }
 
 - (void)animateBacklight:(PFLCoord *)coord
 {
-    CCSprite *highlightSprite = [CCSprite spriteWithImageNamed:@"audio_box_highlight.png"];
-        
-    highlightSprite.color = [PFLColorUtils padHighlightWithTheme:self.puzzle.puzzleSet.theme];
-    highlightSprite.position = [coord relativeMidpoint];
-    [self.audioObjectsBatchNode addChild:highlightSprite z:ZOrderAudioBatchPadBacklight];
-    
-    [highlightSprite backlight:self.beatDuration completion:^{
-        [highlightSprite removeFromParentAndCleanup:YES];
-    }];
+  CCSprite *highlightSprite = [CCSprite spriteWithImageNamed:@"audio_box_highlight.png"];
+      
+  highlightSprite.color = [PFLColorUtils padHighlightWithTheme:self.puzzle.puzzleSet.theme];
+  highlightSprite.position = [coord relativeMidpoint];
+  [self.audioObjectsBatchNode addChild:highlightSprite z:ZOrderAudioBatchPadBacklight];
+  
+  [highlightSprite backlight:self.beatDuration completion:^{
+      [highlightSprite removeFromParentAndCleanup:YES];
+  }];
 }
 
 #pragma mark - scene management
 
 - (void)onEnter
 {
-    [super onEnter];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:kNotificationStepUserSequence object:nil];
-    [notificationCenter addObserver:self selector:@selector(handleAudioTouchDispatcherHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
-    [self setupDebug];
+  [super onEnter];
+  NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:kNotificationStepUserSequence object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleAudioTouchDispatcherHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
+  [self setupDebug];
 }
 
 - (void)onExit
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super onExit];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super onExit];
 }
 
 #pragma mark - Notifications
 
-- (void)handleStepUserSequence:(NSNotification *)notification
+- (void)handleStepUserSequence:(NSNotification*)notification
 {
-    PFLCoord *coord = notification.userInfo[kKeyCoord];
-    if ([coord isCoordInGroup:self.puzzle.area]) {
-        [self animateBacklight:coord];
-    }
+  PFLCoord* coord = notification.userInfo[kKeyCoord];
+  if ([coord isCoordInGroup:self.puzzle.area])
+  {
+    [self animateBacklight:coord];
+  }
 }
 
-- (void)handleAudioTouchDispatcherHit:(NSNotification *)notification
+- (void)handleAudioTouchDispatcherHit:(NSNotification*)notification
 {
-    PFLCoord *coord = notification.userInfo[kPFLAudioTouchDispatcherCoordKey];
-    if ([coord isCoordInGroup:self.puzzle.area]) {
-        [self animateBacklight:coord];
-    }
+  PFLCoord* coord = notification.userInfo[kPFLAudioTouchDispatcherCoordKey];
+  if ([coord isCoordInGroup:self.puzzle.area])
+  {
+    [self animateBacklight:coord];
+  }
 }
 
 #pragma mark - debug methods
@@ -442,32 +469,32 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 // edit debugging options here
 - (void)setupDebug
 {
-    // mute PD
-    [PFLAudioEventController mute:NO];
-    
-    // draw grid as defined in our tile map -- does not neccesarily coordinate with gameplay
-    // warning: enabling makes many calls to draw cycle -- large maps will lag
-    self.shouldDrawGrid = NO;
-    
-    // layer size reporting:
-    // [self.scheduler scheduleSelector:@selector(reportS ize:) forTarget:self interval:0.3 paused:NO repeat:kCCRepeatForever delay:0];
-    
-    // // draw bounding box over puzzle layer content box
-    // CCSprite *rectSprite = [CCSprite rectSpriteWithSize:CGSizeMake(self.contentSize.width, self.contentSize.height) color:ccRED];
-    // rectSprite.anchorPoint = ccp(0, 0);
-    // rectSprite.position = ccp(0, 0);
-    // rectSprite.opacity = 100;
-    // [self addChild:rectSprite];
+  // mute PD
+  [PFLAudioEventController mute:NO];
+  
+  // draw grid as defined in our tile map -- does not neccesarily coordinate with gameplay
+  // warning: enabling makes many calls to draw cycle -- large maps will lag
+  self.shouldDrawGrid = NO;
+  
+  // layer size reporting:
+  // [self.scheduler scheduleSelector:@selector(reportS ize:) forTarget:self interval:0.3 paused:NO repeat:kCCRepeatForever delay:0];
+  
+  // // draw bounding box over puzzle layer content box
+  // CCSprite *rectSprite = [CCSprite rectSpriteWithSize:CGSizeMake(self.contentSize.width, self.contentSize.height) color:ccRED];
+  // rectSprite.anchorPoint = ccp(0, 0);
+  // rectSprite.position = ccp(0, 0);
+  // rectSprite.opacity = 100;
+  // [self addChild:rectSprite];
 }
 
 - (void)reportSize:(CCTime)deltaTime
 {
-    CCLOG(@"\n\n--debug------------------------");
-    CCLOG(@"seq layer content size: %@", NSStringFromCGSize(self.contentSize));
-    CCLOG(@"seq layer bounding box: %@", NSStringFromCGRect(self.boundingBox));
-    CCLOG(@"seq layer position: %@", NSStringFromCGPoint(self.position));
-    CCLOG(@"seq layer scale: %g", self.scale);
-    CCLOG(@"--end debug------------------------\n");
+  CCLOG(@"\n\n--debug------------------------");
+  CCLOG(@"seq layer content size: %@", NSStringFromCGSize(self.contentSize));
+  CCLOG(@"seq layer bounding box: %@", NSStringFromCGRect(self.boundingBox));
+  CCLOG(@"seq layer position: %@", NSStringFromCGPoint(self.position));
+  CCLOG(@"seq layer scale: %g", self.scale);
+  CCLOG(@"--end debug------------------------\n");
 }
 
 //- (void)draw

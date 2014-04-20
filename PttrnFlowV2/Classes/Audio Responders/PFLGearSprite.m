@@ -40,7 +40,7 @@
     
     // CCNode+Grid
     self.cell = glyph.cell;
-    self.cellSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
+    self.cellSize = [PFLGameConstants gridUnitSize];
     
     // units (beats)
     self.audioUnits = [NSMutableArray array];

@@ -22,7 +22,6 @@ NSString *const kDirectionDown = @"down";
 NSString *const kDirectionLeft = @"left";
 
 // size
-CGFloat const kSizeGridUnit = 68.0;
 CGFloat const kStatusBarHeight = 20.0;
 
 // duration
@@ -39,5 +38,28 @@ NSString *const kClearRectUILayer = @"clear_rect_uilayer.png";
 NSString *const kClearRectAudioBatch = @"clear_rect_audio_batch.png";
 
 @implementation PFLGameConstants
+
++ (CGFloat)gridUnit
+{
+  CGSize screenSize = [[CCDirector sharedDirector] designSize];
+  if ((NSInteger)screenSize.width == 768)
+  {
+    return 68.0f * 2.0f;
+  }
+  else if ((NSInteger)screenSize.width == 640)
+  {
+    return 68.0f;
+  }
+  else
+  {
+    CCLOG(@"Warning: unsupported screen width: %f", screenSize.width);
+    return 68.0f;
+  }
+}
+
++ (CGSize)gridUnitSize
+{
+  return CGSizeMake([PFLGameConstants gridUnit], [PFLGameConstants gridUnit]);
+}
 
 @end

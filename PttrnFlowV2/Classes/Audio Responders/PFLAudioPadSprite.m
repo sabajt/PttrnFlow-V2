@@ -33,7 +33,7 @@
 
         // CCNode+Grid
         self.cell = glyph.cell;
-        self.cellSize = CGSizeMake(kSizeGridUnit, kSizeGridUnit);
+        self.cellSize = [PFLGameConstants gridUnitSize];
     }
     return self;
 }

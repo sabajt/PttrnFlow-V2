@@ -25,7 +25,6 @@ FOUNDATION_EXPORT NSString *const kDirectionDown;
 FOUNDATION_EXPORT NSString *const kDirectionLeft;
 
 // size
-FOUNDATION_EXPORT CGFloat const kSizeGridUnit;
 FOUNDATION_EXPORT CGFloat const kStatusBarHeight;
 
 // duration
@@ -42,6 +41,9 @@ FOUNDATION_EXPORT NSString *const kClearRectUILayer;
 FOUNDATION_EXPORT NSString *const kClearRectAudioBatch;
 
 @interface PFLGameConstants : NSObject
+
++ (CGFloat)gridUnit;
++ (CGSize)gridUnitSize;
 
 @end
 
