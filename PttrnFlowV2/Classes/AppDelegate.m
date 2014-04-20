@@ -11,7 +11,7 @@
 #import "IntroScene.h"
 #import "HelloWorldScene.h"
 #import "PFLPuzzleSet.h"
-#import "PFLPuzzleSetNode.h"
+#import "PFLPuzzleSetLayer.h"
 
 @implementation AppDelegate
 
@@ -56,7 +56,7 @@
 -(CCScene *)startScene
 {
     PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
-    CCScene *scene = [PFLPuzzleSetNode sceneWithPuzzleSet:puzzleSet];
+    CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet];
     return scene;
 }
 
