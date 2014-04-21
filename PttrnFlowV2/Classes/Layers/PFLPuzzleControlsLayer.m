@@ -15,9 +15,6 @@
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleSetLayer.h"
 
-CGFloat const kUIButtonUnitSize = 50;
-CGFloat const kUITimelineStepWidth = 40;
-
 static NSInteger const kRowLength = 8;
 
 @interface PFLPuzzleControlsLayer ()
@@ -41,6 +38,66 @@ static NSInteger const kRowLength = 8;
 @end
 
 @implementation PFLPuzzleControlsLayer
+
++ (CGSize)uiButtonUnitSize
+{
+  CGSize screenSize = [CCDirector sharedDirector].designSize;
+  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  {
+    return CGSizeMake(100.0f, 100.0f);
+  }
+  else if ((NSInteger)screenSize.width == PFLIPhoneRetinaScreenWidth)
+  {
+    return CGSizeMake(50.0f, 50.0f);
+  }
+  else
+  {
+    CCLOG(@"Warning: unsupported screen size: %@", NSStringFromCGSize(screenSize));
+    return CGSizeMake(50.0f, 50.0f);
+  }
+}
+
++ (CGFloat)uiTimelineStepWidth
+{
+  CGSize screenSize = [CCDirector sharedDirector].designSize;
+  return screenSize.width / 8.0f;
+}
+
++ (CCSprite*)uiLeftControlPanelWithTheme:(NSString*)theme
+{
+  CCSprite* leftControlsPanel;
+  CCSprite* leftControlsPanelBorder;
+  CGSize screenSize = [CCDirector sharedDirector].designSize;
+  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  {
+    leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill_extended.png"];
+    leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge_extended.png"];
+  }
+  else
+  {
+    leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill.png"];
+    leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge.png"];
+  }
+  leftControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
+  leftControlsPanel.anchorPoint = ccp(0, 0);
+  
+  leftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
+  leftControlsPanelBorder.anchorPoint = ccp(0, 0);
+  leftControlsPanelBorder.position = ccp(0, 0);
+  [leftControlsPanel addChild:leftControlsPanelBorder];
+
+  return leftControlsPanel;
+}
+
++ (CCSprite*)uiLeftDashedLineWithTheme:(NSString*)theme
+{
+  CGFloat width = [PFLPuzzleControlsLayer uiTimelineStepWidth] * 2.0f;
+  CCSprite* temp = [CCSprite spriteWithImageNamed:@"rounded_dash.png"];
+  NSInteger repeats = (width / temp.contentSize.width);
+  PFLTileSprite* line = [[PFLTileSprite alloc] initWithImage:@"rounded_dash.png" repeats:ccp(repeats / 2, 1) color1:[PFLColorUtils controlPanelEdgeWithTheme:theme] color2:nil skip:1];
+  
+  return line;
+}
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
 {
@@ -81,7 +138,7 @@ static NSInteger const kRowLength = 8;
     }
     else
     {
-      CGFloat xOffset = (rightControlsPanel.contentSize.width - self.contentSize.width) + (kUITimelineStepWidth * (kRowLength - steps));
+      CGFloat xOffset = (rightControlsPanel.contentSize.width - self.contentSize.width) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] * (kRowLength - steps));
       rightControlsPanel.position = ccp(-xOffset, 0);
     }
     rightControlsPanelBorder.position = rightControlsPanel.position;
@@ -90,18 +147,15 @@ static NSInteger const kRowLength = 8;
     [self.uiBatchNode addChild:rightControlsPanelBorder];
     
     // left controls panel
-    CCSprite *leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill.png"];
-    leftControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
-    leftControlsPanel.anchorPoint = ccp(0, 0);
-    leftControlsPanel.position = ccp(0, -50); // will be 0 for seq > 8 len in future
-    
-    CCSprite *leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge.png"];
-    leftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
-    leftControlsPanelBorder.anchorPoint = ccp(0, 0);
-    leftControlsPanelBorder.position = leftControlsPanel.position;
-    
+    CCSprite* leftControlsPanel = [PFLPuzzleControlsLayer uiLeftControlPanelWithTheme:theme];
+    leftControlsPanel.position = ccp(0, -[PFLPuzzleControlsLayer uiButtonUnitSize].height);
     [self.uiBatchNode addChild:leftControlsPanel];
-    [self.uiBatchNode addChild:leftControlsPanelBorder];
+    
+    // dashed line
+    CCSprite* line = [PFLPuzzleControlsLayer uiLeftDashedLineWithTheme:self.puzzle.puzzleSet.theme];
+    line.anchorPoint = ccp(0, 0);
+    line.position = ccp(0, [PFLPuzzleControlsLayer uiButtonUnitSize].height - line.contentSize.height / 2.0f); // TODO: adjust based on seq len
+    [self.uiBatchNode addChild:line z:1];
     
     // top left controls panel corner
     CCSprite *topLeftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
@@ -119,19 +173,22 @@ static NSInteger const kRowLength = 8;
     // speaker (solution sequence) button
     PFLToggleButton *speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.speakerButton = speakerButton;
-    speakerButton.position = ccp(kUITimelineStepWidth / 2, 75); // FIX ME LATER
+    speakerButton.position = ccp(
+      [PFLPuzzleControlsLayer uiTimelineStepWidth] / 2,
+      ([PFLPuzzleControlsLayer uiButtonUnitSize].height * 2.0f) - ([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f)
+    ); // TODO: FIX ME LATER
     [self.uiBatchNode addChild:speakerButton];
     
     // play (user sequence) button
     PFLToggleButton *playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.playButton = playButton;
-    playButton.position = ccp(speakerButton.position.x + kUITimelineStepWidth, speakerButton.position.y);
+    playButton.position = ccp(speakerButton.position.x + [PFLPuzzleControlsLayer uiTimelineStepWidth], speakerButton.position.y);
     [self.uiBatchNode addChild:playButton];
     
     // exit button
     PFLBasicButton *exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.exitButton = exitButton;
-    exitButton.position = ccp(kUITimelineStepWidth / 2, self.contentSize.height - 25);
+    exitButton.position = ccp([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2, self.contentSize.height - 25);
     [self.uiBatchNode addChild:exitButton];
     
     // solution buttons
@@ -141,7 +198,10 @@ static NSInteger const kRowLength = 8;
     {
       PFLSolutionButton *solutionButton = [[PFLSolutionButton alloc] initWithPlaceholderImage:@"clear_rect_uilayer.png" size:CGSizeMake(40.0f, 40.0f) index:i defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils solutionButtonHighlightWithTheme:theme] delegate:self];
       [self.solutionButtons addObject:solutionButton];
-      solutionButton.position = ccp((i * kUITimelineStepWidth) + (solutionButton.contentSize.width / 2), solutionButton.contentSize.height / 2);
+      solutionButton.position = ccp(
+        (i * [PFLPuzzleControlsLayer uiTimelineStepWidth]) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2),
+        [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2
+      );
       [self addChild:solutionButton];
     }
   }

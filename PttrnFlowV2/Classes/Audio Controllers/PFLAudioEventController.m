@@ -23,11 +23,6 @@
   return [[self alloc] init];
 }
 
-+ (void)mute:(BOOL)mute
-{
-    CCLOG(@"mute needs implementation");
-}
-
 #pragma mark - SoundEventReveiver
 
 - (void)loadSamples:(NSArray *)samples
@@ -40,6 +35,11 @@
 
 - (void)receiveEvents:(NSArray*)events
 {
+  if (self.mute)
+  {
+    return;
+  }
+  
   if ((events == nil) || (events.count < 1))
   {
     CCLOG(@"no events sent to synth");

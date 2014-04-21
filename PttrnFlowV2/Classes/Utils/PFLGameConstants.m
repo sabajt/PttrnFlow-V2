@@ -22,6 +22,8 @@ NSString *const kDirectionDown = @"down";
 NSString *const kDirectionLeft = @"left";
 
 // size
+NSInteger const PFLIPhoneRetinaScreenWidth = 640;
+NSInteger const PFLIPadRetinaScreenWidth = 768;
 CGFloat const kStatusBarHeight = 20.0;
 
 // duration
@@ -42,11 +44,11 @@ NSString *const kClearRectAudioBatch = @"clear_rect_audio_batch.png";
 + (CGFloat)gridUnit
 {
   CGSize screenSize = [[CCDirector sharedDirector] designSize];
-  if ((NSInteger)screenSize.width == 768)
+  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
   {
     return 68.0f * 2.0f;
   }
-  else if ((NSInteger)screenSize.width == 640)
+  else if ((NSInteger)screenSize.width == PFLIPhoneRetinaScreenWidth)
   {
     return 68.0f;
   }

@@ -109,9 +109,9 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     self.contentSize = CGSizeMake((self.maxCoord.x + 1) * [PFLGameConstants gridUnit], (self.maxCoord.y + 1) * [PFLGameConstants gridUnit]);
     
     self.puzzleBounds = CGRectMake(kPuzzleBoundsMargin,
-                                   (3 * kUIButtonUnitSize) + kPuzzleBoundsMargin,
+                                   (3 * [PFLPuzzleControlsLayer uiButtonUnitSize].height) + kPuzzleBoundsMargin,
                                    self.screenSize.width - (2 * kPuzzleBoundsMargin),
-                                   self.screenSize.height - (4 * kUIButtonUnitSize) - (2 * kPuzzleBoundsMargin));
+                                   self.screenSize.height - (4 * [PFLPuzzleControlsLayer uiButtonUnitSize].height) - (2 * kPuzzleBoundsMargin));
     
     if (self.contentSize.width >= self.puzzleBounds.size.width)
     {
@@ -472,9 +472,6 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 // edit debugging options here
 - (void)setupDebug
 {
-  // mute PD
-  [PFLAudioEventController mute:NO];
-  
   // draw grid as defined in our tile map -- does not neccesarily coordinate with gameplay
   // warning: enabling makes many calls to draw cycle -- large maps will lag
   self.shouldDrawGrid = NO;

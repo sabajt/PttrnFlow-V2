@@ -10,10 +10,10 @@
 
 @interface PFLAudioEventController : CCNode <AVAudioPlayerDelegate>
 
-@property (assign) CGFloat beatDuration;
+@property CGFloat beatDuration;
+@property BOOL mute;
 
 + (PFLAudioEventController *)audioEventController;
-+ (void)mute:(BOOL)mute;
 
 - (void)loadSamples:(NSArray *)samples;
 - (void)receiveEvents:(NSArray *)events;

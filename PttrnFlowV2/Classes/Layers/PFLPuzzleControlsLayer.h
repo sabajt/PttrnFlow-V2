@@ -23,9 +23,10 @@
 
 @end
 
-FOUNDATION_EXPORT CGFloat const kUIButtonUnitSize;
-
 @interface PFLPuzzleControlsLayer : CCNode <ToggleButtonDelegate, BasicButtonDelegate, PFLSolutionButtonDelegate>
+
++ (CGSize)uiButtonUnitSize;
++ (CGFloat)uiTimelineStepWidth;
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate;
 
