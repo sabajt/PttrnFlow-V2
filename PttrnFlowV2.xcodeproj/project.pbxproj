@@ -277,7 +277,6 @@
 		33B868F91900313D0071C2B9 /* tech-hhclosed2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868EB1900313D0071C2B9 /* tech-hhclosed2.caf */; };
 		33B868FA1900313D0071C2B9 /* tech-hhclosed3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868EC1900313D0071C2B9 /* tech-hhclosed3.caf */; };
 		33B868FB1900313D0071C2B9 /* tech-hhclosed4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868ED1900313D0071C2B9 /* tech-hhclosed4.caf */; };
-		33B868FC1900313D0071C2B9 /* tech-ride1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868EE1900313D0071C2B9 /* tech-ride1.caf */; };
 		33B868FD1900313D0071C2B9 /* tech-tonal1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868EF1900313D0071C2B9 /* tech-tonal1.caf */; };
 		33B868FE1900313D0071C2B9 /* tech-tonal2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F01900313D0071C2B9 /* tech-tonal2.caf */; };
 		33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F11900313D0071C2B9 /* tech-tonal3.caf */; };
@@ -287,6 +286,20 @@
 		33F714561906000900621616 /* userInterface-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F714541906000900621616 /* userInterface-ipad.png */; };
 		33F714591906004000621616 /* audioObjects-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714571906004000621616 /* audioObjects-ipad.plist */; };
 		33F7145A1906004000621616 /* audioObjects-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F714581906004000621616 /* audioObjects-ipad.png */; };
+		33F714691906CB9B00621616 /* tech-bell1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F7145B1906CB9B00621616 /* tech-bell1.caf */; };
+		33F7146A1906CB9B00621616 /* tech-bell2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F7145C1906CB9B00621616 /* tech-bell2.caf */; };
+		33F7146B1906CB9B00621616 /* tech-bongo1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F7145D1906CB9B00621616 /* tech-bongo1.caf */; };
+		33F7146C1906CB9B00621616 /* tech-bongo2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F7145E1906CB9B00621616 /* tech-bongo2.caf */; };
+		33F7146D1906CB9B00621616 /* tech-bongo3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F7145F1906CB9B00621616 /* tech-bongo3.caf */; };
+		33F7146E1906CB9B00621616 /* tech-bongo4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714601906CB9B00621616 /* tech-bongo4.caf */; };
+		33F7146F1906CB9B00621616 /* tech-crash2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714611906CB9B00621616 /* tech-crash2.caf */; };
+		33F714701906CB9B00621616 /* tech-hhopen1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714621906CB9B00621616 /* tech-hhopen1.caf */; };
+		33F714711906CB9B00621616 /* tech-hhopen2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714631906CB9B00621616 /* tech-hhopen2.caf */; };
+		33F714721906CB9B00621616 /* tech-rattle1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714641906CB9B00621616 /* tech-rattle1.caf */; };
+		33F714731906CB9B00621616 /* tech-shaker1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714651906CB9B00621616 /* tech-shaker1.caf */; };
+		33F714741906CB9B00621616 /* tech-shaker2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714661906CB9B00621616 /* tech-shaker2.caf */; };
+		33F714751906CB9B00621616 /* tech-tamb1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714671906CB9B00621616 /* tech-tamb1.caf */; };
+		33F714761906CB9B00621616 /* tech-tamb2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33F714681906CB9B00621616 /* tech-tamb2.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -830,7 +843,6 @@
 		33B868EB1900313D0071C2B9 /* tech-hhclosed2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-hhclosed2.caf"; sourceTree = "<group>"; };
 		33B868EC1900313D0071C2B9 /* tech-hhclosed3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-hhclosed3.caf"; sourceTree = "<group>"; };
 		33B868ED1900313D0071C2B9 /* tech-hhclosed4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-hhclosed4.caf"; sourceTree = "<group>"; };
-		33B868EE1900313D0071C2B9 /* tech-ride1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-ride1.caf"; sourceTree = "<group>"; };
 		33B868EF1900313D0071C2B9 /* tech-tonal1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal1.caf"; sourceTree = "<group>"; };
 		33B868F01900313D0071C2B9 /* tech-tonal2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal2.caf"; sourceTree = "<group>"; };
 		33B868F11900313D0071C2B9 /* tech-tonal3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal3.caf"; sourceTree = "<group>"; };
@@ -840,6 +852,20 @@
 		33F714541906000900621616 /* userInterface-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipad.png"; sourceTree = "<group>"; };
 		33F714571906004000621616 /* audioObjects-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipad.plist"; sourceTree = "<group>"; };
 		33F714581906004000621616 /* audioObjects-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioObjects-ipad.png"; sourceTree = "<group>"; };
+		33F7145B1906CB9B00621616 /* tech-bell1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bell1.caf"; sourceTree = "<group>"; };
+		33F7145C1906CB9B00621616 /* tech-bell2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bell2.caf"; sourceTree = "<group>"; };
+		33F7145D1906CB9B00621616 /* tech-bongo1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bongo1.caf"; sourceTree = "<group>"; };
+		33F7145E1906CB9B00621616 /* tech-bongo2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bongo2.caf"; sourceTree = "<group>"; };
+		33F7145F1906CB9B00621616 /* tech-bongo3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bongo3.caf"; sourceTree = "<group>"; };
+		33F714601906CB9B00621616 /* tech-bongo4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-bongo4.caf"; sourceTree = "<group>"; };
+		33F714611906CB9B00621616 /* tech-crash2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-crash2.caf"; sourceTree = "<group>"; };
+		33F714621906CB9B00621616 /* tech-hhopen1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-hhopen1.caf"; sourceTree = "<group>"; };
+		33F714631906CB9B00621616 /* tech-hhopen2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-hhopen2.caf"; sourceTree = "<group>"; };
+		33F714641906CB9B00621616 /* tech-rattle1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-rattle1.caf"; sourceTree = "<group>"; };
+		33F714651906CB9B00621616 /* tech-shaker1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-shaker1.caf"; sourceTree = "<group>"; };
+		33F714661906CB9B00621616 /* tech-shaker2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-shaker2.caf"; sourceTree = "<group>"; };
+		33F714671906CB9B00621616 /* tech-tamb1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tamb1.caf"; sourceTree = "<group>"; };
+		33F714681906CB9B00621616 /* tech-tamb2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tamb2.caf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1905,6 +1931,20 @@
 		339966A318F0DC8D000F4522 /* patches */ = {
 			isa = PBXGroup;
 			children = (
+				33F7145B1906CB9B00621616 /* tech-bell1.caf */,
+				33F7145C1906CB9B00621616 /* tech-bell2.caf */,
+				33F7145D1906CB9B00621616 /* tech-bongo1.caf */,
+				33F7145E1906CB9B00621616 /* tech-bongo2.caf */,
+				33F7145F1906CB9B00621616 /* tech-bongo3.caf */,
+				33F714601906CB9B00621616 /* tech-bongo4.caf */,
+				33F714611906CB9B00621616 /* tech-crash2.caf */,
+				33F714621906CB9B00621616 /* tech-hhopen1.caf */,
+				33F714631906CB9B00621616 /* tech-hhopen2.caf */,
+				33F714641906CB9B00621616 /* tech-rattle1.caf */,
+				33F714651906CB9B00621616 /* tech-shaker1.caf */,
+				33F714661906CB9B00621616 /* tech-shaker2.caf */,
+				33F714671906CB9B00621616 /* tech-tamb1.caf */,
+				33F714681906CB9B00621616 /* tech-tamb2.caf */,
 				33B868E61900313D0071C2B9 /* tech-chuk1.caf */,
 				33B868E71900313D0071C2B9 /* tech-clap1.caf */,
 				33B868E81900313D0071C2B9 /* tech-clok1.caf */,
@@ -1913,7 +1953,6 @@
 				33B868EB1900313D0071C2B9 /* tech-hhclosed2.caf */,
 				33B868EC1900313D0071C2B9 /* tech-hhclosed3.caf */,
 				33B868ED1900313D0071C2B9 /* tech-hhclosed4.caf */,
-				33B868EE1900313D0071C2B9 /* tech-ride1.caf */,
 				33B868EF1900313D0071C2B9 /* tech-tonal1.caf */,
 				33B868F01900313D0071C2B9 /* tech-tonal2.caf */,
 				33B868F11900313D0071C2B9 /* tech-tonal3.caf */,
@@ -2023,16 +2062,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F714751906CB9B00621616 /* tech-tamb1.caf in Resources */,
 				3399635D18F0A8DE000F4522 /* Default@2x.png in Resources */,
 				3399660D18F0B261000F4522 /* audioObjects-hd.png in Resources */,
 				3399670918F0DC8D000F4522 /* puzzle3.json in Resources */,
 				3399660E18F0B261000F4522 /* audioObjects.plist in Resources */,
+				33F7146D1906CB9B00621616 /* tech-bongo3.caf in Resources */,
 				339A29A61902B9300045CA1A /* audioObjects-ipadhd.png in Resources */,
 				33B868F71900313D0071C2B9 /* tech-crash1.caf in Resources */,
 				3399637018F0A8DE000F4522 /* Icon-120.png in Resources */,
+				33F7146C1906CB9B00621616 /* tech-bongo2.caf in Resources */,
 				3399657418F0A8E0000F4522 /* LICENSE_CCBReader.txt in Resources */,
+				33F7146A1906CB9B00621616 /* tech-bell2.caf in Resources */,
+				33F714741906CB9B00621616 /* tech-shaker2.caf in Resources */,
 				3399636618F0A8DE000F4522 /* Icon@2x.png in Resources */,
 				3399637818F0A8DE000F4522 /* Icon-Small@2x.png in Resources */,
+				33F7146E1906CB9B00621616 /* tech-bongo4.caf in Resources */,
 				3399636A18F0A8DE000F4522 /* Icon-72@2x.png in Resources */,
 				33F714551906000900621616 /* userInterface-ipad.plist in Resources */,
 				3399670A18F0DC8D000F4522 /* puzzle4.json in Resources */,
@@ -2043,6 +2088,7 @@
 				339A29AA1902C1190045CA1A /* userInterface-ipadhd.png in Resources */,
 				3399637218F0A8DE000F4522 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */,
+				33F7146B1906CB9B00621616 /* tech-bongo1.caf in Resources */,
 				3399660F18F0B261000F4522 /* audioObjects.png in Resources */,
 				33F714561906000900621616 /* userInterface-ipad.png in Resources */,
 				339A29A91902C1190045CA1A /* userInterface-ipadhd.plist in Resources */,
@@ -2056,20 +2102,26 @@
 				33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */,
 				3399670B18F0DC8D000F4522 /* puzzle5.json in Resources */,
 				33F714591906004000621616 /* audioObjects-ipad.plist in Resources */,
+				33F714721906CB9B00621616 /* tech-rattle1.caf in Resources */,
 				3399670718F0DC8D000F4522 /* puzzle1.json in Resources */,
 				3399637418F0A8DE000F4522 /* Icon-Small-50.png in Resources */,
 				3399670818F0DC8D000F4522 /* puzzle2.json in Resources */,
 				33B868FB1900313D0071C2B9 /* tech-hhclosed4.caf in Resources */,
 				33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */,
+				33F714711906CB9B00621616 /* tech-hhopen2.caf in Resources */,
 				3399655D18F0A8E0000F4522 /* LICENSE_Kazmath.txt in Resources */,
 				33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */,
 				3399670D18F0DC8D000F4522 /* puzzleSet0.json in Resources */,
+				33F7146F1906CB9B00621616 /* tech-crash2.caf in Resources */,
 				3399636818F0A8DE000F4522 /* Icon-72.png in Resources */,
 				339964B618F0A8DF000F4522 /* LICENSE_cocos2d.txt in Resources */,
 				3399635F18F0A8DE000F4522 /* Default-568h@2x.png in Resources */,
 				3399662018F0B47A000F4522 /* userInterface.plist in Resources */,
 				3399637F18F0A8DE000F4522 /* iTunesArtwork in Resources */,
+				33F714691906CB9B00621616 /* tech-bell1.caf in Resources */,
+				33F714761906CB9B00621616 /* tech-tamb2.caf in Resources */,
 				3399637A18F0A8DE000F4522 /* Icon-Spotlight-iOS7.png in Resources */,
+				33F714731906CB9B00621616 /* tech-shaker1.caf in Resources */,
 				33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */,
 				3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */,
 				3399662118F0B47A000F4522 /* userInterface.png in Resources */,
@@ -2080,8 +2132,8 @@
 				3399670618F0DC8D000F4522 /* puzzle0.json in Resources */,
 				3399637C18F0A8DE000F4522 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				3399636C18F0A8DE000F4522 /* Icon-76.png in Resources */,
+				33F714701906CB9B00621616 /* tech-hhopen1.caf in Resources */,
 				33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */,
-				33B868FC1900313D0071C2B9 /* tech-ride1.caf in Resources */,
 				3399654218F0A8DF000F4522 /* ChangeLog in Resources */,
 				3399638118F0A8DE000F4522 /* iTunesArtwork@2x in Resources */,
 				33B868FE1900313D0071C2B9 /* tech-tonal2.caf in Resources */,
