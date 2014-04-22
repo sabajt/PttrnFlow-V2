@@ -326,7 +326,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:ee1c9de90faa23e67b77c3f3ea359998:3e36ace2ecce17dca466c86b92a33574:367595984b56cf09ab34c6d5a6c087aa$</string>
+            <string>$TexturePacker:SmartUpdate:892a340d1490f2d9d42e73becf7384cc:3e36ace2ecce17dca466c86b92a33574:c502f529b1326393133b1b1fe352aeb3$</string>
             <key>textureFileName</key>
             <string>userInterface-ipadhd.png</string>
         </dict>

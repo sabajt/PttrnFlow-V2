@@ -44,7 +44,9 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
-    
+  
+//  [[CCFileUtils sharedFileUtils] setEnableiPhoneResourcesOniPad:YES];
+  
     // load sprite sheets
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"transitions.plist"];

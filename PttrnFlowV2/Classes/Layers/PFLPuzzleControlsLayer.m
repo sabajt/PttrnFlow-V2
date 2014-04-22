@@ -284,7 +284,6 @@ static NSInteger const kRowLength = 8;
   
   CCActionMoveTo *flagMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:ccp(flag.position.x, flagCenterY + offset)];
   
-  
   CCActionEaseElasticOut *flagEase = [CCActionEaseElasticOut actionWithAction:flagMoveTo];
   [flag runAction:flagEase];
   CCActionFadeIn *flagFadeIn = [CCActionFadeIn actionWithDuration:0.5f];

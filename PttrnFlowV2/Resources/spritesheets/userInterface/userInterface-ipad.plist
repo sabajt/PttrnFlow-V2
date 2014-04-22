@@ -322,13 +322,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>userInterface-hd.png</string>
+            <string>userInterface-ipad.png</string>
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
             <string>$TexturePacker:SmartUpdate:892a340d1490f2d9d42e73becf7384cc:3e36ace2ecce17dca466c86b92a33574:c502f529b1326393133b1b1fe352aeb3$</string>
             <key>textureFileName</key>
-            <string>userInterface-hd.png</string>
+            <string>userInterface-ipad.png</string>
         </dict>
     </dict>
 </plist>
