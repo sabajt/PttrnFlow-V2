@@ -99,6 +99,19 @@ static NSInteger const kRowLength = 8;
   return line;
 }
 
++ (CGFloat)uiSolutionFlagOffset
+{
+  CGSize screenSize = [CCDirector sharedDirector].designSize;
+  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  {
+    return 12.0f;
+  }
+  else
+  {
+    return 6.0f;
+  }
+}
+
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
 {
   self = [super init];
@@ -117,11 +130,6 @@ static NSInteger const kRowLength = 8;
     
     self.uiBatchNode = uiBatch;
     [self addChild:uiBatch];
-    
-    CCSpriteBatchNode *transitionBatch = [CCSpriteBatchNode batchNodeWithFile:@"transitions.png"];
-    self.transitionBatchNode = transitionBatch;
-    [self addChild:transitionBatch];
-    [self createTransitionPadding];
     
     // right controls panel
     CCSprite *rightControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_right_bottom_fill.png"];
@@ -188,7 +196,7 @@ static NSInteger const kRowLength = 8;
     // exit button
     PFLBasicButton *exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.exitButton = exitButton;
-    exitButton.position = ccp([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2, self.contentSize.height - 25);
+    exitButton.position = ccp([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
     [self.uiBatchNode addChild:exitButton];
     
     // solution buttons
@@ -206,23 +214,6 @@ static NSInteger const kRowLength = 8;
     }
   }
   return self;
-}
-
-- (void)createTransitionPadding
-{
-  CCSprite *fill = [CCSprite spriteWithImageNamed:@"puzzle_left_transition_padding_568_a_fill.png"];
-  fill.color = [PFLColorUtils controlPanelFillWithTheme:self.puzzle.puzzleSet.theme];
-  fill.anchorPoint = ccp(1, 0);
-  fill.position = ccp(0, 0);
-  //    fill.position = ccp(-fill.contentSize.width, 0.0f);
-  [self.transitionBatchNode addChild:fill];
-  
-  CCSprite *edge = [CCSprite spriteWithImageNamed:@"puzzle_left_transition_padding_568_a_edge.png"];
-  edge.color = [PFLColorUtils controlPanelEdgeWithTheme:self.puzzle.puzzleSet.theme];
-  edge.anchorPoint = ccp(1, 0);
-  edge.position = ccp(0, 0);
-  //    edge.position = ccp(-edge.contentSize.width, 0.0f);
-  [self.transitionBatchNode addChild:edge];
 }
 
 // TODO: if this becomes a custom animation (crossfade?) will probably need to use with a completion callback
@@ -271,7 +262,7 @@ static NSInteger const kRowLength = 8;
   PFLSolutionButton *button = self.solutionButtons[index];
   [button animateCorrectHit:correct];
   
-  CGFloat  offset = 6.0f;
+  CGFloat offset = [PFLPuzzleControlsLayer uiSolutionFlagOffset];
   NSString *flagName = @"x.png";
   if (correct)
   {
@@ -284,9 +275,16 @@ static NSInteger const kRowLength = 8;
   [self.solutionFlags addObject:flag];
   [self.uiBatchNode addChild:flag];
   flag.color = [PFLColorUtils controlButtonsDefaultWithTheme:self.puzzle.puzzleSet.theme];
-  flag.position = ccp(button.position.x, button.contentSize.height / 2);
+  
+  CGFloat flagCenterY = ([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f) - 8.0f;
+  
+  flag.position = ccp(button.position.x, flagCenterY);
+  
   flag.opacity = 0.0f;
-  CCActionMoveTo *flagMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:ccp(flag.position.x, (button.contentSize.height / 2) + offset)];
+  
+  CCActionMoveTo *flagMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:ccp(flag.position.x, flagCenterY + offset)];
+  
+  
   CCActionEaseElasticOut *flagEase = [CCActionEaseElasticOut actionWithAction:flagMoveTo];
   [flag runAction:flagEase];
   CCActionFadeIn *flagFadeIn = [CCActionFadeIn actionWithDuration:0.5f];

@@ -93,9 +93,7 @@
     self.audioEventController.beatDuration = puzzleSet.beatDuration;
     [self addChild:self.audioEventController];
     [self.audioEventController loadSamples:self.combinedSampleNames];
-    
-    //
-    self.audioEventController.mute = YES;
+    self.audioEventController.mute = NO;
     
     self.loopIndex = 0;
     [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
