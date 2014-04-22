@@ -33,21 +33,21 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 
 @property (assign) PFLEventType eventType;
 
-@property (strong, nonatomic) NSNumber *audioID;
-@property (copy, nonatomic) NSString *direction;
-@property (copy, nonatomic) NSString *file;
-@property (copy, nonatomic) NSString *midiValue;
-@property (strong, nonatomic) NSArray *sampleEvents;
-@property (copy, nonatomic) NSString *synthType;
-@property (strong, nonatomic) NSNumber *time;
+@property (strong, nonatomic) NSNumber* audioID;
+@property (copy, nonatomic) NSString* direction;
+@property (copy, nonatomic) NSString* file;
+@property (copy, nonatomic) NSString* midiValue;
+@property (strong, nonatomic) NSArray* sampleEvents;
+@property (copy, nonatomic) NSString* synthType;
+@property (strong, nonatomic) NSNumber* time;
 
 // Individual event constructors
-+ (id)synthEventWithAudioID:(NSNumber *)audioID midiValue:(NSString *)midiValue synthType:(NSString *)synthType;
-+ (id)sampleEventWithAudioID:(NSNumber *)audioID file:(NSString *)file time:(NSNumber *)time;
-+ (id)directionEventWithDirection:(NSString *)direction;
++ (id)synthEventWithAudioID:(NSNumber*)audioID midiValue:(NSString*)midiValue synthType:(NSString*)synthType;
++ (id)sampleEventWithAudioID:(NSNumber*)audioID file:(NSString*)file time:(NSNumber*)time;
++ (id)directionEventWithDirection:(NSString*)direction;
 + (id)exitEvent;
-+ (id)audioStopEventWithAudioID:(NSNumber *)audioID;
-+ (id)multiSampleEventWithAudioID:(NSNumber *)audioID sampleEvents:(NSArray *)sampleEvents;
-+ (id)multiSampleEventWithAudioID:(NSNumber *)audioID multiSample:(PFLMultiSample *)multiSample;
++ (id)audioStopEventWithAudioID:(NSNumber*)audioID;
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID sampleEvents:(NSArray*)sampleEvents;
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID multiSample:(PFLMultiSample*)multiSample;
 
 @end

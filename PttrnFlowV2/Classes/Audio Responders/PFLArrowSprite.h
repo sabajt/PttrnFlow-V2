@@ -13,6 +13,6 @@
 
 @interface PFLArrowSprite : CCSprite <PFLAudioResponder>
 
-- (id)initWithGlyph:(PFLGlyph *)glyph;
+- (id)initWithGlyph:(PFLGlyph*)glyph;
 
 @end

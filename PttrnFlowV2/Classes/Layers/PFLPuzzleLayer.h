@@ -14,11 +14,11 @@
 
 @interface PFLPuzzleLayer : PFLScrollNode
 
-@property (weak, nonatomic) PFLAudioResponderStepController *sequenceDispatcher;
-@property (weak, nonatomic) PFLAudioResponderTouchController *audioResponderTouchController;
+@property (weak, nonatomic) PFLAudioResponderStepController* sequenceDispatcher;
+@property (weak, nonatomic) PFLAudioResponderTouchController* audioResponderTouchController;
 
-@property (weak, nonatomic) CCSpriteBatchNode *audioObjectsBatchNode;
+@property (weak, nonatomic) CCSpriteBatchNode* audioObjectsBatchNode;
 
-+ (CCScene *)sceneWithPuzzle:(PFLPuzzle *)puzzle;
++ (CCScene*)sceneWithPuzzle:(PFLPuzzle*)puzzle;
 
 @end

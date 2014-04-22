@@ -10,7 +10,7 @@
 
 @interface PFLPuzzleBackgroundLayer : CCNode
 
-+ (PFLPuzzleBackgroundLayer *)backgroundLayerWithTheme:(NSString *)theme;
-+ (PFLPuzzleBackgroundLayer *)backgroundLayerWithColor:(CCColor *)color;
++ (PFLPuzzleBackgroundLayer*)backgroundLayerWithTheme:(NSString*)theme;
++ (PFLPuzzleBackgroundLayer*)backgroundLayerWithColor:(CCColor*)color;
 
 @end

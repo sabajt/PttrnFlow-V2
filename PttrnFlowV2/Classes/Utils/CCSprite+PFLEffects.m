@@ -13,26 +13,26 @@
 
 - (void)backlight:(CGFloat)beatDuration completion:(void (^)(void))completion
 {
-    [self stopAllActions];
-    self.scale = 1.0f;
-    
-    CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:beatDuration * 2.0f];
-    [self runAction:[CCActionEaseSineOut actionWithAction:fadeOut]];
+  [self stopAllActions];
+  self.scale = 1.0f;
+  
+  CCActionFadeOut* fadeOut = [CCActionFadeOut actionWithDuration:beatDuration * 2.0f];
+  [self runAction:[CCActionEaseSineOut actionWithAction:fadeOut]];
 
-    CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:beatDuration * 2.0f scale:self.scale + 0.5f];
-    CCActionEaseSineOut *easeUp = [CCActionEaseSineOut actionWithAction:scaleUp];
-    
-    CCActionCallBlock *resetScale = [CCActionCallBlock actionWithBlock:^{
-        self.scale = 1.0f;
-    }];
-    
-    CCActionCallBlock *completionAction = [CCActionCallBlock actionWithBlock:^{
-        if (completion) {
-            completion();
-        }
-    }];
-    
-    [self runAction:[CCActionSequence actionWithArray:@[easeUp, resetScale, completionAction]]];
+  CCActionScaleTo* scaleUp = [CCActionScaleTo actionWithDuration:beatDuration * 2.0f scale:self.scale + 0.5f];
+  CCActionEaseSineOut *easeUp = [CCActionEaseSineOut actionWithAction:scaleUp];
+  
+  CCActionCallBlock* resetScale = [CCActionCallBlock actionWithBlock:^{
+    self.scale = 1.0f;
+  }];
+  
+  CCActionCallBlock* completionAction = [CCActionCallBlock actionWithBlock:^{
+    if (completion) {
+      completion();
+    }
+  }];
+  
+  [self runAction:[CCActionSequence actionWithArray:@[easeUp, resetScale, completionAction]]];
 }
 
 @end

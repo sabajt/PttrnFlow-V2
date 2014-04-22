@@ -13,9 +13,9 @@
 @property CGFloat beatDuration;
 @property BOOL mute;
 
-+ (PFLAudioEventController *)audioEventController;
++ (PFLAudioEventController*)audioEventController;
 
-- (void)loadSamples:(NSArray *)samples;
-- (void)receiveEvents:(NSArray *)events;
+- (void)loadSamples:(NSArray*)samples;
+- (void)receiveEvents:(NSArray*)events;
 
 @end

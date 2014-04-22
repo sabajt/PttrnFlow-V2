@@ -13,9 +13,9 @@
 
 @interface PFLEntrySprite : CCSprite <PFLAudioResponder>
 
-@property (copy, nonatomic) NSString *direction;
+@property (copy, nonatomic) NSString* direction;
 
-- (id)initWithGlyph:(PFLGlyph *)glyph;
+- (id)initWithGlyph:(PFLGlyph*)glyph;
 
 @end
 

@@ -13,13 +13,12 @@
 @interface PFLSolutionButton ()
 
 @property (weak, nonatomic) id<PFLSolutionButtonDelegate> delegate;
-@property (weak, nonatomic) CCSprite *numberSprite;
-@property (weak, nonatomic) CCSprite *hitDot;
+@property (weak, nonatomic) CCSprite* numberSprite;
+@property (weak, nonatomic) CCSprite* hitDot;
 
 @end
 
 @implementation PFLSolutionButton
-
 
 + (CGFloat)hitOffset
 {
@@ -34,7 +33,7 @@
   }
 }
 
-- (id)initWithPlaceholderImage:(NSString *)placeholderImage size:(CGSize)size index:(NSInteger)index defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<PFLSolutionButtonDelegate>)delegate
+- (id)initWithPlaceholderImage:(NSString*)placeholderImage size:(CGSize)size index:(NSInteger)index defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<PFLSolutionButtonDelegate>)delegate
 {
   self = [super initWithImageNamed:placeholderImage];
   if (self)
@@ -92,7 +91,7 @@
 
 #pragma mark - Touch
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event
 {
   [self press];
 }

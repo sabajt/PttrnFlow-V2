@@ -11,7 +11,7 @@
 
 @interface CCNode (PFLGrid)
 
-@property (strong, nonatomic) PFLCoord *cell;
+@property (strong, nonatomic) PFLCoord* cell;
 @property (assign) CGSize cellSize;
 
 @end

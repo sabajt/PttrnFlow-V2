@@ -13,8 +13,8 @@
 
 @interface PFLPuzzleSetLayer : PFLScrollNode <PFLPuzzleSetCellDelegate>
 
-@property (strong, nonatomic) NSArray *mapNames;
+@property (strong, nonatomic) NSArray* mapNames;
 
-+ (CCScene *)sceneWithPuzzleSet:(PFLPuzzleSet *)puzzle;
++ (CCScene*)sceneWithPuzzleSet:(PFLPuzzleSet*)puzzle;
 
 @end

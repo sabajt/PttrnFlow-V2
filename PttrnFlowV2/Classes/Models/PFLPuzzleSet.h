@@ -12,14 +12,14 @@
 
 @property (assign) NSInteger bpm;
 @property (assign) CGFloat beatDuration;
-@property (strong, nonatomic) NSArray *keyframes;
+@property (strong, nonatomic) NSArray* keyframes;
 @property (assign) NSInteger length;
-@property (copy, nonatomic) NSString *name;
-@property (strong, nonatomic) NSArray *puzzles;
-@property (copy, nonatomic) NSString *theme;
+@property (copy, nonatomic) NSString* name;
+@property (strong, nonatomic) NSArray* puzzles;
+@property (copy, nonatomic) NSString* theme;
 
-+ (PFLPuzzleSet *)puzzleSetFromResource:(NSString *)resource;
-- (id)initWithJson:(NSDictionary *)json;
-- (NSArray *)combinedSolutionEvents;
++ (PFLPuzzleSet*)puzzleSetFromResource:(NSString*)resource;
+- (id)initWithJson:(NSDictionary*)json;
+- (NSArray*)combinedSolutionEvents;
 
 @end

@@ -17,7 +17,6 @@
 @property (assign) NSInteger sourceIndex;
 @property (assign) NSInteger targetIndex;
 
-//+ (NSArray*)keyframesFromArray:(NSArray*)array puzzle:(PFLPuzzle*)puzzle;
 + (PFLKeyframe*)keyframeWithJson:(NSDictionary*)json puzzle:(PFLPuzzle*)puzzle;
 - (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 

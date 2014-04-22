@@ -11,13 +11,13 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 
-static NSString *const kBpm = @"bpm";
-static NSString *const kFile = @"file";
-static NSString *const kKeyframes = @"keyframes";
-static NSString *const kLength = @"length";
-static NSString *const kName = @"name";
-static NSString *const kPuzzles = @"puzzles";
-static NSString *const kTheme = @"theme";
+static NSString* const kBpm = @"bpm";
+static NSString* const kFile = @"file";
+static NSString* const kKeyframes = @"keyframes";
+static NSString* const kLength = @"length";
+static NSString* const kName = @"name";
+static NSString* const kPuzzles = @"puzzles";
+static NSString* const kTheme = @"theme";
 
 @interface PFLPuzzleSet ()
 
@@ -27,12 +27,12 @@ static NSString *const kTheme = @"theme";
 
 @implementation PFLPuzzleSet
 
-+ (PFLPuzzleSet *)puzzleSetFromResource:(NSString *)resource;
++ (PFLPuzzleSet*)puzzleSetFromResource:(NSString*)resource;
 {
     return [[PFLPuzzleSet alloc] initWithJson:[PFLJsonUtils deserializeJsonObjectResource:resource]];
 }
 
-- (id)initWithJson:(NSDictionary *)json
+- (id)initWithJson:(NSDictionary*)json
 {
   self = [super init];
   if (self)

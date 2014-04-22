@@ -13,12 +13,9 @@
 
 @implementation PFLPuzzleBackgroundLayer
 
-+ (PFLPuzzleBackgroundLayer *)backgroundLayerWithTheme:(NSString *)theme
++ (PFLPuzzleBackgroundLayer*)backgroundLayerWithTheme:(NSString *)theme
 {
-//    PFLPuzzleBackgroundLayer *layer = [PFLPuzzleBackgroundLayer layerWithColor:ccc4BFromccc3B([PFLColorUtils backgroundWithTheme:theme])];
-    
-    PFLPuzzleBackgroundLayer *node = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils backgroundWithTheme:theme]];
-    
+    PFLPuzzleBackgroundLayer* node = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils backgroundWithTheme:theme]];
     
 //    CCSpriteBatchNode *batchNode = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyBackground stringByAppendingString:@".png"]];
 //    [layer addChild:batchNode];
@@ -41,11 +38,5 @@
   node.contentSize = CGSizeMake(1.0f, 1.0f);
   return node;
 }
-
-//- (void)tintToColor:(CCColor)color duration:(ccTime)duration
-//{
-//    CCTintTo *tint = [CCTintTo actionWithDuration:duration red:color.r green:color.g blue:color.b];
-//    [self runAction:tint];
-//}
 
 @end

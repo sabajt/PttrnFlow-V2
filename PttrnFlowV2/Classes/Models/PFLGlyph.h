@@ -12,13 +12,13 @@
 
 @interface PFLGlyph : NSObject
 
-@property (strong, nonatomic) NSNumber *audioID;
-@property (copy, nonatomic) NSString *arrow;
-@property (strong, nonatomic) PFLCoord *cell;
-@property (copy, nonatomic) NSString *entry;
+@property (strong, nonatomic) NSNumber* audioID;
+@property (copy, nonatomic) NSString* arrow;
+@property (strong, nonatomic) PFLCoord* cell;
+@property (copy, nonatomic) NSString* entry;
 @property (assign) BOOL isStatic;
-@property (weak, nonatomic) PFLPuzzle *puzzle;
+@property (weak, nonatomic) PFLPuzzle* puzzle;
 
-- (id)initWithObject:(NSDictionary *)object puzzle:(PFLPuzzle *)puzzle;
+- (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 
 @end

@@ -15,49 +15,44 @@
 
 @property (strong, nonatomic) CCColor* defaultColor;
 @property (strong, nonatomic) CCColor* activeColor;
-@property (strong, nonatomic) PFLEvent *event;
+@property (strong, nonatomic) PFLEvent* event;
 
 @end
 
 @implementation PFLSynthSprite
 
-- (id)initWithCell:(PFLCoord *)cell
-           audioID:(NSNumber *)audioID
-             synth:(NSString *)synth
-              midi:(NSNumber *)midi
-             image:(NSString *)image
-         decorator:(NSString *)decorator
+- (id)initWithCell:(PFLCoord*)cell audioID:(NSNumber*)audioID synth:(NSString*)synth midi:(NSNumber*)midi image:(NSString*)image decorator:(NSString*)decorator
 {
-    self = [super initWithImageNamed:image];
-    if (self) {
-        self.defaultColor = [PFLColorUtils cream];
-        self.activeColor = [PFLColorUtils activeYellow];
-        self.color = self.defaultColor;
-        
-        self.event = [PFLEvent synthEventWithAudioID:audioID midiValue:[midi stringValue] synthType:synth];
-        
-        // CCNode+Grid
-        self.cell = cell;
-        self.cellSize = [PFLGameConstants gridUnitSize];
-    }
-    return self;
+  self = [super initWithImageNamed:image];
+  if (self)
+  {
+    self.defaultColor = [PFLColorUtils cream];
+    self.activeColor = [PFLColorUtils activeYellow];
+    self.color = self.defaultColor;
+    
+    self.event = [PFLEvent synthEventWithAudioID:audioID midiValue:[midi stringValue] synthType:synth];
+    
+    // CCNode+Grid
+    self.cell = cell;
+    self.cellSize = [PFLGameConstants gridUnitSize];
+  }
+  return self;
 }
 
 #pragma mark - AudioResponder
 
-- (PFLCoord *)audioCell
+- (PFLCoord*)audioCell
 {
-    return self.cell;
+  return self.cell;
 }
 
-- (PFLEvent *)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioHit:(CGFloat)beatDuration
 {
-    self.color = self.activeColor;
-//    CCTintTo *tint = [CCTintTo actionWithDuration:beatDuration red:self.defaultColor.r green:self.defaultColor.g blue:self.defaultColor.b];
-    CCActionTintTo *tint = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];
-    [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
-    
-    return self.event;
+  self.color = self.activeColor;
+  CCActionTintTo* tint = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];
+  [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
+  
+  return self.event;
 }
 
 @end

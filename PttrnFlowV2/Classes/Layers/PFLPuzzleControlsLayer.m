@@ -19,21 +19,18 @@ static NSInteger const kRowLength = 8;
 
 @interface PFLPuzzleControlsLayer ()
 
-@property (weak, nonatomic) CCSpriteBatchNode *uiBatchNode;
-@property (weak, nonatomic) CCSpriteBatchNode *transitionBatchNode;
+@property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
+@property (weak, nonatomic) CCSpriteBatchNode* transitionBatchNode;
 
 @property (weak, nonatomic) id<PFLPuzzleControlsDelegate> delegate;
-@property (strong, nonatomic) NSMutableArray *solutionButtons;
-@property (strong, nonatomic) NSMutableArray *solutionFlags;
-@property (weak, nonatomic) PFLPuzzle *puzzle;
-
-// size and positions
+@property (weak, nonatomic) PFLPuzzle* puzzle;
 @property (assign) NSInteger steps;
 
-// buttons
-@property (weak, nonatomic) PFLToggleButton *speakerButton;
-@property (weak, nonatomic) PFLToggleButton *playButton;
-@property (weak, nonatomic) PFLBasicButton *exitButton;
+@property (strong, nonatomic) NSMutableArray* solutionButtons;
+@property (strong, nonatomic) NSMutableArray* solutionFlags;
+@property (weak, nonatomic) PFLToggleButton* speakerButton;
+@property (weak, nonatomic) PFLToggleButton* playButton;
+@property (weak, nonatomic) PFLBasicButton* exitButton;
 
 @end
 
@@ -119,7 +116,7 @@ static NSInteger const kRowLength = 8;
   {
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
-    NSString *theme = puzzle.puzzleSet.theme;
+    NSString* theme = puzzle.puzzleSet.theme;
     self.delegate = delegate;
     
     NSInteger steps = 4;
@@ -136,7 +133,7 @@ static NSInteger const kRowLength = 8;
     rightControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
     rightControlsPanel.anchorPoint = ccp(0, 0);
     
-    CCSprite *rightControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_right_bottom_edge.png"];
+    CCSprite* rightControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_right_bottom_edge.png"];
     rightControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
     rightControlsPanelBorder.anchorPoint = ccp(0, 0);
     
@@ -166,20 +163,20 @@ static NSInteger const kRowLength = 8;
     [self.uiBatchNode addChild:line z:1];
     
     // top left controls panel corner
-    CCSprite *topLeftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
+    CCSprite* topLeftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
     topLeftControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
     topLeftControlsPanel.anchorPoint = ccp(0, 1);
     topLeftControlsPanel.position = ccp(0, self.contentSize.height);
     [self.uiBatchNode addChild:topLeftControlsPanel];
     
-    CCSprite *topLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
+    CCSprite* topLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
     topLeftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
     topLeftControlsPanelBorder.anchorPoint = ccp(0, 1);
     topLeftControlsPanelBorder.position = topLeftControlsPanel.position;
     [self.uiBatchNode addChild:topLeftControlsPanelBorder];
     
     // speaker (solution sequence) button
-    PFLToggleButton *speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
+    PFLToggleButton* speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.speakerButton = speakerButton;
     speakerButton.position = ccp(
       [PFLPuzzleControlsLayer uiTimelineStepWidth] / 2,
@@ -188,13 +185,13 @@ static NSInteger const kRowLength = 8;
     [self.uiBatchNode addChild:speakerButton];
     
     // play (user sequence) button
-    PFLToggleButton *playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
+    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.playButton = playButton;
     playButton.position = ccp(speakerButton.position.x + [PFLPuzzleControlsLayer uiTimelineStepWidth], speakerButton.position.y);
     [self.uiBatchNode addChild:playButton];
     
     // exit button
-    PFLBasicButton *exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
+    PFLBasicButton* exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.exitButton = exitButton;
     exitButton.position = ccp([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
     [self.uiBatchNode addChild:exitButton];
@@ -204,7 +201,7 @@ static NSInteger const kRowLength = 8;
     self.solutionFlags = [NSMutableArray array];
     for (NSInteger i = 0; i < steps; i++)
     {
-      PFLSolutionButton *solutionButton = [[PFLSolutionButton alloc] initWithPlaceholderImage:@"clear_rect_uilayer.png" size:CGSizeMake(40.0f, 40.0f) index:i defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils solutionButtonHighlightWithTheme:theme] delegate:self];
+      PFLSolutionButton* solutionButton = [[PFLSolutionButton alloc] initWithPlaceholderImage:@"clear_rect_uilayer.png" size:CGSizeMake(40.0f, 40.0f) index:i defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils solutionButtonHighlightWithTheme:theme] delegate:self];
       [self.solutionButtons addObject:solutionButton];
       solutionButton.position = ccp(
         (i * [PFLPuzzleControlsLayer uiTimelineStepWidth]) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2),
@@ -227,7 +224,7 @@ static NSInteger const kRowLength = 8;
     }
   }
   
-  for (CCSprite *flag in self.solutionFlags)
+  for (CCSprite* flag in self.solutionFlags)
   {
     [flag removeFromParentAndCleanup:YES];
   }
@@ -263,7 +260,7 @@ static NSInteger const kRowLength = 8;
   [button animateCorrectHit:correct];
   
   CGFloat offset = [PFLPuzzleControlsLayer uiSolutionFlagOffset];
-  NSString *flagName = @"x.png";
+  NSString* flagName = @"x.png";
   if (correct)
   {
     offset *= -1.0f;
@@ -271,7 +268,7 @@ static NSInteger const kRowLength = 8;
   }
   
   // create and animate solution flag (check or x)
-  CCSprite *flag = [CCSprite spriteWithImageNamed:flagName];
+  CCSprite* flag = [CCSprite spriteWithImageNamed:flagName];
   [self.solutionFlags addObject:flag];
   [self.uiBatchNode addChild:flag];
   flag.color = [PFLColorUtils controlButtonsDefaultWithTheme:self.puzzle.puzzleSet.theme];
@@ -284,9 +281,9 @@ static NSInteger const kRowLength = 8;
   
   CCActionMoveTo *flagMoveTo = [CCActionMoveTo actionWithDuration:1.0f position:ccp(flag.position.x, flagCenterY + offset)];
   
-  CCActionEaseElasticOut *flagEase = [CCActionEaseElasticOut actionWithAction:flagMoveTo];
+  CCActionEaseElasticOut* flagEase = [CCActionEaseElasticOut actionWithAction:flagMoveTo];
   [flag runAction:flagEase];
-  CCActionFadeIn *flagFadeIn = [CCActionFadeIn actionWithDuration:0.5f];
+  CCActionFadeIn* flagFadeIn = [CCActionFadeIn actionWithDuration:0.5f];
   [flag runAction:flagFadeIn];
 }
 
@@ -344,8 +341,8 @@ static NSInteger const kRowLength = 8;
 {
   if ([sender isEqual:self.exitButton])
   {
-    CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
-    CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
+    CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
+    CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
     [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
   }
 }

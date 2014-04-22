@@ -17,44 +17,45 @@
 
 @interface PFLAudioPadSprite ()
 
-@property (strong, nonatomic) CCSprite *highlightSprite;
+@property (strong, nonatomic) CCSprite* highlightSprite;
 
 @end
 
 
 @implementation PFLAudioPadSprite
 
-- (id)initWithGlyph:(PFLGlyph *)glyph
+- (id)initWithGlyph:(PFLGlyph*)glyph
 {
-    self = [super initWithImageNamed:@"audio_box.png"];
-    if (self) {
-        self.isStatic = glyph.isStatic;
-        self.color = [PFLColorUtils padWithTheme:glyph.puzzle.puzzleSet.theme isStatic:glyph.isStatic];
+  self = [super initWithImageNamed:@"audio_box.png"];
+  if (self)
+  {
+    self.isStatic = glyph.isStatic;
+    self.color = [PFLColorUtils padWithTheme:glyph.puzzle.puzzleSet.theme isStatic:glyph.isStatic];
 
-        // CCNode+Grid
-        self.cell = glyph.cell;
-        self.cellSize = [PFLGameConstants gridUnitSize];
-    }
-    return self;
+    // CCNode+Grid
+    self.cell = glyph.cell;
+    self.cellSize = [PFLGameConstants gridUnitSize];
+  }
+  return self;
 }
 
 #pragma mark - AudioResponder
 
-- (PFLEvent *)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioHit:(CGFloat)beatDuration
 {
-    CCActionScaleTo *padScaleUp = [CCActionScaleTo actionWithDuration:beatDuration / 2.0f scale:1.2f];
-    CCActionEaseSineIn *padEaseUp = [CCActionEaseSineIn actionWithAction:padScaleUp];
-    CCActionScaleTo *padScaleDown = [CCActionScaleTo actionWithDuration:beatDuration / 2.0f scale:1.0f];
-    CCActionEaseSineOut *padEaseDown = [CCActionEaseSineOut actionWithAction:padScaleDown];
-    CCActionSequence *seq = [CCActionSequence actionWithArray:@[padEaseUp, padEaseDown]];
-    [self runAction:seq];
-    
-    return nil;
+  CCActionScaleTo* padScaleUp = [CCActionScaleTo actionWithDuration:beatDuration / 2.0f scale:1.2f];
+  CCActionEaseSineIn* padEaseUp = [CCActionEaseSineIn actionWithAction:padScaleUp];
+  CCActionScaleTo* padScaleDown = [CCActionScaleTo actionWithDuration:beatDuration / 2.0f scale:1.0f];
+  CCActionEaseSineOut* padEaseDown = [CCActionEaseSineOut actionWithAction:padScaleDown];
+  CCActionSequence* seq = [CCActionSequence actionWithArray:@[padEaseUp, padEaseDown]];
+  [self runAction:seq];
+  
+  return nil;
 }
 
-- (PFLCoord *)audioCell
+- (PFLCoord*)audioCell
 {
-    return self.cell;
+  return self.cell;
 }
 
 @end

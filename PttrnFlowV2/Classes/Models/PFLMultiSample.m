@@ -10,13 +10,14 @@
 
 @implementation PFLMultiSample
 
-- (id)initWithSamples:(NSArray *)samples
+- (id)initWithSamples:(NSArray*)samples
 {
-    self = [super init];
-    if (self) {
-        self.samples = samples;
-    }
-    return self;
+  self = [super init];
+  if (self)
+  {
+    self.samples = samples;
+  }
+  return self;
 }
 
 @end

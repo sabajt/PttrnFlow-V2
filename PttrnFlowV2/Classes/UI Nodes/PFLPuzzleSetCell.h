@@ -12,10 +12,9 @@
 
 @protocol PFLPuzzleSetCellDelegate <NSObject>
 
-- (void)puzzleSetCellTouchUpInside:(PFLPuzzleSetCell *)cell index:(NSInteger)index;
+- (void)puzzleSetCellTouchUpInside:(PFLPuzzleSetCell*)cell index:(NSInteger)index;
 
 @end
-
 
 @interface PFLPuzzleSetCell : CCSprite
 

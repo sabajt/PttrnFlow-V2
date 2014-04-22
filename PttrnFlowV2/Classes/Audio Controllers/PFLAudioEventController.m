@@ -12,7 +12,7 @@
 
 @interface PFLAudioEventController ()
 
-@property (strong, nonatomic) NSMutableDictionary *sampleKey;
+@property (strong, nonatomic) NSMutableDictionary* sampleKey;
 
 @end
 
@@ -25,7 +25,7 @@
 
 #pragma mark - SoundEventReveiver
 
-- (void)loadSamples:(NSArray *)samples
+- (void)loadSamples:(NSArray*)samples
 {
   for (NSString *sampleName in samples)
   {
@@ -51,7 +51,6 @@
     if (event.eventType == PFLEventTypeSynth)
     {
       NSNumber* midiValue = @([event.midiValue integerValue]);
-      // TODO: synth type needs to be an enum on event or basic model
       NSNumber* synthType = @0;
     }
     

@@ -15,16 +15,6 @@ static NSString* const kTargetIndex = @"target_index";
 
 @implementation PFLKeyframe
 
-//+ (NSArray*)keyframesFromArray:(NSArray*)array puzzle:(PFLPuzzle*)puzzle
-//{
-//  NSMutableArray* keyframes = [NSMutableArray array];
-//  for (NSDictionary* object in array)
-//  {
-//    [keyframes addObject:[[PFLKeyframe alloc] initWithObject:object puzzle:puzzle]];
-//  }
-//  return [NSArray arrayWithArray:keyframes];
-//}
-
 + (PFLKeyframe*)keyframeWithJson:(NSDictionary*)json puzzle:(PFLPuzzle*)puzzle
 {
   return [[PFLKeyframe alloc] initWithObject:json puzzle:puzzle];

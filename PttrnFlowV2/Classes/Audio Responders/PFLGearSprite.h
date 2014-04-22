@@ -13,6 +13,6 @@
 
 @interface PFLGearSprite : CCSprite <PFLAudioResponder>
 
-- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample;
+- (id)initWithGlyph:(PFLGlyph*)glyph multiSample:(PFLMultiSample*)multiSample;
 
 @end

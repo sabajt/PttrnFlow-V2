@@ -17,19 +17,20 @@ static NSString *const kStatic = @"static";
 
 @implementation PFLGlyph
 
-- (id)initWithObject:(NSDictionary *)object puzzle:(PFLPuzzle *)puzzle
+- (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle
 {
-    self = [super init];
-    if (self) {
-        self.audioID = object[kAudio];
-        self.arrow = object[kArrow];
-        NSArray *cell = object[kCell];
-        self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
-        self.entry = object[kEntry];
-        self.isStatic = [object[kStatic] boolValue];
-        self.puzzle = puzzle;
-    }
-    return self;
+  self = [super init];
+  if (self)
+  {
+    self.audioID = object[kAudio];
+    self.arrow = object[kArrow];
+    NSArray *cell = object[kCell];
+    self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
+    self.entry = object[kEntry];
+    self.isStatic = [object[kStatic] boolValue];
+    self.puzzle = puzzle;
+  }
+  return self;
 }
 
 @end

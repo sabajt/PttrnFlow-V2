@@ -10,11 +10,11 @@
 
 @interface PFLSample : NSObject
 
-@property (copy, nonatomic) NSString *file;
-@property (copy, nonatomic) NSString *image;
-@property (strong, nonatomic) NSNumber *time;
+@property (copy, nonatomic) NSString* file;
+@property (copy, nonatomic) NSString* image;
+@property (strong, nonatomic) NSNumber* time;
 
-+ (NSArray *)samplesFromArray:(NSArray *)array;
-- (id)initWithObject:(NSDictionary *)object;
++ (NSArray*)samplesFromArray:(NSArray*)array;
+- (id)initWithObject:(NSDictionary*)object;
 
 @end

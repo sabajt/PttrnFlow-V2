@@ -12,7 +12,7 @@
 
 @protocol PFLSolutionButtonDelegate <NSObject>
 
-- (void)solutionButtonPressed:(PFLSolutionButton *)button;
+- (void)solutionButtonPressed:(PFLSolutionButton*)button;
 
 @end
 
@@ -21,7 +21,7 @@
 @property (assign) NSInteger index;
 @property (assign) BOOL isDisplaced;
 
-- (id)initWithPlaceholderImage:(NSString *)placeholderImage size:(CGSize)size index:(NSInteger)index defaultColor:(CCColor *)defaultColor activeColor:(CCColor *)activeColor delegate:(id<PFLSolutionButtonDelegate>)delegate;
+- (id)initWithPlaceholderImage:(NSString*)placeholderImage size:(CGSize)size index:(NSInteger)index defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<PFLSolutionButtonDelegate>)delegate;
 - (void)press;
 - (void)animateCorrectHit:(BOOL)correct;
 - (void)reset;

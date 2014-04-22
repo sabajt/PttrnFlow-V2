@@ -13,20 +13,20 @@
 
 @class PFLPuzzle, PFLAudioEventController;
 
-FOUNDATION_EXPORT NSString *const kNotificationStepUserSequence;
-FOUNDATION_EXPORT NSString *const kNotificationStepSolutionSequence;
-FOUNDATION_EXPORT NSString *const kNotificationEndUserSequence;
-FOUNDATION_EXPORT NSString *const kNotificationEndSolutionSequence;
-FOUNDATION_EXPORT NSString *const kKeyIndex;
-FOUNDATION_EXPORT NSString *const kKeyCoord;
-FOUNDATION_EXPORT NSString *const kKeyCorrectHit;
-FOUNDATION_EXPORT NSString *const kKeyEmpty;
+FOUNDATION_EXPORT NSString* const kNotificationStepUserSequence;
+FOUNDATION_EXPORT NSString* const kNotificationStepSolutionSequence;
+FOUNDATION_EXPORT NSString* const kNotificationEndUserSequence;
+FOUNDATION_EXPORT NSString* const kNotificationEndSolutionSequence;
+FOUNDATION_EXPORT NSString* const kKeyIndex;
+FOUNDATION_EXPORT NSString* const kKeyCoord;
+FOUNDATION_EXPORT NSString* const kKeyCorrectHit;
+FOUNDATION_EXPORT NSString* const kKeyEmpty;
 
 @interface PFLAudioResponderStepController : CCNode <PFLPuzzleControlsDelegate>
 
-@property (weak, nonatomic) PFLEntrySprite *entry;
+@property (weak, nonatomic) PFLEntrySprite* entry;
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
+- (id)initWithPuzzle:(PFLPuzzle*)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
 - (void)addResponder:(id<PFLAudioResponder>)responder;
 - (void)clearResponders;
 

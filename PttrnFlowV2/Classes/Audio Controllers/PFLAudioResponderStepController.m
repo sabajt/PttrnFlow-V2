@@ -61,14 +61,14 @@ NSString *const kKeyEmpty = @"empty";
   [self.responders removeAllObjects];
 }
 
-- (PFLCoord *)nextStep
+- (PFLCoord*)nextStep
 {
   return [self nextStepInDirection:self.currentDirection currentCoord:self.currentCell];
 }
 
-- (PFLCoord *)nextStepInDirection:(NSString *)direction currentCoord:(PFLCoord *)currentCoord
+- (PFLCoord*)nextStepInDirection:(NSString *)direction currentCoord:(PFLCoord*)currentCoord
 {
-  PFLCoord *maxCoord = [PFLCoord maxCoord:self.puzzle.area];
+  PFLCoord* maxCoord = [PFLCoord maxCoord:self.puzzle.area];
   currentCoord = [currentCoord stepInDirection:direction];
   if (currentCoord.x > maxCoord.x)
   {
@@ -94,10 +94,10 @@ NSString *const kKeyEmpty = @"empty";
     return;
   }
   
-  NSArray *events = [self hitResponders:self.responders atCoord:self.currentCell];
+  NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
   
-  for (PFLEvent *e in events)
+  for (PFLEvent* e in events)
   {
     if (e.eventType == PFLEventTypeDirection)
     {
@@ -116,7 +116,7 @@ NSString *const kKeyEmpty = @"empty";
     CCLOG(@"miss");
   }
   
-  NSDictionary *info = @{
+  NSDictionary* info = @{
     kKeyIndex : @(self.userSequenceIndex),
     kKeyCoord : self.currentCell,
     kKeyCorrectHit : @(correctHit),
@@ -137,7 +137,7 @@ NSString *const kKeyEmpty = @"empty";
     return;
   }
   // use notification instead of playSolutionIndex so we can get the button highlight too.
-  NSDictionary *info = @{ kKeyIndex : @(self.solutionSequenceIndex) };
+  NSDictionary* info = @{ kKeyIndex : @(self.solutionSequenceIndex) };
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepSolutionSequence object:nil userInfo:info];
   self.solutionSequenceIndex++;
 }

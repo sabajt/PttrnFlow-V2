@@ -68,7 +68,7 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 }
 
 // TODO: currently not being used
-- (void)releaseCell:(PFLCoord *)cell channel:(NSString *)channel
+- (void)releaseCell:(PFLCoord*)cell channel:(NSString*)channel
 {
   for (id<PFLAudioResponder> responder in self.responders)
   {

@@ -21,7 +21,7 @@
 
 @interface PFLPuzzleSetLayer ()
 
-@property (strong, nonatomic) PFLPuzzleSet *puzzleSet;
+@property (strong, nonatomic) PFLPuzzleSet* puzzleSet;
 @property (strong, nonatomic) NSMutableArray* combinedSampleNames;
 @property NSInteger loopIndex;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;

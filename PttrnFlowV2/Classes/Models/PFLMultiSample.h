@@ -10,8 +10,8 @@
 
 @interface PFLMultiSample : NSObject
 
-@property (strong, nonatomic) NSArray *samples;
+@property (strong, nonatomic) NSArray* samples;
 
-- (id)initWithSamples:(NSArray *)samples;
+- (id)initWithSamples:(NSArray*)samples;
 
 @end

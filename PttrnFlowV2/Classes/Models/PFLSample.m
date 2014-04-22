@@ -14,24 +14,26 @@ static NSString *const kTime = @"time";
 
 @implementation PFLSample
 
-+ (NSArray *)samplesFromArray:(NSArray *)array
++ (NSArray*)samplesFromArray:(NSArray*)array
 {
-    NSMutableArray *sampels = [NSMutableArray array];
-    for (NSDictionary *object in array) {
-        [sampels addObject:[[PFLSample alloc] initWithObject:object]];
-    }
-    return [NSArray arrayWithArray:sampels];
+  NSMutableArray* sampels = [NSMutableArray array];
+  for (NSDictionary* object in array)
+  {
+    [sampels addObject:[[PFLSample alloc] initWithObject:object]];
+  }
+  return [NSArray arrayWithArray:sampels];
 }
 
-- (id)initWithObject:(NSDictionary *)object
+- (id)initWithObject:(NSDictionary*)object
 {
-    self = [super init];
-    if (self) {
-        self.file = object[kFile];
-        self.image = object[kImage];
-        self.time = object[kTime];
-    }
-    return self;
+  self = [super init];
+  if (self)
+  {
+    self.file = object[kFile];
+    self.image = object[kImage];
+    self.time = object[kTime];
+  }
+  return self;
 }
 
 @end

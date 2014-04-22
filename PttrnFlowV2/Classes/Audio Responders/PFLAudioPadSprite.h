@@ -15,6 +15,6 @@
 
 @property (assign) BOOL isStatic;
 
-- (id)initWithGlyph:(PFLGlyph *)glyph;
+- (id)initWithGlyph:(PFLGlyph*)glyph;
 
 @end

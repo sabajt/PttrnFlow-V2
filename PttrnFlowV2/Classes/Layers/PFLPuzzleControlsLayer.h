@@ -28,6 +28,6 @@
 + (CGSize)uiButtonUnitSize;
 + (CGFloat)uiTimelineStepWidth;
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate;
+- (id)initWithPuzzle:(PFLPuzzle*)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate;
 
 @end

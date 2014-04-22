@@ -19,26 +19,26 @@ static char kCellSizeValue;
 @dynamic cell;
 @dynamic cellSize;
 
-- (void)setCell:(PFLCoord *)cell
+- (void)setCell:(PFLCoord*)cell
 {
-    objc_setAssociatedObject(self, &kCellValue, cell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  objc_setAssociatedObject(self, &kCellValue, cell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (PFLCoord *)cell
+- (PFLCoord*)cell
 {
-    return objc_getAssociatedObject(self, &kCellValue);
+  return objc_getAssociatedObject(self, &kCellValue);
 }
 
 - (void)setCellSize:(CGSize)cellSize
 {
-    NSValue *value = [NSValue valueWithCGSize:cellSize];
-    objc_setAssociatedObject(self, &kCellSizeValue, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  NSValue* value = [NSValue valueWithCGSize:cellSize];
+  objc_setAssociatedObject(self, &kCellSizeValue, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)cellSize
 {
-    NSValue *value = objc_getAssociatedObject(self, &kCellSizeValue);;
-    return [value CGSizeValue];
+  NSValue* value = objc_getAssociatedObject(self, &kCellSizeValue);;
+  return [value CGSizeValue];
 }
 
 @end
