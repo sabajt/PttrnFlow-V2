@@ -111,24 +111,6 @@ static NSInteger const kLongSequence = 16;
   }
 }
 
-//+ (CGPoint)rightControlsPanelPositionWithLength
-//{
-//  CGSize screenSize = [CCDirector sharedDirector].designSize;
-//  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
-//  {
-//    return CGSizeMake(100.0f, 100.0f);
-//  }
-//  else if ((NSInteger)screenSize.width == PFLIPhoneRetinaScreenWidth)
-//  {
-//    return CGSizeMake(50.0f, 50.0f);
-//  }
-//  else
-//  {
-//    CCLOG(@"Warning: unsupported screen size: %@", NSStringFromCGSize(screenSize));
-//    return CGSizeMake(50.0f, 50.0f);
-//  }
-//}
-
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
 {
   self = [super init];
@@ -179,13 +161,27 @@ static NSInteger const kLongSequence = 16;
     
     // left controls panel
     CCSprite* leftControlsPanel = [PFLPuzzleControlsLayer uiLeftControlPanelWithTheme:theme];
-    leftControlsPanel.position = ccp(0, -[PFLPuzzleControlsLayer uiButtonUnitSize].height);
+    if (self.steps == kLongSequence)
+    {
+      leftControlsPanel.position = ccp(0, 0);
+    }
+    else
+    {
+      leftControlsPanel.position = ccp(0, -[PFLPuzzleControlsLayer uiButtonUnitSize].height);
+    }
     [self.uiBatchNode addChild:leftControlsPanel];
     
     // dashed line
     CCSprite* line = [PFLPuzzleControlsLayer uiLeftDashedLineWithTheme:self.puzzle.puzzleSet.theme];
     line.anchorPoint = ccp(0, 0);
-    line.position = ccp(0, [PFLPuzzleControlsLayer uiButtonUnitSize].height - line.contentSize.height / 2.0f); // TODO: adjust based on seq len
+    if (self.steps == kLongSequence)
+    {
+      line.position = ccp( 0, ([PFLPuzzleControlsLayer uiButtonUnitSize].height * 2.0f) - (line.contentSize.height / 2.0f) );
+    }
+    else
+    {
+      line.position = ccp( 0, [PFLPuzzleControlsLayer uiButtonUnitSize].height - line.contentSize.height / 2.0f );
+    }
     [self.uiBatchNode addChild:line z:1];
     
     // top left controls panel corner
@@ -204,10 +200,14 @@ static NSInteger const kLongSequence = 16;
     // speaker (solution sequence) button
     PFLToggleButton* speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.speakerButton = speakerButton;
-    speakerButton.position = ccp(
-      [PFLPuzzleControlsLayer uiTimelineStepWidth] / 2,
-      ([PFLPuzzleControlsLayer uiButtonUnitSize].height * 2.0f) - ([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f)
-    ); // TODO: FIX ME LATER
+    if (self.steps == kLongSequence)
+    {
+      speakerButton.position = ccp( [PFLPuzzleControlsLayer uiTimelineStepWidth] / 2, ([PFLPuzzleControlsLayer uiButtonUnitSize].height * 2.5f) );
+    }
+    else
+    {
+      speakerButton.position = ccp( [PFLPuzzleControlsLayer uiTimelineStepWidth] / 2, ([PFLPuzzleControlsLayer uiButtonUnitSize].height * 1.5f) );
+    }
     [self.uiBatchNode addChild:speakerButton];
     
     // play (user sequence) button
@@ -229,10 +229,15 @@ static NSInteger const kLongSequence = 16;
     {
       PFLSolutionButton* solutionButton = [[PFLSolutionButton alloc] initWithPlaceholderImage:@"clear_rect_uilayer.png" size:CGSizeMake(40.0f, 40.0f) index:i defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils solutionButtonHighlightWithTheme:theme] delegate:self];
       [self.solutionButtons addObject:solutionButton];
-      solutionButton.position = ccp(
-        (i * [PFLPuzzleControlsLayer uiTimelineStepWidth]) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2),
-        [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2
-      );
+      if (i >= kMediumSequence)
+      {
+        solutionButton.position = ccp( (i - kMediumSequence + 0.5f) * [PFLPuzzleControlsLayer uiTimelineStepWidth], 1.5f * [PFLPuzzleControlsLayer uiButtonUnitSize].height);
+      }
+      else
+      {
+        solutionButton.position = ccp( (i + 0.5f) * [PFLPuzzleControlsLayer uiTimelineStepWidth], 0.5f * [PFLPuzzleControlsLayer uiButtonUnitSize].height);
+      }
+      
       [self addChild:solutionButton];
     }
   }
