@@ -23,7 +23,7 @@
 + (CGFloat)hitOffset
 {
   CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
   {
     return 16.0f;
   }

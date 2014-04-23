@@ -25,8 +25,8 @@ FOUNDATION_EXPORT NSString *const kDirectionDown;
 FOUNDATION_EXPORT NSString *const kDirectionLeft;
 
 // size
-FOUNDATION_EXPORT NSInteger const PFLIPhoneRetinaScreenWidth;
-FOUNDATION_EXPORT NSInteger const PFLIPadRetinaScreenWidth;
+FOUNDATION_EXPORT NSInteger const PFLIPhoneDesignWidth;
+FOUNDATION_EXPORT NSInteger const PFLIPadDesignWidth;
 FOUNDATION_EXPORT CGFloat const kStatusBarHeight;
 
 // duration

@@ -14,18 +14,18 @@
 #import "PFLPuzzle.h"
 #import "PFLSample.h"
 
-static NSString *const kArea = @"area";
-static NSString *const kAudio = @"audio";
-static NSString *const kGlyphs = @"glyphs";
-static NSString *const kMidi = @"midi";
-static NSString *const kName = @"name";
-static NSString *const kSolution = @"solution";
-static NSString *const kSamples = @"samples";
-static NSString *const kSynth = @"synth";
+static NSString* const kArea = @"area";
+static NSString* const kAudio = @"audio";
+static NSString* const kGlyphs = @"glyphs";
+static NSString* const kMidi = @"midi";
+static NSString* const kName = @"name";
+static NSString* const kSolution = @"solution";
+static NSString* const kSamples = @"samples";
+static NSString* const kSynth = @"synth";
 
 @interface PFLPuzzle ()
 
-@property (strong, nonatomic) NSArray *solutionEvents;
+@property (strong, nonatomic) NSArray* solutionEvents;
 
 @end
 

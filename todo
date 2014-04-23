@@ -1,0 +1,26 @@
+PttrnFlowV2 todo
+
+set screen
+- show solved or not on cells
+- cell solved design
+- only play solved puzzles
+- metronome blinker / animations
+- in/out transition
+
+select set screen
+- design
+
+puzzle screen
+- support length 8 and 16 loops
+- loop solution until stopped
+- animate correct seq
+- loop correct seq
+- dotted lines on selection
+- pop animation when move block
+- blinker wrapping animation
+- cat animation
+- in/out transition
+
+other
+- cat character design
+- precise timing (http://theamazingaudioengine.com/doc/)?

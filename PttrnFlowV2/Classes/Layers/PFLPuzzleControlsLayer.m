@@ -15,7 +15,9 @@
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleSetLayer.h"
 
-static NSInteger const kRowLength = 8;
+static NSInteger const kShortSequence = 4;
+static NSInteger const kMediumSequence = 8;
+static NSInteger const kLongSequence = 16;
 
 @interface PFLPuzzleControlsLayer ()
 
@@ -39,11 +41,11 @@ static NSInteger const kRowLength = 8;
 + (CGSize)uiButtonUnitSize
 {
   CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
   {
     return CGSizeMake(100.0f, 100.0f);
   }
-  else if ((NSInteger)screenSize.width == PFLIPhoneRetinaScreenWidth)
+  else if ((NSInteger)screenSize.width == PFLIPhoneDesignWidth)
   {
     return CGSizeMake(50.0f, 50.0f);
   }
@@ -65,7 +67,7 @@ static NSInteger const kRowLength = 8;
   CCSprite* leftControlsPanel;
   CCSprite* leftControlsPanelBorder;
   CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
   {
     leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill_extended.png"];
     leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge_extended.png"];
@@ -99,7 +101,7 @@ static NSInteger const kRowLength = 8;
 + (CGFloat)uiSolutionFlagOffset
 {
   CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
   {
     return 12.0f;
   }
@@ -108,6 +110,24 @@ static NSInteger const kRowLength = 8;
     return 6.0f;
   }
 }
+
+//+ (CGPoint)rightControlsPanelPositionWithLength
+//{
+//  CGSize screenSize = [CCDirector sharedDirector].designSize;
+//  if ((NSInteger)screenSize.width == PFLIPadRetinaScreenWidth)
+//  {
+//    return CGSizeMake(100.0f, 100.0f);
+//  }
+//  else if ((NSInteger)screenSize.width == PFLIPhoneRetinaScreenWidth)
+//  {
+//    return CGSizeMake(50.0f, 50.0f);
+//  }
+//  else
+//  {
+//    CCLOG(@"Warning: unsupported screen size: %@", NSStringFromCGSize(screenSize));
+//    return CGSizeMake(50.0f, 50.0f);
+//  }
+//}
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
 {
@@ -119,8 +139,10 @@ static NSInteger const kRowLength = 8;
     NSString* theme = puzzle.puzzleSet.theme;
     self.delegate = delegate;
     
-    NSInteger steps = 4;
-    self.steps = steps;
+    self.steps = [self.puzzle.solution count];
+    NSAssert(self.steps != kLongSequence ||
+             self.steps != kMediumSequence ||
+             self.steps != kShortSequence, @"puzzle does not support length of %i", self.steps);
     
     // batch node
     CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
@@ -137,14 +159,18 @@ static NSInteger const kRowLength = 8;
     rightControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
     rightControlsPanelBorder.anchorPoint = ccp(0, 0);
     
-    if (steps >= kRowLength)
+    if (self.steps == kLongSequence)
     {
-      rightControlsPanel.position = ccp(rightControlsPanel.contentSize.width - self.contentSize.width, 0);
+      rightControlsPanel.position = ccp(0, 0);
     }
-    else
+    else if (self.steps == kMediumSequence)
     {
-      CGFloat xOffset = (rightControlsPanel.contentSize.width - self.contentSize.width) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] * (kRowLength - steps));
-      rightControlsPanel.position = ccp(-xOffset, 0);
+      rightControlsPanel.position = ccp(0, -[PFLPuzzleControlsLayer uiButtonUnitSize].height);
+    }
+    else if (self.steps == kShortSequence)
+    {
+      CGFloat xOffset = (rightControlsPanel.contentSize.width - self.contentSize.width) + ([PFLPuzzleControlsLayer uiTimelineStepWidth] * kShortSequence);
+      rightControlsPanel.position = ccp(-xOffset, -[PFLPuzzleControlsLayer uiButtonUnitSize].height);
     }
     rightControlsPanelBorder.position = rightControlsPanel.position;
     
@@ -199,7 +225,7 @@ static NSInteger const kRowLength = 8;
     // solution buttons
     self.solutionButtons = [NSMutableArray array];
     self.solutionFlags = [NSMutableArray array];
-    for (NSInteger i = 0; i < steps; i++)
+    for (NSInteger i = 0; i < self.steps; i++)
     {
       PFLSolutionButton* solutionButton = [[PFLSolutionButton alloc] initWithPlaceholderImage:@"clear_rect_uilayer.png" size:CGSizeMake(40.0f, 40.0f) index:i defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils solutionButtonHighlightWithTheme:theme] delegate:self];
       [self.solutionButtons addObject:solutionButton];
