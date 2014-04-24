@@ -19,8 +19,8 @@ NSString *const kNeighborBelow = @"below";
 + (NSArray*)coordsFromArrays:(NSArray*)arrays
 {
   NSMutableArray* coords = [NSMutableArray array];
-  for (NSArray* a in arrays) {
-    
+  for (NSArray* a in arrays)
+  {
     [coords addObject:[PFLCoord coordWithX:[a[0] integerValue] Y:[a[1] integerValue]]];
   }
   return [NSArray arrayWithArray:coords];

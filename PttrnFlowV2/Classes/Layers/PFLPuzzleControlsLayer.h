@@ -9,7 +9,6 @@
 #import "cocos2d.h"
 #import "PFLToggleButton.h"
 #import "PFLBasicButton.h"
-#import "PFLSolutionButton.h"
 
 @class PFLPuzzle;
 
@@ -17,16 +16,12 @@
 
 - (void)startUserSequence;
 - (void)stopUserSequence;
-- (void)startSolutionSequence;
-- (void)stopSolutionSequence;
-- (void)playSolutionIndex:(NSInteger)index;
 
 @end
 
-@interface PFLPuzzleControlsLayer : CCNode <ToggleButtonDelegate, BasicButtonDelegate, PFLSolutionButtonDelegate>
+@interface PFLPuzzleControlsLayer : CCNode <ToggleButtonDelegate, BasicButtonDelegate>
 
 + (CGSize)uiButtonUnitSize;
-+ (CGFloat)uiTimelineStepWidth;
 
 - (id)initWithPuzzle:(PFLPuzzle*)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate;
 

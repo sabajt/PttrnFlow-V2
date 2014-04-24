@@ -128,20 +128,6 @@ NSString *const kKeyEmpty = @"empty";
   self.userSequenceIndex++;
 }
 
-- (void)stepSolutionSequence
-{
-  if (self.solutionSequenceIndex >= self.puzzle.solutionEvents.count)
-  {
-    // use notification instead of stopSolutionSequence so SequenceControlsLayer can toggle button off
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEndSolutionSequence object:nil];
-    return;
-  }
-  // use notification instead of playSolutionIndex so we can get the button highlight too.
-  NSDictionary* info = @{ kKeyIndex : @(self.solutionSequenceIndex) };
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepSolutionSequence object:nil userInfo:info];
-  self.solutionSequenceIndex++;
-}
-
 #pragma mark - PFLPuzzleControlsDelegate
 
 - (void)startUserSequence
@@ -155,22 +141,6 @@ NSString *const kKeyEmpty = @"empty";
 - (void)stopUserSequence
 {
   [self unschedule:@selector(stepUserSequence:)];
-}
-
-- (void)startSolutionSequence
-{
-  self.solutionSequenceIndex = 0;
-  [self schedule:@selector(stepSolutionSequence) interval:self.beatDuration];
-}
-
-- (void)stopSolutionSequence
-{
-  [self unschedule:@selector(stepSolutionSequence)];
-}
-
-- (void)playSolutionIndex:(NSInteger)index
-{
-  [self.audioEventController receiveEvents:self.puzzle.solutionEvents[index]];
 }
 
 @end
