@@ -49,61 +49,6 @@
   }
 }
 
-+ (CGFloat)uiTimelineStepWidth
-{
-  CGSize screenSize = [CCDirector sharedDirector].designSize;
-  return screenSize.width / 8.0f;
-}
-
-+ (CCSprite*)uiLeftControlPanelWithTheme:(NSString*)theme
-{
-  CCSprite* leftControlsPanel;
-  CCSprite* leftControlsPanelBorder;
-  CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
-  {
-    leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill_extended.png"];
-    leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge_extended.png"];
-  }
-  else
-  {
-    leftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_left_fill.png"];
-    leftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_left_edge.png"];
-  }
-  leftControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
-  leftControlsPanel.anchorPoint = ccp(0, 0);
-  
-  leftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
-  leftControlsPanelBorder.anchorPoint = ccp(0, 0);
-  leftControlsPanelBorder.position = ccp(0, 0);
-  [leftControlsPanel addChild:leftControlsPanelBorder];
-
-  return leftControlsPanel;
-}
-
-+ (CCSprite*)uiLeftDashedLineWithTheme:(NSString*)theme
-{
-  CGFloat width = [PFLPuzzleControlsLayer uiTimelineStepWidth] * 2.0f;
-  CCSprite* temp = [CCSprite spriteWithImageNamed:@"rounded_dash.png"];
-  NSInteger repeats = (width / temp.contentSize.width);
-  PFLTileSprite* line = [[PFLTileSprite alloc] initWithImage:@"rounded_dash.png" repeats:ccp(repeats / 2, 1) color1:[PFLColorUtils controlPanelEdgeWithTheme:theme] color2:nil skip:1];
-  
-  return line;
-}
-
-+ (CGFloat)uiSolutionFlagOffset
-{
-  CGSize screenSize = [CCDirector sharedDirector].designSize;
-  if ((NSInteger)screenSize.width == PFLIPadDesignWidth)
-  {
-    return 12.0f;
-  }
-  else
-  {
-    return 6.0f;
-  }
-}
-
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
 {
   self = [super init];
@@ -138,7 +83,7 @@
     // exit button
     PFLBasicButton* exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
     self.exitButton = exitButton;
-    exitButton.position = ccp([PFLPuzzleControlsLayer uiTimelineStepWidth] / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
+    exitButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
     [self.uiBatchNode addChild:exitButton];
     
     // bottom left controls panel
