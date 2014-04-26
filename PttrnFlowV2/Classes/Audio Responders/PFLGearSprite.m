@@ -57,13 +57,14 @@
       audioUnit.position = ccp(container.contentSize.width / 2, (container.contentSize.height - audioUnit.contentSize.height / 2) - unitPadding);
       audioUnit.color = [PFLColorUtils glyphDetailWithTheme:theme];
       
-      // unit symbol
-      CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
-      unitSymbol.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
-      CGFloat symbolPadding = 2.0f;
-      unitSymbol.position = ccp(audioUnit.contentSize.width / 2.0f, audioUnit.contentSize.height / 2.0f + symbolPadding);
       
-      [audioUnit addChild:unitSymbol];
+      // // unit symbol
+      // CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
+      // unitSymbol.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
+      // CGFloat symbolPadding = 2.0f;
+      // unitSymbol.position = ccp(audioUnit.contentSize.width / 2.0f, audioUnit.contentSize.height / 2.0f + symbolPadding);
+      // [audioUnit addChild:unitSymbol];
+      
       [container addChild:audioUnit];
       [self addChild:container];
 

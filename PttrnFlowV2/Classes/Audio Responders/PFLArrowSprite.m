@@ -35,9 +35,9 @@
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
-    self.rotation = [glyph.arrow degrees];
+    self.rotation = [glyph.direction degrees];
     
-    self.event = [PFLEvent directionEventWithDirection:glyph.arrow];
+    self.event = [PFLEvent directionEventWithDirection:glyph.direction];
     
     CCSprite* detailSprite = [CCSprite spriteWithImageNamed:@"arrow_up.png"];
     self.detailSprite = detailSprite;

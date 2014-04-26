@@ -23,12 +23,14 @@
      "glyphs" :
      [
           {
+               "type" : "entry",
                "static" : 0,
                "cell" : [0, 0],
-               "entry" : "right",
+               "direction" : "right",
                "audio" : 0
           },
           {
+               "type" : "goal",
                "static" : 0,
                "cell" : [2, 0],
                "audio" : 0

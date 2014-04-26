@@ -282,6 +282,7 @@
 		33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F11900313D0071C2B9 /* tech-tonal3.caf */; };
 		33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F21900313D0071C2B9 /* tech-tonal4.caf */; };
 		33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F31900313D0071C2B9 /* tech-tonal5.caf */; };
+		33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */; };
 		33F714551906000900621616 /* userInterface-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714531906000900621616 /* userInterface-ipad.plist */; };
 		33F714561906000900621616 /* userInterface-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F714541906000900621616 /* userInterface-ipad.png */; };
 		33F714591906004000621616 /* audioObjects-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714571906004000621616 /* audioObjects-ipad.plist */; };
@@ -848,6 +849,8 @@
 		33B868F11900313D0071C2B9 /* tech-tonal3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal3.caf"; sourceTree = "<group>"; };
 		33B868F21900313D0071C2B9 /* tech-tonal4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal4.caf"; sourceTree = "<group>"; };
 		33B868F31900313D0071C2B9 /* tech-tonal5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal5.caf"; sourceTree = "<group>"; };
+		33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGoalSprite.h; sourceTree = "<group>"; };
+		33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGoalSprite.m; sourceTree = "<group>"; };
 		33F714531906000900621616 /* userInterface-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "userInterface-ipad.plist"; sourceTree = "<group>"; };
 		33F714541906000900621616 /* userInterface-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipad.png"; sourceTree = "<group>"; };
 		33F714571906004000621616 /* audioObjects-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipad.plist"; sourceTree = "<group>"; };
@@ -1827,6 +1830,8 @@
 				3399663018F0B60C000F4522 /* PFLGearSprite.m */,
 				3399663118F0B60C000F4522 /* PFLSynthSprite.h */,
 				3399663218F0B60C000F4522 /* PFLSynthSprite.m */,
+				33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */,
+				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
 			);
 			name = "Audio Responders";
 			path = "Classes/Audio Responders";
@@ -2253,6 +2258,7 @@
 				3399655918F0A8E0000F4522 /* vec3.c in Sources */,
 				339963DC18F0A8DE000F4522 /* CCLayoutBox.m in Sources */,
 				339963D918F0A8DE000F4522 /* CCLayout.m in Sources */,
+				33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */,
 				339964FC18F0A8DF000F4522 /* OALSuspendHandler.m in Sources */,
 				3399655B18F0A8E0000F4522 /* vec4.c in Sources */,
 				3399646D18F0A8DF000F4522 /* CCDirectorIOS.m in Sources */,

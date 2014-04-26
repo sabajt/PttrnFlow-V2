@@ -66,25 +66,29 @@
      "glyphs" :
      [
           {
+               "type" : "entry",
                "static" : 1,
                "cell" : [0, 0],
-               "entry" : "right",
+               "direction" : "right",
                "audio" : 0
           },
           {
+               "type" : "arrow",
                "static" : 0,
                "cell" : [1, 0],
-               "arrow" : "up",
+               "direction" : "up",
                "audio" : 1
           },
-                    {
+          {
+               "type" : "arrow",
                "static" : 1,
                "cell" : [1, 1],
-               "arrow" : "right",
+               "direction" : "up",
                "audio" : 2
           },
           {
-               "static" : 0,
+               "type" : "goal",
+               "static" : 1,
                "cell" : [2, 1],
                "audio" : 3
           }

@@ -34,6 +34,7 @@ FOUNDATION_EXPORT NSString *const kNeighborBelow;
 #pragma mark - compare
 
 + (PFLCoord *)maxCoord:(NSArray *)coords;
++ (PFLCoord*)minCoord:(NSArray *)coords;
 - (BOOL)isEqualToCoord:(PFLCoord *)coord;
 - (BOOL)isCoordInGroup:(NSArray *)coords;
 

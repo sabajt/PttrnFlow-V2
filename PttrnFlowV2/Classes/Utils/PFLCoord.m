@@ -90,6 +90,19 @@ NSString *const kNeighborBelow = @"below";
   return [PFLCoord coordWithX:xMax Y:yMax];
 }
 
++ (PFLCoord*)minCoord:(NSArray *)coords
+{
+  NSInteger xMin = NSIntegerMax;
+  NSInteger yMin = NSIntegerMax;
+  
+  for (PFLCoord* c in coords)
+  {
+    xMin = MIN(xMin, c.x);
+    yMin = MIN(yMin, c.y);
+  }
+  return [PFLCoord coordWithX:xMin Y:yMin];
+}
+
 - (BOOL)isEqualToCoord:(PFLCoord*)coord
 {
     return ((self.x == coord.x) && (self.y == coord.y));
@@ -114,9 +127,10 @@ NSString *const kNeighborBelow = @"below";
   return [PFLCoord findNeighborPairs:coords existingPairs:[NSMutableArray array]];
 }
 
-+ (NSArray *)findNeighborPairs:(NSArray*)coords existingPairs:(NSMutableArray *)pairs
++ (NSArray*)findNeighborPairs:(NSArray*)coords existingPairs:(NSMutableArray*)pairs
 {
-  if (coords.count == 2) {
+  if (coords.count == 2)
+  {
     PFLCoord* c1 = coords[0];
     PFLCoord* c2 = coords[1];
     if ([c1 isNeighbor:c2])

@@ -27,6 +27,7 @@
 #import "PFLMultiSample.h"
 #import "PFLSample.h"
 #import "PFLPuzzleSet.h"
+#import "PFLGoalSprite.h"
 
 typedef NS_ENUM(NSInteger, ZOrderAudioBatch)
 {
@@ -133,9 +134,9 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       self.position = ccp(self.position.x, self.puzzleBounds.origin.y + (padding / 2));
     }
     self.scrollBoundsInPoints = CGRectMake(self.position.x,
-                                   self.position.y,
-                                   (self.screenSize.width - kPuzzleBoundsMargin) - self.position.x,
-                                   (self.screenSize.height - kPuzzleBoundsMargin) - self.position.y);
+                                           self.position.y,
+                                           (self.screenSize.width - kPuzzleBoundsMargin) - self.position.x,
+                                           (self.screenSize.height - kPuzzleBoundsMargin) - self.position.y);
 
     // audio touch dispatcher
     CGFloat beatDuration = self.beatDuration;
@@ -392,7 +393,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       }
       
       // direction arrow
-      if (glyph.arrow)
+      if ([glyph.type isEqualToString:PFLGlyphTypeArrow])
       {
         PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithGlyph:glyph];
         [self.audioResponderTouchController addResponder:arrow];
@@ -402,7 +403,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       }
       
       // entry point
-      if (glyph.entry)
+      else if ([glyph.type isEqualToString:PFLGlyphTypeEntry])
       {
         PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithGlyph:glyph];
         [self.audioResponderTouchController addResponder:entry];
@@ -410,6 +411,16 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
         self.sequenceDispatcher.entry = entry;
         entry.position = cellCenter;
         [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
+      }
+      
+      // goal
+      else if ([glyph.type isEqualToString:PFLGlyphTypeGoal])
+      {
+        PFLGoalSprite* goal = [[PFLGoalSprite alloc] initWithGlyph:glyph];
+        [self.audioResponderTouchController addResponder:goal];
+        [self.sequenceDispatcher addResponder:goal];
+        goal.position = cellCenter;
+        [self.audioObjectsBatchNode addChild:goal z:ZOrderAudioBatchGlyph];
       }
     }
     [self.audioEventController loadSamples:allSampleNames];

@@ -69,14 +69,24 @@ NSString *const kKeyEmpty = @"empty";
 - (PFLCoord*)nextStepInDirection:(NSString *)direction currentCoord:(PFLCoord*)currentCoord
 {
   PFLCoord* maxCoord = [PFLCoord maxCoord:self.puzzle.area];
+  PFLCoord* minCoord = [PFLCoord minCoord:self.puzzle.area];
   currentCoord = [currentCoord stepInDirection:direction];
+  
   if (currentCoord.x > maxCoord.x)
   {
-    currentCoord = [PFLCoord coordWithX:0 Y:currentCoord.y];
+    currentCoord = [PFLCoord coordWithX:minCoord.x Y:currentCoord.y];
   }
   if (currentCoord.y > maxCoord.y)
   {
-    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:0];
+    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:minCoord.y];
+  }
+  if (currentCoord.x < minCoord.x)
+  {
+    currentCoord = [PFLCoord coordWithX:maxCoord.x Y:currentCoord.y];
+  }
+  if (currentCoord.y < minCoord.y)
+  {
+    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:maxCoord.y];
   }
   if ([currentCoord isCoordInGroup:self.puzzle.area])
   {
