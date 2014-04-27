@@ -14,5 +14,6 @@
 @interface PFLGoalSprite : CCSprite <PFLAudioResponder>
 
 - (id)initWithGlyph:(PFLGlyph*)glyph;
+- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;
 
 @end

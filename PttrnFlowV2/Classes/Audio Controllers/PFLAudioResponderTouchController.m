@@ -36,8 +36,8 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     self.contentSize = CGSizeMake(320, 568);
     self.userInteractionEnabled = YES;
     self.allowScrolling = YES;
-    _responders = [NSMutableArray array];
-    _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    self.responders = [NSMutableArray array];
+    self.trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     self.beatDuration = duration;
   }
   return self;
@@ -72,10 +72,10 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 {
   for (id<PFLAudioResponder> responder in self.responders)
   {
-    if (([cell isEqualToCoord:[responder audioCell]]) &&
+    if (([cell isEqualToCoord:[responder audioResponderCell]]) &&
         [responder respondsToSelector:@selector(audioRelease:)])
     {
-      [responder audioRelease:1];
+      [responder audioResponderRelease:1];
     }
   }
 }

@@ -14,10 +14,12 @@
 
 @property (strong, nonatomic) NSArray* area;
 @property (strong, nonatomic) NSArray* audio;
+@property (copy, nonatomic) NSString* file;
 @property (strong, nonatomic) NSArray* glyphs;
 @property (copy, nonatomic) NSString* name;
 @property (weak, nonatomic) PFLPuzzleSet* puzzleSet;
 @property (strong, nonatomic) NSArray* solution;
+@property (strong, nonatomic) NSNumber* uid;
 
 + (PFLPuzzle*)puzzleFromResource:(NSString*)resource puzzleSet:(PFLPuzzleSet*)puzzleSet;
 - (id)initWithJson:(NSDictionary*)json puzzleSet:(PFLPuzzleSet*)puzzleSet;

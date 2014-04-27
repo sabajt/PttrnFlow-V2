@@ -14,7 +14,8 @@ NSString* const PFLGlyphTypeArrow = @"arrow";
 NSString* const PFLGlyphTypeEntry = @"entry";
 NSString* const PFLGlyphTypeGoal = @"goal";
 
-static NSString* const kAudio = @"audio";
+static NSString* const kResponderID = @"responder_id";
+static NSString* const kAudioID = @"audio_id";
 static NSString* const kCell = @"cell";
 static NSString* const kDirection = @"direction";
 static NSString* const kStatic = @"static";
@@ -29,7 +30,8 @@ static NSString* const kType = @"type";
   {
     self.puzzle = puzzle;
 
-    self.audioID = object[kAudio];
+    self.responderID = object[kResponderID];
+    self.audioID = object[kAudioID];
     NSArray *cell = object[kCell];
     self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
     self.direction = object[kDirection];

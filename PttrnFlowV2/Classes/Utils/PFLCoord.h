@@ -31,6 +31,10 @@ FOUNDATION_EXPORT NSString *const kNeighborBelow;
 - (CGPoint)relativeMidpoint;
 - (CGPoint)relativeMidpointWithUnitSize:(CGFloat)unitSize;
 
+#pragma mark - convert
+
+- (NSArray*)arrayRepresentation;
+
 #pragma mark - compare
 
 + (PFLCoord *)maxCoord:(NSArray *)coords;

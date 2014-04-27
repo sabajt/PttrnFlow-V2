@@ -19,11 +19,12 @@ FOUNDATION_EXPORT NSString* const PFLGlyphTypeGoal;
 
 @property (weak, nonatomic) PFLPuzzle* puzzle;
 
+@property (strong, nonatomic) NSNumber* responderID;
 @property (strong, nonatomic) NSNumber* audioID;
 @property (strong, nonatomic) PFLCoord* cell;
 @property (copy, nonatomic) NSString* direction;
-@property (assign) BOOL isStatic;
 @property (copy, nonatomic) NSString* type;
+@property BOOL isStatic;
 
 - (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 

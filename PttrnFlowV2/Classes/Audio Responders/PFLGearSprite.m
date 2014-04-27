@@ -23,6 +23,7 @@
 @property (strong, nonatomic) CCColor* activeColor;
 @property (strong, nonatomic) NSMutableArray *audioUnits;
 @property (strong, nonatomic) PFLEvent *multiSampleEvent;
+@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -30,16 +31,29 @@
 
 - (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample
 {
+  return [self initWithGlyph:glyph multiSample:multiSample cell:nil];
+}
+
+- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample cell:(PFLCoord*)cell
+{
   self = [super initWithImageNamed:@"audio_circle.png"];
   if (self)
   {
+    self.glyph = glyph;
     NSString* theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
     
     // CCNode+Grid
-    self.cell = glyph.cell;
+    if (cell)
+    {
+      self.cell = cell;
+    }
+    else
+    {
+      self.cell = glyph.cell;
+    }
     self.cellSize = [PFLGameConstants gridUnitSize];
     
     // units (beats)
@@ -77,12 +91,17 @@
 
 #pragma mark - AudioResponder
 
-- (PFLCoord*)audioCell
+- (NSNumber*)audioResponderID
+{
+  return self.glyph.responderID;
+}
+
+- (PFLCoord*)audioResponderCell
 {
   return self.cell;
 }
 
-- (PFLEvent*)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
   self.rotation = 0;
 

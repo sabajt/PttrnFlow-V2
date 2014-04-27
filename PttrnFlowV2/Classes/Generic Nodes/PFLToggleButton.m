@@ -25,68 +25,74 @@
 
 @implementation PFLToggleButton
 
-- (id)initWithPlaceholderImage:(NSString *)placeholderImage offImage:(NSString *)offImage onImage:(NSString *)onImage delegate:(id<ToggleButtonDelegate>)delegate
+- (id)initWithPlaceholderImage:(NSString*)placeholderImage offImage:(NSString*)offImage onImage:(NSString*)onImage delegate:(id<ToggleButtonDelegate>)delegate
 {
-    self = [super initWithImageNamed:placeholderImage];
-    if (self) {
-        self.userInteractionEnabled = YES;
-        self.delegate = delegate;
-        
-        CCSprite *offSprite = [CCSprite spriteWithImageNamed:offImage];
-        self.offSprite = offSprite;
-        CCSprite *onSprite = [CCSprite spriteWithImageNamed:onImage];
-        self.onSprite = onSprite;
-        
-        // minimum size to contain both sprites
-        self.contentSize = CGContainingSize(offSprite.contentSize, onSprite.contentSize);
-        
-        offSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-        [self addChild:offSprite];
-        
-        onSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-        [self addChild:onSprite];
-        onSprite.visible = NO;
-    }
-    return self;
+  self = [super initWithImageNamed:placeholderImage];
+  if (self)
+  {
+    self.userInteractionEnabled = YES;
+    self.delegate = delegate;
+    
+    CCSprite *offSprite = [CCSprite spriteWithImageNamed:offImage];
+    self.offSprite = offSprite;
+    CCSprite *onSprite = [CCSprite spriteWithImageNamed:onImage];
+    self.onSprite = onSprite;
+    
+    // minimum size to contain both sprites
+    self.contentSize = CGContainingSize(offSprite.contentSize, onSprite.contentSize);
+    
+    offSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
+    [self addChild:offSprite];
+    
+    onSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
+    [self addChild:onSprite];
+    onSprite.visible = NO;
+  }
+  return self;
 }
 
-- (id)initWithImage:(NSString *)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<ToggleButtonDelegate>)delegate
+- (id)initWithImage:(NSString*)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<ToggleButtonDelegate>)delegate
 {
-    self = [super initWithImageNamed:image];
-    if (self) {
-        self.userInteractionEnabled = YES;
-        self.delegate = delegate;
-        self.defaultColor = defaultColor;
-        self.activeColor = activeColor;
-        self.color = defaultColor;
-    }
-    return self;
+  self = [super initWithImageNamed:image];
+  if (self)
+  {
+    self.userInteractionEnabled = YES;
+    self.delegate = delegate;
+    self.defaultColor = defaultColor;
+    self.activeColor = activeColor;
+    self.color = defaultColor;
+  }
+  return self;
 }
 
 - (void)toggle
 {
-    self.isOn = !self.isOn;
-    
-    if (self.offSprite) {
-        self.offSprite.visible = !self.isOn;
-        self.onSprite.visible = self.isOn;
+  self.isOn = !self.isOn;
+  
+  if (self.offSprite)
+  {
+    self.offSprite.visible = !self.isOn;
+    self.onSprite.visible = self.isOn;
+  }
+  else
+  {
+    if (self.isOn)
+    {
+      self.color = self.activeColor;
     }
-    else {
-        if (self.isOn) {
-            self.color = self.activeColor;
-        }
-        else {
-            self.color = self.defaultColor;
-        }
+    else
+    {
+      self.color = self.defaultColor;
     }
-    [self.delegate toggleButtonPressed:self];
+  }
+  [self.delegate toggleButtonPressed:self];
 }
 
 #pragma mark - CCTargetedTouchDelegate
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event
 {
-    [self toggle];
+  [self toggle];
 }
 
 @end

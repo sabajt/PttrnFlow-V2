@@ -75,6 +75,13 @@ NSString *const kNeighborBelow = @"below";
   return CGPointMake(position.x + unitSize / 2, position.y + unitSize / 2);
 }
 
+#pragma mark - convert
+
+- (NSArray*)arrayRepresentation;
+{
+  return @[[NSNumber numberWithInteger:self.x], [NSNumber numberWithInteger:self.y]];
+}
+
 #pragma mark - compare
 
 + (PFLCoord*)maxCoord:(NSArray *)coords

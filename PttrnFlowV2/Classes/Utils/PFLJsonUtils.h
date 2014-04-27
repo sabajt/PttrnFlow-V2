@@ -14,5 +14,6 @@
 + (NSDictionary *)deserializeJsonObjectResource:(NSString *)resource bundle:(NSBundle *)bundle;
 + (NSArray *)deserializeJsonArrayResource:(NSString *)resource;
 + (NSArray *)deserializeJsonArrayResource:(NSString *)resource bundle:(NSBundle *)bundle;
++ (void)serializeJsonObject:(id)object withName:(NSString*)name;
 
 @end
