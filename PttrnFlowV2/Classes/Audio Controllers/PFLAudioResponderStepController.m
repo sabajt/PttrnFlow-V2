@@ -96,22 +96,20 @@ NSString *const kKeyEmpty = @"empty";
 }
 
 - (void)stepUserSequence:(CCTime)dt
-{    
-  if (self.userSequenceIndex >= self.puzzle.solutionEvents.count)
-  {
-    // use notification instead of stopUserSequence so SequenceControlsLayer can toggle button off
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEndUserSequence object:nil];
-    return;
-  }
-  
+{
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
   
+  BOOL loop = NO;
   for (PFLEvent* e in events)
   {
     if (e.eventType == PFLEventTypeDirection)
     {
       self.currentDirection = e.direction;
+    }
+    if (e.eventType == PFLEventTypeGoal)
+    {
+      loop = YES;
     }
   }
   
@@ -134,8 +132,16 @@ NSString *const kKeyEmpty = @"empty";
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepUserSequence object:nil userInfo:info];
 
-  self.currentCell = [self nextStep];
-  self.userSequenceIndex++;
+  if (loop)
+  {
+    self.userSequenceIndex = 0;
+    self.currentCell = self.entry.cell;
+  }
+  else
+  {
+    self.currentCell = [self nextStep];
+    self.userSequenceIndex++;
+  }
 }
 
 #pragma mark - PFLPuzzleControlsDelegate
@@ -144,7 +150,7 @@ NSString *const kKeyEmpty = @"empty";
 {
   self.userSequenceIndex = 0;
   self.currentCell = self.entry.cell;
-  self.currentDirection = self.entry.direction;
+  
   [self schedule:@selector(stepUserSequence:) interval:self.beatDuration];
 }
 
