@@ -472,7 +472,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 {
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:kNotificationStepUserSequence object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:PFLNotificationStepSequence object:nil];
   [notificationCenter addObserver:self selector:@selector(handleaudioResponderTouchControllerHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
   [self setupDebug];
 }

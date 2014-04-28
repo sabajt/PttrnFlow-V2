@@ -15,14 +15,14 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 
-NSString *const kNotificationStepUserSequence = @"stepUserSequence";
-NSString *const kNotificationStepSolutionSequence = @"stepSolutionSequence";
-NSString *const kNotificationEndUserSequence = @"endUserSequence";
-NSString *const kNotificationEndSolutionSequence = @"endSolutionSequence";
-NSString *const kKeyIndex = @"index";
-NSString *const kKeyCoord = @"coord";
-NSString *const kKeyCorrectHit = @"correctHit";
-NSString *const kKeyEmpty = @"empty";
+NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
+NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
+NSString* const PFLNotificationEndSequence = @"PFLNotificationEndSequence";
+
+NSString* const kKeyIndex = @"index";
+NSString* const kKeyCoord = @"coord";
+NSString* const kKeyCorrectHit = @"correctHit";
+NSString* const kKeyEmpty = @"empty";
 
 @interface PFLAudioResponderStepController ()
 
@@ -130,7 +130,7 @@ NSString *const kKeyEmpty = @"empty";
     kKeyCorrectHit : @(correctHit),
     kKeyEmpty : @(events.count == 0)
   };
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepUserSequence object:nil userInfo:info];
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];
 
   if (loop)
   {
@@ -152,11 +152,15 @@ NSString *const kKeyEmpty = @"empty";
   self.currentCell = self.entry.cell;
   
   [self schedule:@selector(stepUserSequence:) interval:self.beatDuration];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStartSequence object:nil userInfo:nil];
 }
 
 - (void)stopUserSequence
 {
   [self unschedule:@selector(stepUserSequence:)];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationEndSequence object:nil userInfo:nil];
 }
 
 @end

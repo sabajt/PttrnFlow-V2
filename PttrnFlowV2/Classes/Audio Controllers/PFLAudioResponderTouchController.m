@@ -6,13 +6,14 @@
 //
 //
 
-#import "PFLAudioResponderTouchController.h"
-#import "PFLEvent.h"
-#import "PFLAudioEventController.h"
-#import "PFLCoord.h"
-#import "NSObject+PFLAudioResponderUtils.h"
-#import "PFLAudioPadSprite.h"
 #import "CCNode+PFLGrid.h"
+#import "NSObject+PFLAudioResponderUtils.h"
+#import "PFLAudioEventController.h"
+#import "PFLAudioPadSprite.h"
+#import "PFLAudioResponderStepController.h"
+#import "PFLAudioResponderTouchController.h"
+#import "PFLCoord.h"
+#import "PFLEvent.h"
 
 NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
 NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
@@ -41,6 +42,27 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     self.beatDuration = duration;
   }
   return self;
+}
+
+- (void)onEnter
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStartSequence:) name:PFLNotificationStartSequence object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStopSequence:) name:PFLNotificationEndSequence object:nil];
+}
+
+- (void)onExit
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)handleStartSequence:(NSNotification*)notification
+{
+  self.userInteractionEnabled = NO;
+}
+
+- (void)handleStopSequence:(NSNotification*)notification
+{
+  self.userInteractionEnabled = YES;
 }
 
 - (void)addResponder:(id<PFLAudioResponder>)responder

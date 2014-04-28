@@ -114,8 +114,7 @@
 {
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:kNotificationStepUserSequence object:nil];
-  [notificationCenter addObserver:self selector:@selector(handleEndUserSequence:) name:kNotificationEndUserSequence object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:PFLNotificationStepSequence object:nil];
 }
 
 - (void)onExit
@@ -128,13 +127,7 @@
 
 - (void)handleStepUserSequence:(NSNotification*)notification
 {
-  
-}
-
-// SequenceDispatcher needs us to toggle off the the play button
-- (void)handleEndUserSequence:(NSNotification*)notification
-{
-  [self.playButton toggle];
+  // animate collecting beats / forming sequence?
 }
 
 #pragma mark - ToggleButtonDelegate
