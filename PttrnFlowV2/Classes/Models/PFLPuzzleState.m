@@ -24,7 +24,7 @@
 + (instancetype)puzzleStateForPuzzle:(PFLPuzzle*)puzzle
 {
   NSString* fileName = [NSString stringWithFormat:@"puzzleState%@", puzzle.uid];
-  NSString* path = [[AppDelegate applicationDocumentsDirectory] stringByAppendingString:fileName];
+  NSString* path = [[AppDelegate applicationDocumentsDirectory] stringByAppendingPathComponent:fileName];
   
   PFLPuzzleState* puzzleState = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
   if (!puzzleState)
@@ -64,8 +64,12 @@
 
 - (void)archive
 {
-  NSString* path = [[AppDelegate applicationDocumentsDirectory] stringByAppendingString:self.fileName];
-  [NSKeyedArchiver archiveRootObject:self toFile:path];
+  NSString* path = [[AppDelegate applicationDocumentsDirectory] stringByAppendingPathComponent:self.fileName];
+  BOOL success = [NSKeyedArchiver archiveRootObject:self toFile:path];
+  if (!success)
+  {
+    CCLOG(@"Warning: archive to path: '%@' unsuccesful!", path);
+  }
 }
 
 - (void)updateWithGlyphs:(NSArray*)glyphs
