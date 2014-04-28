@@ -19,7 +19,6 @@ FOUNDATION_EXPORT NSString* const PFLNotificationEndSequence;
 
 FOUNDATION_EXPORT NSString* const kKeyIndex;
 FOUNDATION_EXPORT NSString* const kKeyCoord;
-FOUNDATION_EXPORT NSString* const kKeyCorrectHit;
 FOUNDATION_EXPORT NSString* const kKeyEmpty;
 
 @interface PFLAudioResponderStepController : CCNode <PFLPuzzleControlsDelegate>

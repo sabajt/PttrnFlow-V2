@@ -21,7 +21,6 @@ NSString* const PFLNotificationEndSequence = @"PFLNotificationEndSequence";
 
 NSString* const kKeyIndex = @"index";
 NSString* const kKeyCoord = @"coord";
-NSString* const kKeyCorrectHit = @"correctHit";
 NSString* const kKeyEmpty = @"empty";
 
 @interface PFLAudioResponderStepController ()
@@ -113,21 +112,9 @@ NSString* const kKeyEmpty = @"empty";
     }
   }
   
-  BOOL correctHit = NO;
-  if ([[events audioEvents] hasSameNumberOfSameObjects:self.puzzle.solutionEvents[self.userSequenceIndex]])
-  {
-    CCLOG(@"hit");
-    correctHit = YES;
-  }
-  else
-  {
-    CCLOG(@"miss");
-  }
-  
   NSDictionary* info = @{
     kKeyIndex : @(self.userSequenceIndex),
     kKeyCoord : self.currentCell,
-    kKeyCorrectHit : @(correctHit),
     kKeyEmpty : @(events.count == 0)
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];

@@ -96,22 +96,23 @@
     self.audioEventController.mute = YES;
     
     self.loopIndex = 0;
-    [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
+//    [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
   };
   return self;
 }
 
-- (void)stepLoopSequence
-{
-  NSArray* events = self.puzzleSet.combinedSolutionEvents[self.loopIndex];
-  [self.audioEventController receiveEvents:events];
-  
-  self.loopIndex++;
-  if (self.loopIndex >= self.puzzleSet.combinedSolutionEvents.count)
-  {
-    self.loopIndex = 0;
-  }
-}
+// TODO: needs refactoring to work with dynamic solution sequences
+//- (void)stepLoopSequence
+//{
+//  NSArray* events = self.puzzleSet.combinedSolutionEvents[self.loopIndex];
+//  [self.audioEventController receiveEvents:events];
+//  
+//  self.loopIndex++;
+//  if (self.loopIndex >= self.puzzleSet.combinedSolutionEvents.count)
+//  {
+//    self.loopIndex = 0;
+//  }
+//}
 
 #pragma mark SequenceMenuCellDelegate
 

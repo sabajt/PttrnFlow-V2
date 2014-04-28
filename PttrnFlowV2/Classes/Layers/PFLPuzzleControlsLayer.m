@@ -59,8 +59,6 @@
     NSString* theme = puzzle.puzzleSet.theme;
     self.delegate = delegate;
     
-    self.steps = [self.puzzle.solution count];
-    
     // batch node
     CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
     

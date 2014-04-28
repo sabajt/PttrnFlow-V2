@@ -20,6 +20,5 @@
 
 + (PFLPuzzleSet*)puzzleSetFromResource:(NSString*)resource;
 - (id)initWithJson:(NSDictionary*)json;
-- (NSArray*)combinedSolutionEvents;
 
 @end
