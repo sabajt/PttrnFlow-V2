@@ -1,9 +1,9 @@
 //
-//  AudioPad.h
-//  PttrnFlow
+//  PFLGoal.h
+//  PttrnFlowV2
 //
-//  Created by John Saba on 8/25/13.
-//
+//  Created by John Saba on 4/24/14.
+//  Copyright (c) 2014 John Saba. All rights reserved.
 //
 
 #import "CCSprite.h"
@@ -11,9 +11,7 @@
 
 @class PFLGlyph;
 
-@interface PFLAudioPadSprite : CCSprite <PFLAudioResponder>
-
-@property (assign) BOOL isStatic;
+@interface PFLGoalSprite : CCSprite <PFLAudioResponder>
 
 - (id)initWithGlyph:(PFLGlyph*)glyph;
 - (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;

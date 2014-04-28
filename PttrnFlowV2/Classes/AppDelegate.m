@@ -15,7 +15,11 @@
 
 @implementation AppDelegate
 
-// 
++ (NSString*)applicationDocumentsDirectory
+{
+  return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// This is the only app delegate method you need to implement when inheriting from CCAppDelegate.
@@ -47,19 +51,19 @@
   
 //  [[CCFileUtils sharedFileUtils] setEnableiPhoneResourcesOniPad:YES];
   
-    // load sprite sheets
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"transitions.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
+  // load sprite sheets
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"transitions.plist"];
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
 	
 	return YES;
 }
 
 -(CCScene *)startScene
 {
-    PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
-    CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet];
-    return scene;
+  PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
+  CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet];
+  return scene;
 }
 
 @end

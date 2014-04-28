@@ -10,14 +10,21 @@
 
 @class PFLCoord, PFLPuzzle;
 
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeNone;
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeArrow;
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeEntry;
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeGoal;
+
 @interface PFLGlyph : NSObject
 
-@property (strong, nonatomic) NSNumber* audioID;
-@property (copy, nonatomic) NSString* arrow;
-@property (strong, nonatomic) PFLCoord* cell;
-@property (copy, nonatomic) NSString* entry;
-@property (assign) BOOL isStatic;
 @property (weak, nonatomic) PFLPuzzle* puzzle;
+
+@property (strong, nonatomic) NSNumber* responderID;
+@property (strong, nonatomic) NSNumber* audioID;
+@property (strong, nonatomic) PFLCoord* cell;
+@property (copy, nonatomic) NSString* direction;
+@property (copy, nonatomic) NSString* type;
+@property BOOL isStatic;
 
 - (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 

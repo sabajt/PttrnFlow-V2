@@ -6,13 +6,14 @@
 //
 //
 
-#import "PFLAudioResponderTouchController.h"
-#import "PFLEvent.h"
-#import "PFLAudioEventController.h"
-#import "PFLCoord.h"
-#import "NSObject+PFLAudioResponderUtils.h"
-#import "PFLAudioPadSprite.h"
 #import "CCNode+PFLGrid.h"
+#import "NSObject+PFLAudioResponderUtils.h"
+#import "PFLAudioEventController.h"
+#import "PFLAudioPadSprite.h"
+#import "PFLAudioResponderStepController.h"
+#import "PFLAudioResponderTouchController.h"
+#import "PFLCoord.h"
+#import "PFLEvent.h"
 
 NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
 NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
@@ -36,11 +37,32 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     self.contentSize = CGSizeMake(320, 568);
     self.userInteractionEnabled = YES;
     self.allowScrolling = YES;
-    _responders = [NSMutableArray array];
-    _trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+    self.responders = [NSMutableArray array];
+    self.trackingTouches = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     self.beatDuration = duration;
   }
   return self;
+}
+
+- (void)onEnter
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStartSequence:) name:PFLNotificationStartSequence object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStopSequence:) name:PFLNotificationEndSequence object:nil];
+}
+
+- (void)onExit
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)handleStartSequence:(NSNotification*)notification
+{
+  self.userInteractionEnabled = NO;
+}
+
+- (void)handleStopSequence:(NSNotification*)notification
+{
+  self.userInteractionEnabled = YES;
 }
 
 - (void)addResponder:(id<PFLAudioResponder>)responder
@@ -72,10 +94,10 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 {
   for (id<PFLAudioResponder> responder in self.responders)
   {
-    if (([cell isEqualToCoord:[responder audioCell]]) &&
+    if (([cell isEqualToCoord:[responder audioResponderCell]]) &&
         [responder respondsToSelector:@selector(audioRelease:)])
     {
-      [responder audioRelease:1];
+      [responder audioResponderRelease:1];
     }
   }
 }

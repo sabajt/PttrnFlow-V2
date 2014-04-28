@@ -8,12 +8,12 @@ set screen
 - in/out transition
 
 select set screen
-- design
+- everything!
 
 puzzle screen
-- support length 8 and 16 loops
-- loop solution until stopped
-- animate correct seq
+
+- remember last configuration
+- animate goal
 - loop correct seq
 - dotted lines on selection
 - pop animation when move block
@@ -21,6 +21,9 @@ puzzle screen
 - cat animation
 - in/out transition
 
+design
+- cat character 
+- loop 'building' - collecting hits into sequence
+
 other
-- cat character design
 - precise timing (http://theamazingaudioengine.com/doc/)?

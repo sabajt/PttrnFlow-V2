@@ -34,7 +34,7 @@
             return nil;
         }
         
-        PFLCoord *responderCoord = [responder audioCell];
+        PFLCoord *responderCoord = [responder audioResponderCell];
         if ([responderCoord isEqualToCoord:coord]) {
             [results addObject:responder];
         }
@@ -53,7 +53,7 @@
             return nil;
         }
         
-        PFLEvent *event = [responder audioHit:self.beatDuration];
+        PFLEvent *event = [responder audioResponderHit:self.beatDuration];
         if (event) {
             events = [events arrayByAddingObject:event];
         }

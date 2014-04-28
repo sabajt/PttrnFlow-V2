@@ -21,6 +21,7 @@
 @property (strong, nonatomic) CCColor* defaultColor;
 @property (strong, nonatomic) CCColor* activeColor;
 @property (strong, nonatomic) PFLEvent* event;
+@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -28,14 +29,20 @@
 
 - (id)initWithGlyph:(PFLGlyph*)glyph
 {
+  return [self initWithGlyph:glyph cell:nil];
+}
+
+- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
+{
   self = [super initWithImageNamed:@"glyph_circle.png"];
   if (self)
   {
+    self.glyph = glyph;
     NSString* theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
-    self.direction = glyph.entry;
+    self.direction = glyph.direction;
     self.rotation = [self.direction degrees];
     
     self.event = [PFLEvent directionEventWithDirection:self.direction];
@@ -47,7 +54,15 @@
     detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
     
     // CCNode+Grid
-    self.cell = glyph.cell;
+    // CCNode+Grid
+    if (cell)
+    {
+      self.cell = cell;
+    }
+    else
+    {
+      self.cell = glyph.cell;
+    }
     self.cellSize = [PFLGameConstants gridUnitSize];
   }
   return self;
@@ -55,12 +70,17 @@
 
 #pragma mark - AudioResponder
 
-- (PFLCoord*)audioCell
+- (NSNumber*)audioResponderID
+{
+  return self.glyph.responderID;
+}
+
+- (PFLCoord*)audioResponderCell
 {
   return self.cell;
 }
 
-- (PFLEvent*)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
   self.color = self.activeColor;
   CCActionTintTo* tint = [CCActionTintTo actionWithDuration:beatDuration * 2.0 color:self.defaultColor];

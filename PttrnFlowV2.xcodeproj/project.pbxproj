@@ -269,6 +269,8 @@
 		339A29A61902B9300045CA1A /* audioObjects-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */; };
 		339A29A91902C1190045CA1A /* userInterface-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A71902C1190045CA1A /* userInterface-ipadhd.plist */; };
 		339A29AA1902C1190045CA1A /* userInterface-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A81902C1190045CA1A /* userInterface-ipadhd.png */; };
+		33A38D04190C211A002FBFF7 /* PFLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A38D03190C211A002FBFF7 /* PFLResourceManager.m */; };
+		33A38D07190C25AD002FBFF7 /* PFLPuzzleState.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */; };
 		33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E61900313D0071C2B9 /* tech-chuk1.caf */; };
 		33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E71900313D0071C2B9 /* tech-clap1.caf */; };
 		33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E81900313D0071C2B9 /* tech-clok1.caf */; };
@@ -282,6 +284,7 @@
 		33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F11900313D0071C2B9 /* tech-tonal3.caf */; };
 		33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F21900313D0071C2B9 /* tech-tonal4.caf */; };
 		33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F31900313D0071C2B9 /* tech-tonal5.caf */; };
+		33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */; };
 		33F714551906000900621616 /* userInterface-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714531906000900621616 /* userInterface-ipad.plist */; };
 		33F714561906000900621616 /* userInterface-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F714541906000900621616 /* userInterface-ipad.png */; };
 		33F714591906004000621616 /* audioObjects-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714571906004000621616 /* audioObjects-ipad.plist */; };
@@ -835,6 +838,10 @@
 		339A29A41902B9300045CA1A /* audioObjects-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audioObjects-ipadhd.png"; sourceTree = "<group>"; };
 		339A29A71902C1190045CA1A /* userInterface-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "userInterface-ipadhd.plist"; sourceTree = "<group>"; };
 		339A29A81902C1190045CA1A /* userInterface-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipadhd.png"; sourceTree = "<group>"; };
+		33A38D02190C211A002FBFF7 /* PFLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLResourceManager.h; sourceTree = "<group>"; };
+		33A38D03190C211A002FBFF7 /* PFLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLResourceManager.m; sourceTree = "<group>"; };
+		33A38D05190C25AD002FBFF7 /* PFLPuzzleState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleState.h; sourceTree = "<group>"; };
+		33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleState.m; sourceTree = "<group>"; };
 		33B868E61900313D0071C2B9 /* tech-chuk1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-chuk1.caf"; sourceTree = "<group>"; };
 		33B868E71900313D0071C2B9 /* tech-clap1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clap1.caf"; sourceTree = "<group>"; };
 		33B868E81900313D0071C2B9 /* tech-clok1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clok1.caf"; sourceTree = "<group>"; };
@@ -848,6 +855,8 @@
 		33B868F11900313D0071C2B9 /* tech-tonal3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal3.caf"; sourceTree = "<group>"; };
 		33B868F21900313D0071C2B9 /* tech-tonal4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal4.caf"; sourceTree = "<group>"; };
 		33B868F31900313D0071C2B9 /* tech-tonal5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal5.caf"; sourceTree = "<group>"; };
+		33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGoalSprite.h; sourceTree = "<group>"; };
+		33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGoalSprite.m; sourceTree = "<group>"; };
 		33F714531906000900621616 /* userInterface-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "userInterface-ipad.plist"; sourceTree = "<group>"; };
 		33F714541906000900621616 /* userInterface-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipad.png"; sourceTree = "<group>"; };
 		33F714571906004000621616 /* audioObjects-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipad.plist"; sourceTree = "<group>"; };
@@ -1827,6 +1836,8 @@
 				3399663018F0B60C000F4522 /* PFLGearSprite.m */,
 				3399663118F0B60C000F4522 /* PFLSynthSprite.h */,
 				3399663218F0B60C000F4522 /* PFLSynthSprite.m */,
+				33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */,
+				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
 			);
 			name = "Audio Responders";
 			path = "Classes/Audio Responders";
@@ -1871,6 +1882,8 @@
 				3399664F18F0B60C000F4522 /* PFLEvent.m */,
 				3399665018F0B60C000F4522 /* PFLGlyph.h */,
 				3399665118F0B60C000F4522 /* PFLGlyph.m */,
+				33A38D05190C25AD002FBFF7 /* PFLPuzzleState.h */,
+				33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */,
 				3399665218F0B60C000F4522 /* PFLKeyframe.h */,
 				3399665318F0B60C000F4522 /* PFLKeyframe.m */,
 				3399665418F0B60C000F4522 /* PFLMultiSample.h */,
@@ -1923,6 +1936,8 @@
 				3399667A18F0B60C000F4522 /* PFLJsonUtils.m */,
 				3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */,
 				3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */,
+				33A38D02190C211A002FBFF7 /* PFLResourceManager.h */,
+				33A38D03190C211A002FBFF7 /* PFLResourceManager.m */,
 			);
 			name = Utils;
 			path = Classes/Utils;
@@ -2231,6 +2246,7 @@
 				339963E018F0A8DE000F4522 /* CCMotionStreak.m in Sources */,
 				3399639018F0A8DE000F4522 /* CCActionInstant.m in Sources */,
 				3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */,
+				33A38D07190C25AD002FBFF7 /* PFLPuzzleState.m in Sources */,
 				3399648A18F0A8DF000F4522 /* base64.c in Sources */,
 				339964C918F0A8DF000F4522 /* OALAudioTrack.m in Sources */,
 				3399640C18F0A8DF000F4522 /* CCProgressNode.m in Sources */,
@@ -2253,6 +2269,7 @@
 				3399655918F0A8E0000F4522 /* vec3.c in Sources */,
 				339963DC18F0A8DE000F4522 /* CCLayoutBox.m in Sources */,
 				339963D918F0A8DE000F4522 /* CCLayout.m in Sources */,
+				33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */,
 				339964FC18F0A8DF000F4522 /* OALSuspendHandler.m in Sources */,
 				3399655B18F0A8E0000F4522 /* vec4.c in Sources */,
 				3399646D18F0A8DF000F4522 /* CCDirectorIOS.m in Sources */,
@@ -2295,6 +2312,7 @@
 				339A29A01902AC6D0045CA1A /* PFLAudioEventController.m in Sources */,
 				3399638A18F0A8DE000F4522 /* CCActionCatmullRom.m in Sources */,
 				339964A218F0A8DF000F4522 /* NSAttributedString+CCAdditions.m in Sources */,
+				33A38D04190C211A002FBFF7 /* PFLResourceManager.m in Sources */,
 				3399656418F0A8E0000F4522 /* CCBKeyframe.m in Sources */,
 				3399651E18F0A8DF000F4522 /* CCControlTextureFactory.m in Sources */,
 				339963A318F0A8DE000F4522 /* CCAnimationCache.m in Sources */,

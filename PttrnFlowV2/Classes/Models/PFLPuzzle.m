@@ -22,6 +22,7 @@ static NSString* const kName = @"name";
 static NSString* const kSolution = @"solution";
 static NSString* const kSamples = @"samples";
 static NSString* const kSynth = @"synth";
+static NSString* const kUid = @"uid";
 
 @interface PFLPuzzle ()
 
@@ -45,6 +46,7 @@ static NSString* const kSynth = @"synth";
     self.name = json[kName];
     self.puzzleSet = puzzleSet;
     self.solution = json[kSolution];
+    self.uid = json[kUid];
     
     NSMutableArray* audio = [NSMutableArray array];
     for (NSDictionary* a in json[kAudio])

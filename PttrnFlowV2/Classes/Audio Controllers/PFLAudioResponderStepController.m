@@ -15,14 +15,14 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 
-NSString *const kNotificationStepUserSequence = @"stepUserSequence";
-NSString *const kNotificationStepSolutionSequence = @"stepSolutionSequence";
-NSString *const kNotificationEndUserSequence = @"endUserSequence";
-NSString *const kNotificationEndSolutionSequence = @"endSolutionSequence";
-NSString *const kKeyIndex = @"index";
-NSString *const kKeyCoord = @"coord";
-NSString *const kKeyCorrectHit = @"correctHit";
-NSString *const kKeyEmpty = @"empty";
+NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
+NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
+NSString* const PFLNotificationEndSequence = @"PFLNotificationEndSequence";
+
+NSString* const kKeyIndex = @"index";
+NSString* const kKeyCoord = @"coord";
+NSString* const kKeyCorrectHit = @"correctHit";
+NSString* const kKeyEmpty = @"empty";
 
 @interface PFLAudioResponderStepController ()
 
@@ -69,14 +69,24 @@ NSString *const kKeyEmpty = @"empty";
 - (PFLCoord*)nextStepInDirection:(NSString *)direction currentCoord:(PFLCoord*)currentCoord
 {
   PFLCoord* maxCoord = [PFLCoord maxCoord:self.puzzle.area];
+  PFLCoord* minCoord = [PFLCoord minCoord:self.puzzle.area];
   currentCoord = [currentCoord stepInDirection:direction];
+  
   if (currentCoord.x > maxCoord.x)
   {
-    currentCoord = [PFLCoord coordWithX:0 Y:currentCoord.y];
+    currentCoord = [PFLCoord coordWithX:minCoord.x Y:currentCoord.y];
   }
   if (currentCoord.y > maxCoord.y)
   {
-    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:0];
+    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:minCoord.y];
+  }
+  if (currentCoord.x < minCoord.x)
+  {
+    currentCoord = [PFLCoord coordWithX:maxCoord.x Y:currentCoord.y];
+  }
+  if (currentCoord.y < minCoord.y)
+  {
+    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:maxCoord.y];
   }
   if ([currentCoord isCoordInGroup:self.puzzle.area])
   {
@@ -86,22 +96,20 @@ NSString *const kKeyEmpty = @"empty";
 }
 
 - (void)stepUserSequence:(CCTime)dt
-{    
-  if (self.userSequenceIndex >= self.puzzle.solutionEvents.count)
-  {
-    // use notification instead of stopUserSequence so SequenceControlsLayer can toggle button off
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEndUserSequence object:nil];
-    return;
-  }
-  
+{
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
   
+  BOOL loop = NO;
   for (PFLEvent* e in events)
   {
     if (e.eventType == PFLEventTypeDirection)
     {
       self.currentDirection = e.direction;
+    }
+    if (e.eventType == PFLEventTypeGoal)
+    {
+      loop = YES;
     }
   }
   
@@ -122,24 +130,18 @@ NSString *const kKeyEmpty = @"empty";
     kKeyCorrectHit : @(correctHit),
     kKeyEmpty : @(events.count == 0)
   };
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepUserSequence object:nil userInfo:info];
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];
 
-  self.currentCell = [self nextStep];
-  self.userSequenceIndex++;
-}
-
-- (void)stepSolutionSequence
-{
-  if (self.solutionSequenceIndex >= self.puzzle.solutionEvents.count)
+  if (loop)
   {
-    // use notification instead of stopSolutionSequence so SequenceControlsLayer can toggle button off
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEndSolutionSequence object:nil];
-    return;
+    self.userSequenceIndex = 0;
+    self.currentCell = self.entry.cell;
   }
-  // use notification instead of playSolutionIndex so we can get the button highlight too.
-  NSDictionary* info = @{ kKeyIndex : @(self.solutionSequenceIndex) };
-  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStepSolutionSequence object:nil userInfo:info];
-  self.solutionSequenceIndex++;
+  else
+  {
+    self.currentCell = [self nextStep];
+    self.userSequenceIndex++;
+  }
 }
 
 #pragma mark - PFLPuzzleControlsDelegate
@@ -148,29 +150,17 @@ NSString *const kKeyEmpty = @"empty";
 {
   self.userSequenceIndex = 0;
   self.currentCell = self.entry.cell;
-  self.currentDirection = self.entry.direction;
+  
   [self schedule:@selector(stepUserSequence:) interval:self.beatDuration];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStartSequence object:nil userInfo:nil];
 }
 
 - (void)stopUserSequence
 {
   [self unschedule:@selector(stepUserSequence:)];
-}
-
-- (void)startSolutionSequence
-{
-  self.solutionSequenceIndex = 0;
-  [self schedule:@selector(stepSolutionSequence) interval:self.beatDuration];
-}
-
-- (void)stopSolutionSequence
-{
-  [self unschedule:@selector(stepSolutionSequence)];
-}
-
-- (void)playSolutionIndex:(NSInteger)index
-{
-  [self.audioEventController receiveEvents:self.puzzle.solutionEvents[index]];
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationEndSequence object:nil userInfo:nil];
 }
 
 @end

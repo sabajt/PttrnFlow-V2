@@ -41,12 +41,12 @@
 
 #pragma mark - AudioResponder
 
-- (PFLCoord*)audioCell
+- (PFLCoord*)audioResponderCell
 {
   return self.cell;
 }
 
-- (PFLEvent*)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
   self.color = self.activeColor;
   CCActionTintTo* tint = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];

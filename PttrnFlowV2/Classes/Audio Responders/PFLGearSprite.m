@@ -23,6 +23,7 @@
 @property (strong, nonatomic) CCColor* activeColor;
 @property (strong, nonatomic) NSMutableArray *audioUnits;
 @property (strong, nonatomic) PFLEvent *multiSampleEvent;
+@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -30,16 +31,29 @@
 
 - (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample
 {
+  return [self initWithGlyph:glyph multiSample:multiSample cell:nil];
+}
+
+- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample cell:(PFLCoord*)cell
+{
   self = [super initWithImageNamed:@"audio_circle.png"];
   if (self)
   {
+    self.glyph = glyph;
     NSString* theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
     
     // CCNode+Grid
-    self.cell = glyph.cell;
+    if (cell)
+    {
+      self.cell = cell;
+    }
+    else
+    {
+      self.cell = glyph.cell;
+    }
     self.cellSize = [PFLGameConstants gridUnitSize];
     
     // units (beats)
@@ -57,13 +71,14 @@
       audioUnit.position = ccp(container.contentSize.width / 2, (container.contentSize.height - audioUnit.contentSize.height / 2) - unitPadding);
       audioUnit.color = [PFLColorUtils glyphDetailWithTheme:theme];
       
-      // unit symbol
-      CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
-      unitSymbol.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
-      CGFloat symbolPadding = 2.0f;
-      unitSymbol.position = ccp(audioUnit.contentSize.width / 2.0f, audioUnit.contentSize.height / 2.0f + symbolPadding);
       
-      [audioUnit addChild:unitSymbol];
+      // // unit symbol
+      // CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
+      // unitSymbol.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
+      // CGFloat symbolPadding = 2.0f;
+      // unitSymbol.position = ccp(audioUnit.contentSize.width / 2.0f, audioUnit.contentSize.height / 2.0f + symbolPadding);
+      // [audioUnit addChild:unitSymbol];
+      
       [container addChild:audioUnit];
       [self addChild:container];
 
@@ -76,12 +91,17 @@
 
 #pragma mark - AudioResponder
 
-- (PFLCoord*)audioCell
+- (NSNumber*)audioResponderID
+{
+  return self.glyph.responderID;
+}
+
+- (PFLCoord*)audioResponderCell
 {
   return self.cell;
 }
 
-- (PFLEvent*)audioHit:(CGFloat)beatDuration
+- (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
   self.rotation = 0;
 

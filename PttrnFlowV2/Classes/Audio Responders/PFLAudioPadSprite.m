@@ -18,22 +18,36 @@
 @interface PFLAudioPadSprite ()
 
 @property (strong, nonatomic) CCSprite* highlightSprite;
+@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
 
 @implementation PFLAudioPadSprite
 
-- (id)initWithGlyph:(PFLGlyph*)glyph
+- (id)initWithGlyph:(PFLGlyph *)glyph
+{
+  return [self initWithGlyph:glyph cell:nil];
+}
+
+- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
 {
   self = [super initWithImageNamed:@"audio_box.png"];
   if (self)
   {
+    self.glyph = glyph;
     self.isStatic = glyph.isStatic;
     self.color = [PFLColorUtils padWithTheme:glyph.puzzle.puzzleSet.theme isStatic:glyph.isStatic];
 
     // CCNode+Grid
-    self.cell = glyph.cell;
+    if (cell)
+    {
+      self.cell = cell;
+    }
+    else
+    {
+      self.cell = glyph.cell;
+    }
     self.cellSize = [PFLGameConstants gridUnitSize];
   }
   return self;
@@ -41,7 +55,12 @@
 
 #pragma mark - AudioResponder
 
-- (PFLEvent*)audioHit:(CGFloat)beatDuration
+- (NSNumber*)audioResponderID
+{
+  return self.glyph.responderID;
+}
+
+- (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
   CCActionScaleTo* padScaleUp = [CCActionScaleTo actionWithDuration:beatDuration / 2.0f scale:1.2f];
   CCActionEaseSineIn* padEaseUp = [CCActionEaseSineIn actionWithAction:padScaleUp];
@@ -53,7 +72,7 @@
   return nil;
 }
 
-- (PFLCoord*)audioCell
+- (PFLCoord*)audioResponderCell
 {
   return self.cell;
 }

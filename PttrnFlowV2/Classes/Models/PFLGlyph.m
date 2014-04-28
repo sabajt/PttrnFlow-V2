@@ -9,11 +9,17 @@
 #import "PFLGlyph.h"
 #import "PFLCoord.h"
 
-static NSString *const kAudio = @"audio";
-static NSString *const kArrow = @"arrow";
-static NSString *const kCell = @"cell";
-static NSString *const kEntry = @"entry";
-static NSString *const kStatic = @"static";
+NSString* const PFLGlyphTypeNone = @"none";
+NSString* const PFLGlyphTypeArrow = @"arrow";
+NSString* const PFLGlyphTypeEntry = @"entry";
+NSString* const PFLGlyphTypeGoal = @"goal";
+
+static NSString* const kResponderID = @"responder_id";
+static NSString* const kAudioID = @"audio_id";
+static NSString* const kCell = @"cell";
+static NSString* const kDirection = @"direction";
+static NSString* const kStatic = @"static";
+static NSString* const kType = @"type";
 
 @implementation PFLGlyph
 
@@ -22,13 +28,15 @@ static NSString *const kStatic = @"static";
   self = [super init];
   if (self)
   {
-    self.audioID = object[kAudio];
-    self.arrow = object[kArrow];
+    self.puzzle = puzzle;
+
+    self.responderID = object[kResponderID];
+    self.audioID = object[kAudioID];
     NSArray *cell = object[kCell];
     self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
-    self.entry = object[kEntry];
+    self.direction = object[kDirection];
     self.isStatic = [object[kStatic] boolValue];
-    self.puzzle = puzzle;
+    self.type = object[kType];
   }
   return self;
 }

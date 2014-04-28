@@ -101,6 +101,13 @@ NSString *const kChannelNone = @"ChannelNone";
   return [PFLEvent multiSampleEventWithAudioID:audioID sampleEvents:[NSArray arrayWithArray:sampleEvents]];
 }
 
++ (id)goalEvent
+{
+  PFLEvent* event = [[PFLEvent alloc] init];
+  event.eventType = PFLEventTypeGoal;
+  return event;
+}
+
 #pragma mark - PFLCompareObjectsDelegate
 
 - (BOOL)isEqualToObject:(id)object
