@@ -19,9 +19,11 @@ NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
 NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
 NSString* const PFLNotificationEndSequence = @"PFLNotificationEndSequence";
 
-NSString* const kKeyIndex = @"index";
 NSString* const kKeyCoord = @"coord";
 NSString* const kKeyEmpty = @"empty";
+NSString* const kKeyInBounds = @"inBounds";
+NSString* const kKeyIndex = @"index";
+NSString* const kKeyLoop = @"loop";
 
 @interface PFLAudioResponderStepController ()
 
@@ -60,42 +62,10 @@ NSString* const kKeyEmpty = @"empty";
   [self.responders removeAllObjects];
 }
 
-- (PFLCoord*)nextStep
-{
-  return [self nextStepInDirection:self.currentDirection currentCoord:self.currentCell];
-}
-
-- (PFLCoord*)nextStepInDirection:(NSString *)direction currentCoord:(PFLCoord*)currentCoord
-{
-  PFLCoord* maxCoord = [PFLCoord maxCoord:self.puzzle.area];
-  PFLCoord* minCoord = [PFLCoord minCoord:self.puzzle.area];
-  currentCoord = [currentCoord stepInDirection:direction];
-  
-  if (currentCoord.x > maxCoord.x)
-  {
-    currentCoord = [PFLCoord coordWithX:minCoord.x Y:currentCoord.y];
-  }
-  if (currentCoord.y > maxCoord.y)
-  {
-    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:minCoord.y];
-  }
-  if (currentCoord.x < minCoord.x)
-  {
-    currentCoord = [PFLCoord coordWithX:maxCoord.x Y:currentCoord.y];
-  }
-  if (currentCoord.y < minCoord.y)
-  {
-    currentCoord = [PFLCoord coordWithX:currentCoord.x Y:maxCoord.y];
-  }
-  if ([currentCoord isCoordInGroup:self.puzzle.area])
-  {
-    return currentCoord;
-  }
-  return [self nextStepInDirection:direction currentCoord:currentCoord];
-}
-
 - (void)stepUserSequence:(CCTime)dt
 {
+  BOOL inBounds = [self.currentCell isCoordInGroup:self.puzzle.area];
+  
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
   
@@ -113,11 +83,19 @@ NSString* const kKeyEmpty = @"empty";
   }
   
   NSDictionary* info = @{
-    kKeyIndex : @(self.userSequenceIndex),
     kKeyCoord : self.currentCell,
-    kKeyEmpty : @(events.count == 0)
+    kKeyEmpty : @(events.count == 0),
+    kKeyInBounds : @(inBounds),
+    kKeyIndex : @(self.userSequenceIndex),
+    kKeyLoop : @(loop)
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];
+  
+  if (!inBounds)
+  {
+    [self stopUserSequence];
+    return;
+  }
 
   if (loop)
   {
@@ -126,7 +104,7 @@ NSString* const kKeyEmpty = @"empty";
   }
   else
   {
-    self.currentCell = [self nextStep];
+    self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
     self.userSequenceIndex++;
   }
 }

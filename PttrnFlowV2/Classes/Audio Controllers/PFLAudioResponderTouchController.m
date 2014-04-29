@@ -229,6 +229,11 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   self.allowScrolling = YES;
 }
 
+- (BOOL)hitTestWithWorldPos:(CGPoint)pos
+{
+  return YES;
+}
+
 #pragma mark - ScrollLayerDelegate
 
 - (BOOL)shouldScroll

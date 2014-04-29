@@ -11,5 +11,6 @@
 @interface CCSprite (PFLEffects)
 
 - (void)backlight:(CGFloat)beatDuration completion:(void (^)(void))completion;
+- (void)backlightRotate:(CGFloat)beatDuration completion:(void (^)(void))completion;
 
 @end

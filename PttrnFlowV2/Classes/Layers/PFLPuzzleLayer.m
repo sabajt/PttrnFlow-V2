@@ -457,6 +457,19 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   }];
 }
 
+- (void)animateOutOfBounds:(PFLCoord*)coord
+{
+  CCSprite* highlightSprite = [CCSprite spriteWithImageNamed:@"audio_box_highlight.png"];
+  
+  highlightSprite.color = [PFLColorUtils padHighlightWithTheme:self.puzzle.puzzleSet.theme];
+  highlightSprite.position = [coord relativeMidpoint];
+  [self.audioObjectsBatchNode addChild:highlightSprite z:ZOrderAudioBatchPadBacklight];
+  
+  [highlightSprite backlightRotate:self.beatDuration completion:^{
+    [highlightSprite removeFromParentAndCleanup:YES];
+  }];
+}
+
 - (void)addAudioResponder:(id<PFLAudioResponder>)responder
 {
   if (!self.audioResponders)
@@ -473,7 +486,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
   [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:PFLNotificationStepSequence object:nil];
-  [notificationCenter addObserver:self selector:@selector(handleaudioResponderTouchControllerHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleAudioResponderTouchControllerHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
   [self setupDebug];
 }
 
@@ -522,14 +535,22 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   {
     [self animateBacklight:coord];
   }
+  else
+  {
+    [self animateOutOfBounds:coord];
+  }
 }
 
-- (void)handleaudioResponderTouchControllerHit:(NSNotification*)notification
+- (void)handleAudioResponderTouchControllerHit:(NSNotification*)notification
 {
   PFLCoord* coord = notification.userInfo[kPFLAudioTouchDispatcherCoordKey];
   if ([coord isCoordInGroup:self.puzzle.area])
   {
     [self animateBacklight:coord];
+  }
+  else
+  {
+    [self animateOutOfBounds:coord];
   }
 }
 
