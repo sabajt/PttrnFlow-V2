@@ -1,5 +1,8 @@
 PttrnFlowV2 todo
 
+json/protodata
+- seq len
+
 set screen
 - show solved or not on cells
 - cell solved design
@@ -11,8 +14,8 @@ select set screen
 - everything!
 
 puzzle screen
-
-- remember last configuration
+- count down UI
+- stop after seq len?
 - animate goal
 - loop correct seq
 - dotted lines on selection

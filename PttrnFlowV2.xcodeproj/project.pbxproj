@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332DED9919107EA5007F78AA /* PFLFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 332DED9819107EA5007F78AA /* PFLFonts.m */; };
 		3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */; };
 		3399634118F0A8DE000F4522 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634018F0A8DE000F4522 /* QuartzCore.framework */; };
 		3399634318F0A8DE000F4522 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634218F0A8DE000F4522 /* OpenGLES.framework */; };
@@ -316,6 +317,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		332DED9719107EA5007F78AA /* PFLFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLFonts.h; sourceTree = "<group>"; };
+		332DED9819107EA5007F78AA /* PFLFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLFonts.m; sourceTree = "<group>"; };
 		3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLRecursiveTouch.h"; sourceTree = "<group>"; };
 		3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+PFLRecursiveTouch.m"; sourceTree = "<group>"; };
 		3399633D18F0A8DE000F4522 /* PttrnFlowV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PttrnFlowV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1938,6 +1941,8 @@
 				3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */,
 				33A38D02190C211A002FBFF7 /* PFLResourceManager.h */,
 				33A38D03190C211A002FBFF7 /* PFLResourceManager.m */,
+				332DED9719107EA5007F78AA /* PFLFonts.h */,
+				332DED9819107EA5007F78AA /* PFLFonts.m */,
 			);
 			name = Utils;
 			path = Classes/Utils;
@@ -2188,6 +2193,7 @@
 				3399644118F0A8DF000F4522 /* CCSpriteFrame.m in Sources */,
 				339963D518F0A8DE000F4522 /* CCNodeColor.m in Sources */,
 				339964AE18F0A8DF000F4522 /* TransformUtils.m in Sources */,
+				332DED9919107EA5007F78AA /* PFLFonts.m in Sources */,
 				3399644F18F0A8DF000F4522 /* CCTextureCache.m in Sources */,
 				3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */,
 				3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */,

@@ -2,7 +2,7 @@
      "uid" : 0,
      "name" : "Kewl Melody",
      "bpm" : 120,
-     "length" : 6,
+     "loop_length" : 4,
      "area" :
      [
           [0, 0],

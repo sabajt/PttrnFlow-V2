@@ -6,14 +6,15 @@
 //
 //
 
-#import "PFLPuzzleControlsLayer.h"
-#import "PFLColorUtils.h"
-#import "PFLTileSprite.h"
-#import "PFLGameConstants.h"
 #import "PFLAudioResponderStepController.h"
+#import "PFLColorUtils.h"
+#import "PFLFonts.h"
+#import "PFLGameConstants.h"
 #import "PFLPuzzle.h"
+#import "PFLPuzzleControlsLayer.h"
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleSetLayer.h"
+#import "PFLTileSprite.h"
 
 @interface PFLPuzzleControlsLayer ()
 
@@ -102,6 +103,13 @@
     self.playButton = playButton;
     playButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width / 2.0f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
     [self.uiBatchNode addChild:playButton];
+    
+    // count down ui
+    CCLabelTTF* countDownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", @(puzzle.loopLength)] fontName:@"ArialRoundedMTBold" fontSize:[PFLFonts controlsPanelFontSize]];
+    countDownLabel.color = [PFLColorUtils controlButtonsDefaultWithTheme:theme];
+    countDownLabel.anchorPoint = ccp(0.5f, 0.5f);
+    countDownLabel.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 1.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
+    [self addChild:countDownLabel];
   }
   return self;
 }

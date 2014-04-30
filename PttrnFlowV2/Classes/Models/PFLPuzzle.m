@@ -43,7 +43,7 @@ static NSString* const kUid = @"uid";
   if (self)
   {
     self.area = [PFLCoord coordsFromArrays:json[kArea]];
-    self.loopLength = json[kLoopLength];
+    self.loopLength = [json[kLoopLength] integerValue];
     self.name = json[kName];
     self.puzzleSet = puzzleSet;
     self.uid = json[kUid];
