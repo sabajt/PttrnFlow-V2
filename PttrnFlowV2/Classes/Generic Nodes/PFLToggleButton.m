@@ -67,6 +67,11 @@
 
 - (void)toggle
 {
+  [self toggleIgnoringDelegate:NO];
+}
+
+- (void)toggleIgnoringDelegate:(BOOL)ignoringDelegate
+{
   self.isOn = !self.isOn;
   
   if (self.offSprite)
@@ -85,7 +90,10 @@
       self.color = self.defaultColor;
     }
   }
-  [self.delegate toggleButtonPressed:self];
+  if (!ignoringDelegate)
+  {
+    [self.delegate toggleButtonPressed:self];
+  }
 }
 
 #pragma mark - CCTargetedTouchDelegate

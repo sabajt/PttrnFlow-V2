@@ -23,6 +23,7 @@ NSString* const kKeyCoord = @"coord";
 NSString* const kKeyEmpty = @"empty";
 NSString* const kKeyInBounds = @"inBounds";
 NSString* const kKeyIndex = @"index";
+NSString* const kKeyIsCorrect = @"isCorrect";
 NSString* const kKeyLoop = @"loop";
 
 @interface PFLAudioResponderStepController ()
@@ -34,6 +35,7 @@ NSString* const kKeyLoop = @"loop";
 @property (strong, nonatomic) PFLCoord* currentCell;
 @property (copy, nonatomic) NSString* currentDirection;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
+@property BOOL hasWon;
 
 @end
 
@@ -64,10 +66,21 @@ NSString* const kKeyLoop = @"loop";
 
 - (void)stepUserSequence:(CCTime)dt
 {
+  if (self.userSequenceIndex >= [self.puzzle.solutionEvents count])
+  {
+    if (!self.hasWon)
+    {
+      self.hasWon = YES;
+      CCLOG(@"WIN AND DISPLAY SOMETHING");
+    }
+    [self repeatLoop];
+  }
+  
   BOOL inBounds = [self.currentCell isCoordInGroup:self.puzzle.area];
   
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
+  BOOL isCorrect = [[events audioEvents] hasSameNumberOfSameObjects:self.puzzle.solutionEvents[self.userSequenceIndex]];
   
   BOOL loop = NO;
   for (PFLEvent* e in events)
@@ -81,17 +94,18 @@ NSString* const kKeyLoop = @"loop";
       loop = YES;
     }
   }
-  
+
   NSDictionary* info = @{
     kKeyCoord : self.currentCell,
     kKeyEmpty : @(events.count == 0),
     kKeyInBounds : @(inBounds),
     kKeyIndex : @(self.userSequenceIndex),
+    kKeyIsCorrect : @(isCorrect),
     kKeyLoop : @(loop)
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];
   
-  if (!inBounds)
+  if (!inBounds || !isCorrect)
   {
     [self stopUserSequence];
     return;
@@ -99,14 +113,20 @@ NSString* const kKeyLoop = @"loop";
 
   if (loop)
   {
-    self.userSequenceIndex = 0;
-    self.currentCell = self.entry.cell;
+    [self repeatLoop];
   }
   else
   {
     self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
     self.userSequenceIndex++;
   }
+}
+
+- (void)repeatLoop
+{
+  self.userSequenceIndex = 0;
+  self.currentCell = self.entry.cell;
+  // TODO: reset any changed state / animations
 }
 
 #pragma mark - PFLPuzzleControlsDelegate

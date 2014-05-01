@@ -21,6 +21,7 @@ FOUNDATION_EXPORT NSString* const kKeyCoord;
 FOUNDATION_EXPORT NSString* const kKeyEmpty;
 FOUNDATION_EXPORT NSString* const kKeyInBounds;
 FOUNDATION_EXPORT NSString* const kKeyIndex;
+FOUNDATION_EXPORT NSString* const kKeyIsCorrect;
 FOUNDATION_EXPORT NSString* const kKeyLoop ;
 
 @interface PFLAudioResponderStepController : CCNode <PFLPuzzleControlsDelegate>

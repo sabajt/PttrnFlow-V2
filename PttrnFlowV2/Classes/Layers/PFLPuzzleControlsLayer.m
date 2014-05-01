@@ -147,23 +147,33 @@
 
 - (void)handleStepUserSequence:(NSNotification*)notification
 {
+  if (self.currentStep >= self.steps)
+  {
+    self.currentStep = 0;
+  }
+  
   self.currentStep++;
+  BOOL isCorrect = [notification.userInfo[kKeyIsCorrect] boolValue];
   self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
-  // TODO: indicate correct or incorrect
+  if (!isCorrect)
+  {
+    self.countDownLabel.string = [self.countDownLabel.string stringByAppendingString:@"X"];
+    [self.playButton toggleIgnoringDelegate:YES];
+  }
 }
 
 - (void)stepSolutionSequence
 {
+  if (self.currentStep >= self.steps)
+  {
+    self.currentStep = 0;
+  }
+  
   NSArray* events = self.puzzle.solutionEvents[self.currentStep];
   [self.audioEventController receiveEvents:events];
 
   self.currentStep++;
   self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
-  if (self.currentStep >= self.steps)
-  {
-    self.currentStep = 0;
-    [self unschedule:@selector(stepSolutionSequence)];
-  }
 }
 
 #pragma mark - ToggleButtonDelegate
