@@ -16,9 +16,9 @@
 @property (strong, nonatomic) NSArray* audio;
 @property (copy, nonatomic) NSString* file;
 @property (strong, nonatomic) NSArray* glyphs;
-@property NSInteger loopLength;
 @property (copy, nonatomic) NSString* name;
 @property (weak, nonatomic) PFLPuzzleSet* puzzleSet;
+@property (strong, nonatomic) NSArray* solutionEvents;
 @property (strong, nonatomic) NSNumber* uid;
 
 + (PFLPuzzle*)puzzleFromResource:(NSString*)resource puzzleSet:(PFLPuzzleSet*)puzzleSet;

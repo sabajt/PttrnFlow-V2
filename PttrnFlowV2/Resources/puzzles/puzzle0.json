@@ -2,7 +2,6 @@
      "uid" : 0,
      "name" : "Kewl Melody",
      "bpm" : 120,
-     "loop_length" : 4,
      "area" :
      [
           [0, 0],
@@ -42,4 +41,11 @@
                "cell" : [2, 0],
           }
      ],
+     "solution" :
+     [
+          [0],
+          [],
+          [0],
+          []
+     ]
 }

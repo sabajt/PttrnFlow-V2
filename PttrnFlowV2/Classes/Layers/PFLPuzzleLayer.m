@@ -78,7 +78,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [scene addChild:puzzleLayer];
   
   // controls layer
-  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher];
+  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher audioEventController:puzzleLayer.audioEventController];
   [scene addChild:uiLayer z:1];
   
   return scene;

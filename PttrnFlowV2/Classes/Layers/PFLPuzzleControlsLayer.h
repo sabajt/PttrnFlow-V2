@@ -10,7 +10,7 @@
 #import "PFLToggleButton.h"
 #import "PFLBasicButton.h"
 
-@class PFLPuzzle;
+@class PFLAudioEventController, PFLPuzzle;
 
 @protocol PFLPuzzleControlsDelegate <NSObject>
 
@@ -23,6 +23,6 @@
 
 + (CGSize)uiButtonUnitSize;
 
-- (id)initWithPuzzle:(PFLPuzzle*)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate;
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController;
 
 @end

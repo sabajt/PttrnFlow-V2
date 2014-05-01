@@ -6,6 +6,7 @@
 //
 //
 
+#import "PFLAudioEventController.h"
 #import "PFLAudioResponderStepController.h"
 #import "PFLColorUtils.h"
 #import "PFLFonts.h"
@@ -18,15 +19,19 @@
 
 @interface PFLPuzzleControlsLayer ()
 
-@property (assign) NSInteger steps;
-
 @property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
 
+@property (weak, nonatomic) PFLPuzzle* puzzle; // TOOD: should this be a strong ref?
 @property (weak, nonatomic) id<PFLPuzzleControlsDelegate> delegate;
-@property (weak, nonatomic) PFLPuzzle* puzzle;
+@property (strong, nonatomic) PFLAudioEventController* audioEventController;
 
 @property (weak, nonatomic) PFLToggleButton* playButton;
+@property (weak, nonatomic) PFLToggleButton* speakerButton;
 @property (weak, nonatomic) PFLBasicButton* exitButton;
+@property (weak, nonatomic) CCLabelTTF* countDownLabel;
+
+@property NSInteger steps;
+@property NSInteger currentStep;
 
 @end
 
@@ -50,15 +55,17 @@
   }
 }
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController
 {
   self = [super init];
   if (self)
   {
+    self.audioEventController = audioEventController;
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
     NSString* theme = puzzle.puzzleSet.theme;
     self.delegate = delegate;
+    self.steps = puzzle.solutionEvents.count;
     
     // batch node
     CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
@@ -104,11 +111,18 @@
     playButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width / 2.0f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
     [self.uiBatchNode addChild:playButton];
     
+    // speaker button
+    PFLToggleButton* speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
+    self.speakerButton = speakerButton;
+    speakerButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 1.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
+    [self.uiBatchNode addChild:speakerButton];
+    
     // count down ui
-    CCLabelTTF* countDownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", @(puzzle.loopLength)] fontName:@"ArialRoundedMTBold" fontSize:[PFLFonts controlsPanelFontSize]];
+    CCLabelTTF* countDownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", @(self.steps)] fontName:@"ArialRoundedMTBold" fontSize:[PFLFonts controlsPanelFontSize]];
+    self.countDownLabel = countDownLabel;
     countDownLabel.color = [PFLColorUtils controlButtonsDefaultWithTheme:theme];
     countDownLabel.anchorPoint = ccp(0.5f, 0.5f);
-    countDownLabel.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 1.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
+    countDownLabel.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 2.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
     [self addChild:countDownLabel];
   }
   return self;
@@ -129,11 +143,27 @@
   [super onExit];
 }
 
-#pragma mark - Notifications
+#pragma mark - Sequence
 
 - (void)handleStepUserSequence:(NSNotification*)notification
 {
-  // animate collecting beats / forming sequence?
+  self.currentStep++;
+  self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
+  // TODO: indicate correct or incorrect
+}
+
+- (void)stepSolutionSequence
+{
+  NSArray* events = self.puzzle.solutionEvents[self.currentStep];
+  [self.audioEventController receiveEvents:events];
+
+  self.currentStep++;
+  self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
+  if (self.currentStep >= self.steps)
+  {
+    self.currentStep = 0;
+    [self unschedule:@selector(stepSolutionSequence)];
+  }
 }
 
 #pragma mark - ToggleButtonDelegate
@@ -142,6 +172,8 @@
 {
   if ([sender isEqual:self.playButton])
   {
+    self.currentStep = 0;
+    
     if (self.playButton.isOn)
     {
       [self.delegate startUserSequence];
@@ -149,6 +181,19 @@
     else
     {
       [self.delegate stopUserSequence];
+    }
+  }
+  else if ([sender isEqual:self.speakerButton])
+  {
+    self.currentStep = 0;
+    
+    if (self.speakerButton.isOn)
+    {
+      [self schedule:@selector(stepSolutionSequence) interval:self.puzzle.puzzleSet.beatDuration];
+    }
+    else
+    {
+      [self unschedule:@selector(stepSolutionSequence)];
     }
   }
 }
