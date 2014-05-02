@@ -14,6 +14,7 @@
 #import "PFLEvent.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
+#import "PFLPuzzleState.h"
 
 NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
 NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
@@ -66,21 +67,10 @@ NSString* const kKeyLoop = @"loop";
 
 - (void)stepUserSequence:(CCTime)dt
 {
-  if (self.userSequenceIndex >= [self.puzzle.solutionEvents count])
-  {
-    if (!self.hasWon)
-    {
-      self.hasWon = YES;
-      CCLOG(@"WIN AND DISPLAY SOMETHING");
-    }
-    [self repeatLoop];
-  }
-  
   BOOL inBounds = [self.currentCell isCoordInGroup:self.puzzle.area];
   
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
-  BOOL isCorrect = [[events audioEvents] hasSameNumberOfSameObjects:self.puzzle.solutionEvents[self.userSequenceIndex]];
   
   BOOL loop = NO;
   for (PFLEvent* e in events)
@@ -100,12 +90,11 @@ NSString* const kKeyLoop = @"loop";
     kKeyEmpty : @(events.count == 0),
     kKeyInBounds : @(inBounds),
     kKeyIndex : @(self.userSequenceIndex),
-    kKeyIsCorrect : @(isCorrect),
     kKeyLoop : @(loop)
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStepSequence object:nil userInfo:info];
   
-  if (!inBounds || !isCorrect)
+  if (!inBounds)
   {
     [self stopUserSequence];
     return;
@@ -113,20 +102,14 @@ NSString* const kKeyLoop = @"loop";
 
   if (loop)
   {
-    [self repeatLoop];
+    self.userSequenceIndex = 0;
+    self.currentCell = self.entry.cell;
   }
   else
   {
     self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
     self.userSequenceIndex++;
   }
-}
-
-- (void)repeatLoop
-{
-  self.userSequenceIndex = 0;
-  self.currentCell = self.entry.cell;
-  // TODO: reset any changed state / animations
 }
 
 #pragma mark - PFLPuzzleControlsDelegate
@@ -139,6 +122,10 @@ NSString* const kKeyLoop = @"loop";
   [self schedule:@selector(stepUserSequence:) interval:self.beatDuration];
   
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationStartSequence object:nil userInfo:nil];
+  
+  // save puzzle state so we can check for a succesful loop
+  PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
+  [puzzleState updateWithAudioResponders:self.responders];
 }
 
 - (void)stopUserSequence

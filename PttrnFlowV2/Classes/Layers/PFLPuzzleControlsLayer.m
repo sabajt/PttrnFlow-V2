@@ -110,20 +110,6 @@
     self.playButton = playButton;
     playButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width / 2.0f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
     [self.uiBatchNode addChild:playButton];
-    
-    // speaker button
-    PFLToggleButton* speakerButton = [[PFLToggleButton alloc] initWithImage:@"speaker.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
-    self.speakerButton = speakerButton;
-    speakerButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 1.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
-    [self.uiBatchNode addChild:speakerButton];
-    
-    // count down ui
-    CCLabelTTF* countDownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", @(self.steps)] fontName:@"ArialRoundedMTBold" fontSize:[PFLFonts controlsPanelFontSize]];
-    self.countDownLabel = countDownLabel;
-    countDownLabel.color = [PFLColorUtils controlButtonsDefaultWithTheme:theme];
-    countDownLabel.anchorPoint = ccp(0.5f, 0.5f);
-    countDownLabel.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width * 2.5f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
-    [self addChild:countDownLabel];
   }
   return self;
 }
@@ -134,7 +120,7 @@
 {
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-  [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:PFLNotificationStepSequence object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleEndSequence:) name:PFLNotificationEndSequence object:nil];
 }
 
 - (void)onExit
@@ -147,33 +133,15 @@
 
 - (void)handleStepUserSequence:(NSNotification*)notification
 {
-  if (self.currentStep >= self.steps)
-  {
-    self.currentStep = 0;
-  }
-  
   self.currentStep++;
-  BOOL isCorrect = [notification.userInfo[kKeyIsCorrect] boolValue];
-  self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
-  if (!isCorrect)
-  {
-    self.countDownLabel.string = [self.countDownLabel.string stringByAppendingString:@"X"];
-    [self.playButton toggleIgnoringDelegate:YES];
-  }
 }
 
-- (void)stepSolutionSequence
+- (void)handleEndSequence:(NSNotification*)notification
 {
-  if (self.currentStep >= self.steps)
+  if (self.playButton.isOn)
   {
-    self.currentStep = 0;
+    [self.playButton toggleIgnoringDelegate:YES];
   }
-  
-  NSArray* events = self.puzzle.solutionEvents[self.currentStep];
-  [self.audioEventController receiveEvents:events];
-
-  self.currentStep++;
-  self.countDownLabel.string = [NSString stringWithFormat:@"%i", self.currentStep];
 }
 
 #pragma mark - ToggleButtonDelegate
@@ -191,19 +159,6 @@
     else
     {
       [self.delegate stopUserSequence];
-    }
-  }
-  else if ([sender isEqual:self.speakerButton])
-  {
-    self.currentStep = 0;
-    
-    if (self.speakerButton.isOn)
-    {
-      [self schedule:@selector(stepSolutionSequence) interval:self.puzzle.puzzleSet.beatDuration];
-    }
-    else
-    {
-      [self unschedule:@selector(stepSolutionSequence)];
     }
   }
 }

@@ -14,7 +14,12 @@
 
 + (instancetype)puzzleStateForPuzzle:(PFLPuzzle*)puzzle;
 
-- (void)updateWithGlyphs:(NSArray*)glyphs;
 - (NSMutableDictionary*)glyphStateForGid:(NSNumber*)gid;
+
+- (void)updateWithAudioResponders:(NSArray*)audioResponders;
+- (void)updateWithGlyphs:(NSArray*)glyphs;
+
+- (BOOL)doesCurrentStateMatchAudioResponders:(NSArray*)audioResponders;
+- (BOOL)doesCurrentStateMatchGlyphs:(NSArray*)glyphs;
 
 @end

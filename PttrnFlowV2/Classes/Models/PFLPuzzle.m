@@ -55,25 +55,6 @@ static NSString* const kUid = @"uid";
     }
     self.audio = [NSArray arrayWithArray:audio];
     
-    // solution events
-    NSMutableArray* solutionEvents = [NSMutableArray array];
-    for (NSArray* s in json[kSolution])
-    {
-      NSMutableArray* events = [NSMutableArray array];
-      for (NSNumber* audioID in s)
-      {
-        id object = self.audio[[audioID integerValue]];
-        id event;
-        if ([object isKindOfClass:[PFLMultiSample class]])
-        {
-          event = [PFLEvent multiSampleEventWithAudioID:audioID multiSample:(PFLMultiSample*)object];
-        }
-        [events addObject:event];
-      }
-      [solutionEvents addObject:events];
-    }
-    self.solutionEvents = [NSArray arrayWithArray:solutionEvents];
-    
     // glyph models
     NSMutableArray* glyphs = [NSMutableArray array];
     for (NSDictionary* g in json[kGlyphs])
@@ -85,5 +66,25 @@ static NSString* const kUid = @"uid";
   }
   return self;
 }
+
+// TODO: will need something like this in puzzle state, but supporting dynamic seq
+//    // solution events
+//    NSMutableArray* solutionEvents = [NSMutableArray array];
+//    for (NSArray* s in json[kSolution])
+//    {
+//      NSMutableArray* events = [NSMutableArray array];
+//      for (NSNumber* audioID in s)
+//      {
+//        id object = self.audio[[audioID integerValue]];
+//        id event;
+//        if ([object isKindOfClass:[PFLMultiSample class]])
+//        {
+//          event = [PFLEvent multiSampleEventWithAudioID:audioID multiSample:(PFLMultiSample*)object];
+//        }
+//        [events addObject:event];
+//      }
+//      [solutionEvents addObject:events];
+//    }
+//    self.solutionEvents = [NSArray arrayWithArray:solutionEvents];
 
 @end

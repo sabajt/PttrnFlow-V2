@@ -492,38 +492,9 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (void)onExit
 {
-  [self savePuzzleState];
+  [[PFLPuzzleState puzzleStateForPuzzle:self.puzzle] updateWithAudioResponders:[self.audioResponders allObjects]];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super onExit];
-}
-
-#pragma mark - State
-
-- (void)savePuzzleState
-{
-  NSMutableArray* updatedGlyphs = [NSMutableArray array];
-  
-  for (id<PFLAudioResponder> audioResponder in self.audioResponders)
-  {
-    if (![audioResponder respondsToSelector:@selector(audioResponderID)])
-    {
-      continue;
-    }
-    
-    PFLGlyph* updateGlyph = [[PFLGlyph alloc] initWithObject:nil puzzle:nil];
-    updateGlyph.responderID = [audioResponder audioResponderID];
-    updateGlyph.cell = [audioResponder audioResponderCell];
-    
-    if ([audioResponder respondsToSelector:@selector(audioResponderDirection)])
-    {
-      updateGlyph.direction = [audioResponder audioResponderDirection];
-    }
-    
-    [updatedGlyphs addObject:updateGlyph];
-  }
-  
-  PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
-  [puzzleState updateWithGlyphs:[NSArray arrayWithArray:updatedGlyphs]];
 }
 
 #pragma mark - Notifications

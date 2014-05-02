@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PFLAudioResponder.h"
 #import "PFLCoord.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleState.h"
@@ -45,13 +46,11 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
   self = [super init];
-  if (!self)
+  if (self)
   {
-    return nil;
+    self.fileName = [aDecoder decodeObjectForKey:@"fileName"];
+    self.glyphs = [aDecoder decodeObjectForKey:@"glyphs"];
   }
-  
-  self.fileName = [aDecoder decodeObjectForKey:@"fileName"];
-  self.glyphs = [aDecoder decodeObjectForKey:@"glyphs"];
   
   return self;
 }
@@ -70,6 +69,45 @@
   {
     CCLOG(@"Warning: archive to path: '%@' unsuccesful!", path);
   }
+}
+
+// Create PFLGlyphs with the only info needed for puzzle state from audio responders
+- (NSArray*)glyphsFromAudioResponders:(NSArray*)audioResponders
+{
+  NSMutableArray* updatedGlyphs = [NSMutableArray array];
+  
+  for (id<PFLAudioResponder> audioResponder in audioResponders)
+  {
+    if (![audioResponder respondsToSelector:@selector(audioResponderID)])
+    {
+      continue;
+    }
+    
+    PFLGlyph* updateGlyph = [[PFLGlyph alloc] initWithObject:nil puzzle:nil];
+    updateGlyph.responderID = [audioResponder audioResponderID];
+    updateGlyph.cell = [audioResponder audioResponderCell];
+    
+    if ([audioResponder respondsToSelector:@selector(audioResponderDirection)])
+    {
+      updateGlyph.direction = [audioResponder audioResponderDirection];
+    }
+    
+    [updatedGlyphs addObject:updateGlyph];
+  }
+  
+  return [NSArray arrayWithArray:updatedGlyphs];
+}
+
+#pragma mark - Public
+
+- (NSMutableDictionary*)glyphStateForGid:(NSNumber*)gid
+{
+  return self.glyphs[gid];
+}
+
+- (void)updateWithAudioResponders:(NSArray*)audioResponders
+{
+  [self updateWithGlyphs:[self glyphsFromAudioResponders:audioResponders]];
 }
 
 - (void)updateWithGlyphs:(NSArray*)glyphs
@@ -97,9 +135,35 @@
   [self archive];
 }
 
-- (NSMutableDictionary*)glyphStateForGid:(NSNumber*)gid
+- (BOOL)doesCurrentStateMatchAudioResponders:(NSArray*)audioResponders
 {
-  return self.glyphs[gid];
+  return [self doesCurrentStateMatchGlyphs:[self glyphsFromAudioResponders:audioResponders]];
+}
+
+- (BOOL)doesCurrentStateMatchGlyphs:(NSArray*)glyphs
+{
+  for (PFLGlyph* glyph in glyphs)
+  {
+    NSMutableDictionary* glyphState = [self glyphStateForGid:glyph.responderID];
+    if (!glyphState)
+    {
+      return NO;
+    }
+    
+    NSArray* oldCellArray = glyphState[@"cell"];
+    PFLCoord* oldCell = [PFLCoord coordWithX:[oldCellArray[0] integerValue] Y:[oldCellArray[1] integerValue]];
+    if (![glyph.cell isEqualToCoord:oldCell])
+    {
+      return NO;
+    }
+    
+    if ((glyph.direction) && ![glyph.direction isEqualToString:glyphState[@"direction"]])
+    {
+      return NO;
+    }
+  }
+  
+  return YES;
 }
 
 @end
