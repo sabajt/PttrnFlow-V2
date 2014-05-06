@@ -19,6 +19,7 @@
 NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
 NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
 NSString* const PFLNotificationEndSequence = @"PFLNotificationEndSequence";
+NSString* const PFLNotificationWinSequence = @"PFLNotificationWinSequence";
 
 NSString* const kKeyCoord = @"coord";
 NSString* const kKeyEmpty = @"empty";
@@ -37,6 +38,7 @@ NSString* const kKeyLoop = @"loop";
 @property (copy, nonatomic) NSString* currentDirection;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
 @property BOOL hasWon;
+@property BOOL lastStepWasLoop;
 
 @end
 
@@ -67,6 +69,15 @@ NSString* const kKeyLoop = @"loop";
 
 - (void)stepUserSequence:(CCTime)dt
 {
+  if (self.lastStepWasLoop)
+  {
+    PFLPuzzleState *puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
+    if ([puzzleState doesCurrentStateMatchAudioResponders:self.responders])
+    {
+      [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationWinSequence object:nil];
+    }
+  }
+  
   BOOL inBounds = [self.currentCell isCoordInGroup:self.puzzle.area];
   
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
@@ -102,11 +113,13 @@ NSString* const kKeyLoop = @"loop";
 
   if (loop)
   {
+    self.lastStepWasLoop = YES;
     self.userSequenceIndex = 0;
     self.currentCell = self.entry.cell;
   }
   else
   {
+    self.lastStepWasLoop = NO;
     self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
     self.userSequenceIndex++;
   }
@@ -116,6 +129,7 @@ NSString* const kKeyLoop = @"loop";
 
 - (void)startUserSequence
 {
+  self.lastStepWasLoop = NO;
   self.userSequenceIndex = 0;
   self.currentCell = self.entry.cell;
   

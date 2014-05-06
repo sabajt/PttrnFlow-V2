@@ -55,6 +55,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 @property BOOL shouldDrawGrid; // debugging
 @property (strong, nonatomic) PFLAudioEventController* audioEventController;
 @property (strong, nonatomic) NSSet* audioResponders;
+@property BOOL hasWon;
 
 @end
 
@@ -487,6 +488,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
   [notificationCenter addObserver:self selector:@selector(handleStepUserSequence:) name:PFLNotificationStepSequence object:nil];
   [notificationCenter addObserver:self selector:@selector(handleAudioResponderTouchControllerHit:) name:kPFLAudioTouchDispatcherHitNotification object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleWinSequence:) name:PFLNotificationWinSequence object:nil];
   [self setupDebug];
 }
 
@@ -522,6 +524,28 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   else
   {
     [self animateOutOfBounds:coord];
+  }
+}
+
+- (void)handleWinSequence:(NSNotification*)notification
+{
+  if (!self.hasWon)
+  {
+    static CGFloat fontSize = 16.0f;
+    
+    CCLabelTTF* loopLabel = [CCLabelTTF labelWithString:@"L  O  O  P" fontName:@"ArialRoundedMTBold" fontSize:fontSize];
+    loopLabel.color = [PFLColorUtils winLabelWithTheme:self.puzzleSet.theme];
+    loopLabel.positionType = CCPositionTypeNormalized;
+    loopLabel.anchorPoint = ccp(1.0f, 1.0f);
+    loopLabel.position = ccp(0.96, 0.99f);
+    [self.parent addChild:loopLabel];
+    
+    CCLabelTTF* completeLabel = [CCLabelTTF labelWithString:@"C  O  M  P  L  E  T  E" fontName:@"ArialRoundedMTBold" fontSize:fontSize];
+    completeLabel.color = [PFLColorUtils winLabelWithTheme:self.puzzleSet.theme];
+    completeLabel.positionType = CCPositionTypeNormalized;
+    completeLabel.anchorPoint = ccp(1.0f, 1.0f);
+    completeLabel.position = ccp(0.96, 0.95f);
+    [self.parent addChild:completeLabel];
   }
 }
 

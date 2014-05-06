@@ -37,6 +37,7 @@ FOUNDATION_EXPORT NSString *const kPFLColorUtilsLightPurpleTheme;
 + (CCColor *)padHighlightWithTheme:(NSString *)theme;
 + (CCColor *)padWithTheme:(NSString *)theme isStatic:(BOOL)isStatic;
 + (CCColor *)solutionButtonHighlightWithTheme:(NSString *)theme;
++ (CCColor *)winLabelWithTheme:(NSString *)theme;
 
 @end
 
