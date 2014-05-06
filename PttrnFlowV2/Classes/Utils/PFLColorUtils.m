@@ -239,7 +239,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 {
   if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
-    return [PFLColorUtils darkPurple];
+    return [PFLColorUtils dimPurple];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];

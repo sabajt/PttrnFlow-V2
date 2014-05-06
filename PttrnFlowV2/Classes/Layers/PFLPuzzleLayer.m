@@ -531,21 +531,34 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 {
   if (!self.hasWon)
   {
+    self.hasWon = YES;
+    
     static CGFloat fontSize = 16.0f;
+    CGSize screenSize = [[CCDirector sharedDirector] designSize];
     
     CCLabelTTF* loopLabel = [CCLabelTTF labelWithString:@"L  O  O  P" fontName:@"ArialRoundedMTBold" fontSize:fontSize];
     loopLabel.color = [PFLColorUtils winLabelWithTheme:self.puzzleSet.theme];
     loopLabel.positionType = CCPositionTypeNormalized;
     loopLabel.anchorPoint = ccp(1.0f, 1.0f);
-    loopLabel.position = ccp(0.96, 0.99f);
+    loopLabel.position = ccp(1 +  (loopLabel.contentSize.width / screenSize.width), 0.99f);
+    CGPoint loopLabelDest = ccp(0.96, 0.99f);
+    CCActionEaseElasticOut* loopLabelIn = [CCActionEaseElasticOut actionWithAction:[CCActionMoveTo actionWithDuration:0.3 position:loopLabelDest] period:1];
+    
     [self.parent addChild:loopLabel];
+    [loopLabel runAction:loopLabelIn];
     
     CCLabelTTF* completeLabel = [CCLabelTTF labelWithString:@"C  O  M  P  L  E  T  E" fontName:@"ArialRoundedMTBold" fontSize:fontSize];
     completeLabel.color = [PFLColorUtils winLabelWithTheme:self.puzzleSet.theme];
     completeLabel.positionType = CCPositionTypeNormalized;
     completeLabel.anchorPoint = ccp(1.0f, 1.0f);
-    completeLabel.position = ccp(0.96, 0.95f);
+    completeLabel.position = ccp(1 +  (completeLabel.contentSize.width / screenSize.width), 0.95f);
+    CGPoint completeLabelDest = ccp(0.96, 0.95f);
+    CCActionEaseElasticOut* completeLabelIn = [CCActionEaseElasticOut actionWithAction:[CCActionMoveTo actionWithDuration:0.3 position:completeLabelDest] period:1];
+    CCActionDelay* delay = [CCActionDelay actionWithDuration:0.3];
+    CCActionSequence* seq = [CCActionSequence actionWithArray:@[delay, completeLabelIn]];
+
     [self.parent addChild:completeLabel];
+    [completeLabel runAction:seq];
   }
 }
 
