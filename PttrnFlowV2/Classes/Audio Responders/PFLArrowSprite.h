@@ -6,14 +6,8 @@
 //
 //
 
-#import "CCSprite.h"
-#import "PFLAudioResponder.h"
+#import "PFLAudioResponderSprite.h"
 
-@class PFLGlyph;
-
-@interface PFLArrowSprite : CCSprite <PFLAudioResponder>
-
-- (id)initWithGlyph:(PFLGlyph*)glyph;
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;
+@interface PFLArrowSprite : PFLAudioResponderSprite
 
 @end

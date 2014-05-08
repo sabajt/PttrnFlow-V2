@@ -6,7 +6,6 @@
 //
 //
 
-#import "CCNode+PFLGrid.h"
 #import "NSObject+PFLAudioResponderUtils.h"
 #import "PFLAudioEventController.h"
 #import "PFLAudioPadSprite.h"
@@ -128,7 +127,7 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     for (CCNode<PFLAudioResponder>* node in fromCellResponders)
     {
       node.position = [toCell relativeMidpoint];
-      node.cell = toCell;
+      [node setAudioResponderCell:toCell];
     }
   }
 }

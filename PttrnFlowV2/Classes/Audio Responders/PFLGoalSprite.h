@@ -6,14 +6,8 @@
 //  Copyright (c) 2014 John Saba. All rights reserved.
 //
 
-#import "CCSprite.h"
-#import "PFLAudioResponder.h"
+#import "PFLAudioResponderSprite.h"
 
-@class PFLGlyph;
-
-@interface PFLGoalSprite : CCSprite <PFLAudioResponder>
-
-- (id)initWithGlyph:(PFLGlyph*)glyph;
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;
+@interface PFLGoalSprite : PFLAudioResponderSprite
 
 @end

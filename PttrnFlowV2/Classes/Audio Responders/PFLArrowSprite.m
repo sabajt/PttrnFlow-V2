@@ -8,7 +8,6 @@
 
 #import "PFLArrowSprite.h"
 #import "NSString+PFLDegrees.h"
-#import "CCNode+PFLGrid.h"
 #import "PFLColorUtils.h"
 #import "PFLEvent.h"
 #import "PFLGlyph.h"
@@ -21,23 +20,16 @@
 @property (strong, nonatomic) CCColor *defaultColor;
 @property (strong, nonatomic) CCColor *activeColor;
 @property (strong, nonatomic) PFLEvent *event;
-@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
 @implementation PFLArrowSprite
 
-- (id)initWithGlyph:(PFLGlyph*)glyph
+- (id)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell
 {
-  return [self initWithGlyph:glyph cell:nil];
-}
-
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
-{
-  self = [super initWithImageNamed:@"glyph_circle.png"];
+  self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    self.glyph = glyph;
     NSString* theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
@@ -50,33 +42,12 @@
     self.detailSprite = detailSprite;
     detailSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     [self addChild:detailSprite];
-    detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
-    
-    // CCNode+Grid
-    if (cell)
-    {
-      self.cell = cell;
-    }
-    else
-    {
-      self.cell = glyph.cell;
-    }
-    self.cellSize = [PFLGameConstants gridUnitSize];
+    detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];    
   }
   return self;
 }
 
-#pragma mark - AudioResponder
-
-- (NSNumber*)audioResponderID
-{
-  return self.glyph.responderID;
-}
-
-- (PFLCoord*)audioResponderCell
-{
-  return self.cell;
-}
+#pragma mark - PFLAudioResponder
 
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {

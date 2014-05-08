@@ -22,7 +22,6 @@
 #import "PFLPuzzleLayer.h"
 #import "PFLPuzzleControlsLayer.h"
 #import "PFLAudioResponderStepController.h"
-#import "PFLSynthSprite.h"
 #import "PFLGlyph.h"
 #import "PFLMultiSample.h"
 #import "PFLSample.h"
@@ -100,7 +99,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     self.audioEventController = audioEventController;
     [self addChild:audioEventController];
     audioEventController.beatDuration = self.beatDuration;
-    audioEventController.mute = NO;
+    audioEventController.mute = YES;
     
     // Sprite sheet batch nodes
     CCSpriteBatchNode* audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyAudioObjects stringByAppendingString:@".png"]];
@@ -380,7 +379,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     CGPoint cellCenter = [cell relativeMidpoint];
     
     // audio pad sprite
-    PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithGlyph:glyph cell:cell];
+    PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithImageNamed:@"audio_box.png" glyph:glyph cell:cell];
     [self addAudioResponder:audioPad];
 
     audioPad.position = cellCenter;
@@ -394,7 +393,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       if ([object isKindOfClass:[PFLMultiSample class]])
       {
         PFLMultiSample* multiSample = (PFLMultiSample*)object;
-        PFLGearSprite* gear = [[PFLGearSprite alloc] initWithGlyph:glyph multiSample:multiSample cell:cell];
+        PFLGearSprite* gear = [[PFLGearSprite alloc] initWithImageNamed:@"audio_circle.png" glyph:glyph cell:cell multiSample:multiSample];
         [self.audioResponderTouchController addResponder:gear];
         [self.sequenceDispatcher addResponder:gear];
         [self addAudioResponder:gear];
@@ -411,7 +410,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     // direction arrow
     if ([glyph.type isEqualToString:PFLGlyphTypeArrow])
     {
-      PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithGlyph:glyph cell:cell];
+      PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
       [self.audioResponderTouchController addResponder:arrow];
       [self.sequenceDispatcher addResponder:arrow];
       [self addAudioResponder:arrow];
@@ -422,7 +421,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     // entry point
     else if ([glyph.type isEqualToString:PFLGlyphTypeEntry])
     {
-      PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithGlyph:glyph cell:cell];
+      PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
       [self.audioResponderTouchController addResponder:entry];
       [self.sequenceDispatcher addResponder:entry];
       self.sequenceDispatcher.entry = entry;
@@ -434,7 +433,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     // goal
     else if ([glyph.type isEqualToString:PFLGlyphTypeGoal])
     {
-      PFLGoalSprite* goal = [[PFLGoalSprite alloc] initWithGlyph:glyph cell:cell];
+      PFLGoalSprite* goal = [[PFLGoalSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
       [self.audioResponderTouchController addResponder:goal];
       [self.sequenceDispatcher addResponder:goal];
       [self addAudioResponder:goal];

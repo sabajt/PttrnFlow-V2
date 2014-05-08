@@ -7,7 +7,6 @@
 //
 
 #import "PFLAudioPadSprite.h"
-#import "CCNode+PFLGrid.h"
 #import "CCSprite+PFLEffects.h"
 #import "PFLColorUtils.h"
 #import "PFLGameConstants.h"
@@ -25,40 +24,18 @@
 
 @implementation PFLAudioPadSprite
 
-- (id)initWithGlyph:(PFLGlyph *)glyph
+- (instancetype)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell
 {
-  return [self initWithGlyph:glyph cell:nil];
-}
-
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
-{
-  self = [super initWithImageNamed:@"audio_box.png"];
+  self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    self.glyph = glyph;
     self.isStatic = glyph.isStatic;
     self.color = [PFLColorUtils padWithTheme:glyph.puzzle.puzzleSet.theme isStatic:glyph.isStatic];
-
-    // CCNode+Grid
-    if (cell)
-    {
-      self.cell = cell;
-    }
-    else
-    {
-      self.cell = glyph.cell;
-    }
-    self.cellSize = [PFLGameConstants gridUnitSize];
   }
   return self;
 }
 
-#pragma mark - AudioResponder
-
-- (NSNumber*)audioResponderID
-{
-  return self.glyph.responderID;
-}
+#pragma mark - PFLAudioResponder
 
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
@@ -70,11 +47,6 @@
   [self runAction:seq];
   
   return nil;
-}
-
-- (PFLCoord*)audioResponderCell
-{
-  return self.cell;
 }
 
 @end

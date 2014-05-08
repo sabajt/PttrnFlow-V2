@@ -6,17 +6,11 @@
 //
 //
 
-#import "CCSprite.h"
-#import "PFLAudioResponder.h"
+#import "PFLAudioResponderSprite.h"
 
-@class PFLGlyph;
-
-@interface PFLEntrySprite : CCSprite <PFLAudioResponder>
+@interface PFLEntrySprite : PFLAudioResponderSprite
 
 @property (copy, nonatomic) NSString* direction;
-
-- (id)initWithGlyph:(PFLGlyph*)glyph;
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;
 
 @end
 

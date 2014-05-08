@@ -15,6 +15,7 @@
 
 // Responder must have a cell
 - (PFLCoord*)audioResponderCell;
+- (void)setAudioResponderCell:(PFLCoord*)coord;
 
 // Triggered on touch down or step
 // Handle glyph actions here, like highlighting / animation
@@ -26,10 +27,8 @@
 // Triggered after touch up or after a step
 - (NSArray*)audioResponderRelease:(NSInteger)bpm;
 
-// Puzzle state may use direction to persist updated glyph state
+// For use with puzzle states
 - (NSString*)audioResponderDirection;
-
-// Puzzle state may use this responder ID to persist updated glyph state
 - (NSNumber*)audioResponderID;
 
 @end

@@ -25,6 +25,8 @@ FOUNDATION_EXPORT NSString* const PFLGlyphTypeGoal;
 @property (copy, nonatomic) NSString* direction;
 @property (copy, nonatomic) NSString* type;
 @property BOOL isStatic;
+@property (strong, nonatomic) NSArray* switchReceiverAttributes;
+@property (strong, nonatomic) NSNumber* switchChannel;
 
 - (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle;
 

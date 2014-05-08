@@ -6,16 +6,10 @@
 //
 //
 
-#import "CCSprite.h"
-#import "PFLAudioResponder.h"
+#import "PFLAudioResponderSprite.h"
 
-@class PFLGlyph;
-
-@interface PFLAudioPadSprite : CCSprite <PFLAudioResponder>
+@interface PFLAudioPadSprite : PFLAudioResponderSprite
 
 @property (assign) BOOL isStatic;
-
-- (id)initWithGlyph:(PFLGlyph*)glyph;
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell;
 
 @end

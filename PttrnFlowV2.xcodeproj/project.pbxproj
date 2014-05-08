@@ -226,7 +226,6 @@
 		3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662B18F0B60C000F4522 /* PFLAudioPadSprite.m */; };
 		3399667F18F0B60C000F4522 /* PFLEntrySprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399662E18F0B60C000F4522 /* PFLEntrySprite.m */; };
 		3399668018F0B60C000F4522 /* PFLGearSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663018F0B60C000F4522 /* PFLGearSprite.m */; };
-		3399668118F0B60C000F4522 /* PFLSynthSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663218F0B60C000F4522 /* PFLSynthSprite.m */; };
 		3399668318F0B60C000F4522 /* PFLBasicButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663718F0B60C000F4522 /* PFLBasicButton.m */; };
 		3399668518F0B60C000F4522 /* PFLTileSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663B18F0B60C000F4522 /* PFLTileSprite.m */; };
 		3399668618F0B60C000F4522 /* PFLToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399663D18F0B60C000F4522 /* PFLToggleButton.m */; };
@@ -244,7 +243,6 @@
 		3399669418F0B60C000F4522 /* PFLSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665B18F0B60C000F4522 /* PFLSample.m */; };
 		3399669718F0B60C000F4522 /* PFLPuzzleSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */; };
 		3399669818F0B60C000F4522 /* PFLSolutionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666518F0B60C000F4522 /* PFLSolutionButton.m */; };
-		3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */; };
 		3399669A18F0B60C000F4522 /* CCSprite+PFLEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */; };
 		3399669B18F0B60C000F4522 /* NSArray+PFLCompareObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666C18F0B60C000F4522 /* NSArray+PFLCompareObjects.m */; };
 		3399669C18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399666E18F0B60C000F4522 /* NSObject+PFLAudioResponderUtils.m */; };
@@ -286,6 +284,8 @@
 		33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F21900313D0071C2B9 /* tech-tonal4.caf */; };
 		33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F31900313D0071C2B9 /* tech-tonal5.caf */; };
 		33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */; };
+		33F0C9FC191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0C9FB191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m */; };
+		33F0C9FF191BF2B70081CF77 /* PFLAudioResponderSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0C9FE191BF2B70081CF77 /* PFLAudioResponderSprite.m */; };
 		33F714551906000900621616 /* userInterface-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714531906000900621616 /* userInterface-ipad.plist */; };
 		33F714561906000900621616 /* userInterface-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F714541906000900621616 /* userInterface-ipad.png */; };
 		33F714591906004000621616 /* audioObjects-ipad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33F714571906004000621616 /* audioObjects-ipad.plist */; };
@@ -766,8 +766,6 @@
 		3399662E18F0B60C000F4522 /* PFLEntrySprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLEntrySprite.m; sourceTree = "<group>"; };
 		3399662F18F0B60C000F4522 /* PFLGearSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGearSprite.h; sourceTree = "<group>"; };
 		3399663018F0B60C000F4522 /* PFLGearSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGearSprite.m; sourceTree = "<group>"; };
-		3399663118F0B60C000F4522 /* PFLSynthSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSynthSprite.h; sourceTree = "<group>"; };
-		3399663218F0B60C000F4522 /* PFLSynthSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSynthSprite.m; sourceTree = "<group>"; };
 		3399663618F0B60C000F4522 /* PFLBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLBasicButton.h; sourceTree = "<group>"; };
 		3399663718F0B60C000F4522 /* PFLBasicButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLBasicButton.m; sourceTree = "<group>"; };
 		3399663A18F0B60C000F4522 /* PFLTileSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLTileSprite.h; sourceTree = "<group>"; };
@@ -802,8 +800,6 @@
 		3399666318F0B60C000F4522 /* PFLPuzzleSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleSetCell.m; sourceTree = "<group>"; };
 		3399666418F0B60C000F4522 /* PFLSolutionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSolutionButton.h; sourceTree = "<group>"; };
 		3399666518F0B60C000F4522 /* PFLSolutionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSolutionButton.m; sourceTree = "<group>"; };
-		3399666718F0B60C000F4522 /* CCNode+PFLGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLGrid.h"; sourceTree = "<group>"; };
-		3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+PFLGrid.m"; sourceTree = "<group>"; };
 		3399666918F0B60C000F4522 /* CCSprite+PFLEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCSprite+PFLEffects.h"; sourceTree = "<group>"; };
 		3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCSprite+PFLEffects.m"; sourceTree = "<group>"; };
 		3399666B18F0B60C000F4522 /* NSArray+PFLCompareObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PFLCompareObjects.h"; sourceTree = "<group>"; };
@@ -860,6 +856,10 @@
 		33B868F31900313D0071C2B9 /* tech-tonal5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal5.caf"; sourceTree = "<group>"; };
 		33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGoalSprite.h; sourceTree = "<group>"; };
 		33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGoalSprite.m; sourceTree = "<group>"; };
+		33F0C9FA191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSwitchReceiverAttributes.h; sourceTree = "<group>"; };
+		33F0C9FB191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSwitchReceiverAttributes.m; sourceTree = "<group>"; };
+		33F0C9FD191BF2B70081CF77 /* PFLAudioResponderSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderSprite.h; sourceTree = "<group>"; };
+		33F0C9FE191BF2B70081CF77 /* PFLAudioResponderSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderSprite.m; sourceTree = "<group>"; };
 		33F714531906000900621616 /* userInterface-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "userInterface-ipad.plist"; sourceTree = "<group>"; };
 		33F714541906000900621616 /* userInterface-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userInterface-ipad.png"; sourceTree = "<group>"; };
 		33F714571906004000621616 /* audioObjects-ipad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "audioObjects-ipad.plist"; sourceTree = "<group>"; };
@@ -1828,6 +1828,8 @@
 		3399662718F0B60C000F4522 /* Audio Responders */ = {
 			isa = PBXGroup;
 			children = (
+				33F0C9FD191BF2B70081CF77 /* PFLAudioResponderSprite.h */,
+				33F0C9FE191BF2B70081CF77 /* PFLAudioResponderSprite.m */,
 				3399662818F0B60C000F4522 /* PFLArrowSprite.h */,
 				3399662918F0B60C000F4522 /* PFLArrowSprite.m */,
 				3399662A18F0B60C000F4522 /* PFLAudioPadSprite.h */,
@@ -1837,8 +1839,6 @@
 				3399662E18F0B60C000F4522 /* PFLEntrySprite.m */,
 				3399662F18F0B60C000F4522 /* PFLGearSprite.h */,
 				3399663018F0B60C000F4522 /* PFLGearSprite.m */,
-				3399663118F0B60C000F4522 /* PFLSynthSprite.h */,
-				3399663218F0B60C000F4522 /* PFLSynthSprite.m */,
 				33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */,
 				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
 			);
@@ -1897,6 +1897,8 @@
 				3399665918F0B60C000F4522 /* PFLPuzzleSet.m */,
 				3399665A18F0B60C000F4522 /* PFLSample.h */,
 				3399665B18F0B60C000F4522 /* PFLSample.m */,
+				33F0C9FA191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.h */,
+				33F0C9FB191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m */,
 			);
 			name = Models;
 			path = Classes/Models;
@@ -1917,8 +1919,6 @@
 		3399666618F0B60C000F4522 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3399666718F0B60C000F4522 /* CCNode+PFLGrid.h */,
-				3399666818F0B60C000F4522 /* CCNode+PFLGrid.m */,
 				3399666918F0B60C000F4522 /* CCSprite+PFLEffects.h */,
 				3399666A18F0B60C000F4522 /* CCSprite+PFLEffects.m */,
 				3399666B18F0B60C000F4522 /* NSArray+PFLCompareObjects.h */,
@@ -2181,6 +2181,7 @@
 				339963A718F0A8DE000F4522 /* CCAtlasNode.m in Sources */,
 				339964F518F0A8DF000F4522 /* OpenALManager.m in Sources */,
 				3399650118F0A8DF000F4522 /* IOSVersion.m in Sources */,
+				33F0C9FF191BF2B70081CF77 /* PFLAudioResponderSprite.m in Sources */,
 				339963B618F0A8DE000F4522 /* CCDirector.m in Sources */,
 				3399652118F0A8DF000F4522 /* CCScrollView.m in Sources */,
 				3399641418F0A8DF000F4522 /* CCResponder.m in Sources */,
@@ -2188,7 +2189,6 @@
 				3399643E18F0A8DF000F4522 /* CCSpriteBatchNode.m in Sources */,
 				3399668B18F0B60C000F4522 /* PFLPuzzleLayer.m in Sources */,
 				3399646218F0A8DF000F4522 /* CCTransition.m in Sources */,
-				3399668118F0B60C000F4522 /* PFLSynthSprite.m in Sources */,
 				339966A018F0B60C000F4522 /* PFLGameConstants.m in Sources */,
 				3399644118F0A8DF000F4522 /* CCSpriteFrame.m in Sources */,
 				339963D518F0A8DE000F4522 /* CCNodeColor.m in Sources */,
@@ -2199,6 +2199,7 @@
 				3399667E18F0B60C000F4522 /* PFLAudioPadSprite.m in Sources */,
 				3399647A18F0A8DF000F4522 /* CCAppDelegate.m in Sources */,
 				3399647E18F0A8DF000F4522 /* CCDirectorMac.m in Sources */,
+				33F0C9FC191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m in Sources */,
 				339963B218F0A8DE000F4522 /* ccDeprecated.m in Sources */,
 				339964E118F0A8DF000F4522 /* ALContext.m in Sources */,
 				339963BD18F0A8DE000F4522 /* CCDrawNode.m in Sources */,
@@ -2271,7 +2272,6 @@
 				339966A118F0B60C000F4522 /* PFLGeometry.m in Sources */,
 				3399657018F0A8E0000F4522 /* CCBLocalizationManager.m in Sources */,
 				3399645C18F0A8DF000F4522 /* CCTiledMapObjectGroup.m in Sources */,
-				3399669918F0B60C000F4522 /* CCNode+PFLGrid.m in Sources */,
 				3399655918F0A8E0000F4522 /* vec3.c in Sources */,
 				339963DC18F0A8DE000F4522 /* CCLayoutBox.m in Sources */,
 				339963D918F0A8DE000F4522 /* CCLayout.m in Sources */,

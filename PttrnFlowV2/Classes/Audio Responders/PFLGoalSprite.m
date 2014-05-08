@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 John Saba. All rights reserved.
 //
 
-#import "CCNode+PFLGrid.h"
 #import "PFLColorUtils.h"
 #import "PFLEvent.h"
 #import "PFLGlyph.h"
@@ -26,17 +25,11 @@
 
 @implementation PFLGoalSprite
 
-- (id)initWithGlyph:(PFLGlyph*)glyph
+- (instancetype)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell
 {
-  return [self initWithGlyph:glyph cell:nil];
-}
-
-- (id)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
-{
-  self = [super initWithImageNamed:@"glyph_circle.png"];
+  self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    self.glyph = glyph;
     self.event = [PFLEvent goalEvent];
 
     NSString* theme = glyph.puzzle.puzzleSet.theme;
@@ -49,32 +42,11 @@
     detailSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     [self addChild:detailSprite];
     detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
-    
-    // CCNode+Grid
-    if (cell)
-    {
-      self.cell = cell;
-    }
-    else
-    {
-      self.cell = glyph.cell;
-    }
-    self.cellSize = [PFLGameConstants gridUnitSize];
   }
   return self;
 }
 
-#pragma mark - AudioResponder
-
-- (NSNumber*)audioResponderID
-{
-  return self.glyph.responderID;
-}
-
-- (PFLCoord*)audioResponderCell
-{
-  return self.cell;
-}
+#pragma mark - PFLAudioResponder
 
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {

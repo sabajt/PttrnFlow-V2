@@ -8,6 +8,7 @@
 
 #import "PFLGlyph.h"
 #import "PFLCoord.h"
+#import "PFLSwitchReceiverAttributes.h"
 
 NSString* const PFLGlyphTypeNone = @"none";
 NSString* const PFLGlyphTypeArrow = @"arrow";
@@ -37,6 +38,15 @@ static NSString* const kType = @"type";
     self.direction = object[kDirection];
     self.isStatic = [object[kStatic] boolValue];
     self.type = object[kType];
+    self.switchChannel = object[@"switch_channel"];
+    
+    NSArray* switchReceiver = object[@"switch_receiver"];
+    if (switchReceiver)
+    {
+      PFLSwitchReceiverAttributes* attributesState1 = [[PFLSwitchReceiverAttributes alloc] initWithJson:switchReceiver[0]];
+      PFLSwitchReceiverAttributes* attributesState2 = [[PFLSwitchReceiverAttributes alloc] initWithJson:switchReceiver[1]];
+      self.switchReceiverAttributes = @[attributesState1, attributesState2];
+    }
   }
   return self;
 }

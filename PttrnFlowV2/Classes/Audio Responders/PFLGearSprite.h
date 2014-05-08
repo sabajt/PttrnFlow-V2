@@ -6,14 +6,12 @@
 //
 //
 
-#import "CCSprite.h"
-#import "PFLAudioResponder.h"
+#import "PFLAudioResponderSprite.h"
 
-@class PFLGlyph, PFLMultiSample;
+@class PFLMultiSample;
 
-@interface PFLGearSprite : CCSprite <PFLAudioResponder>
+@interface PFLGearSprite : PFLAudioResponderSprite
 
-- (id)initWithGlyph:(PFLGlyph*)glyph multiSample:(PFLMultiSample*)multiSample;
-- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample cell:(PFLCoord*)cell;
+- (instancetype)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell multiSample:(PFLMultiSample*)multiSample;
 
 @end

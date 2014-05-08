@@ -8,7 +8,6 @@
 
 #import "PFLAudioResponder.h"
 #import "PFLAudioResponderStepController.h"
-#import "CCNode+PFLGrid.h"
 #import "PFLAudioEventController.h"
 #import "NSObject+PFLAudioResponderUtils.h"
 #import "PFLEvent.h"

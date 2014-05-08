@@ -7,7 +7,6 @@
 //
 
 #import "PFLColorUtils.h"
-#import "CCNode+PFLGrid.h"
 #import "PFLGearSprite.h"
 #import "PFLEvent.h"
 #import "PFLAudioEventController.h"
@@ -29,32 +28,15 @@
 
 @implementation PFLGearSprite
 
-- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample
+- (instancetype)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell multiSample:(PFLMultiSample *)multiSample
 {
-  return [self initWithGlyph:glyph multiSample:multiSample cell:nil];
-}
-
-- (id)initWithGlyph:(PFLGlyph *)glyph multiSample:(PFLMultiSample *)multiSample cell:(PFLCoord*)cell
-{
-  self = [super initWithImageNamed:@"audio_circle.png"];
+  self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    self.glyph = glyph;
     NSString* theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
-    
-    // CCNode+Grid
-    if (cell)
-    {
-      self.cell = cell;
-    }
-    else
-    {
-      self.cell = glyph.cell;
-    }
-    self.cellSize = [PFLGameConstants gridUnitSize];
     
     // units (beats)
     self.audioUnits = [NSMutableArray array];
@@ -70,7 +52,6 @@
       static CGFloat unitPadding = 4.0f;
       audioUnit.position = ccp(container.contentSize.width / 2, (container.contentSize.height - audioUnit.contentSize.height / 2) - unitPadding);
       audioUnit.color = [PFLColorUtils glyphDetailWithTheme:theme];
-      
       
       // // unit symbol
       // CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
@@ -89,17 +70,7 @@
   return self;
 }
 
-#pragma mark - AudioResponder
-
-- (NSNumber*)audioResponderID
-{
-  return self.glyph.responderID;
-}
-
-- (PFLCoord*)audioResponderCell
-{
-  return self.cell;
-}
+#pragma mark - PFLAudioResponder
 
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
