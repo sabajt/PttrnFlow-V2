@@ -48,34 +48,26 @@
   
   // broadcast hit notification here so we don't have to for both touch and step controllers
   // if notification needs touch or step distinction, move this into respective controllers
-  if (self.switchState == 0)
+  if ([self.switchState integerValue] == 0)
   {
-    self.switchState = 1;
+    self.switchState = @1;
   }
   else
   {
-    self.switchState = 0;
+    self.switchState = @0;
   }
   NSDictionary* userInfo = @{
     PFLSwitchChannelKey : self.glyph.switchChannel,
-    PFLSwitchStateKey : [NSNumber numberWithInteger:self.switchState]
+    PFLSwitchStateKey : self.switchState
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLSwitchSenderHitNotification object:nil userInfo:userInfo];
   
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSInteger)state
+- (void)audioResponderSwitchToState:(NSNumber*)state
 {
   self.switchState = state;
-//  if (self.switchState == 0)
-//  {
-//    self.switchState = 1;
-//  }
-//  else
-//  {
-//    self.switchState = 0;
-//  }
 }
 
 @end

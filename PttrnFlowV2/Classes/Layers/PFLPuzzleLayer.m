@@ -504,7 +504,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (void)onExit
 {
-  [[PFLPuzzleState puzzleStateForPuzzle:self.puzzle] updateWithAudioResponders:[self.audioResponders allObjects]];
+  [[PFLPuzzleState puzzleStateForPuzzle:self.puzzle] updateWithAudioResponderSprites:[self.audioResponders allObjects]];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super onExit];
 }

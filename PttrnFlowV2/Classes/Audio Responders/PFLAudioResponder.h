@@ -28,8 +28,7 @@
 - (NSArray*)audioResponderRelease:(NSInteger)bpm;
 
 // For use with puzzle states
-- (NSString*)audioResponderDirection;
 - (NSNumber*)audioResponderID;
-- (void)audioResponderSwitchToState:(NSInteger)state;
+- (void)audioResponderSwitchToState:(NSNumber*)state;
 
 @end

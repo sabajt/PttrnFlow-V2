@@ -71,7 +71,7 @@ NSString* const kKeyLoop = @"loop";
   if (self.lastStepWasLoop)
   {
     PFLPuzzleState *puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
-    if ([puzzleState doesCurrentStateMatchAudioResponders:self.responders])
+    if ([puzzleState doesCurrentStateMatchAudioResponderSprites:self.responders])
     {
       [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationWinSequence object:nil];
     }
@@ -140,7 +140,7 @@ NSString* const kKeyLoop = @"loop";
   
   // save puzzle state so we can check for a succesful loop
   PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
-  [puzzleState updateWithAudioResponders:self.responders];
+  [puzzleState updateWithAudioResponderSprites:self.responders];
 }
 
 - (void)stopUserSequence

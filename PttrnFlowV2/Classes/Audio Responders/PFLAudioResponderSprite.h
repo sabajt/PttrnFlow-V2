@@ -23,7 +23,8 @@ FOUNDATION_EXPORT NSString* const PFLSwitchStateKey;
 @property (strong, nonatomic) CCColor* defaultColor;
 @property (strong, nonatomic) CCColor* activeColor;
 @property (copy, nonatomic) NSString* theme;
-@property NSInteger switchState;
+@property (strong, nonatomic) NSNumber* switchState;
+@property (strong, nonatomic) NSNumber* responderID;
 
 - (instancetype)initWithImageNamed:(NSString*)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell;
 

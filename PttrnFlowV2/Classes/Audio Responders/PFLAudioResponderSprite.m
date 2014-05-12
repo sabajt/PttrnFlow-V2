@@ -31,6 +31,7 @@ NSString* const PFLSwitchStateKey = @"PFLSwitchStateKey";
     self.theme = glyph.puzzle.puzzleSet.theme;
     self.defaultColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
     self.activeColor = [PFLColorUtils glyphActiveWithTheme:self.theme];
+    self.responderID = glyph.responderID;
   }
   return self;
 }
@@ -45,6 +46,12 @@ NSString* const PFLSwitchStateKey = @"PFLSwitchStateKey";
   }
 }
 
+- (void)onExit
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super onExit];
+}
+
 - (void)handleSwitchHit:(NSNotification*)notification
 {
   NSNumber* switchChannel = notification.userInfo[PFLSwitchChannelKey];
@@ -52,7 +59,7 @@ NSString* const PFLSwitchStateKey = @"PFLSwitchStateKey";
   if ([switchChannel isEqualToNumber:self.glyph.switchChannel] &&
       [self respondsToSelector:@selector(audioResponderSwitchToState:)])
   {
-    [self audioResponderSwitchToState:[switchState integerValue]];
+    [self audioResponderSwitchToState:switchState];
   }
   else
   {

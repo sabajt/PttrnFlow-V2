@@ -14,6 +14,7 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 #import "PFLSwitchReceiverAttributes.h"
+#import "PFLPuzzleState.h"
 
 @interface PFLArrowSprite ()
 
@@ -38,9 +39,10 @@
     [self addChild:detailSprite];
     detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
     
+    // TOOD: might need to load saved state?
     if (glyph.switchReceiverAttributes)
     {
-      [self audioResponderSwitchToState:0];
+      [self audioResponderSwitchToState:@0];
     }
     else
     {
@@ -63,10 +65,10 @@
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSInteger)state
+- (void)audioResponderSwitchToState:(NSNumber*)state
 {
   self.switchState = state;
-  PFLSwitchReceiverAttributes* attributes = self.glyph.switchReceiverAttributes[state];
+  PFLSwitchReceiverAttributes* attributes = self.glyph.switchReceiverAttributes[[state integerValue]];
   
   self.active = attributes.active;
   if (self.active)

@@ -12,6 +12,7 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleState.h"
 #import "PFLGlyph.h"
+#import "PFLAudioResponderSprite.h"
 
 @interface PFLPuzzleState ()
 
@@ -71,43 +72,11 @@
   }
 }
 
-// Create PFLGlyphs with the only info needed for puzzle state from audio responders
-- (NSArray*)glyphsFromAudioResponders:(NSArray*)audioResponders
-{
-  NSMutableArray* updatedGlyphs = [NSMutableArray array];
-  
-  for (id<PFLAudioResponder> audioResponder in audioResponders)
-  {
-    if (![audioResponder respondsToSelector:@selector(audioResponderID)])
-    {
-      continue;
-    }
-    
-    PFLGlyph* updateGlyph = [[PFLGlyph alloc] initWithObject:nil puzzle:nil];
-    updateGlyph.responderID = [audioResponder audioResponderID];
-    updateGlyph.cell = [audioResponder audioResponderCell];
-    
-    if ([audioResponder respondsToSelector:@selector(audioResponderDirection)])
-    {
-      updateGlyph.direction = [audioResponder audioResponderDirection];
-    }
-    
-    [updatedGlyphs addObject:updateGlyph];
-  }
-  
-  return [NSArray arrayWithArray:updatedGlyphs];
-}
-
 #pragma mark - Public
 
 - (NSMutableDictionary*)glyphStateForGid:(NSNumber*)gid
 {
   return self.glyphs[gid];
-}
-
-- (void)updateWithAudioResponders:(NSArray*)audioResponders
-{
-  [self updateWithGlyphs:[self glyphsFromAudioResponders:audioResponders]];
 }
 
 - (void)updateWithGlyphs:(NSArray*)glyphs
@@ -126,25 +95,50 @@
     
     NSArray* cell = @[[NSNumber numberWithInteger:glyph.cell.x], [NSNumber numberWithInteger:glyph.cell.y]];
     glyphState[@"cell"] = cell;
-    if (glyph.direction)
+    
+    // default is always state 0 for stuff (hacky fix later)
+    if (glyph.switchChannel)
     {
-      glyphState[@"direction"] = glyph.direction;
+      glyphState[@"switch_state"] = @0;
     }
+    
     self.glyphs[glyph.responderID] = glyphState;
   }
   [self archive];
 }
 
-- (BOOL)doesCurrentStateMatchAudioResponders:(NSArray*)audioResponders
+- (void)updateWithAudioResponderSprites:(NSArray *)audioResponderSprites
 {
-  return [self doesCurrentStateMatchGlyphs:[self glyphsFromAudioResponders:audioResponders]];
+  if (!self.glyphs)
+  {
+    self.glyphs = [NSMutableDictionary dictionary];
+  }
+  for (PFLAudioResponderSprite* responderSprite in audioResponderSprites)
+  {
+    NSMutableDictionary* glyphState = [self glyphStateForGid:responderSprite.responderID];
+    if (!glyphState)
+    {
+      glyphState = [NSMutableDictionary dictionary];
+    }
+    
+    NSArray* cell = @[[NSNumber numberWithInteger:responderSprite.cell.x], [NSNumber numberWithInteger:responderSprite.cell.y]];
+    glyphState[@"cell"] = cell;
+    
+    if (responderSprite.switchState)
+    {
+      glyphState[@"switch_state"] = responderSprite.switchState;
+    }
+    
+    self.glyphs[responderSprite.responderID] = glyphState;
+  }
+  [self archive];
 }
 
-- (BOOL)doesCurrentStateMatchGlyphs:(NSArray*)glyphs
+- (BOOL)doesCurrentStateMatchAudioResponderSprites:(NSArray*)audioResponderSprites
 {
-  for (PFLGlyph* glyph in glyphs)
+  for (PFLAudioResponderSprite* responderSprite in audioResponderSprites)
   {
-    NSMutableDictionary* glyphState = [self glyphStateForGid:glyph.responderID];
+    NSMutableDictionary* glyphState = [self glyphStateForGid:responderSprite.responderID];
     if (!glyphState)
     {
       return NO;
@@ -152,12 +146,13 @@
     
     NSArray* oldCellArray = glyphState[@"cell"];
     PFLCoord* oldCell = [PFLCoord coordWithX:[oldCellArray[0] integerValue] Y:[oldCellArray[1] integerValue]];
-    if (![glyph.cell isEqualToCoord:oldCell])
+    if (![responderSprite.cell isEqualToCoord:oldCell])
     {
       return NO;
     }
     
-    if ((glyph.direction) && ![glyph.direction isEqualToString:glyphState[@"direction"]])
+    NSNumber* oldSwitchState = glyphState[@"switch_state"];
+    if ((responderSprite.switchState) && ![responderSprite.switchState isEqualToNumber:oldSwitchState])
     {
       return NO;
     }
