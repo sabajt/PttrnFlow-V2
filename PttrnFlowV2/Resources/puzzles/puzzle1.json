@@ -189,7 +189,7 @@
                "audio_id" : 7,
                "responder_id" : 2,
                "type" : "arrow",
-               "static" : 1,
+               "static" : 0,
                "switch_channel" : 0,
                "switch_receiver" : 
                [
@@ -202,20 +202,37 @@
                     }
                ]
           },
-          {    "cell" : [2, 0],
+          {    
+               "cell" : [2, 0],
                "audio_id" : 8,
-               "responder_id" : 2,
+               "responder_id" : 3,
+               "type" : "switch_sender",
+               "static" : 0,
+               "switch_channel" : 0
+          },
+          {
+               "cell" : [2, 1],
+               "audio_id" : 6,
+               "responder_id" : 4,
                "type" : "switch_sender",
                "static" : 1,
-               "switch_channel" : 0
+               "switch_channel" : 0,
           },
           {
                "cell" : [3, 0],
                "audio_id" : 4,
-               "responder_id" : 3,
+               "responder_id" : 5,
                "type" : "arrow",
                "direction" : "up",
                "static" : 0,
+          },
+          {
+               "cell" : [1, 1],
+               "audio_id" : 3,
+               "responder_id" : 6,
+               "type" : "arrow",
+               "static" : 0,
+               "direction" : "right"
           }
      ],
      "solution" :

@@ -17,7 +17,6 @@
 @interface PFLAudioPadSprite ()
 
 @property (strong, nonatomic) CCSprite* highlightSprite;
-@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -30,7 +29,7 @@
   if (self)
   {
     self.isStatic = glyph.isStatic;
-    self.color = [PFLColorUtils padWithTheme:glyph.puzzle.puzzleSet.theme isStatic:glyph.isStatic];
+    self.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
   }
   return self;
 }

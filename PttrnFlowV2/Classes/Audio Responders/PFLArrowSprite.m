@@ -13,13 +13,13 @@
 #import "PFLGlyph.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
+#import "PFLSwitchReceiverAttributes.h"
 
 @interface PFLArrowSprite ()
 
 @property (weak, nonatomic) CCSprite *detailSprite;
-@property (strong, nonatomic) CCColor *defaultColor;
-@property (strong, nonatomic) CCColor *activeColor;
 @property (strong, nonatomic) PFLEvent *event;
+@property (copy, nonatomic) NSString* direction;
 
 @end
 
@@ -30,19 +30,23 @@
   self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    NSString* theme = glyph.puzzle.puzzleSet.theme;
-    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
-    self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
-    self.rotation = [glyph.direction degrees];
-    
-    self.event = [PFLEvent directionEventWithDirection:glyph.direction];
     
     CCSprite* detailSprite = [CCSprite spriteWithImageNamed:@"arrow_up.png"];
     self.detailSprite = detailSprite;
     detailSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     [self addChild:detailSprite];
-    detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];    
+    detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    
+    if (glyph.switchReceiverAttributes)
+    {
+      [self audioResponderSwitchToState:0];
+    }
+    else
+    {
+      self.rotation = [glyph.direction degrees];
+      self.event = [PFLEvent directionEventWithDirection:glyph.direction];
+    }
   }
   return self;
 }
@@ -57,6 +61,30 @@
   [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
   
   return self.event;
+}
+
+- (void)audioResponderSwitchToState:(NSInteger)state
+{
+  self.switchState = state;
+  PFLSwitchReceiverAttributes* attributes = self.glyph.switchReceiverAttributes[state];
+  
+  self.active = attributes.active;
+  if (self.active)
+  {
+    self.detailSprite.opacity = 1.0f;
+  }
+  else
+  {
+    self.detailSprite.opacity = 0.2f;
+  }
+  
+  self.direction = attributes.direction;
+  if (self.direction)
+  {
+    self.rotation = [self.direction degrees];
+  }
+  
+  self.event = [PFLEvent directionEventWithDirection:self.direction];
 }
 
 @end

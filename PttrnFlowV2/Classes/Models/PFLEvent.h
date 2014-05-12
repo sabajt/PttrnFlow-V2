@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, PFLEventType)
   PFLEventTypeGoal,
   PFLEventTypeMultiSample,
   PFLEventTypeSample,
+  PFLEventTypeSwitchSender,
   PFLEventTypeSynth,
 };
 
@@ -39,6 +40,7 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 @property (copy, nonatomic) NSString* file;
 @property (copy, nonatomic) NSString* midiValue;
 @property (strong, nonatomic) NSArray* sampleEvents;
+@property (strong, nonatomic) NSNumber* switchSenderChannel;
 @property (copy, nonatomic) NSString* synthType;
 @property (strong, nonatomic) NSNumber* time;
 
@@ -51,5 +53,6 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 + (id)multiSampleEventWithAudioID:(NSNumber*)audioID sampleEvents:(NSArray*)sampleEvents;
 + (id)multiSampleEventWithAudioID:(NSNumber*)audioID multiSample:(PFLMultiSample*)multiSample;
 + (id)goalEvent;
++ (id)switchSenderEventWithChannel:(NSNumber*)channel;
 
 @end

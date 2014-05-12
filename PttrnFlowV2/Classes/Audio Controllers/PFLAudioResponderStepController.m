@@ -85,7 +85,7 @@ NSString* const kKeyLoop = @"loop";
   BOOL loop = NO;
   for (PFLEvent* e in events)
   {
-    if (e.eventType == PFLEventTypeDirection)
+    if ((e.eventType == PFLEventTypeDirection) && e.direction)
     {
       self.currentDirection = e.direction;
     }
@@ -114,7 +114,7 @@ NSString* const kKeyLoop = @"loop";
   {
     self.lastStepWasLoop = YES;
     self.userSequenceIndex = 0;
-    self.currentCell = self.entry.cell;
+    self.currentCell = self.entry.cell; 
   }
   else
   {
@@ -122,6 +122,8 @@ NSString* const kKeyLoop = @"loop";
     self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
     self.userSequenceIndex++;
   }
+  
+  NSAssert(self.currentCell, @"Error: step controller doesn't have current cell");
 }
 
 #pragma mark - PFLPuzzleControlsDelegate

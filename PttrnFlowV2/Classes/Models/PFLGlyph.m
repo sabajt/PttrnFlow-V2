@@ -14,6 +14,7 @@ NSString* const PFLGlyphTypeNone = @"none";
 NSString* const PFLGlyphTypeArrow = @"arrow";
 NSString* const PFLGlyphTypeEntry = @"entry";
 NSString* const PFLGlyphTypeGoal = @"goal";
+NSString* const PFLGlyphTypeSwitchSender = @"switch_sender";
 
 static NSString* const kResponderID = @"responder_id";
 static NSString* const kAudioID = @"audio_id";

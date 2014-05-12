@@ -30,5 +30,6 @@
 // For use with puzzle states
 - (NSString*)audioResponderDirection;
 - (NSNumber*)audioResponderID;
+- (void)audioResponderSwitchToState:(NSInteger)state;
 
 @end

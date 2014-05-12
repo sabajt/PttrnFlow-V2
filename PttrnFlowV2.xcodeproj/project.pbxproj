@@ -270,6 +270,7 @@
 		339A29AA1902C1190045CA1A /* userInterface-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 339A29A81902C1190045CA1A /* userInterface-ipadhd.png */; };
 		33A38D04190C211A002FBFF7 /* PFLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A38D03190C211A002FBFF7 /* PFLResourceManager.m */; };
 		33A38D07190C25AD002FBFF7 /* PFLPuzzleState.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */; };
+		33AB9CB5191E5BE600854B03 /* PFLSwitchSenderSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AB9CB4191E5BE600854B03 /* PFLSwitchSenderSprite.m */; };
 		33B868F41900313D0071C2B9 /* tech-chuk1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E61900313D0071C2B9 /* tech-chuk1.caf */; };
 		33B868F51900313D0071C2B9 /* tech-clap1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E71900313D0071C2B9 /* tech-clap1.caf */; };
 		33B868F61900313D0071C2B9 /* tech-clok1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868E81900313D0071C2B9 /* tech-clok1.caf */; };
@@ -841,6 +842,8 @@
 		33A38D03190C211A002FBFF7 /* PFLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLResourceManager.m; sourceTree = "<group>"; };
 		33A38D05190C25AD002FBFF7 /* PFLPuzzleState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzleState.h; sourceTree = "<group>"; };
 		33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLPuzzleState.m; sourceTree = "<group>"; };
+		33AB9CB3191E5BE600854B03 /* PFLSwitchSenderSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSwitchSenderSprite.h; sourceTree = "<group>"; };
+		33AB9CB4191E5BE600854B03 /* PFLSwitchSenderSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLSwitchSenderSprite.m; sourceTree = "<group>"; };
 		33B868E61900313D0071C2B9 /* tech-chuk1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-chuk1.caf"; sourceTree = "<group>"; };
 		33B868E71900313D0071C2B9 /* tech-clap1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clap1.caf"; sourceTree = "<group>"; };
 		33B868E81900313D0071C2B9 /* tech-clok1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-clok1.caf"; sourceTree = "<group>"; };
@@ -1841,6 +1844,8 @@
 				3399663018F0B60C000F4522 /* PFLGearSprite.m */,
 				33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */,
 				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
+				33AB9CB3191E5BE600854B03 /* PFLSwitchSenderSprite.h */,
+				33AB9CB4191E5BE600854B03 /* PFLSwitchSenderSprite.m */,
 			);
 			name = "Audio Responders";
 			path = "Classes/Audio Responders";
@@ -2297,6 +2302,7 @@
 				339966A218F0B60C000F4522 /* PFLJsonUtils.m in Sources */,
 				3399645918F0A8DF000F4522 /* CCTiledMapLayer.m in Sources */,
 				339965ED18F0A8E0000F4522 /* HelloWorldScene.m in Sources */,
+				33AB9CB5191E5BE600854B03 /* PFLSwitchSenderSprite.m in Sources */,
 				3399654D18F0A8DF000F4522 /* neon_matrix_impl.c in Sources */,
 				339963D218F0A8DE000F4522 /* CCLabelTTF.m in Sources */,
 				3399648718F0A8DF000F4522 /* NSEvent+CC.m in Sources */,

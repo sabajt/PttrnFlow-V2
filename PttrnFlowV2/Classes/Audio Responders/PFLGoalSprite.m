@@ -16,10 +16,7 @@
 @interface PFLGoalSprite ()
 
 @property (weak, nonatomic) CCSprite *detailSprite;
-@property (strong, nonatomic) CCColor *defaultColor;
-@property (strong, nonatomic) CCColor *activeColor;
 @property (strong, nonatomic) PFLEvent *event;
-@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -31,17 +28,13 @@
   if (self)
   {
     self.event = [PFLEvent goalEvent];
-
-    NSString* theme = glyph.puzzle.puzzleSet.theme;
-    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
-    self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
     
     CCSprite* detailSprite = [CCSprite spriteWithImageNamed:@"goal.png"];
     self.detailSprite = detailSprite;
     detailSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     [self addChild:detailSprite];
-    detailSprite.color = [PFLColorUtils padWithTheme:theme isStatic:glyph.isStatic];
+    detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
   }
   return self;
 }

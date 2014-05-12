@@ -108,6 +108,14 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
++ (id)switchSenderEventWithChannel:(NSNumber*)channel
+{
+  PFLEvent* event = [[PFLEvent alloc] init];
+  event.eventType = PFLEventTypeSwitchSender;
+  event.switchSenderChannel = channel;
+  return event;
+}
+
 #pragma mark - PFLCompareObjectsDelegate
 
 - (BOOL)isEqualToObject:(id)object

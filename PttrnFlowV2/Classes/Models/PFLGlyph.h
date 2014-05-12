@@ -14,6 +14,7 @@ FOUNDATION_EXPORT NSString* const PFLGlyphTypeNone;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeArrow;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeEntry;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeGoal;
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeSwitchSender;
 
 @interface PFLGlyph : NSObject
 

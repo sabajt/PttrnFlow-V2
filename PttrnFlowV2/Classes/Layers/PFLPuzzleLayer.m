@@ -29,6 +29,7 @@
 #import "PFLGoalSprite.h"
 #import "PFLPuzzleState.h"
 #import "AppDelegate.h"
+#import "PFLSwitchSenderSprite.h"
 
 typedef NS_ENUM(NSInteger, ZOrderAudioBatch)
 {
@@ -99,7 +100,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     self.audioEventController = audioEventController;
     [self addChild:audioEventController];
     audioEventController.beatDuration = self.beatDuration;
-    audioEventController.mute = YES;
+    audioEventController.mute = NO;
     
     // Sprite sheet batch nodes
     CCSpriteBatchNode* audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyAudioObjects stringByAppendingString:@".png"]];
@@ -180,7 +181,6 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   {
     for (NSInteger y = -1; y <= self.maxCoord.y; y++)
     {
-      
       PFLCoord* cell = [PFLCoord coordWithX:x Y:y];
       
       // find neighbor corners
@@ -439,6 +439,17 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
       [self addAudioResponder:goal];
       goal.position = cellCenter;
       [self.audioObjectsBatchNode addChild:goal z:ZOrderAudioBatchGlyph];
+    }
+    
+    // switch sender
+    else if ([glyph.type isEqualToString:PFLGlyphTypeSwitchSender])
+    {
+      PFLSwitchSenderSprite* switchSender = [[PFLSwitchSenderSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+      [self.audioResponderTouchController addResponder:switchSender];
+      [self.sequenceDispatcher addResponder:switchSender];
+      [self addAudioResponder:switchSender];
+      switchSender.position = cellCenter;
+      [self.audioObjectsBatchNode addChild:switchSender z:ZOrderAudioBatchGlyph];
     }
   }
   [self.audioEventController loadSamples:allSampleNames];

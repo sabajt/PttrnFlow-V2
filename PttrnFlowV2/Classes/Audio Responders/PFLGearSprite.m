@@ -18,11 +18,8 @@
 
 @interface PFLGearSprite ()
 
-@property (strong, nonatomic) CCColor* defaultColor;
-@property (strong, nonatomic) CCColor* activeColor;
 @property (strong, nonatomic) NSMutableArray *audioUnits;
 @property (strong, nonatomic) PFLEvent *multiSampleEvent;
-@property (strong, nonatomic) PFLGlyph* glyph;
 
 @end
 
@@ -33,9 +30,6 @@
   self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
-    NSString* theme = glyph.puzzle.puzzleSet.theme;
-    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:theme];
-    self.activeColor = [PFLColorUtils glyphActiveWithTheme:theme];
     self.color = self.defaultColor;
     
     // units (beats)
@@ -51,7 +45,7 @@
       CCSprite* audioUnit = [CCSprite spriteWithImageNamed:@"audio_unit.png"];
       static CGFloat unitPadding = 4.0f;
       audioUnit.position = ccp(container.contentSize.width / 2, (container.contentSize.height - audioUnit.contentSize.height / 2) - unitPadding);
-      audioUnit.color = [PFLColorUtils glyphDetailWithTheme:theme];
+      audioUnit.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
       
       // // unit symbol
       // CCSprite* unitSymbol = [CCSprite spriteWithImageNamed:sample.image];
