@@ -30,4 +30,9 @@
   }
 }
 
++ (CGFloat)winLabelFontSize
+{
+  return [PFLFonts controlsPanelFontSize];
+}
+
 @end

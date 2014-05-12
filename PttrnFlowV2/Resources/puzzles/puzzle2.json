@@ -1,25 +1,79 @@
 {
      "uid" : 2,
-     "name" : "Kewl Melody",
-     "bpm" : 120,
+     "name" : "Blah Blah",
+     "bpm" : 150,
      "area" :
      [
           [0, 0],
           [1, 0],
           [2, 0],
-          [4, 0],
-          [0, 1],
+          [3, 0],
           [1, 1],
-          [3, 1],
           [2, 1],
-          [4, 1],
-          [3, 2],
-          [4, 2]
+          [3, 1]
      ],
      "audio" :
      [
           {
                "audio_id": 0,
+               "type" : "multisample",
+               "samples" :
+               [
+                    {
+                         "file" : "tech-tonal1.caf",
+                         "image" : "tone_low_1.png",
+                         "time" : 0.0
+                    },
+               ]
+          },
+          {
+               "audio_id": 1,
+               "type" : "multisample",
+               "samples" :
+               [
+                    {
+                         "file" : "tech-tonal5.caf",
+                         "image" : "tone_low_3.png",
+                         "time" : 0.0
+                    },
+                    {
+                         "file" : "tech-tonal1.caf",
+                         "image" : "tone_low_8.png",
+                         "time" : 0.5
+                    },
+               ]
+          },
+          {
+               "audio_id": 2,
+               "type" : "multisample",
+               "samples" :
+               [
+                    {
+                         "file" : "tech-tonal5.caf",
+                         "image" : "tone_low_2.png",
+                         "time" : 0.0
+                    },
+                    {
+                         "file" : "tech-tonal4.caf",
+                         "image" : "tone_low_5.png",
+                         "time" : 0.5
+                    }
+               ]
+          },
+          {
+               "audio_id": 3,
+               "type" : "multisample",
+               "samples" :
+               [
+                    {
+                         "file" : "tech-tonal5.caf",
+                         "image" : "tone_low_7.png",
+                         "time" : 0.0
+                    }
+               ]
+          },
+          {
+               "audio_id": 4,
                "type" : "multisample",
                "samples" :
                [
@@ -36,7 +90,7 @@
                ]
           },
           {
-               "audio_id": 1,
+               "audio_id": 5,
                "type" : "multisample",
                "samples" :
                [
@@ -58,7 +112,7 @@
                ]
           },
           {
-               "audio_id": 2,
+               "audio_id": 6,
                "type" : "multisample",
                "samples" :
                [
@@ -75,7 +129,7 @@
                ]
           },
           {
-               "audio_id": 3,
+               "audio_id": 7,
                "type" : "multisample",
                "samples" :
                [
@@ -97,7 +151,7 @@
                ]
           },
           {
-               "audio_id": 4,
+               "audio_id": 8,
                "type" : "multisample",
                "samples" :
                [
@@ -117,43 +171,68 @@
      "glyphs" :
      [
           {
-               "audio_id" : 0,
+               "cell" : [0, 0],
+               "audio_id" : 5,
                "responder_id" : 0,
                "type" : "entry",
-               "static" : 0,
-               "cell" : [0, 0],
-               "direction" : "right",
+               "static" : 1,
+               "direction" : "right",  
           },
           {
+               "cell" : [3, 1],
                "audio_id" : 1,
                "responder_id" : 1,
-               "type" : "up",
-               "static" : 0,
-               "cell" : [0, 1],
-               "direction" : "up",
+               "type" : "goal",
+               "static" : 1,
           },
-          {
-               "audio_id" : 2,
+          {    "cell" : [1, 0],
+               "audio_id" : 7,
                "responder_id" : 2,
                "type" : "arrow",
                "static" : 0,
-               "cell" : [3, 1],
-               "direction" : "down",
+               "switch_channel" : 0,
+               "switch_receiver" : 
+               [
+                    {
+                         "active" : 0
+                    },
+                    {
+                         "active" : 1,
+                         "direction" : "up"
+                    }
+               ]
+          },
+          {    
+               "cell" : [2, 0],
+               "audio_id" : 8,
+               "responder_id" : 3,
+               "type" : "switch_sender",
+               "static" : 0,
+               "switch_channel" : 0
           },
           {
+               "cell" : [2, 1],
+               "audio_id" : 6,
+               "responder_id" : 4,
+               "type" : "switch_sender",
+               "static" : 1,
+               "switch_channel" : 0,
+          },
+          {
+               "cell" : [3, 0],
+               "audio_id" : 4,
+               "responder_id" : 5,
+               "type" : "arrow",
+               "direction" : "up",
+               "static" : 0,
+          },
+          {
+               "cell" : [1, 1],
                "audio_id" : 3,
-               "responder_id" : 3,
+               "responder_id" : 6,
                "type" : "arrow",
                "static" : 0,
-               "cell" : [4, 1],
-               "direction" : "left",
-          },
-          {
-               "audio_id" : 4,
-               "responder_id" : 4,
-               "type" : "goal",
-               "static" : 1,
-               "cell" : [3, 2],
+               "direction" : "right"
           }
      ],
      "solution" :
@@ -162,17 +241,9 @@
           [1],
           [2],
           [3],
-          [4],
-          [],
+          [3],
           [2],
           [1],
-          [],
-          [3],
-          [],
-          [2],
-          [],
-          [2],
-          [],
-          [3]
+          [0]
      ]
 }

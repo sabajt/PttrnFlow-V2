@@ -11,5 +11,6 @@
 @interface PFLFonts : NSObject
 
 + (CGFloat)controlsPanelFontSize;
++ (CGFloat)winLabelFontSize;
 
 @end
