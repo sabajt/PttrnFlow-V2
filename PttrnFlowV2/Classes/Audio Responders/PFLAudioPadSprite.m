@@ -30,6 +30,16 @@
   {
     self.isStatic = glyph.isStatic;
     self.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    
+    if (glyph.switchReceiverAttributes && glyph.switchChannel)
+    {
+      static CGFloat channelIconPadding = 4.0f;
+      CCSprite* channelIcon = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"switch_receiver_%i.png", [glyph.switchChannel integerValue] + 1]];
+      channelIcon.anchorPoint = ccp(1.0f, 1.0f);
+      channelIcon.position = ccp(self.contentSize.width - channelIconPadding, self.contentSize.height - channelIconPadding);
+      channelIcon.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      [self addChild:channelIcon];
+    }
   }
   return self;
 }

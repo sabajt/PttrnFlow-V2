@@ -33,7 +33,7 @@
             <key>audio_box_empty.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{506,284},{1,1}}</string>
+                <string>{{482,278},{1,1}}</string>
                 <key>offset</key>
                 <string>{-99.5,99.5}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>clear_rect_audio_batch.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{506,284},{1,1}}</string>
+                <string>{{482,278},{1,1}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>drum_bullseye.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{154,930},{32,32}}</string>
+                <string>{{230,864},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -238,6 +238,58 @@
                 <key>sourceSize</key>
                 <string>{280,280}</string>
             </dict>
+            <key>switch_receiver_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{482,240},{18,36}}</string>
+                <key>offset</key>
+                <string>{-2,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{9,2},{18,36}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
+            <key>switch_receiver_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{168,864},{26,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,2},{26,36}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
+            <key>switch_receiver_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{138,902},{26,36}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,2},{26,36}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
+            <key>switch_receiver_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{138,864},{28,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,2},{28,36}}</string>
+                <key>sourceSize</key>
+                <string>{40,40}</string>
+            </dict>
             <key>switch_sender_1.png</key>
             <dict>
                 <key>frame</key>
@@ -293,7 +345,7 @@
             <key>tone_low_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{138,864},{32,32}}</string>
+                <string>{{196,864},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -456,7 +508,7 @@
             <key>size</key>
             <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1f89ef9eb20c952b4fbcb491ff674c9b:89cf2ffe21e950b0c4efc21ed76e457a:82db5edfa4ea82b9933e5fa2170b080c$</string>
+            <string>$TexturePacker:SmartUpdate:79c6ec719e9f8bfb7e6c21bbd731ed02:636363018f4fb5d4f781c9b90bfcfe63:82db5edfa4ea82b9933e5fa2170b080c$</string>
             <key>textureFileName</key>
             <string>audioObjects-ipadhd.png</string>
         </dict>

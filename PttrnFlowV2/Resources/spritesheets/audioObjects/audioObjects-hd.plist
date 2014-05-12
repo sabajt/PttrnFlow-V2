@@ -98,7 +98,7 @@
             <key>drum_bullseye.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{90,478},{16,16}}</string>
+                <string>{{138,478},{16,16}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>drum_diamond.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{72,496},{12,12}}</string>
+                <string>{{72,498},{12,12}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -238,6 +238,58 @@
                 <key>sourceSize</key>
                 <string>{140,140}</string>
             </dict>
+            <key>switch_receiver_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{238,218},{10,18}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,1},{10,18}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
+            <key>switch_receiver_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{104,478},{14,18}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{3,1},{14,18}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
+            <key>switch_receiver_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{88,478},{14,18}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{2,1},{14,18}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
+            <key>switch_receiver_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{72,478},{14,18}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{3,1},{14,18}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
             <key>switch_sender_1.png</key>
             <dict>
                 <key>frame</key>
@@ -293,7 +345,7 @@
             <key>tone_low_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{72,478},{16,16}}</string>
+                <string>{{120,478},{16,16}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -456,7 +508,7 @@
             <key>size</key>
             <string>{256,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1f89ef9eb20c952b4fbcb491ff674c9b:89cf2ffe21e950b0c4efc21ed76e457a:82db5edfa4ea82b9933e5fa2170b080c$</string>
+            <string>$TexturePacker:SmartUpdate:79c6ec719e9f8bfb7e6c21bbd731ed02:636363018f4fb5d4f781c9b90bfcfe63:82db5edfa4ea82b9933e5fa2170b080c$</string>
             <key>textureFileName</key>
             <string>audioObjects-hd.png</string>
         </dict>
