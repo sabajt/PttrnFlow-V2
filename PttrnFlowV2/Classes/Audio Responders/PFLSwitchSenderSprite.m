@@ -33,6 +33,8 @@
     detailSprite.position = ccp(self.contentSize.width / 2.0f, self.contentSize.height / 2.0f);
     [self addChild:detailSprite];
     detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    
+    [self audioResponderSwitchToState:@0];
   }
   return self;
 }

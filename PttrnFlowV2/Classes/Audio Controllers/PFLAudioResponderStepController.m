@@ -75,6 +75,7 @@ NSString* const kKeyLoop = @"loop";
     {
       [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationWinSequence object:nil];
     }
+    
   }
   
   BOOL inBounds = [self.currentCell isCoordInGroup:self.puzzle.area];
