@@ -9,8 +9,11 @@
           [2, 0],
           [3, 0],
           [1, 1],
+          [1, 2],
+          [1, 3],
           [2, 1],
-          [3, 1]
+          [3, 1],
+          [4, 0],
      ],
      "audio" :
      [
@@ -78,14 +81,14 @@
                "samples" :
                [
                     {
-                         "file" : "tech-ride1.caf",
+                         "file" : "tech-chuk1.caf",
                          "image" : "tone_low_5.png",
-                         "time" : 0.5
+                         "time" : 0.0
                     },
                     {
                          "file" : "tech-hhopen1.caf",
                          "image" : "tone_low_5.png",
-                         "time" : 0.9
+                         "time" : 0.75
                     }
                ]
           },
@@ -189,12 +192,13 @@
                "audio_id" : 7,
                "responder_id" : 2,
                "type" : "arrow",
-               "static" : 0,
+               "static" : 1,
                "switch_channel" : 0,
                "switch_receiver" : 
                [
                     {
-                         "active" : 0
+                         "active" : 1,
+                         "direction" : "right"
                     },
                     {
                          "active" : 1,
@@ -207,7 +211,7 @@
                "audio_id" : 8,
                "responder_id" : 3,
                "type" : "switch_sender",
-               "static" : 0,
+               "static" : 1,
                "switch_channel" : 0
           },
           {
@@ -219,7 +223,7 @@
                "switch_channel" : 0,
           },
           {
-               "cell" : [3, 0],
+               "cell" : [4, 0],
                "audio_id" : 4,
                "responder_id" : 5,
                "type" : "arrow",
@@ -227,7 +231,7 @@
                "static" : 0,
           },
           {
-               "cell" : [1, 1],
+               "cell" : [1, 3],
                "audio_id" : 3,
                "responder_id" : 6,
                "type" : "arrow",
