@@ -5,28 +5,11 @@ json/protodata
 
 set screen
 - show solved or not on cells
-- cell solved design
-- only play solved puzzles
+- puzzle set screen loop for solved puzzles
 - metronome blinker / animations
 - in/out transition
-
-select set screen
-- everything!
-
-puzzle screen
-- count down UI
-- stop after seq len?
 - animate goal
-- loop correct seq
 - dotted lines on selection
 - pop animation when move block
-- blinker wrapping animation
-- cat animation
 - in/out transition
-
-design
-- cat character 
-- loop 'building' - collecting hits into sequence
-
-other
 - precise timing (http://theamazingaudioengine.com/doc/)?

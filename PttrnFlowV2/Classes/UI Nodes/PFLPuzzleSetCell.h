@@ -6,9 +6,9 @@
 //
 //
 
-#import "CCSprite.h"
+#import "CCSprite9Slice.h"
 
-@class PFLPuzzleSetCell;
+@class PFLPuzzleSetCell, PFLPuzzle;
 
 @protocol PFLPuzzleSetCellDelegate <NSObject>
 
@@ -16,11 +16,11 @@
 
 @end
 
-@interface PFLPuzzleSetCell : CCSprite
+@interface PFLPuzzleSetCell : CCSprite9Slice
 
 @property (weak, nonatomic) id<PFLPuzzleSetCellDelegate> menuCellDelegate;
 @property BOOL propogateTouch;
 
--(id) initWithIndex:(NSInteger)index;
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle cellIndex:(NSInteger)cellIndex;
 
 @end

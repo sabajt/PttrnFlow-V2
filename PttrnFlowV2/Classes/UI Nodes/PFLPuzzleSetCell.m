@@ -11,21 +11,23 @@
 
 @interface PFLPuzzleSetCell ()
 
-@property (assign) NSInteger index;
+@property (assign) NSInteger cellIndex;
 
 @end
 
 @implementation PFLPuzzleSetCell
 
--(id) initWithIndex:(NSInteger)index
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle cellIndex:(NSInteger)cellIndex
 {
-  self = [super init];
+  self = [super initWithImageNamed:@"audio_box.png"];
   if (self)
   {
     self.userInteractionEnabled = YES;
-    self.index = index;
+    self.cellIndex = cellIndex;
+    self.color = [PFLColorUtils dimPurple];
+    self.margin = 0.25;
     
-    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", index + 1] fontName:@"Helvetica" fontSize:40];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", cellIndex + 1] fontName:@"Helvetica" fontSize:40];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor blackColor];
     label.position = ccp(0.5f, 0.5f);
@@ -61,7 +63,7 @@
   
   if ([self hitTestWithWorldPos:[touch locationInWorld]])
   {
-    [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.index];
+    [self.menuCellDelegate puzzleSetCellTouchUpInside:self index:self.cellIndex];
   }
 }
 

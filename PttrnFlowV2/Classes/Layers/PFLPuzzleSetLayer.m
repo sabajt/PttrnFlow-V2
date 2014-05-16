@@ -52,22 +52,26 @@
   self = [super init];
   if (self)
   {
+    self.contentSize = [[CCDirector sharedDirector] designSize];
     self.puzzleSet = puzzleSet;
     self.allowsScrollHorizontal = NO;
     self.combinedSampleNames = [NSMutableArray array];
     
+    CGSize screenSize = [[CCDirector sharedDirector] designSize];
+
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
-      PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithIndex:i];
-      cell.anchorPoint = ccp(0, 0);
+      PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithPuzzle:puzzle cellIndex:i];
+      [self addChild:cell];
+
+      cell.anchorPoint = ccp(0, 1);
       cell.contentSizeType = CCSizeTypeNormalized;
-      cell.contentSize = CGSizeMake(1.0f, 0.2f);
+      cell.contentSize = CGSizeMake(1.0f, 1.0f / [self.puzzleSet.puzzles count]);
       cell.positionType = CCPositionTypeNormalized;
-      cell.position = ccp(0, i * cell.contentSize.height);
+      cell.position = ccp(0, (screenSize.height - (i * cell.contentSizeInPoints.height)) / screenSize.height);
       cell.propogateTouch = YES;
       cell.menuCellDelegate = self;
-      [self addChild:cell];
       
       for (PFLGlyph* glyph in puzzle.glyphs)
       {

@@ -50,17 +50,16 @@
 	}];
   
 //  [[CCFileUtils sharedFileUtils] setEnableiPhoneResourcesOniPad:YES];
-  
-  // load sprite sheets
-  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
-  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"transitions.plist"];
-  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
 	
 	return YES;
 }
 
 -(CCScene *)startScene
 {
+  // load sprite sheets
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
+  
   PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
   CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet];
   return scene;
