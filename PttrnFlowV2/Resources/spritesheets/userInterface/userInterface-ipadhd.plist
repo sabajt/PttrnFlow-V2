@@ -4,6 +4,19 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>2pt_border_9slice.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1016,1580},{160,160}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{160,160}}</string>
+                <key>sourceSize</key>
+                <string>{160,160}</string>
+            </dict>
             <key>check.png</key>
             <dict>
                 <key>frame</key>
@@ -150,11 +163,11 @@
             <key>numButton1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1100,1856},{88,90}}</string>
+                <string>{{1360,918},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{36,32},{88,90}}</string>
                 <key>sourceSize</key>
@@ -163,11 +176,11 @@
             <key>numButton10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1106,1672},{88,90}}</string>
+                <string>{{1268,918},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{36,32},{88,90}}</string>
                 <key>sourceSize</key>
@@ -176,7 +189,7 @@
             <key>numButton11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1106,1580},{88,90}}</string>
+                <string>{{1100,1926},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -189,7 +202,7 @@
             <key>numButton12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1100,1764},{88,90}}</string>
+                <string>{{1100,1834},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -202,7 +215,7 @@
             <key>numButton13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1016,1672},{88,90}}</string>
+                <string>{{1178,1580},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -215,7 +228,7 @@
             <key>numButton14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1016,1580},{88,90}}</string>
+                <string>{{1100,1742},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -358,7 +371,7 @@
             <key>numButtonHighlight.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1100,1948},{88,88}}</string>
+                <string>{{1452,918},{88,88}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -430,7 +443,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:35915d563a3952221ca29b02c2364f5c:545539d69fd2ffac53d57510657db3da:c502f529b1326393133b1b1fe352aeb3$</string>
+            <string>$TexturePacker:SmartUpdate:6139c270418a6b601a0fb5cc20408fbc:850e666fd3f02a39ff0674c3884b957f:c502f529b1326393133b1b1fe352aeb3$</string>
             <key>textureFileName</key>
             <string>userInterface-ipadhd.png</string>
         </dict>

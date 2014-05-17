@@ -37,7 +37,22 @@
   PFLPuzzleBackgroundLayer* background = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils controlPanelFillWithTheme:puzzleSet.theme]];
   [scene addChild:background];
   
-  PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet];
+  // header
+  CCNodeColor* header = [[CCNodeColor alloc] initWithColor:[PFLColorUtils dimPurple] width:1.0f height:0.1f];
+  header.contentSizeType = CCSizeTypeNormalized;
+  header.positionType = CCPositionTypeNormalized;
+  header.position = ccp(0.0f, 1.0f - header.contentSize.height);
+  [scene addChild:header z:1];
+  
+  CCLabelTTF* headerLabel = [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
+  headerLabel.color = [PFLColorUtils darkCream];
+  headerLabel.anchorPoint = ccp(0.5f, 0.5f);
+  headerLabel.positionType = CCPositionTypeNormalized;
+  headerLabel.position = ccp(0.5f, 0.5f);
+  [header addChild:headerLabel];
+  
+  // menu
+  PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet header:header];
   [scene addChild:menuLayer];
   menuLayer.contentSizeType = CCSizeTypeNormalized;
   menuLayer.contentSize = CGSizeMake(1.0f, 1.0f);
@@ -47,7 +62,7 @@
   return scene;
 }
 
-- (id)initWithPuzzleSet:(PFLPuzzleSet*)puzzleSet
+- (id)initWithPuzzleSet:(PFLPuzzleSet*)puzzleSet header:(CCNode*)header
 {
   self = [super init];
   if (self)
@@ -57,19 +72,22 @@
     self.allowsScrollHorizontal = NO;
     self.combinedSampleNames = [NSMutableArray array];
     
-    CGSize screenSize = [[CCDirector sharedDirector] designSize];
-
+    // puzzle cells
+    NSInteger puzzleCount = [self.puzzleSet.puzzles count];
+    static CGFloat normalizedVertButtonPadding = 1.0f / 20.0f;
+    
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
       PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithPuzzle:puzzle cellIndex:i];
       [self addChild:cell];
-
+      
       cell.anchorPoint = ccp(0, 1);
       cell.contentSizeType = CCSizeTypeNormalized;
-      cell.contentSize = CGSizeMake(1.0f, 1.0f / [self.puzzleSet.puzzles count]);
+      cell.contentSize = CGSizeMake(0.9f, (header.position.y - ((puzzleCount + 1) * normalizedVertButtonPadding)) / puzzleCount);
       cell.positionType = CCPositionTypeNormalized;
-      cell.position = ccp(0, (screenSize.height - (i * cell.contentSizeInPoints.height)) / screenSize.height);
+      cell.position = ccp((1.0f - cell.contentSize.width) / 2.0f,
+                          (header.position.y - (i * cell.contentSize.height)) - ((i + 1.0f) * normalizedVertButtonPadding));
       cell.propogateTouch = YES;
       cell.menuCellDelegate = self;
       

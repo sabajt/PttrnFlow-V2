@@ -8,6 +8,7 @@
 
 #import "PFLPuzzleSetCell.h"
 #import "PFLColorUtils.h"
+#import "PFLPuzzle.h"
 
 @interface PFLPuzzleSetCell ()
 
@@ -19,17 +20,17 @@
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle cellIndex:(NSInteger)cellIndex
 {
-  self = [super initWithImageNamed:@"audio_box.png"];
+  self = [super initWithImageNamed:@"2pt_border_9slice.png"];
   if (self)
   {
     self.userInteractionEnabled = YES;
     self.cellIndex = cellIndex;
     self.color = [PFLColorUtils dimPurple];
-    self.margin = 0.25;
+    self.margin = 0.40;
     
-    CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", cellIndex + 1] fontName:@"Helvetica" fontSize:40];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:puzzle.name fontName:@"ArialRoundedMTBold" fontSize:20];
     label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor blackColor];
+    label.color = [PFLColorUtils dimPurple];
     label.position = ccp(0.5f, 0.5f);
     [self addChild:label];
   }

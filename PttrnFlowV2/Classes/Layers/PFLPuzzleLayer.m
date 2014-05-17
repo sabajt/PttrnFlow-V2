@@ -101,7 +101,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     self.audioEventController = audioEventController;
     [self addChild:audioEventController];
     audioEventController.beatDuration = self.beatDuration;
-    audioEventController.mute = YES;
+    audioEventController.mute = NO;
     
     // Sprite sheet batch nodes
     CCSpriteBatchNode* audioObjectsBatch = [CCSpriteBatchNode batchNodeWithFile:[kTextureKeyAudioObjects stringByAppendingString:@".png"]];
