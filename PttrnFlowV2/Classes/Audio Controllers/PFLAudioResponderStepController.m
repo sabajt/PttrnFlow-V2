@@ -30,14 +30,15 @@ NSString* const kKeyLoop = @"loop";
 @interface PFLAudioResponderStepController ()
 
 @property (strong, nonatomic) PFLPuzzle* puzzle;
-@property (assign) NSInteger userSequenceIndex;
-@property (assign) NSInteger solutionSequenceIndex;
+@property NSInteger userSequenceIndex;
+@property NSInteger solutionSequenceIndex;
 @property (strong, nonatomic) NSMutableArray* responders;
 @property (strong, nonatomic) PFLCoord* currentCell;
 @property (copy, nonatomic) NSString* currentDirection;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
 @property BOOL hasWon;
 @property BOOL lastStepWasLoop;
+@property (strong, nonatomic) NSMutableArray* loopedEvents;
 
 @end
 
@@ -73,7 +74,12 @@ NSString* const kKeyLoop = @"loop";
     PFLPuzzleState *puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
     if ([puzzleState doesCurrentStateMatchAudioResponderSprites:self.responders])
     {
+      self.hasWon = YES;
       [[NSNotificationCenter defaultCenter] postNotificationName:PFLNotificationWinSequence object:nil];
+      
+      PFLPuzzleState *puzzleState = [PFLPuzzleState puzzleStateForPuzzle:self.puzzle];
+      puzzleState.loopedEvents = [NSArray arrayWithArray:self.loopedEvents];
+      [puzzleState archive];
     }
     
   }
@@ -82,15 +88,19 @@ NSString* const kKeyLoop = @"loop";
   
   NSArray* events = [self hitResponders:self.responders atCoord:self.currentCell];
   [self.audioEventController receiveEvents:events];
+  if (!self.hasWon)
+  {
+    [self.loopedEvents addObject:events];
+  }
   
   BOOL loop = NO;
   for (PFLEvent* e in events)
   {
-    if ((e.eventType == PFLEventTypeDirection) && e.direction)
+    if (([e.eventType integerValue] == PFLEventTypeDirection) && e.direction)
     {
       self.currentDirection = e.direction;
     }
-    if (e.eventType == PFLEventTypeGoal)
+    if ([e.eventType integerValue] == PFLEventTypeGoal)
     {
       loop = YES;
     }
@@ -134,6 +144,7 @@ NSString* const kKeyLoop = @"loop";
   self.lastStepWasLoop = NO;
   self.userSequenceIndex = 0;
   self.currentCell = self.entry.cell;
+  self.loopedEvents = [NSMutableArray array];
   
   [self schedule:@selector(stepUserSequence:) interval:self.beatDuration];
   

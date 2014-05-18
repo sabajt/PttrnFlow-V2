@@ -48,13 +48,13 @@
 
   for (PFLEvent* event in events)
   {
-    if (event.eventType == PFLEventTypeSynth)
+    if ([event.eventType integerValue] == PFLEventTypeSynth)
     {
       NSNumber* midiValue = @([event.midiValue integerValue]);
       NSNumber* synthType = @0;
     }
     
-    if (event.eventType == PFLEventTypeSample)
+    if ([event.eventType integerValue] == PFLEventTypeSample)
     {
       id sound = [[OALSimpleAudio sharedInstance] playEffect:event.file];
       if (!sound)
@@ -63,7 +63,7 @@
       }
     }
     
-    if (event.eventType == PFLEventTypeMultiSample)
+    if ([event.eventType integerValue] == PFLEventTypeMultiSample)
     {
       // set up samples to be recieved with time delays
       for (PFLEvent* sampleEvent in event.sampleEvents)

@@ -22,7 +22,8 @@ NSString *const kChannelNone = @"ChannelNone";
   NSMutableArray* filtered = [NSMutableArray array];
   for (PFLEvent* event in self)
   {
-    if ([event isKindOfClass:[PFLEvent class]] && event.audioID) {
+    if ([event isKindOfClass:[PFLEvent class]] && event.audioID)
+    {
       [filtered addObject:event];
     }
   }
@@ -37,11 +38,12 @@ NSString *const kChannelNone = @"ChannelNone";
 
 @implementation PFLEvent
 
-// Individual event constructors
+#pragma mark - constructors
+
 + (id)synthEventWithAudioID:(NSNumber *)audioID midiValue:(NSString *)midiValue synthType:(NSString*)synthType
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeSynth;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeSynth];
   event.audioID = audioID;
   event.midiValue = midiValue;
   event.synthType = synthType;
@@ -51,7 +53,7 @@ NSString *const kChannelNone = @"ChannelNone";
 + (id)sampleEventWithAudioID:(NSNumber*)audioID file:(NSString*)file time:(NSNumber*)time
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeSample;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeSample];
   event.audioID = audioID;
   event.file = file;
   event.time = time;
@@ -61,7 +63,7 @@ NSString *const kChannelNone = @"ChannelNone";
 + (id)directionEventWithDirection:(NSString *)direction
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeDirection;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeDirection];
   event.direction = direction;
   return event;
 }
@@ -69,7 +71,7 @@ NSString *const kChannelNone = @"ChannelNone";
 + (id)exitEvent
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeExit;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeExit];
   return event;
 }
 
@@ -84,7 +86,7 @@ NSString *const kChannelNone = @"ChannelNone";
 + (id)multiSampleEventWithAudioID:(NSNumber*)audioID sampleEvents:(NSArray*)sampleEvents
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeMultiSample;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeMultiSample];
   event.audioID = audioID;
   event.sampleEvents = sampleEvents;
   return event;
@@ -104,16 +106,50 @@ NSString *const kChannelNone = @"ChannelNone";
 + (id)goalEvent
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeGoal;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeGoal];
   return event;
 }
 
 + (id)switchSenderEventWithChannel:(NSNumber*)channel
 {
   PFLEvent* event = [[PFLEvent alloc] init];
-  event.eventType = PFLEventTypeSwitchSender;
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeSwitchSender];
   event.switchSenderChannel = channel;
   return event;
+}
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super init];
+  if (self)
+  {
+    self.eventType = [aDecoder decodeObjectForKey:@"eventType"];
+    self.audioID = [aDecoder decodeObjectForKey:@"audioID"];
+    self.direction = [aDecoder decodeObjectForKey:@"direction"];
+    self.file = [aDecoder decodeObjectForKey:@"file"];
+    self.midiValue = [aDecoder decodeObjectForKey:@"midiValue"];
+    self.sampleEvents = [aDecoder decodeObjectForKey:@"sampleEvents"];
+    self.switchSenderChannel = [aDecoder decodeObjectForKey:@"switchSenderChannel"];
+    self.synthType = [aDecoder decodeObjectForKey:@"synthType"];
+    self.time = [aDecoder decodeObjectForKey:@"time"];
+  }
+  
+  return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+  [aCoder encodeObject:self.eventType forKey:@"eventType"];
+  [aCoder encodeObject:self.audioID forKey:@"audioID"];
+  [aCoder encodeObject:self.direction forKey:@"direction"];
+  [aCoder encodeObject:self.file forKey:@"file"];
+  [aCoder encodeObject:self.midiValue forKey:@"midiValue"];
+  [aCoder encodeObject:self.sampleEvents forKey:@"sampleEvents"];
+  [aCoder encodeObject:self.switchSenderChannel forKey:@"switchSenderChannel"];
+  [aCoder encodeObject:self.synthType forKey:@"synthType"];
+  [aCoder encodeObject:self.time forKey:@"time"];
 }
 
 #pragma mark - PFLCompareObjectsDelegate

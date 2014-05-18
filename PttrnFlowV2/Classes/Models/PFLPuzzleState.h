@@ -12,8 +12,11 @@
 
 @interface PFLPuzzleState : NSObject <NSCoding>
 
+@property (strong, nonatomic) NSArray* loopedEvents;
+
 + (instancetype)puzzleStateForPuzzle:(PFLPuzzle*)puzzle;
 
+- (void)archive;
 - (NSMutableDictionary*)glyphStateForGid:(NSNumber*)gid;
 - (void)updateWithAudioResponderSprites:(NSArray*)audioResponderSprites;
 - (BOOL)doesCurrentStateMatchAudioResponderSprites:(NSArray*)audioResponderSprites;

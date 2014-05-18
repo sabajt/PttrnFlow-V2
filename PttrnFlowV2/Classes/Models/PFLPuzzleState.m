@@ -1,5 +1,5 @@
 //
-//  PFLGlyphState.m
+//  PFLPuzzleState.m
 //  PttrnFlowV2
 //
 //  Created by John Saba on 4/26/14.
@@ -51,6 +51,7 @@
   {
     self.fileName = [aDecoder decodeObjectForKey:@"fileName"];
     self.glyphs = [aDecoder decodeObjectForKey:@"glyphs"];
+    self.loopedEvents = [aDecoder decodeObjectForKey:@"loopedEvents"];
   }
   
   return self;
@@ -60,6 +61,7 @@
 {
   [aCoder encodeObject:self.fileName forKey:@"fileName"];
   [aCoder encodeObject:self.glyphs forKey:@"glyphs"];
+  [aCoder encodeObject:self.loopedEvents forKey:@"loopedEvents"];
 }
 
 - (void)archive

@@ -12,6 +12,7 @@
 #import "PFLAudioResponderTouchController.h"
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleBackgroundLayer.h"
+#import "PFLPuzzleState.h"
 #import "PFLColorUtils.h"
 #import "PFLKeyframe.h"
 #import "PFLAudioEventController.h"
@@ -108,6 +109,9 @@
       }
       
       i++;
+      
+      PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
+      CCLOG(@"puzzle state %@ looped events:\n\n%@\n\n=================================", puzzle.name, puzzleState.loopedEvents);
     }
 
     PFLAudioEventController* audioEventController = [PFLAudioEventController audioEventController];
