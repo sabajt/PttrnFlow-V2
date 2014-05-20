@@ -7,16 +7,14 @@
 //
 
 #import "PFLJsonUtils.h"
-#import "PFLKeyframe.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 
 static NSString* const kBpm = @"bpm";
 static NSString* const kFile = @"file";
-static NSString* const kKeyframes = @"keyframes";
 static NSString* const kLength = @"length";
 static NSString* const kName = @"name";
-static NSString* const kPuzzles = @"puzzles";
+static NSString* const kPuzzleIndex = @"puzzle_index";
 static NSString* const kTheme = @"theme";
 
 @interface PFLPuzzleSet ()
@@ -44,24 +42,14 @@ static NSString* const kTheme = @"theme";
     self.theme = json[kTheme];
     
     NSMutableArray* puzzles = [NSMutableArray array];
-    NSMutableArray* keyframes = [NSMutableArray array];
-
-    NSArray* allPuzzlesJson = json[kPuzzles];
-    for (NSDictionary* puzzleJson in allPuzzlesJson)
+    NSArray* puzzleIndex = json[kPuzzleIndex];
+    for (NSString* file in puzzleIndex)
     {
-      PFLPuzzle* puzzle = [PFLPuzzle puzzleFromResource:puzzleJson[kFile] puzzleSet:self];
+      PFLPuzzle* puzzle = [PFLPuzzle puzzleFromResource:file puzzleSet:self];
       [puzzles addObject:puzzle];
-      
-      NSArray* keyframeJsonArray = puzzleJson[kKeyframes];
-      for (NSDictionary* keyframeJson in keyframeJsonArray)
-      {
-        PFLKeyframe* keyframe = [PFLKeyframe keyframeWithJson:keyframeJson puzzle:puzzle];
-        [keyframes addObject:keyframe];
-      }
     }
     
     self.puzzles = [NSArray arrayWithArray:puzzles];
-    self.keyframes = [NSArray arrayWithArray:keyframes];
   }
   return self;
 }

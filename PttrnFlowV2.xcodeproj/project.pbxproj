@@ -236,7 +236,6 @@
 		3399668D18F0B60C000F4522 /* PFLScrollNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664C18F0B60C000F4522 /* PFLScrollNode.m */; };
 		3399668E18F0B60C000F4522 /* PFLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399664F18F0B60C000F4522 /* PFLEvent.m */; };
 		3399668F18F0B60C000F4522 /* PFLGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665118F0B60C000F4522 /* PFLGlyph.m */; };
-		3399669018F0B60C000F4522 /* PFLKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665318F0B60C000F4522 /* PFLKeyframe.m */; };
 		3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665518F0B60C000F4522 /* PFLMultiSample.m */; };
 		3399669218F0B60C000F4522 /* PFLPuzzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665718F0B60C000F4522 /* PFLPuzzle.m */; };
 		3399669318F0B60C000F4522 /* PFLPuzzleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399665918F0B60C000F4522 /* PFLPuzzleSet.m */; };
@@ -787,8 +786,6 @@
 		3399664F18F0B60C000F4522 /* PFLEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLEvent.m; sourceTree = "<group>"; };
 		3399665018F0B60C000F4522 /* PFLGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGlyph.h; sourceTree = "<group>"; };
 		3399665118F0B60C000F4522 /* PFLGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGlyph.m; sourceTree = "<group>"; };
-		3399665218F0B60C000F4522 /* PFLKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLKeyframe.h; sourceTree = "<group>"; };
-		3399665318F0B60C000F4522 /* PFLKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLKeyframe.m; sourceTree = "<group>"; };
 		3399665418F0B60C000F4522 /* PFLMultiSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLMultiSample.h; sourceTree = "<group>"; };
 		3399665518F0B60C000F4522 /* PFLMultiSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLMultiSample.m; sourceTree = "<group>"; };
 		3399665618F0B60C000F4522 /* PFLPuzzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLPuzzle.h; sourceTree = "<group>"; };
@@ -1892,8 +1889,6 @@
 				3399665118F0B60C000F4522 /* PFLGlyph.m */,
 				33A38D05190C25AD002FBFF7 /* PFLPuzzleState.h */,
 				33A38D06190C25AD002FBFF7 /* PFLPuzzleState.m */,
-				3399665218F0B60C000F4522 /* PFLKeyframe.h */,
-				3399665318F0B60C000F4522 /* PFLKeyframe.m */,
 				3399665418F0B60C000F4522 /* PFLMultiSample.h */,
 				3399665518F0B60C000F4522 /* PFLMultiSample.m */,
 				3399665618F0B60C000F4522 /* PFLPuzzle.h */,
@@ -2350,7 +2345,6 @@
 				339963AF18F0A8DE000F4522 /* CCConfiguration.m in Sources */,
 				3399669E18F0B60C000F4522 /* PFLColorUtils.m in Sources */,
 				3399669B18F0B60C000F4522 /* NSArray+PFLCompareObjects.m in Sources */,
-				3399669018F0B60C000F4522 /* PFLKeyframe.m in Sources */,
 				339964F218F0A8DF000F4522 /* ALWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

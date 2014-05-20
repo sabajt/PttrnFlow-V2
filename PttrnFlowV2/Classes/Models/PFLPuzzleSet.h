@@ -12,7 +12,6 @@
 
 @property (assign) NSInteger bpm;
 @property (assign) CGFloat beatDuration;
-@property (strong, nonatomic) NSArray* keyframes;
 @property (assign) NSInteger length;
 @property (copy, nonatomic) NSString* name;
 @property (strong, nonatomic) NSArray* puzzles;

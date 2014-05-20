@@ -3,35 +3,10 @@
 	"bpm" : 120,
 	"length" : 16,
 	"theme" : "purple_light",
-	"puzzles" : 
-	[	
-		{
-			"file" : "puzzle0",
-			"keyframes" :
-			[
-				{ "source_index" : 0, "target_index" : 0, "range" : 4 },
-				{ "source_index" : 0, "target_index" : 4, "range" : 4 },
-				{ "source_index" : 0, "target_index" : 8, "range" : 4 },
-				{ "source_index" : 0, "target_index" : 12, "range" : 4 },
-			]
-		},
-		{
-			"file" : "puzzle1",
-			"keyframes" :
-			[
-				{ "source_index" : 0, "target_index" : 0, "range" : 4 },
-				{ "source_index" : 3, "target_index" : 4, "range" : 1 },
-				{ "source_index" : 2, "target_index" : 5, "range" : 1 },
-				{ "source_index" : 1, "target_index" : 6, "range" : 1 },
-				{ "source_index" : 0, "target_index" : 7, "range" : 1 },
-			]
-		},
-		{
-			"file" : "puzzle2",
-			"keyframes" :
-			[
-				{ "source_index" : 0, "target_index" : 0, "range" : 16 }
-			]
-		},
+	"puzzle_index" : 
+	[
+		"puzzle0",
+		"puzzle1",
+		"puzzle2"
 	],
 }

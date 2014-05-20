@@ -14,7 +14,6 @@
 #import "PFLPuzzleBackgroundLayer.h"
 #import "PFLPuzzleState.h"
 #import "PFLColorUtils.h"
-#import "PFLKeyframe.h"
 #import "PFLAudioEventController.h"
 #import "PFLGlyph.h"
 #import "PFLMultiSample.h"
@@ -24,6 +23,7 @@
 
 @property (strong, nonatomic) PFLPuzzleSet* puzzleSet;
 @property (strong, nonatomic) NSMutableArray* combinedSampleNames;
+@property (strong, nonatomic) NSMutableArray* combinedEventsLoop;
 @property NSInteger loopIndex;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
 
@@ -77,6 +77,7 @@
     NSInteger puzzleCount = [self.puzzleSet.puzzles count];
     static CGFloat normalizedVertButtonPadding = 1.0f / 20.0f;
     
+    NSInteger maxSeqLength = 0;
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
@@ -108,10 +109,16 @@
         }
       }
       
-      i++;
+//      PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
+//      self.combinedEventsLoop = [NSMutableArray array];
+//      self.combinedEventsLoop[i] = [self.combinedEventsLoop[i] arrayByAddingObjectsFromArray:puzzleState.loopedEvents[i]];
+//      
+//      if ([puzzleState.loopedEvents count] > maxSeqLength)
+//      {
+//        maxSeqLength = [puzzleState.loopedEvents count];
+//      }
       
-      PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
-      CCLOG(@"puzzle state %@ looped events:\n\n%@\n\n=================================", puzzle.name, puzzleState.loopedEvents);
+      i++;
     }
 
     PFLAudioEventController* audioEventController = [PFLAudioEventController audioEventController];
@@ -122,6 +129,7 @@
     self.audioEventController.mute = YES;
     
     self.loopIndex = 0;
+    
 //    [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
   };
   return self;
