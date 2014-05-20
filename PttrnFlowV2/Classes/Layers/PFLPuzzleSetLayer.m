@@ -72,15 +72,16 @@
     self.puzzleSet = puzzleSet;
     self.allowsScrollHorizontal = NO;
     self.combinedSampleNames = [NSMutableArray array];
+    self.combinedEventsLoop = [NSMutableArray array];
     
     // puzzle cells
     NSInteger puzzleCount = [self.puzzleSet.puzzles count];
     static CGFloat normalizedVertButtonPadding = 1.0f / 20.0f;
     
-    NSInteger maxSeqLength = 0;
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
+      // puzzle set cells
       PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithPuzzle:puzzle cellIndex:i];
       [self addChild:cell];
       
@@ -93,6 +94,7 @@
       cell.propogateTouch = YES;
       cell.menuCellDelegate = self;
       
+      // collect sample names to pre-load
       for (PFLGlyph* glyph in puzzle.glyphs)
       {
         if (glyph.audioID)
@@ -109,44 +111,64 @@
         }
       }
       
-//      PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
-//      self.combinedEventsLoop = [NSMutableArray array];
-//      self.combinedEventsLoop[i] = [self.combinedEventsLoop[i] arrayByAddingObjectsFromArray:puzzleState.loopedEvents[i]];
-//      
-//      if ([puzzleState.loopedEvents count] > maxSeqLength)
-//      {
-//        maxSeqLength = [puzzleState.loopedEvents count];
-//      }
+      // build combined event loop from puzzle states
+      PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
+      if (puzzleState.loopedEvents)
+      {
+        for (NSInteger b = 0; b < self.puzzleSet.length; b++)
+        {
+          NSArray* eventsAtBeat;
+          if ([puzzleState.loopedEvents count] > b)
+          {
+            eventsAtBeat = puzzleState.loopedEvents[b];
+          }
+          else
+          {
+            eventsAtBeat = puzzleState.loopedEvents[b % [puzzleState.loopedEvents count]];
+          }
+          
+          NSArray* existingEvents;
+          if (b < [self.combinedEventsLoop count])
+          {
+            existingEvents = [self.combinedEventsLoop[b] arrayByAddingObjectsFromArray:eventsAtBeat];
+            [self.combinedEventsLoop replaceObjectAtIndex:b withObject:existingEvents];
+          }
+          else
+          {
+            [self.combinedEventsLoop addObject:eventsAtBeat];
+          }
+        }
+      }
       
       i++;
     }
 
+    // audio event controller
     PFLAudioEventController* audioEventController = [PFLAudioEventController audioEventController];
     self.audioEventController = audioEventController;
     self.audioEventController.beatDuration = puzzleSet.beatDuration;
     [self addChild:self.audioEventController];
     [self.audioEventController loadSamples:self.combinedSampleNames];
-    self.audioEventController.mute = YES;
+    self.audioEventController.mute = NO;
     
+    // begin playing loop
     self.loopIndex = 0;
-    
-//    [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
+    [self schedule:@selector(stepLoopSequence) interval:self.puzzleSet.beatDuration];
   };
   return self;
 }
 
-// TODO: needs refactoring to work with dynamic solution sequences
-//- (void)stepLoopSequence
-//{
-//  NSArray* events = self.puzzleSet.combinedSolutionEvents[self.loopIndex];
-//  [self.audioEventController receiveEvents:events];
-//  
-//  self.loopIndex++;
-//  if (self.loopIndex >= self.puzzleSet.combinedSolutionEvents.count)
-//  {
-//    self.loopIndex = 0;
-//  }
-//}
+- (void)stepLoopSequence
+{
+  NSArray* events = self.combinedEventsLoop[self.loopIndex];
+  [self.audioEventController receiveEvents:events];
+  
+  self.loopIndex++;
+  if (self.loopIndex >= [self.combinedEventsLoop count])
+  {
+    self.loopIndex = 0;
+  }
+}
 
 #pragma mark SequenceMenuCellDelegate
 
