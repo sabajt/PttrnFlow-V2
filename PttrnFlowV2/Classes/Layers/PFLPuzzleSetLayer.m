@@ -160,8 +160,12 @@
 
 - (void)stepLoopSequence
 {
-  NSArray* events = self.combinedEventsLoop[self.loopIndex];
-  [self.audioEventController receiveEvents:events];
+  if (self.loopIndex < [self.combinedEventsLoop count])
+  {
+    NSArray* events;
+    events = self.combinedEventsLoop[self.loopIndex];
+    [self.audioEventController receiveEvents:events];
+  }
   
   self.loopIndex++;
   if (self.loopIndex >= [self.combinedEventsLoop count])
