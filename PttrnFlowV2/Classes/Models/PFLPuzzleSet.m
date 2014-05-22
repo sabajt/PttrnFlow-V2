@@ -54,32 +54,4 @@ static NSString* const kTheme = @"theme";
   return self;
 }
 
-// TODO: will need to refactor to fit dynamic solution sequences
-//- (NSArray*)combinedSolutionEvents
-//{
-//  if (!_combinedSolutionEvents)
-//  {
-//    NSMutableArray *combinedSolutionEvents = [NSMutableArray array];
-//    for (NSInteger i = 0; i < self.length; i++)
-//    {
-//      [combinedSolutionEvents addObject:[NSArray array]];
-//    }
-//    
-//    for (PFLKeyframe *keyframe in self.keyframes)
-//    {
-//      NSInteger s = keyframe.sourceIndex;
-//      for (NSInteger r = 0; r < keyframe.range; r++)
-//      {
-//        NSArray *events = [keyframe.puzzle solutionEvents][s];
-//        NSInteger t = keyframe.targetIndex + r;
-//        combinedSolutionEvents[t] = [combinedSolutionEvents[t] arrayByAddingObjectsFromArray:events];
-//        s++;
-//      }
-//    }
-//    
-//    _combinedSolutionEvents = [NSArray arrayWithArray:combinedSolutionEvents];
-//  }
-//  return _combinedSolutionEvents;
-//}
-
 @end
