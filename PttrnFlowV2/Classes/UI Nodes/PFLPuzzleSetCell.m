@@ -9,6 +9,7 @@
 #import "PFLPuzzleSetCell.h"
 #import "PFLColorUtils.h"
 #import "PFLPuzzle.h"
+#import "PFLPuzzleState.h"
 
 @interface PFLPuzzleSetCell ()
 
@@ -31,8 +32,18 @@
     CCLabelTTF *label = [CCLabelTTF labelWithString:puzzle.name fontName:@"ArialRoundedMTBold" fontSize:20];
     label.positionType = CCPositionTypeNormalized;
     label.color = [PFLColorUtils dimPurple];
-    label.position = ccp(0.5f, 0.5f);
+    label.position = ccp(0.33f, 0.5f);
     [self addChild:label];
+    
+    PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
+    if (puzzleState.loopedEvents)
+    {
+      CCSprite* check = [CCSprite spriteWithImageNamed:@"check.png"];
+      check.color = [PFLColorUtils dimPurple];
+      check.positionType = CCPositionTypeNormalized;
+      check.position = ccp(0.66, 0.5f);
+      [self addChild:check];
+    }
   }
   return self;
 }

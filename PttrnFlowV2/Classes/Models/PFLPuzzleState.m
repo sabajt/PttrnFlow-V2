@@ -57,6 +57,8 @@
   return self;
 }
 
+#pragma mark - NSCoding
+
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
   [aCoder encodeObject:self.fileName forKey:@"fileName"];

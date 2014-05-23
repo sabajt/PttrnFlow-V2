@@ -59,7 +59,7 @@
 
       [self.audioUnits addObject:audioUnit];
     }
-    self.multiSampleEvent = [PFLEvent multiSampleEventWithAudioID:glyph.audioID multiSample:multiSample];
+    self.multiSampleEvent = [PFLEvent multiSampleEventWithAudioID:glyph.audioID puzzleFile:glyph.puzzle.file multiSample:multiSample];
   }
   return self;
 }

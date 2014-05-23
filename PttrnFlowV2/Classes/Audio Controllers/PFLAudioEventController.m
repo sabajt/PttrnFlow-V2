@@ -56,10 +56,10 @@
     
     if ([event.eventType integerValue] == PFLEventTypeSample)
     {
-      id sound = [[OALSimpleAudio sharedInstance] playEffect:event.file];
+      id sound = [[OALSimpleAudio sharedInstance] playEffect:event.sampleFile];
       if (!sound)
       {
-        CCLOG(@"Error: sound for sample %@ could not be created", event.file);
+        CCLOG(@"Error: sound for sample %@ could not be created", event.sampleFile);
       }
     }
     

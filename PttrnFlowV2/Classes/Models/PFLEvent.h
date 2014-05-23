@@ -33,25 +33,26 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 
 @interface PFLEvent : NSObject <PFLCompareObjectsDelegate>
 
-@property (strong, nonatomic) NSString* puzzleName;
 @property (strong, nonatomic) NSNumber* audioID;
 @property (copy, nonatomic) NSString* direction;
 @property (strong, nonatomic) NSNumber* eventType;
-@property (copy, nonatomic) NSString* file;
 @property (copy, nonatomic) NSString* midiValue;
+@property (strong, nonatomic) NSString* puzzleFile;
+@property (copy, nonatomic) NSString* sampleFile;
 @property (strong, nonatomic) NSArray* sampleEvents;
 @property (strong, nonatomic) NSNumber* switchSenderChannel;
 @property (copy, nonatomic) NSString* synthType;
 @property (strong, nonatomic) NSNumber* time;
 
 // Individual event constructors
-+ (id)synthEventWithAudioID:(NSNumber*)audioID midiValue:(NSString*)midiValue synthType:(NSString*)synthType;
-+ (id)sampleEventWithAudioID:(NSNumber*)audioID file:(NSString*)file time:(NSNumber*)time;
++ (id)synthEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile midiValue:(NSString*)midiValue synthType:(NSString*)synthType;
++ (id)sampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile sampleFile:(NSString*)sampleFile time:(NSNumber*)time;
 + (id)directionEventWithDirection:(NSString*)direction;
 + (id)exitEvent;
-+ (id)audioStopEventWithAudioID:(NSNumber*)audioID;
-+ (id)multiSampleEventWithAudioID:(NSNumber*)audioID sampleEvents:(NSArray*)sampleEvents;
-+ (id)multiSampleEventWithAudioID:(NSNumber*)audioID multiSample:(PFLMultiSample*)multiSample;
++ (id)audioStopEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString *)puzzleFile;
++ (id)audioStopEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile;
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile sampleEvents:(NSArray*)sampleEvents;
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile multiSample:(PFLMultiSample*)multiSample;
 + (id)goalEvent;
 + (id)switchSenderEventWithChannel:(NSNumber*)channel;
 

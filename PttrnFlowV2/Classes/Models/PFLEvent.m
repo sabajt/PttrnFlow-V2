@@ -39,7 +39,7 @@ NSString *const kChannelNone = @"ChannelNone";
 
 #pragma mark - constructors
 
-+ (id)synthEventWithAudioID:(NSNumber *)audioID midiValue:(NSString *)midiValue synthType:(NSString*)synthType
++ (id)synthEventWithAudioID:(NSNumber *)audioID puzzleFile:(NSString *)puzzleFile midiValue:(NSString *)midiValue synthType:(NSString *)synthType
 {
   PFLEvent* event = [[PFLEvent alloc] init];
   event.eventType = [NSNumber numberWithInteger:PFLEventTypeSynth];
@@ -49,12 +49,12 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
-+ (id)sampleEventWithAudioID:(NSNumber*)audioID file:(NSString*)file time:(NSNumber*)time
++ (id)sampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString *)puzzleFile sampleFile:(NSString *)sampleFile time:(NSNumber *)time
 {
   PFLEvent* event = [[PFLEvent alloc] init];
   event.eventType = [NSNumber numberWithInteger:PFLEventTypeSample];
   event.audioID = audioID;
-  event.file = file;
+  event.sampleFile = sampleFile;
   event.time = time;
   return event;
 }
@@ -74,7 +74,7 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
-+ (id)audioStopEventWithAudioID:(NSNumber*)audioID
++ (id)audioStopEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString *)puzzleFile
 {
   PFLEvent* event = [[PFLEvent alloc] init];
   event.eventType = PFLEventTypeAudioStop;
@@ -82,7 +82,7 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
-+ (id)multiSampleEventWithAudioID:(NSNumber*)audioID sampleEvents:(NSArray*)sampleEvents
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString *)puzzleFile sampleEvents:(NSArray *)sampleEvents
 {
   PFLEvent* event = [[PFLEvent alloc] init];
   event.eventType = [NSNumber numberWithInteger:PFLEventTypeMultiSample];
@@ -91,15 +91,15 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
-+ (id)multiSampleEventWithAudioID:(NSNumber*)audioID multiSample:(PFLMultiSample*)multiSample
++ (id)multiSampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString *)puzzleFile multiSample:(PFLMultiSample *)multiSample
 {
   NSMutableArray* sampleEvents = [NSMutableArray array];
   for (PFLSample* sample in multiSample.samples)
   {
-    PFLEvent* sampleEvent = [PFLEvent sampleEventWithAudioID:audioID file:sample.file time:sample.time];
+    PFLEvent* sampleEvent = [PFLEvent sampleEventWithAudioID:audioID puzzleFile:puzzleFile sampleFile:sample.file time:sample.time];
     [sampleEvents addObject:sampleEvent];
   }
-  return [PFLEvent multiSampleEventWithAudioID:audioID sampleEvents:[NSArray arrayWithArray:sampleEvents]];
+  return [PFLEvent multiSampleEventWithAudioID:audioID puzzleFile:puzzleFile sampleEvents:[NSArray arrayWithArray:sampleEvents]];
 }
 
 + (id)goalEvent
@@ -127,8 +127,9 @@ NSString *const kChannelNone = @"ChannelNone";
     self.eventType = [aDecoder decodeObjectForKey:@"eventType"];
     self.audioID = [aDecoder decodeObjectForKey:@"audioID"];
     self.direction = [aDecoder decodeObjectForKey:@"direction"];
-    self.file = [aDecoder decodeObjectForKey:@"file"];
     self.midiValue = [aDecoder decodeObjectForKey:@"midiValue"];
+    self.puzzleFile = [aDecoder decodeObjectForKey:@"puzzleFile"];
+    self.sampleFile = [aDecoder decodeObjectForKey:@"sampleFile"];
     self.sampleEvents = [aDecoder decodeObjectForKey:@"sampleEvents"];
     self.switchSenderChannel = [aDecoder decodeObjectForKey:@"switchSenderChannel"];
     self.synthType = [aDecoder decodeObjectForKey:@"synthType"];
@@ -143,8 +144,9 @@ NSString *const kChannelNone = @"ChannelNone";
   [aCoder encodeObject:self.eventType forKey:@"eventType"];
   [aCoder encodeObject:self.audioID forKey:@"audioID"];
   [aCoder encodeObject:self.direction forKey:@"direction"];
-  [aCoder encodeObject:self.file forKey:@"file"];
   [aCoder encodeObject:self.midiValue forKey:@"midiValue"];
+  [aCoder encodeObject:self.puzzleFile forKey:@"puzzleFile"];
+  [aCoder encodeObject:self.sampleFile forKey:@"sampleFile"];
   [aCoder encodeObject:self.sampleEvents forKey:@"sampleEvents"];
   [aCoder encodeObject:self.switchSenderChannel forKey:@"switchSenderChannel"];
   [aCoder encodeObject:self.synthType forKey:@"synthType"];

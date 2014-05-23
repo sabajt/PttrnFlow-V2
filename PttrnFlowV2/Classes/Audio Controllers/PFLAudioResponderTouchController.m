@@ -192,7 +192,7 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
   NSString* channel = [touchInfo objectForKey:@"channel"];
-  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
+  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil puzzleFile:nil];
   [self.audioEventController receiveEvents:@[audioStopEvent]];
 
   // get grid cell of touch
@@ -214,7 +214,7 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
   NSString* channel = [touchInfo objectForKey:@"channel"];
-  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil];
+  PFLEvent* audioStopEvent = [PFLEvent audioStopEventWithAudioID:nil puzzleFile:nil];
   [self.audioEventController receiveEvents:@[audioStopEvent]];
   
   // get grid cell of touch
