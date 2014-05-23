@@ -7,7 +7,7 @@
             <key>2pt_border_9slice.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{710,480},{80,80}}</string>
+                <string>{{2,568},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -163,7 +163,7 @@
             <key>numButton1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{94,568},{44,46}}</string>
+                <string>{{130,568},{44,46}}</string>
                 <key>offset</key>
                 <string>{0,2}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>numButton10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{48,616},{44,46}}</string>
+                <string>{{102,712},{44,46}}</string>
                 <key>offset</key>
                 <string>{0,2}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>numButton11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{48,568},{44,46}}</string>
+                <string>{{102,664},{44,46}}</string>
                 <key>offset</key>
                 <string>{0,2}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>numButton12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,616},{44,46}}</string>
+                <string>{{84,616},{44,46}}</string>
                 <key>offset</key>
                 <string>{0,2}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>numButton13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,568},{44,46}}</string>
+                <string>{{84,568},{44,46}}</string>
                 <key>offset</key>
                 <string>{0,2}</string>
                 <key>rotated</key>
@@ -371,7 +371,7 @@
             <key>numButtonHighlight.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{94,616},{44,44}}</string>
+                <string>{{130,616},{44,44}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -406,6 +406,19 @@
                 <string>{{0,0},{8,4}}</string>
                 <key>sourceSize</key>
                 <string>{8,4}</string>
+            </dict>
+            <key>rounded_fill_9slice.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{710,480},{80,80}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{80,80}}</string>
+                <key>sourceSize</key>
+                <string>{80,80}</string>
             </dict>
             <key>speaker.png</key>
             <dict>
@@ -443,7 +456,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6139c270418a6b601a0fb5cc20408fbc:850e666fd3f02a39ff0674c3884b957f:c502f529b1326393133b1b1fe352aeb3$</string>
+            <string>$TexturePacker:SmartUpdate:790c1b8224bf81d5c9f1e2b90c94f42a:326e9be544a615b8b8c9d32641f2109a:c502f529b1326393133b1b1fe352aeb3$</string>
             <key>textureFileName</key>
             <string>userInterface-hd.png</string>
         </dict>

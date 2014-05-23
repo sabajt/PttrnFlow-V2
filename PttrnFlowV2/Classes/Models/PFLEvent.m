@@ -46,6 +46,7 @@ NSString *const kChannelNone = @"ChannelNone";
   event.audioID = audioID;
   event.midiValue = midiValue;
   event.synthType = synthType;
+  event.puzzleFile = puzzleFile;
   return event;
 }
 
@@ -56,6 +57,7 @@ NSString *const kChannelNone = @"ChannelNone";
   event.audioID = audioID;
   event.sampleFile = sampleFile;
   event.time = time;
+  event.puzzleFile = puzzleFile;
   return event;
 }
 
@@ -79,6 +81,7 @@ NSString *const kChannelNone = @"ChannelNone";
   PFLEvent* event = [[PFLEvent alloc] init];
   event.eventType = PFLEventTypeAudioStop;
   event.audioID = audioID;
+  event.puzzleFile = puzzleFile;
   return event;
 }
 
@@ -88,6 +91,7 @@ NSString *const kChannelNone = @"ChannelNone";
   event.eventType = [NSNumber numberWithInteger:PFLEventTypeMultiSample];
   event.audioID = audioID;
   event.sampleEvents = sampleEvents;
+  event.puzzleFile = puzzleFile;
   return event;
 }
 
@@ -151,6 +155,21 @@ NSString *const kChannelNone = @"ChannelNone";
   [aCoder encodeObject:self.switchSenderChannel forKey:@"switchSenderChannel"];
   [aCoder encodeObject:self.synthType forKey:@"synthType"];
   [aCoder encodeObject:self.time forKey:@"time"];
+}
+
+#pragma mark - Accesors
+
+- (void)setDelegate:(id<PFLEventDelegate>)delegate
+{
+  _delegate = delegate;
+  
+  if ([self.sampleEvents count] > 0)
+  {
+    for (PFLEvent* event in self.sampleEvents)
+    {
+      event.delegate = self.delegate;
+    }
+  }
 }
 
 #pragma mark - PFLCompareObjectsDelegate

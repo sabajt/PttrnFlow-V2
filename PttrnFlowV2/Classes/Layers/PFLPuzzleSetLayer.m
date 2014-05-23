@@ -18,6 +18,7 @@
 #import "PFLGlyph.h"
 #import "PFLMultiSample.h"
 #import "PFLSample.h"
+#import "PFLEvent.h"
 
 @interface PFLPuzzleSetLayer ()
 
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) NSMutableArray* combinedEventsLoop;
 @property NSInteger loopIndex;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
+@property (strong, nonatomic) NSMutableDictionary* puzzleSetCells;
 
 @end
 
@@ -77,14 +79,13 @@
     // puzzle cells
     NSInteger puzzleCount = [self.puzzleSet.puzzles count];
     static CGFloat normalizedVertButtonPadding = 1.0f / 20.0f;
+    self.puzzleSetCells = [NSMutableDictionary dictionary];
     
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
       // puzzle set cells
       PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithPuzzle:puzzle cellIndex:i];
-      [self addChild:cell];
-      
       cell.anchorPoint = ccp(0, 1);
       cell.contentSizeType = CCSizeTypeNormalized;
       cell.contentSize = CGSizeMake(0.9f, (header.position.y - ((puzzleCount + 1) * normalizedVertButtonPadding)) / puzzleCount);
@@ -93,6 +94,9 @@
                           (header.position.y - (i * cell.contentSize.height)) - ((i + 1.0f) * normalizedVertButtonPadding));
       cell.propogateTouch = YES;
       cell.menuCellDelegate = self;
+      
+      [self addChild:cell];
+      [self.puzzleSetCells setObject:cell forKey:puzzle.file];
       
       // collect sample names to pre-load
       for (PFLGlyph* glyph in puzzle.glyphs)
@@ -131,10 +135,29 @@
           if (b < [self.combinedEventsLoop count])
           {
             existingEvents = [self.combinedEventsLoop[b] arrayByAddingObjectsFromArray:eventsAtBeat];
+            
+            // cell wants callbacks for animation
+            for (PFLEvent* event in existingEvents)
+            {
+              if (event.audioID && ([event.puzzleFile isEqualToString:cell.puzzle.file]))
+              {
+                event.delegate = cell;
+              }
+            }
+            
             [self.combinedEventsLoop replaceObjectAtIndex:b withObject:existingEvents];
           }
           else
           {
+            // cell wants callbacks for animation
+            for (PFLEvent* event in eventsAtBeat)
+            {
+              if (event.audioID && ([event.puzzleFile isEqualToString:cell.puzzle.file]))
+              {
+                event.delegate = cell;
+              }
+            }
+            
             [self.combinedEventsLoop addObject:eventsAtBeat];
           }
         }

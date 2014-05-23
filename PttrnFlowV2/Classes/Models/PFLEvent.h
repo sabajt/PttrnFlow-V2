@@ -23,7 +23,13 @@ typedef NS_ENUM(NSInteger, PFLEventType)
   PFLEventTypeSynth,
 };
 
-@class PFLPuzzle, PFLMultiSample;
+@class PFLEvent, PFLPuzzle, PFLMultiSample;
+
+@protocol PFLEventDelegate <NSObject>
+
+- (void)eventFired:(PFLEvent*)event;
+
+@end
 
 @interface NSArray (PFLEvent)
 
@@ -32,6 +38,9 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 @end
 
 @interface PFLEvent : NSObject <PFLCompareObjectsDelegate>
+
+// if delegate is used, must be assigned at runtime ( will not attempt to be archived )
+@property (weak, nonatomic) id<PFLEventDelegate> delegate;
 
 @property (strong, nonatomic) NSNumber* audioID;
 @property (copy, nonatomic) NSString* direction;

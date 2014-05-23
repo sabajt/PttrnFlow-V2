@@ -48,18 +48,17 @@
 
   for (PFLEvent* event in events)
   {
-    if ([event.eventType integerValue] == PFLEventTypeSynth)
-    {
-      NSNumber* midiValue = @([event.midiValue integerValue]);
-      NSNumber* synthType = @0;
-    }
-    
     if ([event.eventType integerValue] == PFLEventTypeSample)
     {
       id sound = [[OALSimpleAudio sharedInstance] playEffect:event.sampleFile];
       if (!sound)
       {
         CCLOG(@"Error: sound for sample %@ could not be created", event.sampleFile);
+      }
+      
+      if (event.delegate)
+      {
+        [event.delegate eventFired:event];
       }
     }
     
@@ -75,7 +74,10 @@
         CCActionSequence* seq = [CCActionSequence actionWithArray:@[delay, sampleBlock]];
         [self runAction:seq];
       };
+      
+      // no need to call eventFired: on multisample, we just want the sample sub events to call eventFired:
     }
+    
   }
 }
 
