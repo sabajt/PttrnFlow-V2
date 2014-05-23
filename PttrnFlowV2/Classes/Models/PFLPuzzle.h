@@ -19,7 +19,6 @@
 @property (copy, nonatomic) NSString* name;
 @property (weak, nonatomic) PFLPuzzleSet* puzzleSet;
 @property (strong, nonatomic) NSArray* solutionEvents;
-@property (strong, nonatomic) NSNumber* uid;
 
 + (PFLPuzzle*)puzzleFromResource:(NSString*)resource puzzleSet:(PFLPuzzleSet*)puzzleSet;
 - (id)initWithJson:(NSDictionary*)json puzzleSet:(PFLPuzzleSet*)puzzleSet;

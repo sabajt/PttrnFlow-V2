@@ -14,16 +14,6 @@
 #import "PFLPuzzle.h"
 #import "PFLSample.h"
 
-static NSString* const kArea = @"area";
-static NSString* const kAudio = @"audio";
-static NSString* const kGlyphs = @"glyphs";
-static NSString* const kMidi = @"midi";
-static NSString* const kName = @"name";
-static NSString* const kSamples = @"samples";
-static NSString* const kSolution = @"solution";
-static NSString* const kSynth = @"synth";
-static NSString* const kUid = @"uid";
-
 @implementation PFLPuzzle
 
 + (PFLPuzzle*)puzzleFromResource:(NSString*)resource puzzleSet:(PFLPuzzleSet*)puzzleSet
@@ -36,16 +26,16 @@ static NSString* const kUid = @"uid";
   self = [super init];
   if (self)
   {
-    self.area = [PFLCoord coordsFromArrays:json[kArea]];
-    self.name = json[kName];
+    self.area = [PFLCoord coordsFromArrays:json[@"area"]];
+    self.name = json[@"name"];
     self.puzzleSet = puzzleSet;
-    self.uid = json[kUid];
+    self.file = json[@"file"];
     
     // audio models
     NSMutableArray* audio = [NSMutableArray array];
-    for (NSDictionary* a in json[kAudio])
+    for (NSDictionary* a in json[@"audio"])
     {
-      NSArray* s = a[kSamples];
+      NSArray* s = a[@"samples"];
       if (s)
       {
         NSArray *samples = [PFLSample samplesFromArray:s];
@@ -57,7 +47,7 @@ static NSString* const kUid = @"uid";
     
     // glyph models
     NSMutableArray* glyphs = [NSMutableArray array];
-    for (NSDictionary* g in json[kGlyphs])
+    for (NSDictionary* g in json[@"glyphs"])
     {
       PFLGlyph* glyph = [[PFLGlyph alloc] initWithObject:g puzzle:self];
       [glyphs addObject:glyph];

@@ -60,7 +60,7 @@
   [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"audioObjects.plist"];
   [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"userInterface.plist"];
   
-  PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"puzzleSet0"];
+  PFLPuzzleSet *puzzleSet = [PFLPuzzleSet puzzleSetFromResource:@"sys_set_0"];
   CCScene *scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:puzzleSet];
   return scene;
 }

@@ -25,7 +25,7 @@
 
 + (instancetype)puzzleStateForPuzzle:(PFLPuzzle*)puzzle
 {
-  NSString* fileName = [NSString stringWithFormat:@"puzzleState%@", puzzle.uid];
+  NSString* fileName = [NSString stringWithFormat:@"%@_state", puzzle.file];
   NSString* path = [[AppDelegate applicationDocumentsDirectory] stringByAppendingPathComponent:fileName];
   
   PFLPuzzleState* puzzleState = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
@@ -37,7 +37,7 @@
   }
   else
   {
-    puzzleState.fileName = [NSString stringWithFormat:@"puzzleState%@", puzzle.uid];
+    puzzleState.fileName = fileName;
     [puzzleState archive];
   }
   

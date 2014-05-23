@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 
 @interface PFLEvent : NSObject <PFLCompareObjectsDelegate>
 
+@property (strong, nonatomic) NSString* puzzleName;
 @property (strong, nonatomic) NSNumber* audioID;
 @property (copy, nonatomic) NSString* direction;
 @property (strong, nonatomic) NSNumber* eventType;
