@@ -8,20 +8,13 @@
 
 #import "CCSprite.h"
 
-@class PFLBasicButton;
-
-@protocol BasicButtonDelegate <NSObject>
-
-- (void)basicButtonPressed:(PFLBasicButton *)sender;
-
-@end
-
 @interface PFLBasicButton : CCSprite
 
-- (id)initWithPlaceholderFrameName:(NSString *)placeholderFrameName
-                      offFrameName:(NSString *)offFrameName
-                       onFrameName:(NSString *)onFrameName
-                          delegate:(id<BasicButtonDelegate>)delegate;
-- (id)initWithImage:(NSString *)image defaultColor:(CCColor *)defaultColor activeColor:(CCColor*)activeColor delegate:(id<BasicButtonDelegate>)delegate;
+@property (weak, nonatomic) id target;
+
+@property (copy, nonatomic) NSString* touchBeganSelectorName;
+@property (copy, nonatomic) NSString* touchEndedSelectorName;
+
+- (id)initWithImage:(NSString *)image defaultColor:(CCColor *)defaultColor activeColor:(CCColor*)activeColor target:(id)target;
 
 @end

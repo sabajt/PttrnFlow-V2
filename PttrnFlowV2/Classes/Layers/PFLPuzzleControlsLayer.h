@@ -8,7 +8,6 @@
 
 #import "cocos2d.h"
 #import "PFLToggleButton.h"
-#import "PFLBasicButton.h"
 
 @class PFLAudioEventController, PFLPuzzle;
 
@@ -19,7 +18,7 @@
 
 @end
 
-@interface PFLPuzzleControlsLayer : CCNode <ToggleButtonDelegate, BasicButtonDelegate>
+@interface PFLPuzzleControlsLayer : CCNode <ToggleButtonDelegate>
 
 + (CGSize)uiButtonUnitSize;
 

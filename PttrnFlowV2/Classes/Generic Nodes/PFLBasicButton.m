@@ -13,7 +13,6 @@
 
 @property (weak, nonatomic) CCSprite *offSprite;
 @property (weak, nonatomic) CCSprite *onSprite;
-@property (weak, nonatomic) id<BasicButtonDelegate> delegate;
 @property (strong, nonatomic) CCColor* defaultColor;
 @property (strong, nonatomic) CCColor* activeColor;
 @property (assign) BOOL useColor;
@@ -22,111 +21,79 @@
 
 @implementation PFLBasicButton
 
-- (id)initWithPlaceholderFrameName:(NSString *)placeholderFrameName
-                      offFrameName:(NSString *)offFrameName
-                       onFrameName:(NSString *)onFrameName
-                          delegate:(id<BasicButtonDelegate>)delegate
+- (id)initWithImage:(NSString *)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor target:(id)target
 {
-    self = [super initWithImageNamed:placeholderFrameName];
-    if (self) {
-        self.userInteractionEnabled = YES;
-        self.delegate = delegate;
-        
-        CCSprite *offSprite = [CCSprite spriteWithImageNamed:offFrameName];
-        self.offSprite = offSprite;
-        CCSprite *onSprite = [CCSprite spriteWithImageNamed:onFrameName];
-        self.onSprite = onSprite;
-        
-        // minimum size to contain both sprites
-        self.contentSize = CGContainingSize(offSprite.contentSize, onSprite.contentSize);
-        
-        offSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-        [self addChild:offSprite];
-        
-        onSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-        [self addChild:onSprite];
-        onSprite.visible = NO;
-    }
-    return self;
+  self = [super initWithImageNamed:image];
+  if (self)
+  {
+    self.userInteractionEnabled = YES;
+    self.target = target;
+    self.defaultColor = defaultColor;
+    self.activeColor = activeColor;
+    self.color = defaultColor;
+    self.useColor = YES;
+  }
+  return self;
 }
 
-- (id)initWithImage:(NSString *)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<BasicButtonDelegate>)delegate
+- (void)callSelectorNamed:(NSString*)selectorName
 {
-    self = [super initWithImageNamed:image];
-    if (self) {
-        self.userInteractionEnabled = YES;
-        self.delegate = delegate;
-        self.defaultColor = defaultColor;
-        self.activeColor = activeColor;
-        self.color = defaultColor;
-        self.useColor = YES;
-    }
-    return self;
+  // http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+  SEL selector = NSSelectorFromString(selectorName);
+  IMP imp = [self.target methodForSelector:selector];
+  void (*func)(id, SEL) = (void *)imp;
+  func(self.target, selector);
 }
 
-//- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    if ([super ccTouchBegan:touch withEvent:event]) {
-        if (self.offSprite && self.onSprite) {
-            self.offSprite.visible = NO;
-            self.onSprite.visible = YES;
-        }
-        if (self.useColor) {
-            self.color = self.activeColor;
-        }
-//        return YES;
-//    }
-//    return NO;
+  if (self.offSprite && self.onSprite)
+  {
+    self.offSprite.visible = NO;
+    self.onSprite.visible = YES;
+  }
+  if (self.useColor)
+  {
+    self.color = self.activeColor;
+  }
+  
+  if (self.target && self.touchBeganSelectorName)
+  {
+    [self callSelectorNamed:self.touchBeganSelectorName];
+  }
 }
 
-//- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
-- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
-{
-//    [super ccTouchMoved:touch withEvent:event];
-//    
-//    BOOL containsTouch = [self containsTouch:touch];
-//    
-//    if (self.offSprite && self.onSprite) {
-//        self.offSprite.visible = !containsTouch;
-//        self.onSprite.visible = containsTouch;
-//    }
-//    if (self.useColor) {
-//        if (containsTouch) {
-//            self.color = self.activeColor;
-//        }
-//        else {
-//            self.color = self.defaultColor;
-//        }
-//    }
-}
-
-//- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    [super ccTouchEnded:touch withEvent:event];
-    
-    if (self.offSprite && self.onSprite) {
-        self.offSprite.visible = YES;
-        self.onSprite.visible = NO;
-    }
-    
-    if (self.useColor) {
-        self.color = self.defaultColor;
-    }
-    
-//    if ([self containsTouch:touch]) {
-        [self.delegate basicButtonPressed:self];
-//    }
-}
-
-//- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
-- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
-{
-//    [super ccTouchCancelled:touch withEvent:event];
-    
+  if (self.offSprite && self.onSprite)
+  {
     self.offSprite.visible = YES;
     self.onSprite.visible = NO;
+  }
+  
+  if (self.useColor)
+  {
+    self.color = self.defaultColor;
+  }
+  
+  if (self.target && self.touchEndedSelectorName)
+  {
+    [self callSelectorNamed:self.touchEndedSelectorName];
+  }
+}
+
+- (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+{
+  if (self.offSprite && self.onSprite)
+  {
+    self.offSprite.visible = YES;
+    self.onSprite.visible = NO;
+  }
+  
+  if (self.useColor)
+  {
+    self.color = self.defaultColor;
+  }
 }
 
 @end

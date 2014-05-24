@@ -16,6 +16,7 @@
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleSetLayer.h"
 #import "PFLTileSprite.h"
+#import "PFLBasicButton.h"
 
 @interface PFLPuzzleControlsLayer ()
 
@@ -87,9 +88,10 @@
     [self.uiBatchNode addChild:topLeftControlsPanelBorder];
     
     // exit button
-    PFLBasicButton* exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
-    self.exitButton = exitButton;
+    PFLBasicButton* exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] target:self];
     exitButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
+    exitButton.touchEndedSelectorName = @"exitButtonPressed";
+    self.exitButton = exitButton;
     [self.uiBatchNode addChild:exitButton];
     
     // bottom left controls panel
@@ -165,14 +167,11 @@
 
 #pragma mark - BasicButtonDelegate
 
-- (void)basicButtonPressed:(PFLBasicButton *)sender
+- (void)exitButtonPressed
 {
-  if ([sender isEqual:self.exitButton])
-  {
-    CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
-    CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
-    [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
-  }
+  CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
+  CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
+  [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
 }
 
 @end
