@@ -1,8 +1,8 @@
 //
-//  MainSynth.h
-//  SequencerGame
+//  PFLAudioEventController.h
+//  PttrnFlowV2
 //
-//  Created by John Saba on 5/5/13.
+//  Created by John Saba on 5/24/14.
 //
 //
 

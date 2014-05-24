@@ -8,11 +8,12 @@
 
 #import "CCNode.h"
 
+FOUNDATION_EXPORT NSString* const PFLNotificationToggleMute;
+
 @protocol PFLHudLayerDelegate <NSObject>
 
 @optional
 - (void)backButtonPressed;
-- (void)muteButtonPressed;
 
 @end
 
@@ -20,6 +21,7 @@
 
 @property (weak, nonatomic) id<PFLHudLayerDelegate> delegate;
 
++ (BOOL)isMuted;
 - (id)initWithTheme:(NSString*)theme;
 
 @end

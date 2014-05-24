@@ -9,6 +9,7 @@
 #import "PFLAudioEventController.h"
 #import "PFLPuzzleLayer.h"
 #import "PFLEvent.h"
+#import "PFLHudLayer.h"
 
 @interface PFLAudioEventController ()
 
@@ -23,7 +24,26 @@
   return [[self alloc] init];
 }
 
-#pragma mark - SoundEventReveiver
+- (void)onEnter
+{
+  [super onEnter];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleToggleMute) name:PFLNotificationToggleMute object:nil];
+  
+  self.mute = [PFLHudLayer isMuted];
+}
+
+- (void)onExit
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [super onExit];
+}
+
+- (void)handleToggleMute
+{
+  self.mute = [PFLHudLayer isMuted];
+}
 
 - (void)loadSamples:(NSArray*)samples
 {
@@ -35,11 +55,6 @@
 
 - (void)receiveEvents:(NSArray*)events
 {
-  if (self.mute)
-  {
-    return;
-  }
-  
   if ((events == nil) || (events.count < 1))
   {
     CCLOG(@"no events sent to synth");
@@ -50,10 +65,13 @@
   {
     if ([event.eventType integerValue] == PFLEventTypeSample)
     {
-      id sound = [[OALSimpleAudio sharedInstance] playEffect:event.sampleFile];
-      if (!sound)
+      if (!self.mute)
       {
-        CCLOG(@"Error: sound for sample %@ could not be created", event.sampleFile);
+        id sound = [[OALSimpleAudio sharedInstance] playEffect:event.sampleFile];
+        if (!sound)
+        {
+          CCLOG(@"Error: sound for sample %@ could not be created", event.sampleFile);
+        }
       }
       
       if (event.delegate)
@@ -75,7 +93,7 @@
         [self runAction:seq];
       };
       
-      // no need to call eventFired: on multisample, we just want the sample sub events to call eventFired:
+      // no need to call eventFired: (yet) on multisample, we just want the sample sub events to call eventFired:
     }
     
   }

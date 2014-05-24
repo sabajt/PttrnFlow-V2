@@ -8,10 +8,11 @@
 
 #import "PFLScrollNode.h"
 #import "PFLPuzzleSetCell.h"
+#import "PFLHudLayer.h"
 
 @class PFLPuzzleSet;
 
-@interface PFLPuzzleSetLayer : PFLScrollNode <PFLPuzzleSetCellDelegate>
+@interface PFLPuzzleSetLayer : PFLScrollNode <PFLPuzzleSetCellDelegate, PFLHudLayerDelegate>
 
 @property (strong, nonatomic) NSArray* mapNames;
 

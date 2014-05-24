@@ -38,14 +38,14 @@
   CCScene* scene = [CCScene node];
   
   PFLPuzzleBackgroundLayer* background = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils controlPanelFillWithTheme:puzzleSet.theme]];
-  [scene addChild:background];
+  [scene addChild:background z:0];
   
   // header
   CCNodeColor* header = [[CCNodeColor alloc] initWithColor:[PFLColorUtils dimPurple] width:1.0f height:0.1f];
   header.contentSizeType = CCSizeTypeNormalized;
   header.positionType = CCPositionTypeNormalized;
   header.position = ccp(0.0f, 1.0f - header.contentSize.height);
-  [scene addChild:header z:1];
+  [scene addChild:header z:2];
   
   CCLabelTTF* headerLabel = [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
   headerLabel.color = [PFLColorUtils darkCream];
@@ -56,11 +56,16 @@
   
   // menu
   PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet header:header];
-  [scene addChild:menuLayer];
   menuLayer.contentSizeType = CCSizeTypeNormalized;
   menuLayer.contentSize = CGSizeMake(1.0f, 1.0f);
   menuLayer.positionType = CCPositionTypeNormalized;
   menuLayer.scrollBoundsInPoints = CGRectMake(0.0f, 0.0f, scene.contentSizeInPoints.width, scene.contentSizeInPoints.height);
+  [scene addChild:menuLayer z:1];
+  
+  // HUD layer
+  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzleSet.theme];
+  hudLayer.delegate = menuLayer;
+  [scene addChild:hudLayer z:3];
   
   return scene;
 }
