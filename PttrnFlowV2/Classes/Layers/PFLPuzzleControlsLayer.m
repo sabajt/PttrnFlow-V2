@@ -17,6 +17,7 @@
 #import "PFLPuzzleSetLayer.h"
 #import "PFLTileSprite.h"
 #import "PFLBasicButton.h"
+#import "PFLToggleButton.h"
 
 @interface PFLPuzzleControlsLayer ()
 
@@ -108,9 +109,10 @@
     [self.uiBatchNode addChild:bottomLeftControlsPanelBorder];
   
     // play button
-    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] delegate:self];
-    self.playButton = playButton;
+    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] target:self];
     playButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width / 2.0f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
+    playButton.touchBeganSelectorName = @"playButtonPressed";
+    self.playButton = playButton;
     [self.uiBatchNode addChild:playButton];
   }
   return self;
@@ -142,30 +144,23 @@
 {
   if (self.playButton.isOn)
   {
-    [self.playButton toggleIgnoringDelegate:YES];
+    [self.playButton toggleIgnoringTarget:YES];
   }
 }
 
-#pragma mark - ToggleButtonDelegate
-
-- (void)toggleButtonPressed:(PFLToggleButton*)sender
+- (void)playButtonPressed
 {
-  if ([sender isEqual:self.playButton])
+  self.currentStep = 0;
+  
+  if (self.playButton.isOn)
   {
-    self.currentStep = 0;
-    
-    if (self.playButton.isOn)
-    {
-      [self.delegate startUserSequence];
-    }
-    else
-    {
-      [self.delegate stopUserSequence];
-    }
+    [self.delegate startUserSequence];
+  }
+  else
+  {
+    [self.delegate stopUserSequence];
   }
 }
-
-#pragma mark - BasicButtonDelegate
 
 - (void)exitButtonPressed
 {

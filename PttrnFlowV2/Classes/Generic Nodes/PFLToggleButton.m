@@ -11,8 +11,6 @@
 
 @interface PFLToggleButton ()
 
-@property (weak, nonatomic) id<ToggleButtonDelegate> delegate;
-
 // using different sprites for on / off state
 @property (weak, nonatomic) CCSprite *offSprite;
 @property (weak, nonatomic) CCSprite *onSprite;
@@ -25,39 +23,13 @@
 
 @implementation PFLToggleButton
 
-- (id)initWithPlaceholderImage:(NSString*)placeholderImage offImage:(NSString*)offImage onImage:(NSString*)onImage delegate:(id<ToggleButtonDelegate>)delegate
-{
-  self = [super initWithImageNamed:placeholderImage];
-  if (self)
-  {
-    self.userInteractionEnabled = YES;
-    self.delegate = delegate;
-    
-    CCSprite *offSprite = [CCSprite spriteWithImageNamed:offImage];
-    self.offSprite = offSprite;
-    CCSprite *onSprite = [CCSprite spriteWithImageNamed:onImage];
-    self.onSprite = onSprite;
-    
-    // minimum size to contain both sprites
-    self.contentSize = CGContainingSize(offSprite.contentSize, onSprite.contentSize);
-    
-    offSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-    [self addChild:offSprite];
-    
-    onSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-    [self addChild:onSprite];
-    onSprite.visible = NO;
-  }
-  return self;
-}
-
-- (id)initWithImage:(NSString*)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor delegate:(id<ToggleButtonDelegate>)delegate
+- (id)initWithImage:(NSString*)image defaultColor:(CCColor*)defaultColor activeColor:(CCColor*)activeColor target:(id)target
 {
   self = [super initWithImageNamed:image];
   if (self)
   {
     self.userInteractionEnabled = YES;
-    self.delegate = delegate;
+    self.target = target;
     self.defaultColor = defaultColor;
     self.activeColor = activeColor;
     self.color = defaultColor;
@@ -65,12 +37,21 @@
   return self;
 }
 
-- (void)toggle
+- (void)callSelectorNamed:(NSString*)selectorName
 {
-  [self toggleIgnoringDelegate:NO];
+  // http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+  SEL selector = NSSelectorFromString(selectorName);
+  IMP imp = [self.target methodForSelector:selector];
+  void (*func)(id, SEL) = (void*)imp;
+  func(self.target, selector);
 }
 
-- (void)toggleIgnoringDelegate:(BOOL)ignoringDelegate
+- (void)toggle
+{
+  [self toggleIgnoringTarget:NO];
+}
+
+- (void)toggleIgnoringTarget:(BOOL)ignoringTarget
 {
   self.isOn = !self.isOn;
   
@@ -90,15 +71,16 @@
       self.color = self.defaultColor;
     }
   }
-  if (!ignoringDelegate)
+  
+  if (!ignoringTarget && self.target && self.touchBeganSelectorName)
   {
-    [self.delegate toggleButtonPressed:self];
+    [self callSelectorNamed:self.touchBeganSelectorName];
   }
 }
 
 #pragma mark - CCTargetedTouchDelegate
 
-- (void)touchBegan:(UITouch*)touch withEvent:(UIEvent*)event
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
   [self toggle];
 }

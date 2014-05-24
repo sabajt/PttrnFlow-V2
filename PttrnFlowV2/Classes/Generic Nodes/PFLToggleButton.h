@@ -8,21 +8,16 @@
 
 #import "CCSprite.h"
 
-@class PFLToggleButton;
-
-@protocol ToggleButtonDelegate <NSObject>
-
-- (void)toggleButtonPressed:(PFLToggleButton *)sender;
-
-@end
-
 @interface PFLToggleButton : CCSprite
 
 @property BOOL isOn;
 
-- (id)initWithPlaceholderImage:(NSString *)placeholderImage offImage:(NSString *)offImage onImage:(NSString *)onImage delegate:(id<ToggleButtonDelegate>)delegate;
-- (id)initWithImage:(NSString *)image defaultColor:(CCColor *)defaultColor activeColor:(CCColor*)activeColor delegate:(id<ToggleButtonDelegate>)delegate;
+@property (weak, nonatomic) id target;
+@property (copy, nonatomic) NSString* touchBeganSelectorName;
+
+- (id)initWithImage:(NSString *)image defaultColor:(CCColor *)defaultColor activeColor:(CCColor*)activeColor target:(id)target;
+
 - (void)toggle;
-- (void)toggleIgnoringDelegate:(BOOL)ignoringDelegate;
+- (void)toggleIgnoringTarget:(BOOL)ignoringTarget;
 
 @end
