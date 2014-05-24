@@ -28,8 +28,6 @@
 @property (strong, nonatomic) PFLAudioEventController* audioEventController;
 
 @property (weak, nonatomic) PFLToggleButton* playButton;
-@property (weak, nonatomic) PFLToggleButton* speakerButton;
-@property (weak, nonatomic) PFLBasicButton* exitButton;
 @property (weak, nonatomic) CCLabelTTF* countDownLabel;
 
 @property NSInteger steps;
@@ -74,26 +72,6 @@
     
     self.uiBatchNode = uiBatch;
     [self addChild:uiBatch];
-    
-    // top left controls panel
-    CCSprite* topLeftControlsPanel = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
-    topLeftControlsPanel.color = [PFLColorUtils controlPanelFillWithTheme:theme];
-    topLeftControlsPanel.anchorPoint = ccp(0, 1);
-    topLeftControlsPanel.position = ccp(0, self.contentSize.height);
-    [self.uiBatchNode addChild:topLeftControlsPanel];
-    
-    CCSprite* topLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
-    topLeftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
-    topLeftControlsPanelBorder.anchorPoint = ccp(0, 1);
-    topLeftControlsPanelBorder.position = topLeftControlsPanel.position;
-    [self.uiBatchNode addChild:topLeftControlsPanelBorder];
-    
-    // exit button
-    PFLBasicButton* exitButton = [[PFLBasicButton alloc] initWithImage:@"exit.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] target:self];
-    exitButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f, self.contentSize.height - topLeftControlsPanel.contentSize.height / 2.0f);
-    exitButton.touchEndedSelectorName = @"exitButtonPressed";
-    self.exitButton = exitButton;
-    [self.uiBatchNode addChild:exitButton];
     
     // bottom left controls panel
     CCSprite* bottomLeftControlsPanelFill = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
@@ -160,13 +138,6 @@
   {
     [self.delegate stopUserSequence];
   }
-}
-
-- (void)exitButtonPressed
-{
-  CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
-  CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
-  [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
 }
 
 @end

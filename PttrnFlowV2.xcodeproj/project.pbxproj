@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		332DED9919107EA5007F78AA /* PFLFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 332DED9819107EA5007F78AA /* PFLFonts.m */; };
+		338866511930FAC700DD024C /* PFLHudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 338866501930FAC700DD024C /* PFLHudLayer.m */; };
 		3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */; };
 		3399634118F0A8DE000F4522 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634018F0A8DE000F4522 /* QuartzCore.framework */; };
 		3399634318F0A8DE000F4522 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634218F0A8DE000F4522 /* OpenGLES.framework */; };
@@ -313,6 +314,8 @@
 /* Begin PBXFileReference section */
 		332DED9719107EA5007F78AA /* PFLFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLFonts.h; sourceTree = "<group>"; };
 		332DED9819107EA5007F78AA /* PFLFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLFonts.m; sourceTree = "<group>"; };
+		3388664F1930FAC700DD024C /* PFLHudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLHudLayer.h; sourceTree = "<group>"; };
+		338866501930FAC700DD024C /* PFLHudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLHudLayer.m; sourceTree = "<group>"; };
 		3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLRecursiveTouch.h"; sourceTree = "<group>"; };
 		3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+PFLRecursiveTouch.m"; sourceTree = "<group>"; };
 		3399633D18F0A8DE000F4522 /* PttrnFlowV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PttrnFlowV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1862,6 +1865,8 @@
 				3399664A18F0B60C000F4522 /* PFLPuzzleSetLayer.m */,
 				3399664B18F0B60C000F4522 /* PFLScrollNode.h */,
 				3399664C18F0B60C000F4522 /* PFLScrollNode.m */,
+				3388664F1930FAC700DD024C /* PFLHudLayer.h */,
+				338866501930FAC700DD024C /* PFLHudLayer.m */,
 			);
 			name = Layers;
 			path = Classes/Layers;
@@ -2239,6 +2244,7 @@
 				3399654F18F0A8DF000F4522 /* plane.c in Sources */,
 				339964D218F0A8DF000F4522 /* OALSimpleAudio.m in Sources */,
 				339963C418F0A8DE000F4522 /* CCGLProgram.m in Sources */,
+				338866511930FAC700DD024C /* PFLHudLayer.m in Sources */,
 				339965E618F0A8E0000F4522 /* main.m in Sources */,
 				3399668E18F0B60C000F4522 /* PFLEvent.m in Sources */,
 				339964F918F0A8DF000F4522 /* OALAudioSession.m in Sources */,

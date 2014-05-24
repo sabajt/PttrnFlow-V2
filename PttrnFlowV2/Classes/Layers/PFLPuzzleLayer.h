@@ -8,11 +8,11 @@
 
 #import "cocos2d.h"
 #import "PFLScrollNode.h"
-#import "PFLPuzzleControlsLayer.h"
+#import "PFLHudLayer.h"
 
-@class PdDispatcher, PFLAudioResponderStepController, PFLAudioResponderTouchController;
+@class PFLPuzzle, PdDispatcher, PFLAudioResponderStepController, PFLAudioResponderTouchController;
 
-@interface PFLPuzzleLayer : PFLScrollNode
+@interface PFLPuzzleLayer : PFLScrollNode <PFLHudLayerDelegate>
 
 @property (weak, nonatomic) PFLAudioResponderStepController* sequenceDispatcher;
 @property (weak, nonatomic) PFLAudioResponderTouchController* audioResponderTouchController;

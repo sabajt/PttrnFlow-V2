@@ -31,6 +31,7 @@
 #import "AppDelegate.h"
 #import "PFLSwitchSenderSprite.h"
 #import "PFLFonts.h"
+#import "PFLPuzzleSetLayer.h"
 
 typedef NS_ENUM(NSInteger, ZOrderAudioBatch)
 {
@@ -82,6 +83,11 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   // controls layer
   PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher audioEventController:puzzleLayer.audioEventController];
   [scene addChild:uiLayer z:1];
+  
+  // HUD layer
+  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzle.puzzleSet.theme];
+  hudLayer.delegate = puzzleLayer;
+  [scene addChild:hudLayer];
   
   return scene;
 }
@@ -571,6 +577,15 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     [self.parent addChild:completeLabel];
     [completeLabel runAction:seq];
   }
+}
+
+#pragma mark - PFLHudLayerDelegate
+
+- (void)backButtonPressed
+{
+  CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
+  CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
+  [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
 }
 
 #pragma mark - debug methods
