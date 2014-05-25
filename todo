@@ -1,11 +1,6 @@
 PttrnFlowV2 todo
 
-json/protodata
-- seq len
-
-set screen
-- show solved or not on cells
-- puzzle set screen loop for solved puzzles
+- drag items onto board
 - metronome blinker / animations
 - in/out transition
 - animate goal

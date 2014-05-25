@@ -41,14 +41,19 @@
   [scene addChild:background z:0];
   
   // header
-  CCNodeColor* header = [[CCNodeColor alloc] initWithColor:[PFLColorUtils dimPurple] width:1.0f height:0.1f];
+  CCNodeColor* header = [[CCNodeColor alloc] initWithColor:[PFLColorUtils darkCream] width:1.0f height:0.1f];
   header.contentSizeType = CCSizeTypeNormalized;
   header.positionType = CCPositionTypeNormalized;
   header.position = ccp(0.0f, 1.0f - header.contentSize.height);
   [scene addChild:header z:2];
   
+  CCNodeColor* separator = [[CCNodeColor alloc] initWithColor:[PFLColorUtils dimPurple] width:header.contentSizeInPoints.width height:2.0f];
+  separator.positionType = CCPositionTypeNormalized;
+  separator.position = ccp(0.0f, 0.0f);
+  [header addChild:separator];
+  
   CCLabelTTF* headerLabel = [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
-  headerLabel.color = [PFLColorUtils darkCream];
+  headerLabel.color = [PFLColorUtils dimPurple];
   headerLabel.anchorPoint = ccp(0.5f, 0.5f);
   headerLabel.positionType = CCPositionTypeNormalized;
   headerLabel.position = ccp(0.5f, 0.5f);

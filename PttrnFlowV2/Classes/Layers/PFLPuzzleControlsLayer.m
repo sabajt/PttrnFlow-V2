@@ -67,31 +67,39 @@
     self.delegate = delegate;
     self.steps = puzzle.solutionEvents.count;
     
-    // batch node
-    CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
+//    // batch node
+//    CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
+//    
+//    self.uiBatchNode = uiBatch;
+//    [self addChild:uiBatch];
+//    
+//    // bottom left controls panel
+//    CCSprite* bottomLeftControlsPanelFill = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
+//    bottomLeftControlsPanelFill.rotation = -90.0f;
+//    bottomLeftControlsPanelFill.color = [PFLColorUtils controlPanelFillWithTheme:theme];
+//    bottomLeftControlsPanelFill.position = ccp(bottomLeftControlsPanelFill.contentSize.width / 2.0f, bottomLeftControlsPanelFill.contentSize.height / 2.0f);
+//    [self.uiBatchNode addChild:bottomLeftControlsPanelFill];
+//    
+//    CCSprite* bottomLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
+//    bottomLeftControlsPanelBorder.rotation = -90.0f;
+//    bottomLeftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
+//    bottomLeftControlsPanelBorder.position = bottomLeftControlsPanelFill.position;
+//    [self.uiBatchNode addChild:bottomLeftControlsPanelBorder];
     
-    self.uiBatchNode = uiBatch;
-    [self addChild:uiBatch];
-    
-    // bottom left controls panel
-    CCSprite* bottomLeftControlsPanelFill = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
-    bottomLeftControlsPanelFill.rotation = -90.0f;
-    bottomLeftControlsPanelFill.color = [PFLColorUtils controlPanelFillWithTheme:theme];
-    bottomLeftControlsPanelFill.position = ccp(bottomLeftControlsPanelFill.contentSize.width / 2.0f, bottomLeftControlsPanelFill.contentSize.height / 2.0f);
-    [self.uiBatchNode addChild:bottomLeftControlsPanelFill];
-    
-    CCSprite* bottomLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
-    bottomLeftControlsPanelBorder.rotation = -90.0f;
-    bottomLeftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
-    bottomLeftControlsPanelBorder.position = bottomLeftControlsPanelFill.position;
-    [self.uiBatchNode addChild:bottomLeftControlsPanelBorder];
+    CCNode* buttonAnchor = [CCNode node];
+    buttonAnchor.anchorPoint = ccp(0.0f, 0.0f);
+    buttonAnchor.positionType = CCPositionTypeNormalized;
+    buttonAnchor.position = ccp(0.0f, 0.0f);
+    buttonAnchor.contentSize = CGSizeMake(50.0f, 50.0f);
+    [self addChild:buttonAnchor];
   
     // play button
     PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] target:self];
-    playButton.position = ccp([PFLPuzzleControlsLayer uiButtonUnitSize].width / 2.0f, [PFLPuzzleControlsLayer uiButtonUnitSize].height / 2.0f);
+    playButton.positionType = CCPositionTypeNormalized;
+    playButton.position = ccp(0.5f, 0.5f);
     playButton.touchBeganSelectorName = @"playButtonPressed";
     self.playButton = playButton;
-    [self.uiBatchNode addChild:playButton];
+    [buttonAnchor addChild:playButton];
   }
   return self;
 }
