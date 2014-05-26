@@ -8,6 +8,7 @@
 
 #import "PFLBasicButton.h"
 #import "PFLGeometry.h"
+#import "CCDirector.h"
 
 @interface PFLBasicButton ()
 
@@ -15,7 +16,7 @@
 @property (weak, nonatomic) CCSprite *onSprite;
 @property (strong, nonatomic) CCColor* defaultColor;
 @property (strong, nonatomic) CCColor* activeColor;
-@property (assign) BOOL useColor;
+@property BOOL useColor;
 
 @end
 
@@ -45,17 +46,32 @@
   func(self.target, selector);
 }
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)highlightUI:(BOOL)shouldHighlight
 {
   if (self.offSprite && self.onSprite)
   {
-    self.offSprite.visible = NO;
-    self.onSprite.visible = YES;
+    self.offSprite.visible = !shouldHighlight;
+    self.onSprite.visible = shouldHighlight;
   }
+  
   if (self.useColor)
   {
-    self.color = self.activeColor;
+    if (shouldHighlight)
+    {
+      self.color = self.activeColor;
+    }
+    else
+    {
+      self.color = self.defaultColor;
+    }
   }
+}
+
+#pragma mark -
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+  [self highlightUI:YES];
   
   if (self.target && self.touchBeganSelectorName)
   {
@@ -63,20 +79,21 @@
   }
 }
 
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+  CGPoint worldTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView:[CCDirector sharedDirector].view]];
+  if (![self hitTestWithWorldPos:worldTouchLocation])
+  {
+    [self highlightUI:NO];
+  }
+}
+
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-  if (self.offSprite && self.onSprite)
-  {
-    self.offSprite.visible = YES;
-    self.onSprite.visible = NO;
-  }
+  [self highlightUI:NO];
   
-  if (self.useColor)
-  {
-    self.color = self.defaultColor;
-  }
-  
-  if (self.target && self.touchEndedSelectorName)
+  CGPoint worldTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView:[CCDirector sharedDirector].view]];
+  if ([self hitTestWithWorldPos:worldTouchLocation] && self.target && self.touchEndedSelectorName)
   {
     [self callSelectorNamed:self.touchEndedSelectorName];
   }
@@ -84,16 +101,7 @@
 
 - (void)touchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
 {
-  if (self.offSprite && self.onSprite)
-  {
-    self.offSprite.visible = YES;
-    self.onSprite.visible = NO;
-  }
-  
-  if (self.useColor)
-  {
-    self.color = self.defaultColor;
-  }
+  [self highlightUI:NO];
 }
 
 @end
