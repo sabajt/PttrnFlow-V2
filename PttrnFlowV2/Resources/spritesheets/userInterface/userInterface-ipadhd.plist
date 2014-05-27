@@ -7,7 +7,7 @@
             <key>2pt_border_9slice.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1380,1580},{160,160}}</string>
+                <string>{{1100,1742},{160,160}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>clear_rect_uilayer.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2000,106},{1,1}}</string>
+                <string>{{2042,106},{1,1}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,20 +150,20 @@
             <key>exit.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1198,1580},{180,180}}</string>
+                <string>{{1982,106},{66,58}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{-3,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{180,180}}</string>
+                <string>{{54,61},{66,58}}</string>
                 <key>sourceSize</key>
                 <string>{180,180}</string>
             </dict>
             <key>numButton1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1280,1944},{88,90}}</string>
+                <string>{{1262,1764},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -176,7 +176,7 @@
             <key>numButton10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1190,1944},{88,90}}</string>
+                <string>{{1268,1580},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>numButton11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1100,1944},{88,90}}</string>
+                <string>{{1262,1672},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>numButton12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{182,1432},{88,90}}</string>
+                <string>{{1178,1580},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>numButton13.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{92,1432},{88,90}}</string>
+                <string>{{1190,1904},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>numButton14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,1432},{88,90}}</string>
+                <string>{{1100,1904},{88,90}}</string>
                 <key>offset</key>
                 <string>{0,3}</string>
                 <key>rotated</key>
@@ -371,7 +371,7 @@
             <key>numButtonHighlight.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1370,1924},{88,88}}</string>
+                <string>{{1280,1856},{88,88}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,20 +384,20 @@
             <key>play.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1100,1762},{180,180}}</string>
+                <string>{{134,1432},{108,108}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{7,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{180,180}}</string>
+                <string>{{43,36},{108,108}}</string>
                 <key>sourceSize</key>
                 <string>{180,180}</string>
             </dict>
             <key>rounded_dash.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1982,106},{16,8}}</string>
+                <string>{{1982,174},{16,8}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -410,7 +410,7 @@
             <key>rounded_fill_9slice.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1282,1762},{160,160}}</string>
+                <string>{{1016,1580},{160,160}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -423,13 +423,13 @@
             <key>speaker.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1016,1580},{180,180}}</string>
+                <string>{{2,1432},{130,130}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{180,180}}</string>
+                <string>{{25,25},{130,130}}</string>
                 <key>sourceSize</key>
                 <string>{180,180}</string>
             </dict>
@@ -456,7 +456,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:7138a23dd9c8c3e5450e5cc82be7c222:bdc9890f79624d6021a525b35e7bf24b:c502f529b1326393133b1b1fe352aeb3$</string>
+            <string>$TexturePacker:SmartUpdate:bfb14e78cda64cab0e76493cc5d59c9d:b2c0c53aeefd10f0cba5a302c011953d:c502f529b1326393133b1b1fe352aeb3$</string>
             <key>textureFileName</key>
             <string>userInterface-ipadhd.png</string>
         </dict>
