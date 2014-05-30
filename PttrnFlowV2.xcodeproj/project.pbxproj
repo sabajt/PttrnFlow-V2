@@ -2043,6 +2043,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "John Saba";
+				TargetAttributes = {
+					3399633C18F0A8DE000F4522 = {
+						DevelopmentTeam = 586EB56567;
+					};
+				};
 			};
 			buildConfigurationList = 3399633818F0A8DE000F4522 /* Build configuration list for PBXProject "PttrnFlowV2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2461,6 +2466,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2478,7 +2485,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A000E401-28D8-478C-9159-770ADAB1F3F1";
+				PROVISIONING_PROFILE = "586A3BE8-66DD-4E4F-B738-2DA1E9640B4D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2488,6 +2495,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PttrnFlowV2/Supporting Files/Prefix.pch";
@@ -2504,7 +2513,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A000E401-28D8-478C-9159-770ADAB1F3F1";
+				PROVISIONING_PROFILE = "8449AA43-3E15-4BEF-B341-527F6D127B79";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
