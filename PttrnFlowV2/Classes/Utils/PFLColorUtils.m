@@ -15,45 +15,50 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 #pragma mark - Colors
 
-+ (CCColor *)activeYellow
++ (CCColor*)activeYellow
 {
   return [CCColor colorWithCcColor3b:ccc3(255, 212, 39)];
 }
 
-+ (CCColor *)cream
++ (CCColor*)cream
 {
 //    return ccc3(252, 251, 247); // original
   return [CCColor colorWithCcColor3b:ccc3(232, 231, 227)]; // darker
 }
 
-+ (CCColor *)darkCream
++ (CCColor*)darkCream
 {
   return [CCColor colorWithCcColor3b:ccc3(222, 221, 217)];
 }
 
-+ (CCColor *)darkGray
++ (CCColor*)darkGray
 {
   return [CCColor colorWithCcColor3b:ccc3(43, 43, 43)];
 }
 
-+ (CCColor *)darkPurple
++ (CCColor*)darkPurple
 {
   return [CCColor colorWithCcColor3b:ccc3(102, 77, 102)];
 }
 
-+ (CCColor *)defaultPurple
++ (CCColor*)defaultPurple
 {
   return [CCColor colorWithCcColor3b:ccc3(157, 79, 140)];
 }
 
-+ (CCColor *)dimPurple
++ (CCColor*)dimPurple
 {
   return [CCColor colorWithCcColor3b:ccc3(155, 138, 159)];
 }
 
-+ (CCColor *)lightPurple
++ (CCColor*)lightPurple
 {
   return [CCColor colorWithCcColor3b:ccc3(227, 222, 238)];
+}
+
++ (CCColor*)translucentBlack
+{
+  return [CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.2f];
 }
 
 #pragma mark - Themes
@@ -88,26 +93,17 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor *)backgroundWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
-    return [PFLColorUtils darkGray];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
-  {
-//        return [PFLColorUtils lightPurple];
     return [PFLColorUtils darkCream];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];
 }
 
-+ (CCColor *)controlButtonsDefaultWithTheme:(NSString *)theme
++ (CCColor *)contentBackedButtonsDefaultWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils dimPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils dimPurple];
   }
@@ -115,13 +111,9 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)controlButtonsActiveWithTheme:(NSString *)theme
++ (CCColor *)contentBackedButtonsActiveWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils darkPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils darkPurple];
   }
@@ -129,15 +121,21 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)controlPanelEdgeWithTheme:(NSString *)theme
++ (CCColor *)controlPanelButtonsDefaultWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  {
+    return [PFLColorUtils darkCream];
+  }
+  CCLOG(@"Warning theme '%@' not recognized", theme);
+  return [CCColor blackColor];
+}
+
++ (CCColor *)controlPanelButtonsActiveWithTheme:(NSString *)theme
+{
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils darkPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
-  {
-    return [PFLColorUtils dimPurple];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];
@@ -145,13 +143,9 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor *)controlPanelFillWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
-    return [PFLColorUtils darkCream];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
-  {
-    return [PFLColorUtils darkCream];
+    return [PFLColorUtils translucentBlack];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];
@@ -216,20 +210,6 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
       return [PFLColorUtils dimPurple];
     }
     return [PFLColorUtils defaultPurple];
-  }
-  CCLOG(@"Warning theme '%@' not recognized", theme);
-  return [CCColor blackColor];
-}
-
-+ (CCColor *)solutionButtonHighlightWithTheme:(NSString *)theme
-{
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils activeYellow];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
-  {
-    return [PFLColorUtils darkPurple];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];

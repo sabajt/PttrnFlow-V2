@@ -22,6 +22,8 @@ FOUNDATION_EXPORT NSString* const PFLNotificationToggleMute;
 @property (weak, nonatomic) id<PFLHudLayerDelegate> delegate;
 
 + (BOOL)isMuted;
-- (id)initWithTheme:(NSString*)theme;
++ (CGFloat)accesoryBarHeight;
+
+- (id)initWithTheme:(NSString*)theme contentMode:(BOOL)contentMode;
 
 @end

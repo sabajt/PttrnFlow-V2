@@ -37,30 +37,13 @@
 {
   CCScene* scene = [CCScene node];
   
-  PFLPuzzleBackgroundLayer* background = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils controlPanelFillWithTheme:puzzleSet.theme]];
+  PFLPuzzleBackgroundLayer* background = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils backgroundWithTheme:puzzleSet.theme]];
   [scene addChild:background z:0];
   
-  // header
-  CCNodeColor* header = [[CCNodeColor alloc] initWithColor:[PFLColorUtils darkCream] width:1.0f height:0.1f];
-  header.contentSizeType = CCSizeTypeNormalized;
-  header.positionType = CCPositionTypeNormalized;
-  header.position = ccp(0.0f, 1.0f - header.contentSize.height);
-  [scene addChild:header z:2];
-  
-  CCNodeColor* separator = [[CCNodeColor alloc] initWithColor:[PFLColorUtils dimPurple] width:header.contentSizeInPoints.width height:2.0f];
-  separator.positionType = CCPositionTypeNormalized;
-  separator.position = ccp(0.0f, 0.0f);
-  [header addChild:separator];
-  
-  CCLabelTTF* headerLabel = [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
-  headerLabel.color = [PFLColorUtils dimPurple];
-  headerLabel.anchorPoint = ccp(0.5f, 0.5f);
-  headerLabel.positionType = CCPositionTypeNormalized;
-  headerLabel.position = ccp(0.5f, 0.5f);
-  [header addChild:headerLabel];
+//  [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
   
   // menu
-  PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet header:header];
+  PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet];
   menuLayer.contentSizeType = CCSizeTypeNormalized;
   menuLayer.contentSize = CGSizeMake(1.0f, 1.0f);
   menuLayer.positionType = CCPositionTypeNormalized;
@@ -68,14 +51,14 @@
   [scene addChild:menuLayer z:1];
   
   // HUD layer
-  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzleSet.theme];
+  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzleSet.theme contentMode:NO];
   hudLayer.delegate = menuLayer;
   [scene addChild:hudLayer z:3];
   
   return scene;
 }
 
-- (id)initWithPuzzleSet:(PFLPuzzleSet*)puzzleSet header:(CCNode*)header
+- (id)initWithPuzzleSet:(PFLPuzzleSet*)puzzleSet
 {
   self = [super init];
   if (self)
@@ -91,6 +74,8 @@
     static CGFloat normalizedVertButtonPadding = 1.0f / 20.0f;
     self.puzzleSetCells = [NSMutableDictionary dictionary];
     
+    CGFloat normalizedHeaderPosY = (self.contentSize.height - [PFLHudLayer accesoryBarHeight]) / self.contentSize.height;
+    
     int i = 0;
     for (PFLPuzzle* puzzle in self.puzzleSet.puzzles)
     {
@@ -98,10 +83,10 @@
       PFLPuzzleSetCell* cell = [[PFLPuzzleSetCell alloc] initWithPuzzle:puzzle cellIndex:i];
       cell.anchorPoint = ccp(0, 1);
       cell.contentSizeType = CCSizeTypeNormalized;
-      cell.contentSize = CGSizeMake(0.9f, (header.position.y - ((puzzleCount + 1) * normalizedVertButtonPadding)) / puzzleCount);
+      cell.contentSize = CGSizeMake(0.9f, (normalizedHeaderPosY - ((puzzleCount + 1) * normalizedVertButtonPadding)) / puzzleCount);
       cell.positionType = CCPositionTypeNormalized;
       cell.position = ccp((1.0f - cell.contentSize.width) / 2.0f,
-                          (header.position.y - (i * cell.contentSize.height)) - ((i + 1.0f) * normalizedVertButtonPadding));
+                          (normalizedHeaderPosY - (i * cell.contentSize.height)) - ((i + 1.0f) * normalizedVertButtonPadding));
       cell.propogateTouch = YES;
       cell.menuCellDelegate = self;
       

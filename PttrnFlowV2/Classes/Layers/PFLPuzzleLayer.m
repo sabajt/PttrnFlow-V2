@@ -85,7 +85,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [scene addChild:uiLayer z:1];
   
   // HUD layer
-  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzle.puzzleSet.theme];
+  PFLHudLayer* hudLayer = [[PFLHudLayer alloc] initWithTheme:puzzle.puzzleSet.theme contentMode:YES];
   hudLayer.delegate = puzzleLayer;
   [scene addChild:hudLayer];
   

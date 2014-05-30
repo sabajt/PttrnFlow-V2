@@ -63,9 +63,17 @@
     self.audioEventController = audioEventController;
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
-    NSString* theme = puzzle.puzzleSet.theme;
     self.delegate = delegate;
     self.steps = puzzle.solutionEvents.count;
+    
+    NSString* theme = puzzle.puzzleSet.theme;
+    
+    // bottom panel
+    CCNode* bottomPanel = [CCNodeColor nodeWithColor:[PFLColorUtils controlPanelFillWithTheme:theme]];
+    bottomPanel.anchorPoint = ccp(0.0f, 0.0f);
+    bottomPanel.position = ccp(0.0f, 0.0f);
+    bottomPanel.contentSize = CGSizeMake(self.contentSizeInPoints.width, [PFLHudLayer accesoryBarHeight]);
+    [self addChild:bottomPanel];
     
 //    // batch node
 //    CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
@@ -86,20 +94,22 @@
 //    bottomLeftControlsPanelBorder.position = bottomLeftControlsPanelFill.position;
 //    [self.uiBatchNode addChild:bottomLeftControlsPanelBorder];
     
-    CCNode* buttonAnchor = [CCNode node];
-    buttonAnchor.anchorPoint = ccp(0.0f, 0.0f);
-    buttonAnchor.positionType = CCPositionTypeNormalized;
-    buttonAnchor.position = ccp(0.0f, 0.0f);
-    buttonAnchor.contentSize = CGSizeMake(50.0f, 50.0f);
-    [self addChild:buttonAnchor];
+//    CCNode* buttonAnchor = [CCNode node];
+//    buttonAnchor.anchorPoint = ccp(0.0f, 0.0f);
+//    buttonAnchor.positionType = CCPositionTypeNormalized;
+//    buttonAnchor.position = ccp(0.0f, 0.0f);
+//    buttonAnchor.contentSize = CGSizeMake(50.0f, 50.0f);
+//    [self addChild:buttonAnchor];
   
     // play button
-    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlButtonsActiveWithTheme:theme] target:self];
+    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:theme] target:self];
+    playButton.anchorPoint = ccp(0.5f, 0.5f);
     playButton.positionType = CCPositionTypeNormalized;
-    playButton.position = ccp(0.5f, 0.5f);
+    CGFloat xPos = (bottomPanel.contentSizeInPoints.width / 9.0f) / bottomPanel.contentSizeInPoints.width;
+    playButton.position = ccp(xPos, 0.5f);
     playButton.touchBeganSelectorName = @"playButtonPressed";
     self.playButton = playButton;
-    [buttonAnchor addChild:playButton];
+    [bottomPanel addChild:playButton];
   }
   return self;
 }
