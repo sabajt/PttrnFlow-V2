@@ -173,7 +173,11 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     
     // create puzzle objects
     [self createBorderWithAreaCells:puzzle.area];
-    [self createPuzzleObjects:puzzle];        
+    
+    for (PFLGlyph* glyph in puzzle.staticGlyphs)
+    {
+      [self addGlyphNode:glyph];
+    }
   }
   return self;
 }
@@ -360,108 +364,90 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   }
 }
 
-- (void)createPuzzleObjects:(PFLPuzzle*)puzzle
+- (void)addGlyphNode:(PFLGlyph*)glyph
 {
-  NSArray* glyphs = [puzzle.staticGlyphs arrayByAddingObjectsFromArray:puzzle.inventoryGlyphs];
-  PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
-  NSMutableArray* allSampleNames = [NSMutableArray array];
-  
-  for (PFLGlyph* glyph in glyphs)
+  if (!glyph.cell)
   {
-    // cell is the only mandatory field to create an audio pad (empty pad can be used as a puzzle object to just take up space)
-    if (glyph.isStatic && !glyph.cell)
-    {
-      CCLOG(@"SequenceLayer createPuzzleObjects error: 'cell' must not be null on audio pads");
-      return;
-    }
-    PFLCoord* cell;
-    NSDictionary* glyphState = [puzzleState glyphStateForGid:glyph.responderID];
-    if (glyphState)
-    {
-      NSArray* cellArray = glyphState[@"cell"];
-      cell = [PFLCoord coordWithX:[cellArray[0] integerValue] Y:[cellArray[1] integerValue]];
-    }
-    else
-    {
-      cell = glyph.cell;
-    }
-    CGPoint cellCenter = [cell relativeMidpoint];
-    
-    // audio pad sprite
-    PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithImageNamed:@"audio_box.png" glyph:glyph cell:cell];
-    [self addAudioResponder:audioPad];
+    CCLOG(@"Error: glyph nodes must be created with a cell");
+    return;
+  }
+  // TODO: may need to construct locations from saved state?
+  PFLCoord* cell = glyph.cell;
+  CGPoint cellCenter = [cell relativeMidpoint];
+  
+  // audio pad sprite
+  PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithImageNamed:@"audio_box.png" glyph:glyph cell:cell];
+  [self addAudioResponder:audioPad];
 
-    audioPad.position = cellCenter;
-    [self.audioResponderTouchController addResponder:audioPad];
-    [self.sequenceDispatcher addResponder:audioPad];
-    [self.audioObjectsBatchNode addChild:audioPad z:ZOrderAudioBatchPad];
-    
-    if (glyph.audioID)
+  audioPad.position = cellCenter;
+  [self.audioResponderTouchController addResponder:audioPad];
+  [self.sequenceDispatcher addResponder:audioPad];
+  [self.audioObjectsBatchNode addChild:audioPad z:ZOrderAudioBatchPad];
+  
+  if (glyph.audioID)
+  {
+    id object = self.puzzle.audio[[glyph.audioID integerValue]];
+    if ([object isKindOfClass:[PFLMultiSample class]])
     {
-      id object = puzzle.audio[[glyph.audioID integerValue]];
-      if ([object isKindOfClass:[PFLMultiSample class]])
+      PFLMultiSample* multiSample = (PFLMultiSample*)object;
+      PFLGearSprite* gear = [[PFLGearSprite alloc] initWithImageNamed:@"audio_circle.png" glyph:glyph cell:cell multiSample:multiSample];
+      [self.audioResponderTouchController addResponder:gear];
+      [self.sequenceDispatcher addResponder:gear];
+      [self addAudioResponder:gear];
+      gear.position = cellCenter;
+      [self.audioObjectsBatchNode addChild:gear z:ZOrderAudioBatchGlyph];
+      
+      for (PFLSample* sample in multiSample.samples)
       {
-        PFLMultiSample* multiSample = (PFLMultiSample*)object;
-        PFLGearSprite* gear = [[PFLGearSprite alloc] initWithImageNamed:@"audio_circle.png" glyph:glyph cell:cell multiSample:multiSample];
-        [self.audioResponderTouchController addResponder:gear];
-        [self.sequenceDispatcher addResponder:gear];
-        [self addAudioResponder:gear];
-        gear.position = cellCenter;
-        [self.audioObjectsBatchNode addChild:gear z:ZOrderAudioBatchGlyph];
-        
-        for (PFLSample* sample in multiSample.samples)
-        {
-          [allSampleNames addObject:sample.file];
-        }
+        [self.audioEventController loadSamples:@[sample.file]];
       }
     }
-    
-    // direction arrow
-    if ([glyph.type isEqualToString:PFLGlyphTypeArrow])
-    {
-      PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
-      [self.audioResponderTouchController addResponder:arrow];
-      [self.sequenceDispatcher addResponder:arrow];
-      [self addAudioResponder:arrow];
-      arrow.position = cellCenter;
-      [self.audioObjectsBatchNode addChild:arrow z:ZOrderAudioBatchGlyph];
-    }
-    
-    // entry point
-    else if ([glyph.type isEqualToString:PFLGlyphTypeEntry])
-    {
-      PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
-      [self.audioResponderTouchController addResponder:entry];
-      [self.sequenceDispatcher addResponder:entry];
-      self.sequenceDispatcher.entry = entry;
-      [self addAudioResponder:entry];
-      entry.position = cellCenter;
-      [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
-    }
-    
-    // goal
-    else if ([glyph.type isEqualToString:PFLGlyphTypeGoal])
-    {
-      PFLGoalSprite* goal = [[PFLGoalSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
-      [self.audioResponderTouchController addResponder:goal];
-      [self.sequenceDispatcher addResponder:goal];
-      [self addAudioResponder:goal];
-      goal.position = cellCenter;
-      [self.audioObjectsBatchNode addChild:goal z:ZOrderAudioBatchGlyph];
-    }
-    
-    // switch sender
-    else if ([glyph.type isEqualToString:PFLGlyphTypeSwitchSender])
-    {
-      PFLSwitchSenderSprite* switchSender = [[PFLSwitchSenderSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
-      [self.audioResponderTouchController addResponder:switchSender];
-      [self.sequenceDispatcher addResponder:switchSender];
-      [self addAudioResponder:switchSender];
-      switchSender.position = cellCenter;
-      [self.audioObjectsBatchNode addChild:switchSender z:ZOrderAudioBatchGlyph];
-    }
   }
-  [self.audioEventController loadSamples:allSampleNames];
+  
+  // direction arrow
+  if ([glyph.type isEqualToString:PFLGlyphTypeArrow])
+  {
+    PFLArrowSprite* arrow = [[PFLArrowSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+    [self.audioResponderTouchController addResponder:arrow];
+    [self.sequenceDispatcher addResponder:arrow];
+    [self addAudioResponder:arrow];
+    arrow.position = cellCenter;
+    [self.audioObjectsBatchNode addChild:arrow z:ZOrderAudioBatchGlyph];
+  }
+  
+  // entry point
+  else if ([glyph.type isEqualToString:PFLGlyphTypeEntry])
+  {
+    PFLEntrySprite* entry = [[PFLEntrySprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+    [self.audioResponderTouchController addResponder:entry];
+    [self.sequenceDispatcher addResponder:entry];
+    self.sequenceDispatcher.entry = entry;
+    [self addAudioResponder:entry];
+    entry.position = cellCenter;
+    [self.audioObjectsBatchNode addChild:entry z:ZOrderAudioBatchGlyph];
+  }
+  
+  // goal
+  else if ([glyph.type isEqualToString:PFLGlyphTypeGoal])
+  {
+    PFLGoalSprite* goal = [[PFLGoalSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+    [self.audioResponderTouchController addResponder:goal];
+    [self.sequenceDispatcher addResponder:goal];
+    [self addAudioResponder:goal];
+    goal.position = cellCenter;
+    [self.audioObjectsBatchNode addChild:goal z:ZOrderAudioBatchGlyph];
+  }
+  
+  // switch sender
+  else if ([glyph.type isEqualToString:PFLGlyphTypeSwitchSender])
+  {
+    PFLSwitchSenderSprite* switchSender = [[PFLSwitchSenderSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+    [self.audioResponderTouchController addResponder:switchSender];
+    [self.sequenceDispatcher addResponder:switchSender];
+    [self addAudioResponder:switchSender];
+    switchSender.position = cellCenter;
+    [self.audioObjectsBatchNode addChild:switchSender z:ZOrderAudioBatchGlyph];
+  }
 }
 
 - (void)animateBacklight:(PFLCoord*)coord
@@ -498,15 +484,6 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   }
   self.audioResponders = [self.audioResponders setByAddingObject:responder];
 }
-
-//- (BOOL)canDropItem
-//{
-//  NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
-//  if (toCellResponders.count > 0)
-//  {
-//    return;
-//  }
-//}
 
 #pragma mark - scene management
 
@@ -601,7 +578,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 #pragma mark - PFLInventoryDelegate
 
-- (void)inventoryItemMoved:(CCNode*)node
+- (void)inventoryItemMoved:(PFLDragNode*)item
 {
   if (!self.dropHighlight)
   {
@@ -610,7 +587,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     [self addChild:self.dropHighlight];
   }
   
-  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:node.position]];
+  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:item.position]];
   if ([coord isCoordInGroup:self.puzzle.area] &&
       [self responders:[self.audioResponders allObjects] atCoord:coord].count == 0)
   {
@@ -623,14 +600,17 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   }
 }
 
-- (BOOL)inventoryItemDroppedOnBoard:(CCNode*)node
+- (BOOL)inventoryItemDroppedOnBoard:(PFLDragNode*)item;
 {
   self.dropHighlight.visible = NO;
   
-  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:node.position]];
+  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:item.position]];
   if ([coord isCoordInGroup:self.puzzle.area] &&
       [self responders:[self.audioResponders allObjects] atCoord:coord].count == 0)
   {
+    PFLGlyph* glyph = item.glyph;
+    glyph.cell = coord;
+    [self addGlyphNode:glyph];
     return YES;
   }
   return NO;

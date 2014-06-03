@@ -35,6 +35,8 @@
 @property NSInteger steps;
 @property NSInteger currentStep;
 
+@property CGPoint lastDraggedItemPosition;
+
 @end
 
 @implementation PFLPuzzleControlsLayer
@@ -181,7 +183,7 @@
 
 - (void)dragNode:(PFLDragNode *)dragNode touchBegan:(UITouch *)touch
 {
-  
+  self.lastDraggedItemPosition = dragNode.position;
 }
 
 - (void)dragNode:(PFLDragNode*)dragNode touchMoved:(UITouch*)touch
@@ -202,11 +204,12 @@
   
   if ([self.inventoryDelegate inventoryItemDroppedOnBoard:dragNode])
   {
-    CCLOG(@"handle add to board");
+    [dragNode removeFromParentAndCleanup:YES];
   }
   else
   {
-    CCLOG(@"handle return to inventory");
+    CCActionEaseSineOut* move =[CCActionEaseSineOut actionWithAction:[CCActionMoveTo actionWithDuration:0.08f position:self.lastDraggedItemPosition]];
+    [dragNode runAction:move];
   }
 }
 

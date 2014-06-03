@@ -22,6 +22,7 @@
 @interface PFLDragNode : CCNode
 
 @property (weak, nonatomic) id<PFLDragNodeDelegate> delegate;
+@property (strong, nonatomic) PFLGlyph* glyph;
 
 - (instancetype)initWithGlyph:(PFLGlyph*)glyph theme:(NSString*)theme puzzle:(PFLPuzzle*)puzzle;
 

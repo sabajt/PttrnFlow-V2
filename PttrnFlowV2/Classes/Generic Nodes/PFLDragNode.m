@@ -29,6 +29,7 @@
   self = [super init];
   if (self)
   {
+    self.glyph = glyph;
     self.userInteractionEnabled = YES;
     self.contentSize = [PFLGameConstants gridUnitSize];
     self.anchorPoint = ccp(0.5f, 0.5f);

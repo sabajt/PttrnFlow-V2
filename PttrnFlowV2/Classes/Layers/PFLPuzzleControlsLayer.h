@@ -20,8 +20,8 @@
 
 @protocol PFLInventoryDelegate <NSObject>
 
-- (void)inventoryItemMoved:(CCNode*)node;
-- (BOOL)inventoryItemDroppedOnBoard:(CCNode*)node;
+- (void)inventoryItemMoved:(PFLDragNode*)node;
+- (BOOL)inventoryItemDroppedOnBoard:(PFLDragNode*)node;
 
 @end
 
