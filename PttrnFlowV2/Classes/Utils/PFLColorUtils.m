@@ -151,6 +151,16 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
++ (CCColor *)dropHighlightWithTheme:(NSString *)theme
+{
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  {
+    return [PFLColorUtils translucentBlack];
+  }
+  CCLOG(@"Warning theme '%@' not recognized", theme);
+  return [CCColor blackColor];
+}
+
 + (CCColor *)glyphActiveWithTheme:(NSString *)theme
 {
   if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])

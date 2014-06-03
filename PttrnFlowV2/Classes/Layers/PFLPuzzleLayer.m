@@ -6,11 +6,13 @@
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
+#import "AppDelegate.h"
+#import "CCSprite+PFLEffects.h"
+#import "NSObject+PFLAudioResponderUtils.h"
 #import "PFLArrowSprite.h"
 #import "PFLAudioPadSprite.h"
 #import "PFLAudioResponderTouchController.h"
 #import "PFLPuzzleBackgroundLayer.h"
-#import "CCSprite+PFLEffects.h"
 #import "PFLColorUtils.h"
 #import "PFLCoord.h"
 #import "PFLGearSprite.h"
@@ -20,7 +22,6 @@
 #import "PFLGeometry.h"
 #import "PFLPuzzle.h"
 #import "PFLPuzzleLayer.h"
-#import "PFLPuzzleControlsLayer.h"
 #import "PFLAudioResponderStepController.h"
 #import "PFLGlyph.h"
 #import "PFLMultiSample.h"
@@ -28,7 +29,6 @@
 #import "PFLPuzzleSet.h"
 #import "PFLGoalSprite.h"
 #import "PFLPuzzleState.h"
-#import "AppDelegate.h"
 #import "PFLSwitchSenderSprite.h"
 #import "PFLFonts.h"
 #import "PFLPuzzleSetLayer.h"
@@ -58,6 +58,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 @property (strong, nonatomic) PFLAudioEventController* audioEventController;
 @property (strong, nonatomic) NSSet* audioResponders;
 @property BOOL hasWon;
+@property (weak, nonatomic) CCNodeColor* dropHighlight;
 
 @end
 
@@ -82,6 +83,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   
   // controls layer
   PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher audioEventController:puzzleLayer.audioEventController];
+  uiLayer.inventoryDelegate = puzzleLayer;
   [scene addChild:uiLayer z:1];
   
   // HUD layer
@@ -360,14 +362,14 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 
 - (void)createPuzzleObjects:(PFLPuzzle*)puzzle
 {
-  NSArray* glyphs = puzzle.glyphs;
+  NSArray* glyphs = [puzzle.staticGlyphs arrayByAddingObjectsFromArray:puzzle.inventoryGlyphs];
   PFLPuzzleState* puzzleState = [PFLPuzzleState puzzleStateForPuzzle:puzzle];
   NSMutableArray* allSampleNames = [NSMutableArray array];
   
   for (PFLGlyph* glyph in glyphs)
   {
     // cell is the only mandatory field to create an audio pad (empty pad can be used as a puzzle object to just take up space)
-    if (!glyph.cell)
+    if (glyph.isStatic && !glyph.cell)
     {
       CCLOG(@"SequenceLayer createPuzzleObjects error: 'cell' must not be null on audio pads");
       return;
@@ -497,6 +499,15 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   self.audioResponders = [self.audioResponders setByAddingObject:responder];
 }
 
+//- (BOOL)canDropItem
+//{
+//  NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
+//  if (toCellResponders.count > 0)
+//  {
+//    return;
+//  }
+//}
+
 #pragma mark - scene management
 
 - (void)onEnter
@@ -586,6 +597,43 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   CCScene* scene = [PFLPuzzleSetLayer sceneWithPuzzleSet:self.puzzle.puzzleSet];
   CCTransition* transition = [CCTransition transitionCrossFadeWithDuration:0.33f];
   [[CCDirector sharedDirector] replaceScene:scene withTransition:transition];
+}
+
+#pragma mark - PFLInventoryDelegate
+
+- (void)inventoryItemMoved:(CCNode*)node
+{
+  if (!self.dropHighlight)
+  {
+    CCNodeColor* dropHighlight = [CCNodeColor nodeWithColor:[PFLColorUtils dropHighlightWithTheme:self.puzzleSet.theme] width:[PFLGameConstants gridUnit] height:[PFLGameConstants gridUnit]];
+    self.dropHighlight = dropHighlight;
+    [self addChild:self.dropHighlight];
+  }
+  
+  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:node.position]];
+  if ([coord isCoordInGroup:self.puzzle.area] &&
+      [self responders:[self.audioResponders allObjects] atCoord:coord].count == 0)
+  {
+    self.dropHighlight.visible = YES;
+    self.dropHighlight.position = [coord relativePosition];
+  }
+  else
+  {
+    self.dropHighlight.visible = NO;
+  }
+}
+
+- (BOOL)inventoryItemDroppedOnBoard:(CCNode*)node
+{
+  self.dropHighlight.visible = NO;
+  
+  PFLCoord* coord = [PFLCoord coordForRelativePosition:[self convertToNodeSpace:node.position]];
+  if ([coord isCoordInGroup:self.puzzle.area] &&
+      [self responders:[self.audioResponders allObjects] atCoord:coord].count == 0)
+  {
+    return YES;
+  }
+  return NO;
 }
 
 #pragma mark - debug methods

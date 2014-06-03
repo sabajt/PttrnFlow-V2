@@ -24,11 +24,13 @@
 @property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
 
 @property (weak, nonatomic) PFLPuzzle* puzzle; // TOOD: should this be a strong ref?
-@property (weak, nonatomic) id<PFLPuzzleControlsDelegate> delegate;
+@property (weak, nonatomic) id<PFLPuzzleControlsDelegate> controlsDelegate;
 @property (strong, nonatomic) PFLAudioEventController* audioEventController;
+@property (copy, nonatomic) NSString* theme;
 
 @property (weak, nonatomic) PFLToggleButton* playButton;
 @property (weak, nonatomic) CCLabelTTF* countDownLabel;
+@property (weak, nonatomic) CCNodeColor* bottomPanel;
 
 @property NSInteger steps;
 @property NSInteger currentStep;
@@ -63,16 +65,17 @@
     self.audioEventController = audioEventController;
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
-    self.delegate = delegate;
+    self.controlsDelegate = delegate;
     self.steps = puzzle.solutionEvents.count;
-    
-    NSString* theme = puzzle.puzzleSet.theme;
+    self.theme = puzzle.puzzleSet.theme;
     
     // bottom panel
-    CCNode* bottomPanel = [CCNodeColor nodeWithColor:[PFLColorUtils controlPanelFillWithTheme:theme]];
+    CCNodeColor* bottomPanel = [CCNodeColor nodeWithColor:[PFLColorUtils controlPanelFillWithTheme:self.theme]];
     bottomPanel.anchorPoint = ccp(0.0f, 0.0f);
     bottomPanel.position = ccp(0.0f, 0.0f);
-    bottomPanel.contentSize = CGSizeMake(self.contentSizeInPoints.width, [PFLHudLayer accesoryBarHeight]);
+    bottomPanel.contentSize = CGSizeMake(self.contentSizeInPoints.width, [PFLGameConstants gridUnit]);
+
+    self.bottomPanel = bottomPanel;
     [self addChild:bottomPanel];
     
 //    // batch node
@@ -102,7 +105,7 @@
 //    [self addChild:buttonAnchor];
   
     // play button
-    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:theme] target:self];
+    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:self.theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:self.theme] target:self];
     playButton.anchorPoint = ccp(0.5f, 0.5f);
     playButton.positionType = CCPositionTypeNormalized;
     CGFloat xPos = (bottomPanel.contentSizeInPoints.width / 9.0f) / bottomPanel.contentSizeInPoints.width;
@@ -110,8 +113,24 @@
     playButton.touchBeganSelectorName = @"playButtonPressed";
     self.playButton = playButton;
     [bottomPanel addChild:playButton];
+    
+    [self createInventoryObjects];
   }
   return self;
+}
+
+- (void)createInventoryObjects
+{
+  NSInteger i = 0;
+  
+  for (PFLGlyph* glyph in self.puzzle.inventoryGlyphs)
+  {
+    PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
+    dragNode.delegate = self;
+    dragNode.position = ccp(((i + 1) * dragNode.contentSize.width) + dragNode.contentSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
+    [self addChild:dragNode];
+    i++;
+  }
 }
 
 #pragma mark - Scene management
@@ -150,12 +169,50 @@
   
   if (self.playButton.isOn)
   {
-    [self.delegate startUserSequence];
+    [self.controlsDelegate startUserSequence];
   }
   else
   {
-    [self.delegate stopUserSequence];
+    [self.controlsDelegate stopUserSequence];
   }
+}
+
+#pragma mark - PFLDragNodeDelegate
+
+- (void)dragNode:(PFLDragNode *)dragNode touchBegan:(UITouch *)touch
+{
+  
+}
+
+- (void)dragNode:(PFLDragNode*)dragNode touchMoved:(UITouch*)touch
+{
+  dragNode.position = [self convertToWorldSpace:touch.locationInWorld];
+  [self.inventoryDelegate inventoryItemMoved:dragNode];
+}
+
+- (void)dragNode:(PFLDragNode *)dragNode touchEnded:(UITouch *)touch
+{
+  dragNode.position = [self convertToWorldSpace:touch.locationInWorld];
+  
+  if (!self.inventoryDelegate)
+  {
+    CCLOG(@"Warning: no inventory delegate set.");
+    return;
+  }
+  
+  if ([self.inventoryDelegate inventoryItemDroppedOnBoard:dragNode])
+  {
+    CCLOG(@"handle add to board");
+  }
+  else
+  {
+    CCLOG(@"handle return to inventory");
+  }
+}
+
+- (void)dragNode:(PFLDragNode *)dragNode touchCancelled:(UITouch *)touch
+{
+  
 }
 
 @end

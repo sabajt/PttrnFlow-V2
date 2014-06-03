@@ -50,30 +50,29 @@
                ]
           },
      ],
-     "glyphs" :
+     "static_glyphs" :
      [
           {
                "responder_id" : 0,
                "audio_id" : 0,
                "type" : "entry",
-               "static" : 1,
-               "cell" : [0, 0],
                "direction" : "right",
+               "cell" : [0, 0],
           },
           {
                "responder_id" : 1,
                "audio_id" : 1,
                "type" : "goal",
-               "static" : 1,
                "cell" : [2, 1],
           },
+     ],
+     "inventory_glyphs" : 
+     [
           {
                "responder_id" : 2,
                "audio_id" : 2,
                "type" : "arrow",
                "direction" : "up",
-               "static" : 0,
-               "cell" : [3, 0],
           }
      ]
 }

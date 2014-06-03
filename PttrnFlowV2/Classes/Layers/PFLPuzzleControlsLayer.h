@@ -7,6 +7,7 @@
 //
 
 #import "cocos2d.h"
+#import "PFLDragNode.h"
 
 @class PFLAudioEventController, PFLPuzzle;
 
@@ -17,7 +18,16 @@
 
 @end
 
-@interface PFLPuzzleControlsLayer : CCNode
+@protocol PFLInventoryDelegate <NSObject>
+
+- (void)inventoryItemMoved:(CCNode*)node;
+- (BOOL)inventoryItemDroppedOnBoard:(CCNode*)node;
+
+@end
+
+@interface PFLPuzzleControlsLayer : CCNode <PFLDragNodeDelegate>
+
+@property (weak, nonatomic) id<PFLInventoryDelegate>inventoryDelegate;
 
 + (CGSize)uiButtonUnitSize;
 

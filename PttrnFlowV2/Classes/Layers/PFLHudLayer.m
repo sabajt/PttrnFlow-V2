@@ -82,7 +82,7 @@ NSString* const PFLNotificationToggleMute = @"PFLNotificationToggleMute";
     headerButtonActiveColor = [PFLColorUtils contentBackedButtonsActiveWithTheme:self.theme];
   }
 
-  // header 
+  // header
   CCNode* headerAnchor = [CCNodeColor nodeWithColor:headerColor];
   headerAnchor.anchorPoint = ccp(0.0f, 1.0f);
   headerAnchor.positionType = CCPositionTypeNormalized;

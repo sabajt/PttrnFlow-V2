@@ -26,19 +26,20 @@ FOUNDATION_EXPORT NSString *const kPFLColorUtilsLightPurpleTheme;
 
 #pragma mark - Theme
 
-+ (CCColor*)audioPanelEdgeWithTheme:(NSString *)theme;
-+ (CCColor*)audioPanelFillWithTheme:(NSString *)theme;
-+ (CCColor*)backgroundWithTheme:(NSString *)theme;
-+ (CCColor*)contentBackedButtonsDefaultWithTheme:(NSString *)theme;
-+ (CCColor*)contentBackedButtonsActiveWithTheme:(NSString *)theme;
-+ (CCColor*)controlPanelButtonsDefaultWithTheme:(NSString *)theme;
-+ (CCColor*)controlPanelButtonsActiveWithTheme:(NSString *)theme;
-+ (CCColor*)controlPanelFillWithTheme:(NSString *)theme;
-+ (CCColor*)glyphActiveWithTheme:(NSString *)theme;
-+ (CCColor*)glyphDetailWithTheme:(NSString *)theme;
-+ (CCColor*)padHighlightWithTheme:(NSString *)theme;
-+ (CCColor*)padWithTheme:(NSString *)theme isStatic:(BOOL)isStatic;
-+ (CCColor*)winLabelWithTheme:(NSString *)theme;
++ (CCColor*)audioPanelEdgeWithTheme:(NSString*)theme;
++ (CCColor*)audioPanelFillWithTheme:(NSString*)theme;
++ (CCColor*)backgroundWithTheme:(NSString*)theme;
++ (CCColor*)contentBackedButtonsDefaultWithTheme:(NSString*)theme;
++ (CCColor*)contentBackedButtonsActiveWithTheme:(NSString*)theme;
++ (CCColor*)controlPanelButtonsDefaultWithTheme:(NSString*)theme;
++ (CCColor*)controlPanelButtonsActiveWithTheme:(NSString*)theme;
++ (CCColor*)controlPanelFillWithTheme:(NSString*)theme;
++ (CCColor*)dropHighlightWithTheme:(NSString*)theme;
++ (CCColor*)glyphActiveWithTheme:(NSString*)theme;
++ (CCColor*)glyphDetailWithTheme:(NSString*)theme;
++ (CCColor*)padHighlightWithTheme:(NSString*)theme;
++ (CCColor*)padWithTheme:(NSString*)theme isStatic:(BOOL)isStatic;
++ (CCColor*)winLabelWithTheme:(NSString*)theme;
 
 @end
 

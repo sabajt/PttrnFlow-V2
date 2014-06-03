@@ -94,7 +94,7 @@
       [self.puzzleSetCells setObject:cell forKey:puzzle.file];
       
       // collect sample names to pre-load
-      for (PFLGlyph* glyph in puzzle.glyphs)
+      for (PFLGlyph* glyph in puzzle.staticGlyphs)
       {
         if (glyph.audioID)
         {
