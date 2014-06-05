@@ -17,6 +17,10 @@
 NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
 NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
 
+NSString* const PFLForwardTouchControllerMovedNotification = @"PFLForwardTouchControllerMovedNotification";
+NSString* const PFLForwardTouchControllerEndedNotification = @"PFLForwardTouchControllerEndedNotification";
+NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerTouchKey";
+
 @interface PFLAudioResponderTouchController ()
 
 @property (strong, nonatomic) NSMutableArray* responders;
@@ -69,6 +73,11 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   [self.responders addObject:responder];
 }
 
+- (void)removeResponder:(id<PFLAudioResponder>)responder
+{
+  [self.responders removeObject:responder];
+}
+
 - (void)clearResponders
 {
   [self.responders removeAllObjects];
@@ -103,16 +112,9 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 - (void)changeToCell:(PFLCoord*)toCell fromCell:(PFLCoord*)fromCell channel:(NSString*)channel
 {
-  // don't do anything if responders at to cell
-  NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
-  if (toCellResponders.count > 0)
-  {
-      return;
-  }
-  
-  // move any responders to available cell if audio pad is not static
   PFLAudioPadSprite* pad;
   NSArray* fromCellResponders = [self responders:self.responders atCoord:fromCell];
+
   if (fromCellResponders.count > 0)
   {
     NSInteger found = [fromCellResponders indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -122,12 +124,29 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
       pad = fromCellResponders[found];
     }
   }
-  if (pad && !pad.isStatic && [toCell isCoordInGroup:self.areaCells])
+  if (pad && !pad.isStatic)
   {
-    for (CCNode<PFLAudioResponder>* node in fromCellResponders)
+    if ([toCell isCoordInGroup:self.areaCells])
     {
-      node.position = [toCell relativeMidpoint];
-      [node setAudioResponderCell:toCell];
+      // pop glyph off if responders at TO cell
+      NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
+      if (toCellResponders.count > 0)
+      {
+        [self.delegate glyphNodeDraggedOffBoardFromCell:fromCell];
+        return;
+      }
+      
+      // move any non-static responders to available cell
+      for (CCNode<PFLAudioResponder>* node in fromCellResponders)
+      {
+        node.position = [toCell relativeMidpoint];
+        [node setAudioResponderCell:toCell];
+      }
+    }
+    // pop glyph off if dragged off area
+    else
+    {
+      [self.delegate glyphNodeDraggedOffBoardFromCell:fromCell];
     }
   }
 }
@@ -183,6 +202,9 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 //  [self releaseCell:lastCell channel:channel];
 //  [self hitCell:cell channel:channel];
   }
+  
+  // broadcast forward touch
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLForwardTouchControllerMovedNotification object:nil userInfo:@{PFLForwardTouchControllerTouchKey : touch}];
 }
 
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
@@ -205,6 +227,9 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
 
   self.allowScrolling = YES;
+  
+  // broadcast forward touch
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLForwardTouchControllerEndedNotification object:nil userInfo:@{PFLForwardTouchControllerTouchKey : touch}];
 }
 
 - (void)touchCancelled:(UITouch*)touch withEvent:(UIEvent*)event

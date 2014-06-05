@@ -10,14 +10,14 @@
 #import "PFLScrollNode.h"
 #import "PFLHudLayer.h"
 #import "PFLPuzzleControlsLayer.h"
+#import "PFLAudioResponderTouchController.h"
 
 @class PFLPuzzle, PdDispatcher, PFLAudioResponderStepController, PFLAudioResponderTouchController;
 
-@interface PFLPuzzleLayer : PFLScrollNode <PFLHudLayerDelegate, PFLInventoryDelegate>
+@interface PFLPuzzleLayer : PFLScrollNode <PFLHudLayerDelegate, PFLInventoryDelegate, PFLAudioResponderTouchControllerDelegate>
 
 @property (weak, nonatomic) PFLAudioResponderStepController* sequenceDispatcher;
 @property (weak, nonatomic) PFLAudioResponderTouchController* audioResponderTouchController;
-
 @property (weak, nonatomic) CCSpriteBatchNode* audioObjectsBatchNode;
 
 + (CCScene*)sceneWithPuzzle:(PFLPuzzle*)puzzle;

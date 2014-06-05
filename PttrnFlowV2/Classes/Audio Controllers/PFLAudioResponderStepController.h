@@ -31,6 +31,7 @@ FOUNDATION_EXPORT NSString* const kKeyLoop ;
 
 - (id)initWithPuzzle:(PFLPuzzle*)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
 - (void)addResponder:(id<PFLAudioResponder>)responder;
+- (void)removeResponder:(id<PFLAudioResponder>)responder;
 - (void)clearResponders;
 
 @end

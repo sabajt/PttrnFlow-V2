@@ -62,6 +62,11 @@ NSString* const kKeyLoop = @"loop";
   [self.responders addObject:responder];
 }
 
+- (void)removeResponder:(id<PFLAudioResponder>)responder
+{
+  [self.responders removeObject:responder];
+}
+
 - (void)clearResponders
 {
   [self.responders removeAllObjects];

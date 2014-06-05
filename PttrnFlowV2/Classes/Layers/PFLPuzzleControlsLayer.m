@@ -8,6 +8,7 @@
 
 #import "PFLAudioEventController.h"
 #import "PFLAudioResponderStepController.h"
+#import "PFLAudioResponderTouchController.h"
 #import "PFLColorUtils.h"
 #import "PFLFonts.h"
 #import "PFLGameConstants.h"
@@ -18,6 +19,7 @@
 #import "PFLTileSprite.h"
 #import "PFLBasicButton.h"
 #import "PFLToggleButton.h"
+#import "PFLGlyph.h"
 
 @interface PFLPuzzleControlsLayer ()
 
@@ -36,6 +38,7 @@
 @property NSInteger currentStep;
 
 @property CGPoint lastDraggedItemPosition;
+@property PFLDragNode* restoringInventoryItem;
 
 @end
 
@@ -79,32 +82,6 @@
 
     self.bottomPanel = bottomPanel;
     [self addChild:bottomPanel];
-    
-//    // batch node
-//    CCSpriteBatchNode *uiBatch = [CCSpriteBatchNode batchNodeWithFile:@"userInterface.png"];
-//    
-//    self.uiBatchNode = uiBatch;
-//    [self addChild:uiBatch];
-//    
-//    // bottom left controls panel
-//    CCSprite* bottomLeftControlsPanelFill = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_fill.png"];
-//    bottomLeftControlsPanelFill.rotation = -90.0f;
-//    bottomLeftControlsPanelFill.color = [PFLColorUtils controlPanelFillWithTheme:theme];
-//    bottomLeftControlsPanelFill.position = ccp(bottomLeftControlsPanelFill.contentSize.width / 2.0f, bottomLeftControlsPanelFill.contentSize.height / 2.0f);
-//    [self.uiBatchNode addChild:bottomLeftControlsPanelFill];
-//    
-//    CCSprite* bottomLeftControlsPanelBorder = [CCSprite spriteWithImageNamed:@"controls_panel_top_left_edge.png"];
-//    bottomLeftControlsPanelBorder.rotation = -90.0f;
-//    bottomLeftControlsPanelBorder.color = [PFLColorUtils controlPanelEdgeWithTheme:theme];
-//    bottomLeftControlsPanelBorder.position = bottomLeftControlsPanelFill.position;
-//    [self.uiBatchNode addChild:bottomLeftControlsPanelBorder];
-    
-//    CCNode* buttonAnchor = [CCNode node];
-//    buttonAnchor.anchorPoint = ccp(0.0f, 0.0f);
-//    buttonAnchor.positionType = CCPositionTypeNormalized;
-//    buttonAnchor.position = ccp(0.0f, 0.0f);
-//    buttonAnchor.contentSize = CGSizeMake(50.0f, 50.0f);
-//    [self addChild:buttonAnchor];
   
     // play button
     PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:self.theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:self.theme] target:self];
@@ -116,23 +93,30 @@
     self.playButton = playButton;
     [bottomPanel addChild:playButton];
     
-    [self createInventoryObjects];
+    NSInteger i = 0;
+    for (PFLGlyph* glyph in self.puzzle.inventoryGlyphs)
+    {
+      [self createInventoryGlyphItem:glyph index:i];
+      i++;
+    }
   }
   return self;
 }
 
-- (void)createInventoryObjects
+- (void)createInventoryGlyphItem:(PFLGlyph*)glyph index:(NSInteger)i
 {
-  NSInteger i = 0;
-  
-  for (PFLGlyph* glyph in self.puzzle.inventoryGlyphs)
-  {
-    PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
-    dragNode.delegate = self;
-    dragNode.position = ccp(((i + 1) * dragNode.contentSize.width) + dragNode.contentSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
-    [self addChild:dragNode];
-    i++;
-  }
+  PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
+  dragNode.delegate = self;
+  dragNode.position = ccp(((i + 1) * dragNode.contentSize.width) + dragNode.contentSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
+  [self addChild:dragNode];
+}
+
+- (void)restoreInventoryGlyphItem:(PFLGlyph*)glyph
+{  
+  PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
+  self.restoringInventoryItem = dragNode;
+  dragNode.delegate = self;
+  [self addChild:dragNode];
 }
 
 #pragma mark - Scene management
@@ -141,6 +125,9 @@
 {
   [super onEnter];
   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+  
+  [notificationCenter addObserver:self selector:@selector(handleForwardTouchControllerMoved:) name:PFLForwardTouchControllerMovedNotification object:nil];
+  [notificationCenter addObserver:self selector:@selector(handleForwardTouchControllerEnded:) name:PFLForwardTouchControllerEndedNotification object:nil];
   [notificationCenter addObserver:self selector:@selector(handleEndSequence:) name:PFLNotificationEndSequence object:nil];
 }
 
@@ -177,6 +164,29 @@
   {
     [self.controlsDelegate stopUserSequence];
   }
+}
+
+#pragma mark - Forwarded touch controller touches
+
+- (void)handleForwardTouchControllerMoved:(NSNotification*)notification
+{
+  if (self.restoringInventoryItem)
+  {
+    UITouch* touch = notification.userInfo[PFLForwardTouchControllerTouchKey];
+    CGPoint position = [self convertToWorldSpace:touch.locationInWorld];
+    self.restoringInventoryItem.position = position;
+  }
+}
+
+- (void)handleForwardTouchControllerEnded:(NSNotification*)notification
+{
+  if (self.restoringInventoryItem)
+  {
+    UITouch* touch = notification.userInfo[PFLForwardTouchControllerTouchKey];
+    CGPoint position = [self convertToWorldSpace:touch.locationInWorld];
+    self.restoringInventoryItem.position = position;
+  }
+  self.restoringInventoryItem = nil;
 }
 
 #pragma mark - PFLDragNodeDelegate

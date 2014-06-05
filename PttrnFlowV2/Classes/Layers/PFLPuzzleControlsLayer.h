@@ -32,5 +32,6 @@
 + (CGSize)uiButtonUnitSize;
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController;
+- (void)restoreInventoryGlyphItem:(PFLGlyph*)glyph;
 
 @end
