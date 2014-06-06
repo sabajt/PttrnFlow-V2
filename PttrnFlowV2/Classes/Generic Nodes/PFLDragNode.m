@@ -19,6 +19,7 @@
 @interface PFLDragNode ()
 
 @property (copy, nonatomic) NSString* theme;
+@property (weak, nonatomic) CCSprite* audioPad;
 
 @end
 
@@ -41,6 +42,7 @@
     CCSprite* audioPad = [CCSprite spriteWithImageNamed:@"audio_box.png"];
     audioPad.color = [PFLColorUtils padWithTheme:theme isStatic:NO];
     audioPad.position = center;
+    self.audioPad = audioPad;
     [self addChild:audioPad];
     
     if (glyph.audioID)
@@ -101,6 +103,11 @@
 
   }
   return self;
+}
+
+- (CGSize)visualSize
+{
+  return self.audioPad.contentSize;
 }
 
 #pragma mark - CCResponder

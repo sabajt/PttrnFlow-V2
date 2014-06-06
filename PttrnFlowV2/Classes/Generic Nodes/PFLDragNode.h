@@ -23,7 +23,9 @@
 
 @property (weak, nonatomic) id<PFLDragNodeDelegate> delegate;
 @property (strong, nonatomic) PFLGlyph* glyph;
+@property NSInteger inventoryIndex;
 
 - (instancetype)initWithGlyph:(PFLGlyph*)glyph theme:(NSString*)theme puzzle:(PFLPuzzle*)puzzle;
+- (CGSize)visualSize;
 
 @end

@@ -37,8 +37,9 @@
 @property NSInteger steps;
 @property NSInteger currentStep;
 
-@property CGPoint lastDraggedItemPosition;
+@property NSMutableArray* inventoryItems;
 @property PFLDragNode* restoringInventoryItem;
+@property BOOL hasDraggedItemOutsideInventoryArea;
 
 @end
 
@@ -94,6 +95,7 @@
     [bottomPanel addChild:playButton];
     
     NSInteger i = 0;
+    self.inventoryItems = [NSMutableArray array];
     for (PFLGlyph* glyph in self.puzzle.inventoryGlyphs)
     {
       [self createInventoryGlyphItem:glyph index:i];
@@ -103,20 +105,32 @@
   return self;
 }
 
+- (CGPoint)inventoryItemPosition:(NSUInteger)i
+{
+  CGSize gridUnitSize = [PFLGameConstants gridUnitSize];
+  return ccp(((i + 1) * gridUnitSize.width) + gridUnitSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
+}
+
 - (void)createInventoryGlyphItem:(PFLGlyph*)glyph index:(NSInteger)i
 {
   PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
   dragNode.delegate = self;
-  dragNode.position = ccp(((i + 1) * dragNode.contentSize.width) + dragNode.contentSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
+  dragNode.inventoryIndex = i;
+  [self.inventoryItems addObject:dragNode];
   [self addChild:dragNode];
+  
+  dragNode.position = [self inventoryItemPosition:i];
 }
 
 - (void)restoreInventoryGlyphItem:(PFLGlyph*)glyph
 {  
   PFLDragNode* dragNode = [[PFLDragNode alloc] initWithGlyph:glyph theme:self.theme puzzle:self.puzzle];
-  self.restoringInventoryItem = dragNode;
   dragNode.delegate = self;
+  dragNode.inventoryIndex = self.inventoryItems.count;
+  [self.inventoryItems addObject:dragNode];
   [self addChild:dragNode];
+  
+  self.restoringInventoryItem = dragNode;
 }
 
 #pragma mark - Scene management
@@ -193,13 +207,33 @@
 
 - (void)dragNode:(PFLDragNode *)dragNode touchBegan:(UITouch *)touch
 {
-  self.lastDraggedItemPosition = dragNode.position;
+  self.hasDraggedItemOutsideInventoryArea = NO;
 }
 
 - (void)dragNode:(PFLDragNode*)dragNode touchMoved:(UITouch*)touch
 {
   dragNode.position = [self convertToWorldSpace:touch.locationInWorld];
   [self.inventoryDelegate inventoryItemMoved:dragNode];
+  
+  if (!self.hasDraggedItemOutsideInventoryArea &&
+      ((dragNode.positionInPoints.y - ([dragNode visualSize].height / 2.0f)) > self.bottomPanel.contentSize.height))
+  {
+    self.hasDraggedItemOutsideInventoryArea = YES;
+    [self.inventoryItems removeObject:dragNode];
+    [self.inventoryItems addObject:dragNode];
+    
+    for (PFLDragNode* item in self.inventoryItems)
+    {
+      if ([item isEqual:dragNode])
+      {
+        continue;
+      }
+      CCTime shiftDuration = 0.08;
+      CGPoint pos = [self inventoryItemPosition:[self.inventoryItems indexOfObject:item]];
+      CCActionEaseSineOut* move =[CCActionEaseSineOut actionWithAction:[CCActionMoveTo actionWithDuration:shiftDuration position:pos]];
+      [item runAction:move];
+    }
+  }
 }
 
 - (void)dragNode:(PFLDragNode *)dragNode touchEnded:(UITouch *)touch
@@ -215,10 +249,12 @@
   if ([self.inventoryDelegate inventoryItemDroppedOnBoard:dragNode])
   {
     [dragNode removeFromParentAndCleanup:YES];
+    [self.inventoryItems removeObject:dragNode];
   }
   else
   {
-    CCActionEaseSineOut* move =[CCActionEaseSineOut actionWithAction:[CCActionMoveTo actionWithDuration:0.08f position:self.lastDraggedItemPosition]];
+    CGPoint pos = [self inventoryItemPosition:[self.inventoryItems indexOfObject:dragNode]];
+    CCActionEaseSineOut* move =[CCActionEaseSineOut actionWithAction:[CCActionMoveTo actionWithDuration:0.08f position:pos]];
     [dragNode runAction:move];
   }
 }

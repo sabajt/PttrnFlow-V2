@@ -73,6 +73,24 @@
                "audio_id" : 2,
                "type" : "arrow",
                "direction" : "up",
+          },
+          {
+               "responder_id" : 3,
+               "audio_id" : 1,
+               "type" : "arrow",
+               "direction" : "down",
+          },
+          {
+               "responder_id" : 4,
+               "audio_id" : 0,
+               "type" : "arrow",
+               "direction" : "right",
+          },
+          {
+               "responder_id" : 5,
+               "audio_id" : 2,
+               "type" : "arrow",
+               "direction" : "left",
           }
      ]
 }
