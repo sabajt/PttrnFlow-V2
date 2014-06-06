@@ -8,11 +8,8 @@
           [2, 0],
           [3, 0],
           [1, 1],
-          [1, 2],
-          [1, 3],
           [2, 1],
           [3, 1],
-          [4, 0],
      ],
      "audio" :
      [
@@ -170,14 +167,13 @@
                ]
           },
      ],
-     "glyphs" :
+     "static_glyphs" :
      [
           {
                "cell" : [0, 0],
                "audio_id" : 5,
                "responder_id" : 0,
                "type" : "entry",
-               "static" : 1,
                "direction" : "right",  
           },
           {
@@ -191,7 +187,6 @@
                "audio_id" : 7,
                "responder_id" : 2,
                "type" : "arrow",
-               "static" : 1,
                "switch_channel" : 0,
                "switch_receiver" : 
                [
@@ -210,32 +205,28 @@
                "audio_id" : 8,
                "responder_id" : 3,
                "type" : "switch_sender",
-               "static" : 1,
                "switch_channel" : 0
+          }
+     ],
+     "inventory_glyphs" :
+     [
+          {
+               "audio_id" : 3,
+               "responder_id" : 6,
+               "type" : "arrow",
+               "direction" : "right"
           },
           {
-               "cell" : [2, 1],
                "audio_id" : 6,
                "responder_id" : 4,
                "type" : "switch_sender",
-               "static" : 1,
                "switch_channel" : 0,
           },
           {
-               "cell" : [4, 0],
                "audio_id" : 4,
                "responder_id" : 5,
                "type" : "arrow",
                "direction" : "up",
-               "static" : 0,
-          },
-          {
-               "cell" : [1, 3],
-               "audio_id" : 3,
-               "responder_id" : 6,
-               "type" : "arrow",
-               "static" : 0,
-               "direction" : "right"
           }
      ]
 }
