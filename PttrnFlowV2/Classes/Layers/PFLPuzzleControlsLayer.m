@@ -130,6 +130,7 @@
   [self.inventoryItems addObject:dragNode];
   [self addChild:dragNode];
   
+  self.hasDraggedItemOutsideInventoryArea = YES;
   self.restoringInventoryItem = dragNode;
 }
 
@@ -187,8 +188,7 @@
   if (self.restoringInventoryItem)
   {
     UITouch* touch = notification.userInfo[PFLForwardTouchControllerTouchKey];
-    CGPoint position = [self convertToWorldSpace:touch.locationInWorld];
-    self.restoringInventoryItem.position = position;
+    [self dragNode:self.restoringInventoryItem touchMoved:touch];
   }
 }
 
@@ -197,8 +197,7 @@
   if (self.restoringInventoryItem)
   {
     UITouch* touch = notification.userInfo[PFLForwardTouchControllerTouchKey];
-    CGPoint position = [self convertToWorldSpace:touch.locationInWorld];
-    self.restoringInventoryItem.position = position;
+    [self dragNode:self.restoringInventoryItem touchEnded:touch];
   }
   self.restoringInventoryItem = nil;
 }
