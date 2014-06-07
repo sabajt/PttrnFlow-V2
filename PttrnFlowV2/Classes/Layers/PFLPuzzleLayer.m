@@ -34,11 +34,11 @@
 
 typedef NS_ENUM(NSInteger, ZOrderAudioBatch)
 {
-    ZOrderAudioBatchPanelFill = 0,
-    ZOrderAudioBatchPanelBorder,
-    ZOrderAudioBatchPadBacklight,
-    ZOrderAudioBatchPad,
-    ZOrderAudioBatchGlyph
+  ZOrderAudioBatchPanelFill = 0,
+  ZOrderAudioBatchPanelBorder,
+  ZOrderAudioBatchPadBacklight,
+  ZOrderAudioBatchPad,
+  ZOrderAudioBatchGlyph
 };
 
 static CGFloat kPuzzleBoundsMargin = 10.0f;
@@ -80,7 +80,8 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [scene addChild:puzzleLayer];
   
   // controls layer
-  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle delegate:puzzleLayer.sequenceDispatcher audioEventController:puzzleLayer.audioEventController];
+  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle audioEventController:puzzleLayer.audioEventController];
+  
   uiLayer.inventoryDelegate = puzzleLayer;
   puzzleLayer.controlsLayer = uiLayer;
   [scene addChild:uiLayer z:1];
@@ -167,9 +168,11 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     
     // sequence dispacher
     PFLAudioResponderStepController *sequenceDispatcher = [[PFLAudioResponderStepController alloc] initWithPuzzle:puzzle audioEventController:self.audioEventController];
-    self.sequenceDispatcher = sequenceDispatcher;
     [sequenceDispatcher clearResponders];
+    self.sequenceDispatcher = sequenceDispatcher;
     [self addChild:sequenceDispatcher];
+    
+    audioResponderTouchController.controlEntryDelegate = sequenceDispatcher;
     
     // create puzzle objects
     [self createBorderWithAreaCells:puzzle.area];

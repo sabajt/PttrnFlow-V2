@@ -13,6 +13,8 @@
 #import "PFLAudioResponderTouchController.h"
 #import "PFLCoord.h"
 #import "PFLEvent.h"
+#import "PFLGlyph.h"
+#import "PFLPuzzleControlsLayer.h"
 
 NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
 NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
@@ -26,6 +28,7 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 @property (strong, nonatomic) NSMutableArray* responders;
 @property (assign) CFMutableDictionaryRef trackingTouches;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
+@property BOOL hasStartedUsesSequence;
 
 @end
 
@@ -60,12 +63,12 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 
 - (void)handleStartSequence:(NSNotification*)notification
 {
-  self.userInteractionEnabled = NO;
+  self.hasStartedUsesSequence = YES;
 }
 
 - (void)handleStopSequence:(NSNotification*)notification
 {
-  self.userInteractionEnabled = YES;
+  self.hasStartedUsesSequence = NO;
 }
 
 - (void)addResponder:(id<PFLAudioResponder>)responder
@@ -157,10 +160,35 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 {
   [self.parent touchBegan:touch withEvent:event];
   
-  // get grid cell of touch
   CGPoint touchPosition = [touch locationInNode:self];
-
   PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  // find if we touched an entry sprite before processing any hits so we can
+  // start / stop the sequence instead of processing ourselves
+  for (id<PFLAudioResponder> responder in self.responders)
+  {
+    if ([[responder audioResponderCell] isEqualToCoord:cell] && [responder isKindOfClass:[PFLAudioResponderSprite class]])
+    {
+      PFLAudioResponderSprite* audioResponderSprite = (PFLAudioResponderSprite*)responder;
+      if ([audioResponderSprite.glyph.type isEqualToString:PFLGlyphTypeEntry])
+      {
+        if (self.hasStartedUsesSequence) 
+        {
+          [self.controlEntryDelegate stopUserSequence];
+          return;
+        }
+        else
+        {
+          [self.controlEntryDelegate startUserSequence];
+          return;
+        }
+      }
+    }
+  }
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // track touch so we know which events / cell to associate
   CFIndex count = CFDictionaryGetCount(self.trackingTouches);
@@ -178,8 +206,12 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
   
   // get grid cell of touch
   CGPoint touchPosition = [touch locationInNode:self];
-  
   PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // get channel and last touched cell of this specific touch
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
@@ -213,6 +245,11 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
 {
   [self.parent touchEnded:touch withEvent:event];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
 
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
@@ -237,6 +274,11 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 - (void)touchCancelled:(UITouch*)touch withEvent:(UIEvent*)event
 {
   [self.parent touchCancelled:touch withEvent:event];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);

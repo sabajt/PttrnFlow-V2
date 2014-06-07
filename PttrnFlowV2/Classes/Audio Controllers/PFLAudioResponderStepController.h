@@ -7,9 +7,9 @@
 //
 
 #import "CCNode.h"
-#import "PFLPuzzleControlsLayer.h"
 #import "PFLAudioResponder.h"
 #import "PFLEntrySprite.h"
+#import "PFLAudioResponderTouchController.h"
 
 @class PFLPuzzle, PFLAudioEventController;
 
@@ -25,7 +25,7 @@ FOUNDATION_EXPORT NSString* const kKeyIndex;
 FOUNDATION_EXPORT NSString* const kKeyIsCorrect;
 FOUNDATION_EXPORT NSString* const kKeyLoop ;
 
-@interface PFLAudioResponderStepController : CCNode <PFLPuzzleControlsDelegate>
+@interface PFLAudioResponderStepController : CCNode <PFLControlEntryDelegate>
 
 @property (weak, nonatomic) PFLEntrySprite* entry;
 

@@ -11,13 +11,6 @@
 
 @class PFLAudioEventController, PFLPuzzle;
 
-@protocol PFLPuzzleControlsDelegate <NSObject>
-
-- (void)startUserSequence;
-- (void)stopUserSequence;
-
-@end
-
 @protocol PFLInventoryDelegate <NSObject>
 
 - (void)inventoryItemMoved:(PFLDragNode*)node;
@@ -32,7 +25,7 @@
 + (CGSize)uiButtonUnitSize;
 + (BOOL)isRestoringInventoryItem;
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController;
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
 - (void)restoreInventoryGlyphItem:(PFLGlyph*)glyph;
 
 @end

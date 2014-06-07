@@ -28,7 +28,7 @@ static BOOL isRestoringInventoryItem;
 @property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
 
 @property (weak, nonatomic) PFLPuzzle* puzzle; // TOOD: should this be a strong ref?
-@property (weak, nonatomic) id<PFLPuzzleControlsDelegate> controlsDelegate;
+//@property (weak, nonatomic) id<PFLPuzzleControlsDelegate> controlsDelegate;
 @property (strong, nonatomic) PFLAudioEventController* audioEventController;
 @property (copy, nonatomic) NSString* theme;
 
@@ -70,15 +70,18 @@ static BOOL isRestoringInventoryItem;
   return isRestoringInventoryItem;
 }
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController
+//- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController *)audioEventController
 {
   self = [super init];
   if (self)
   {
+    // TODO: why is audio event controller needed anymore?
     self.audioEventController = audioEventController;
+    
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
-    self.controlsDelegate = delegate;
+//    self.controlsDelegate = delegate;
     self.steps = puzzle.solutionEvents.count;
     self.theme = puzzle.puzzleSet.theme;
     
@@ -91,15 +94,15 @@ static BOOL isRestoringInventoryItem;
     self.bottomPanel = bottomPanel;
     [self addChild:bottomPanel];
   
-    // play button
-    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:self.theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:self.theme] target:self];
-    playButton.anchorPoint = ccp(0.5f, 0.5f);
-    playButton.positionType = CCPositionTypeNormalized;
-    CGFloat xPos = (bottomPanel.contentSizeInPoints.width / 9.0f) / bottomPanel.contentSizeInPoints.width;
-    playButton.position = ccp(xPos, 0.5f);
-    playButton.touchBeganSelectorName = @"playButtonPressed";
-    self.playButton = playButton;
-    [bottomPanel addChild:playButton];
+//    // play button
+//    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:self.theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:self.theme] target:self];
+//    playButton.anchorPoint = ccp(0.5f, 0.5f);
+//    playButton.positionType = CCPositionTypeNormalized;
+//    CGFloat xPos = (bottomPanel.contentSizeInPoints.width / 9.0f) / bottomPanel.contentSizeInPoints.width;
+//    playButton.position = ccp(xPos, 0.5f);
+//    playButton.touchBeganSelectorName = @"playButtonPressed";
+//    self.playButton = playButton;
+//    [bottomPanel addChild:playButton];
     
     NSInteger i = 0;
     self.inventoryItems = [NSMutableArray array];
@@ -151,42 +154,12 @@ static BOOL isRestoringInventoryItem;
   
   [notificationCenter addObserver:self selector:@selector(handleForwardTouchControllerMoved:) name:PFLForwardTouchControllerMovedNotification object:nil];
   [notificationCenter addObserver:self selector:@selector(handleForwardTouchControllerEnded:) name:PFLForwardTouchControllerEndedNotification object:nil];
-  [notificationCenter addObserver:self selector:@selector(handleEndSequence:) name:PFLNotificationEndSequence object:nil];
 }
 
 - (void)onExit
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super onExit];
-}
-
-#pragma mark - Sequence
-
-- (void)handleStepUserSequence:(NSNotification*)notification
-{
-  self.currentStep++;
-}
-
-- (void)handleEndSequence:(NSNotification*)notification
-{
-  if (self.playButton.isOn)
-  {
-    [self.playButton toggleIgnoringTarget:YES];
-  }
-}
-
-- (void)playButtonPressed
-{
-  self.currentStep = 0;
-  
-  if (self.playButton.isOn)
-  {
-    [self.controlsDelegate startUserSequence];
-  }
-  else
-  {
-    [self.controlsDelegate stopUserSequence];
-  }
 }
 
 #pragma mark - Forwarded touch controller touches
