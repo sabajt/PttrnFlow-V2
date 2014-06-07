@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, PFLEventType)
   PFLEventTypeSample,
   PFLEventTypeSwitchSender,
   PFLEventTypeSynth,
+  PFLEventTypeWarp,
 };
 
 @class PFLEvent, PFLPuzzle, PFLMultiSample;
@@ -52,6 +53,7 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 @property (strong, nonatomic) NSNumber* switchSenderChannel;
 @property (copy, nonatomic) NSString* synthType;
 @property (strong, nonatomic) NSNumber* time;
+@property (strong, nonatomic) NSNumber* warpChannel;
 
 // Individual event constructors
 + (id)synthEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile midiValue:(NSString*)midiValue synthType:(NSString*)synthType;
@@ -64,5 +66,6 @@ typedef NS_ENUM(NSInteger, PFLEventType)
 + (id)multiSampleEventWithAudioID:(NSNumber*)audioID puzzleFile:(NSString*)puzzleFile multiSample:(PFLMultiSample*)multiSample;
 + (id)goalEvent;
 + (id)switchSenderEventWithChannel:(NSNumber*)channel;
++ (id)warpEventWithWarpChannel:(NSNumber*)warpChannel;
 
 @end

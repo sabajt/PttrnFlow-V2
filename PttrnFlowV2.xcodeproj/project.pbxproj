@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		332DED9919107EA5007F78AA /* PFLFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 332DED9819107EA5007F78AA /* PFLFonts.m */; };
+		334B08EF1943C63600BD4340 /* PFLWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B08EE1943C63600BD4340 /* PFLWarpSprite.m */; };
+		334B08F11943CA8100BD4340 /* sys_set_0_puz_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */; };
 		338866511930FAC700DD024C /* PFLHudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 338866501930FAC700DD024C /* PFLHudLayer.m */; };
 		3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */; };
 		3399634118F0A8DE000F4522 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634018F0A8DE000F4522 /* QuartzCore.framework */; };
@@ -315,6 +317,9 @@
 /* Begin PBXFileReference section */
 		332DED9719107EA5007F78AA /* PFLFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLFonts.h; sourceTree = "<group>"; };
 		332DED9819107EA5007F78AA /* PFLFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLFonts.m; sourceTree = "<group>"; };
+		334B08ED1943C63600BD4340 /* PFLWarpSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLWarpSprite.h; sourceTree = "<group>"; };
+		334B08EE1943C63600BD4340 /* PFLWarpSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLWarpSprite.m; sourceTree = "<group>"; };
+		334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sys_set_0_puz_3.json; sourceTree = "<group>"; };
 		3388664F1930FAC700DD024C /* PFLHudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLHudLayer.h; sourceTree = "<group>"; };
 		338866501930FAC700DD024C /* PFLHudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLHudLayer.m; sourceTree = "<group>"; };
 		3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLRecursiveTouch.h"; sourceTree = "<group>"; };
@@ -1836,6 +1841,8 @@
 				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
 				33AB9CB3191E5BE600854B03 /* PFLSwitchSenderSprite.h */,
 				33AB9CB4191E5BE600854B03 /* PFLSwitchSenderSprite.m */,
+				334B08ED1943C63600BD4340 /* PFLWarpSprite.h */,
+				334B08EE1943C63600BD4340 /* PFLWarpSprite.m */,
 			);
 			name = "Audio Responders";
 			path = "Classes/Audio Responders";
@@ -1981,6 +1988,7 @@
 		339966D018F0DC8D000F4522 /* puzzles */ = {
 			isa = PBXGroup;
 			children = (
+				334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */,
 				339D769F192EC44700B249A7 /* sys_set_0_puz_0.json */,
 				339D76A0192EC44700B249A7 /* sys_set_0_puz_1.json */,
 				339D76A1192EC44700B249A7 /* sys_set_0_puz_2.json */,
@@ -2138,6 +2146,7 @@
 				3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */,
 				3399662118F0B47A000F4522 /* userInterface.png in Resources */,
 				3399661E18F0B47A000F4522 /* userInterface-hd.plist in Resources */,
+				334B08F11943CA8100BD4340 /* sys_set_0_puz_3.json in Resources */,
 				3399636E18F0A8DE000F4522 /* Icon-76@2x.png in Resources */,
 				339965E218F0A8E0000F4522 /* LICENSE_Chipmunk.txt in Resources */,
 				339A29A51902B9300045CA1A /* audioObjects-ipadhd.plist in Resources */,
@@ -2275,6 +2284,7 @@
 				339963C018F0A8DE000F4522 /* ccFPSImages.m in Sources */,
 				3399649718F0A8DF000F4522 /* ccUtils.c in Sources */,
 				3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */,
+				334B08EF1943C63600BD4340 /* PFLWarpSprite.m in Sources */,
 				3399640818F0A8DF000F4522 /* CCPhysicsShape.m in Sources */,
 				3399641018F0A8DF000F4522 /* CCRenderTexture.m in Sources */,
 				3399639618F0A8DE000F4522 /* CCActionManager.m in Sources */,

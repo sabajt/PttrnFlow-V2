@@ -31,6 +31,7 @@
 #import "PFLSwitchSenderSprite.h"
 #import "PFLFonts.h"
 #import "PFLPuzzleSetLayer.h"
+#import "PFLWarpSprite.h"
 
 typedef NS_ENUM(NSInteger, ZOrderAudioBatch)
 {
@@ -396,7 +397,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
 {
   if (!glyph.cell)
   {
-    CCLOG(@"Error: glyph nodes must be created with a cell");
+    CCLOG(@"Error: glyph nodes must be created on the board with a cell");
     return;
   }
   // TODO: may need to construct locations from saved state?
@@ -463,6 +464,15 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     [self addAudioResponder:switchSender];
     switchSender.position = cellCenter;
     [self.audioObjectsBatchNode addChild:switchSender z:ZOrderAudioBatchGlyph];
+  }
+  
+  // warp
+  else if ([glyph.type isEqualToString:PFLGlyphTypeWarp])
+  {
+    PFLWarpSprite* warp = [[PFLWarpSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
+    [self addAudioResponder:warp];
+    warp.position = cellCenter;
+    [self.audioObjectsBatchNode addChild:warp z:ZOrderAudioBatchGlyph];
   }
 }
 

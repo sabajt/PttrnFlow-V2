@@ -113,6 +113,19 @@
       channelIcon.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
       [audioPad addChild:channelIcon];
     }
+    
+    // warp
+    if ([glyph.type isEqualToString:PFLGlyphTypeWarp])
+    {
+      CCSprite* glyphCircle = [CCSprite spriteWithImageNamed:@"glyph_circle.png"];
+      glyphCircle.position = center;
+      glyphCircle.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+
+      CCSprite* warpSprite = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"warp_%i.png", [glyph.warpChannel integerValue] + 1]];
+      warpSprite.position = center;
+      warpSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:NO];
+      [self addChild:warpSprite];
+    }
   }
   return self;
 }

@@ -15,13 +15,7 @@ NSString* const PFLGlyphTypeArrow = @"arrow";
 NSString* const PFLGlyphTypeEntry = @"entry";
 NSString* const PFLGlyphTypeGoal = @"goal";
 NSString* const PFLGlyphTypeSwitchSender = @"switch_sender";
-
-static NSString* const kResponderID = @"responder_id";
-static NSString* const kAudioID = @"audio_id";
-static NSString* const kCell = @"cell";
-static NSString* const kDirection = @"direction";
-static NSString* const kStatic = @"static";
-static NSString* const kType = @"type";
+NSString* const PFLGlyphTypeWarp = @"warp";
 
 @implementation PFLGlyph
 
@@ -32,10 +26,10 @@ static NSString* const kType = @"type";
   {
     self.puzzle = puzzle;
 
-    self.responderID = object[kResponderID];
-    self.audioID = object[kAudioID];
-    self.direction = object[kDirection];
-    self.type = object[kType];
+    self.responderID = object[@"responder_id"];
+    self.audioID = object[@"audio_id"];
+    self.direction = object[@"direction"];
+    self.type = object[@"type"];
     
     self.switchChannel = object[@"switch_channel"];
     NSArray* switchReceiver = object[@"switch_receiver"];
@@ -49,9 +43,11 @@ static NSString* const kType = @"type";
     self.isStatic = isStatic;
     if (isStatic)
     {
-      NSArray *cell = object[kCell];
+      NSArray *cell = object[@"cell"];
       self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
     }
+    
+    self.warpChannel = object[@"warp_channel"];
   }
   return self;
 }

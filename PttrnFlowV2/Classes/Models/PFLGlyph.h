@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString* const PFLGlyphTypeArrow;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeEntry;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeGoal;
 FOUNDATION_EXPORT NSString* const PFLGlyphTypeSwitchSender;
+FOUNDATION_EXPORT NSString* const PFLGlyphTypeWarp;
 
 @interface PFLGlyph : NSObject
 
@@ -28,6 +29,7 @@ FOUNDATION_EXPORT NSString* const PFLGlyphTypeSwitchSender;
 @property BOOL isStatic;
 @property (strong, nonatomic) NSArray* switchReceiverAttributes;
 @property (strong, nonatomic) NSNumber* switchChannel;
+@property (strong, nonatomic) NSNumber* warpChannel;
 
 - (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle isStatic:(BOOL)isStatic;
 
