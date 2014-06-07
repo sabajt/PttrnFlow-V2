@@ -196,7 +196,10 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
     CFDictionaryReplaceValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(touchInfo));
     
     // process cell change
-    [self changeToCell:cell fromCell:lastCell channel:channel];
+    if (![PFLPuzzleControlsLayer isRestoringInventoryItem])
+    {
+      [self changeToCell:cell fromCell:lastCell channel:channel];
+    }
     
     // TODO: hit / release will only be needed when working with PD synths later
 //  [self releaseCell:lastCell channel:channel];
@@ -218,7 +221,6 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
   [self.audioEventController receiveEvents:@[audioStopEvent]];
 
   // get grid cell of touch
-  //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
   CGPoint touchPosition = [touch locationInNode:self];
 
   PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];

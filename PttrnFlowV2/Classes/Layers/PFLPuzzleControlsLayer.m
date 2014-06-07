@@ -21,6 +21,8 @@
 #import "PFLToggleButton.h"
 #import "PFLGlyph.h"
 
+static BOOL isRestoringInventoryItem;
+
 @interface PFLPuzzleControlsLayer ()
 
 @property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
@@ -61,6 +63,11 @@
     CCLOG(@"Warning: unsupported screen size: %@", NSStringFromCGSize(screenSize));
     return CGSizeMake(50.0f, 50.0f);
   }
+}
+
++ (BOOL)isRestoringInventoryItem
+{
+  return isRestoringInventoryItem;
 }
 
 - (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController
@@ -132,6 +139,7 @@
   
   self.hasDraggedItemOutsideInventoryArea = YES;
   self.restoringInventoryItem = dragNode;
+  isRestoringInventoryItem = YES;
 }
 
 #pragma mark - Scene management
@@ -200,6 +208,7 @@
     [self dragNode:self.restoringInventoryItem touchEnded:touch];
   }
   self.restoringInventoryItem = nil;
+  isRestoringInventoryItem = NO;
 }
 
 #pragma mark - PFLDragNodeDelegate

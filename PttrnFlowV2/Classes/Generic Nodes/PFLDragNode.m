@@ -84,23 +84,35 @@
       
       CCSprite* arrowSprite = [CCSprite spriteWithImageNamed:@"arrow_up.png"];
       arrowSprite.position = center;
-      arrowSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+      arrowSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:NO];
       arrowSprite.rotation = [glyph.direction degrees];
       [self addChild:arrowSprite];
     }
 
-//    
-//    // switch sender
-//    else if ([glyph.type isEqualToString:PFLGlyphTypeSwitchSender])
-//    {
-//      PFLSwitchSenderSprite* switchSender = [[PFLSwitchSenderSprite alloc] initWithImageNamed:@"glyph_circle.png" glyph:glyph cell:cell];
-//      [self.audioResponderTouchController addResponder:switchSender];
-//      [self.sequenceDispatcher addResponder:switchSender];
-//      [self addAudioResponder:switchSender];
-//      switchSender.position = cellCenter;
-//      [self.audioObjectsBatchNode addChild:switchSender z:ZOrderAudioBatchGlyph];
-//    }
+    // switch sender
+    if ([glyph.type isEqualToString:PFLGlyphTypeSwitchSender])
+    {
+      CCSprite* glyphCircle = [CCSprite spriteWithImageNamed:@"glyph_circle.png"];
+      glyphCircle.position = center;
+      glyphCircle.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      
+      CCSprite* senderSprite = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"switch_sender_%i.png", [glyph.switchChannel integerValue] + 1]];
+      senderSprite.position = center;
+      senderSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:NO];
+      senderSprite.rotation = [glyph.direction degrees];
+      [self addChild:senderSprite];
+    }
 
+    // switch reciever
+    if (glyph.switchReceiverAttributes && glyph.switchChannel)
+    {
+      static CGFloat channelIconPadding = 4.0f;
+      CCSprite* channelIcon = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"switch_receiver_%i.png", [glyph.switchChannel integerValue] + 1]];
+      channelIcon.anchorPoint = ccp(1.0f, 1.0f);
+      channelIcon.position = ccp(audioPad.contentSizeInPoints.width - channelIconPadding, audioPad.contentSizeInPoints.height - channelIconPadding);
+      channelIcon.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      [audioPad addChild:channelIcon];
+    }
   }
   return self;
 }
