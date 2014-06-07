@@ -135,7 +135,7 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
       NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
       if (toCellResponders.count > 0)
       {
-        [self.delegate glyphNodeDraggedOffBoardFromCell:fromCell];
+        [self.touchControllerDelegate glyphNodeDraggedOffBoardFromCell:fromCell];
         return;
       }
       
@@ -149,7 +149,7 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
     // pop glyph off if dragged off area
     else
     {
-      [self.delegate glyphNodeDraggedOffBoardFromCell:fromCell];
+      [self.touchControllerDelegate glyphNodeDraggedOffBoardFromCell:fromCell];
     }
   }
 }

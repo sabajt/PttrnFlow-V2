@@ -33,7 +33,7 @@ FOUNDATION_EXPORT NSString* const PFLForwardTouchControllerTouchKey;
 
 @interface PFLAudioResponderTouchController : CCNode <PFLScrollNodeDelegate>
 
-@property (weak, nonatomic) id<PFLAudioResponderTouchControllerDelegate> delegate;
+@property (weak, nonatomic) id<PFLAudioResponderTouchControllerDelegate> touchControllerDelegate;
 @property (weak, nonatomic) id<PFLControlEntryDelegate> controlEntryDelegate;
 
 @property BOOL allowScrolling;

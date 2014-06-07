@@ -25,7 +25,7 @@
 + (CGSize)uiButtonUnitSize;
 + (BOOL)isRestoringInventoryItem;
 
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController*)audioEventController;
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle;
 - (void)restoreInventoryGlyphItem:(PFLGlyph*)glyph;
 
 @end

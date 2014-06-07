@@ -28,8 +28,6 @@ static BOOL isRestoringInventoryItem;
 @property (weak, nonatomic) CCSpriteBatchNode* uiBatchNode;
 
 @property (weak, nonatomic) PFLPuzzle* puzzle; // TOOD: should this be a strong ref?
-//@property (weak, nonatomic) id<PFLPuzzleControlsDelegate> controlsDelegate;
-@property (strong, nonatomic) PFLAudioEventController* audioEventController;
 @property (copy, nonatomic) NSString* theme;
 
 @property (weak, nonatomic) PFLToggleButton* playButton;
@@ -70,18 +68,13 @@ static BOOL isRestoringInventoryItem;
   return isRestoringInventoryItem;
 }
 
-//- (id)initWithPuzzle:(PFLPuzzle *)puzzle delegate:(id<PFLPuzzleControlsDelegate>)delegate audioEventController:(PFLAudioEventController*)audioEventController
-- (id)initWithPuzzle:(PFLPuzzle *)puzzle audioEventController:(PFLAudioEventController *)audioEventController
+- (id)initWithPuzzle:(PFLPuzzle *)puzzle;
 {
   self = [super init];
   if (self)
   {
-    // TODO: why is audio event controller needed anymore?
-    self.audioEventController = audioEventController;
-    
     self.contentSize = [[CCDirector sharedDirector] viewSize];
     self.puzzle = puzzle;
-//    self.controlsDelegate = delegate;
     self.steps = puzzle.solutionEvents.count;
     self.theme = puzzle.puzzleSet.theme;
     
@@ -93,16 +86,6 @@ static BOOL isRestoringInventoryItem;
 
     self.bottomPanel = bottomPanel;
     [self addChild:bottomPanel];
-  
-//    // play button
-//    PFLToggleButton* playButton = [[PFLToggleButton alloc] initWithImage:@"play.png" defaultColor:[PFLColorUtils controlPanelButtonsDefaultWithTheme:self.theme] activeColor:[PFLColorUtils controlPanelButtonsActiveWithTheme:self.theme] target:self];
-//    playButton.anchorPoint = ccp(0.5f, 0.5f);
-//    playButton.positionType = CCPositionTypeNormalized;
-//    CGFloat xPos = (bottomPanel.contentSizeInPoints.width / 9.0f) / bottomPanel.contentSizeInPoints.width;
-//    playButton.position = ccp(xPos, 0.5f);
-//    playButton.touchBeganSelectorName = @"playButtonPressed";
-//    self.playButton = playButton;
-//    [bottomPanel addChild:playButton];
     
     NSInteger i = 0;
     self.inventoryItems = [NSMutableArray array];
@@ -118,7 +101,7 @@ static BOOL isRestoringInventoryItem;
 - (CGPoint)inventoryItemPosition:(NSUInteger)i
 {
   CGSize gridUnitSize = [PFLGameConstants gridUnitSize];
-  return ccp(((i + 1) * gridUnitSize.width) + gridUnitSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
+  return ccp((i * gridUnitSize.width) + gridUnitSize.width / 2.0f, self.bottomPanel.contentSizeInPoints.height / 2.0f);
 }
 
 - (void)createInventoryGlyphItem:(PFLGlyph*)glyph index:(NSInteger)i

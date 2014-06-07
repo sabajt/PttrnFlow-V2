@@ -80,7 +80,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   [scene addChild:puzzleLayer];
   
   // controls layer
-  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle audioEventController:puzzleLayer.audioEventController];
+  PFLPuzzleControlsLayer* uiLayer = [[PFLPuzzleControlsLayer alloc] initWithPuzzle:puzzle];
   
   uiLayer.inventoryDelegate = puzzleLayer;
   puzzleLayer.controlsLayer = uiLayer;
@@ -158,7 +158,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
     audioResponderTouchController.positionType = self.positionType;
     audioResponderTouchController.contentSizeType = self.contentSizeType;
     audioResponderTouchController.contentSize = self.contentSize;
-    audioResponderTouchController.delegate = self;
+    audioResponderTouchController.touchControllerDelegate = self;
     self.audioResponderTouchController = audioResponderTouchController;
     [self addScrollDelegate:audioResponderTouchController];
     
