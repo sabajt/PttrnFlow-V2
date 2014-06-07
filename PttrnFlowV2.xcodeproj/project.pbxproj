@@ -278,7 +278,6 @@
 		33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F11900313D0071C2B9 /* tech-tonal3.caf */; };
 		33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F21900313D0071C2B9 /* tech-tonal4.caf */; };
 		33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F31900313D0071C2B9 /* tech-tonal5.caf */; };
-		33C86D51193B788A00F21D8F /* PFLAudioResponderAnchor.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C86D50193B788A00F21D8F /* PFLAudioResponderAnchor.m */; };
 		33C86D54193B8C8A00F21D8F /* PFLDragNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C86D53193B8C8A00F21D8F /* PFLDragNode.m */; };
 		33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */; };
 		33F0C9FC191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0C9FB191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m */; };
@@ -846,8 +845,6 @@
 		33B868F11900313D0071C2B9 /* tech-tonal3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal3.caf"; sourceTree = "<group>"; };
 		33B868F21900313D0071C2B9 /* tech-tonal4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal4.caf"; sourceTree = "<group>"; };
 		33B868F31900313D0071C2B9 /* tech-tonal5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal5.caf"; sourceTree = "<group>"; };
-		33C86D4F193B788A00F21D8F /* PFLAudioResponderAnchor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLAudioResponderAnchor.h; sourceTree = "<group>"; };
-		33C86D50193B788A00F21D8F /* PFLAudioResponderAnchor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLAudioResponderAnchor.m; sourceTree = "<group>"; };
 		33C86D52193B8C8A00F21D8F /* PFLDragNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLDragNode.h; sourceTree = "<group>"; };
 		33C86D53193B8C8A00F21D8F /* PFLDragNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLDragNode.m; sourceTree = "<group>"; };
 		33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGoalSprite.h; sourceTree = "<group>"; };
@@ -1825,8 +1822,6 @@
 			isa = PBXGroup;
 			children = (
 				33F0C9FD191BF2B70081CF77 /* PFLAudioResponderSprite.h */,
-				33C86D4F193B788A00F21D8F /* PFLAudioResponderAnchor.h */,
-				33C86D50193B788A00F21D8F /* PFLAudioResponderAnchor.m */,
 				33F0C9FE191BF2B70081CF77 /* PFLAudioResponderSprite.m */,
 				3399662818F0B60C000F4522 /* PFLArrowSprite.h */,
 				3399662918F0B60C000F4522 /* PFLArrowSprite.m */,
@@ -2280,7 +2275,6 @@
 				339963C018F0A8DE000F4522 /* ccFPSImages.m in Sources */,
 				3399649718F0A8DF000F4522 /* ccUtils.c in Sources */,
 				3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */,
-				33C86D51193B788A00F21D8F /* PFLAudioResponderAnchor.m in Sources */,
 				3399640818F0A8DF000F4522 /* CCPhysicsShape.m in Sources */,
 				3399641018F0A8DF000F4522 /* CCRenderTexture.m in Sources */,
 				3399639618F0A8DE000F4522 /* CCActionManager.m in Sources */,
