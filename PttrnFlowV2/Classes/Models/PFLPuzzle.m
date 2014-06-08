@@ -45,14 +45,23 @@
     }
     self.audio = [NSArray arrayWithArray:audio];
     
-    // glyph models
-    NSMutableArray* glyphs = [NSMutableArray array];
-    for (NSDictionary* g in json[@"glyphs"])
+    // static glyph models
+    NSMutableArray* staticGlyphs = [NSMutableArray array];
+    for (NSDictionary* g in json[@"static_glyphs"])
     {
-      PFLGlyph* glyph = [[PFLGlyph alloc] initWithObject:g puzzle:self];
-      [glyphs addObject:glyph];
+      PFLGlyph* glyph = [[PFLGlyph alloc] initWithObject:g puzzle:self isStatic:YES];
+      [staticGlyphs addObject:glyph];
     }
-    self.glyphs = [NSArray arrayWithArray:glyphs];
+    self.staticGlyphs = [NSArray arrayWithArray:staticGlyphs];
+    
+    // inventory glyph models
+    NSMutableArray* inventoryGlyphs = [NSMutableArray array];
+    for (NSDictionary* g in json[@"inventory_glyphs"])
+    {
+      PFLGlyph* glyph = [[PFLGlyph alloc] initWithObject:g puzzle:self isStatic:NO];
+      [inventoryGlyphs addObject:glyph];
+    }
+    self.inventoryGlyphs = [NSArray arrayWithArray:inventoryGlyphs];
   }
   return self;
 }

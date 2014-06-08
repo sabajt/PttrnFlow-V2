@@ -15,32 +15,23 @@ NSString* const PFLGlyphTypeArrow = @"arrow";
 NSString* const PFLGlyphTypeEntry = @"entry";
 NSString* const PFLGlyphTypeGoal = @"goal";
 NSString* const PFLGlyphTypeSwitchSender = @"switch_sender";
-
-static NSString* const kResponderID = @"responder_id";
-static NSString* const kAudioID = @"audio_id";
-static NSString* const kCell = @"cell";
-static NSString* const kDirection = @"direction";
-static NSString* const kStatic = @"static";
-static NSString* const kType = @"type";
+NSString* const PFLGlyphTypeWarp = @"warp";
 
 @implementation PFLGlyph
 
-- (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle
+- (id)initWithObject:(NSDictionary*)object puzzle:(PFLPuzzle*)puzzle isStatic:(BOOL)isStatic
 {
   self = [super init];
   if (self)
   {
     self.puzzle = puzzle;
 
-    self.responderID = object[kResponderID];
-    self.audioID = object[kAudioID];
-    NSArray *cell = object[kCell];
-    self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
-    self.direction = object[kDirection];
-    self.isStatic = [object[kStatic] boolValue];
-    self.type = object[kType];
-    self.switchChannel = object[@"switch_channel"];
+    self.responderID = object[@"responder_id"];
+    self.audioID = object[@"audio_id"];
+    self.direction = object[@"direction"];
+    self.type = object[@"type"];
     
+    self.switchChannel = object[@"switch_channel"];
     NSArray* switchReceiver = object[@"switch_receiver"];
     if (switchReceiver)
     {
@@ -48,6 +39,15 @@ static NSString* const kType = @"type";
       PFLSwitchReceiverAttributes* attributesState2 = [[PFLSwitchReceiverAttributes alloc] initWithJson:switchReceiver[1]];
       self.switchReceiverAttributes = @[attributesState1, attributesState2];
     }
+    
+    self.isStatic = isStatic;
+    if (isStatic)
+    {
+      NSArray *cell = object[@"cell"];
+      self.cell = [PFLCoord coordWithX:[cell[0] integerValue] Y:[cell[1] integerValue]];
+    }
+    
+    self.warpChannel = object[@"warp_channel"];
   }
   return self;
 }

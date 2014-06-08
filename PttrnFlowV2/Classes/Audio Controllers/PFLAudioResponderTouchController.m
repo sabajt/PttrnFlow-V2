@@ -13,15 +13,22 @@
 #import "PFLAudioResponderTouchController.h"
 #import "PFLCoord.h"
 #import "PFLEvent.h"
+#import "PFLGlyph.h"
+#import "PFLPuzzleControlsLayer.h"
 
 NSString* const kPFLAudioTouchDispatcherCoordKey = @"coord";
 NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispatcherHitNotification";
+
+NSString* const PFLForwardTouchControllerMovedNotification = @"PFLForwardTouchControllerMovedNotification";
+NSString* const PFLForwardTouchControllerEndedNotification = @"PFLForwardTouchControllerEndedNotification";
+NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerTouchKey";
 
 @interface PFLAudioResponderTouchController ()
 
 @property (strong, nonatomic) NSMutableArray* responders;
 @property (assign) CFMutableDictionaryRef trackingTouches;
 @property (weak, nonatomic) PFLAudioEventController* audioEventController;
+@property BOOL hasStartedUsesSequence;
 
 @end
 
@@ -56,17 +63,22 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 - (void)handleStartSequence:(NSNotification*)notification
 {
-  self.userInteractionEnabled = NO;
+  self.hasStartedUsesSequence = YES;
 }
 
 - (void)handleStopSequence:(NSNotification*)notification
 {
-  self.userInteractionEnabled = YES;
+  self.hasStartedUsesSequence = NO;
 }
 
 - (void)addResponder:(id<PFLAudioResponder>)responder
 {
   [self.responders addObject:responder];
+}
+
+- (void)removeResponder:(id<PFLAudioResponder>)responder
+{
+  [self.responders removeObject:responder];
 }
 
 - (void)clearResponders
@@ -103,16 +115,9 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 
 - (void)changeToCell:(PFLCoord*)toCell fromCell:(PFLCoord*)fromCell channel:(NSString*)channel
 {
-  // don't do anything if responders at to cell
-  NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
-  if (toCellResponders.count > 0)
-  {
-      return;
-  }
-  
-  // move any responders to available cell if audio pad is not static
   PFLAudioPadSprite* pad;
   NSArray* fromCellResponders = [self responders:self.responders atCoord:fromCell];
+
   if (fromCellResponders.count > 0)
   {
     NSInteger found = [fromCellResponders indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -122,12 +127,29 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
       pad = fromCellResponders[found];
     }
   }
-  if (pad && !pad.isStatic && [toCell isCoordInGroup:self.areaCells])
+  if (pad && !pad.isStatic)
   {
-    for (CCNode<PFLAudioResponder>* node in fromCellResponders)
+    if ([toCell isCoordInGroup:self.areaCells])
     {
-      node.position = [toCell relativeMidpoint];
-      [node setAudioResponderCell:toCell];
+      // pop glyph off if responders at TO cell
+      NSArray* toCellResponders = [self responders:self.responders atCoord:toCell];
+      if (toCellResponders.count > 0)
+      {
+        [self.touchControllerDelegate glyphNodeDraggedOffBoardFromCell:fromCell];
+        return;
+      }
+      
+      // move any non-static responders to available cell
+      for (CCNode<PFLAudioResponder>* node in fromCellResponders)
+      {
+        node.position = [toCell relativeMidpoint];
+        [node setAudioResponderCell:toCell];
+      }
+    }
+    // pop glyph off if dragged off area
+    else
+    {
+      [self.touchControllerDelegate glyphNodeDraggedOffBoardFromCell:fromCell];
     }
   }
 }
@@ -138,10 +160,35 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
 {
   [self.parent touchBegan:touch withEvent:event];
   
-  // get grid cell of touch
   CGPoint touchPosition = [touch locationInNode:self];
-
   PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  // find if we touched an entry sprite before processing any hits so we can
+  // start / stop the sequence instead of processing ourselves
+  for (id<PFLAudioResponder> responder in self.responders)
+  {
+    if ([[responder audioResponderCell] isEqualToCoord:cell] && [responder isKindOfClass:[PFLAudioResponderSprite class]])
+    {
+      PFLAudioResponderSprite* audioResponderSprite = (PFLAudioResponderSprite*)responder;
+      if ([audioResponderSprite.glyph.type isEqualToString:PFLGlyphTypeEntry])
+      {
+        if (self.hasStartedUsesSequence) 
+        {
+          [self.controlEntryDelegate stopUserSequence];
+          return;
+        }
+        else
+        {
+          [self.controlEntryDelegate startUserSequence];
+          return;
+        }
+      }
+    }
+  }
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // track touch so we know which events / cell to associate
   CFIndex count = CFDictionaryGetCount(self.trackingTouches);
@@ -159,8 +206,12 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   
   // get grid cell of touch
   CGPoint touchPosition = [touch locationInNode:self];
-  
   PFLCoord *cell = [PFLCoord coordForRelativePosition:touchPosition];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // get channel and last touched cell of this specific touch
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
@@ -177,17 +228,28 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
     CFDictionaryReplaceValue(self.trackingTouches, (__bridge void *)(touch), (__bridge void *)(touchInfo));
     
     // process cell change
-    [self changeToCell:cell fromCell:lastCell channel:channel];
+    if (![PFLPuzzleControlsLayer isRestoringInventoryItem])
+    {
+      [self changeToCell:cell fromCell:lastCell channel:channel];
+    }
     
     // TODO: hit / release will only be needed when working with PD synths later
 //  [self releaseCell:lastCell channel:channel];
 //  [self hitCell:cell channel:channel];
   }
+  
+  // broadcast forward touch
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLForwardTouchControllerMovedNotification object:nil userInfo:@{PFLForwardTouchControllerTouchKey : touch}];
 }
 
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent*)event
 {
   [self.parent touchEnded:touch withEvent:event];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
 
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);
@@ -196,7 +258,6 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   [self.audioEventController receiveEvents:@[audioStopEvent]];
 
   // get grid cell of touch
-  //    CGPoint touchPosition = [self convertTouchToNodeSpace:touch];
   CGPoint touchPosition = [touch locationInNode:self];
 
   PFLCoord* cell = [PFLCoord coordForRelativePosition:touchPosition];
@@ -205,11 +266,19 @@ NSString* const kPFLAudioTouchDispatcherHitNotification = @"kPFLAudioTouchDispat
   CFDictionaryRemoveValue(self.trackingTouches, (__bridge void *)touch);
 
   self.allowScrolling = YES;
+  
+  // broadcast forward touch
+  [[NSNotificationCenter defaultCenter] postNotificationName:PFLForwardTouchControllerEndedNotification object:nil userInfo:@{PFLForwardTouchControllerTouchKey : touch}];
 }
 
 - (void)touchCancelled:(UITouch*)touch withEvent:(UIEvent*)event
 {
   [self.parent touchCancelled:touch withEvent:event];
+  
+  if (self.hasStartedUsesSequence)
+  {
+    return;
+  }
   
   // get channel
   NSMutableDictionary* touchInfo = CFDictionaryGetValue(self.trackingTouches, (__bridge void *)touch);

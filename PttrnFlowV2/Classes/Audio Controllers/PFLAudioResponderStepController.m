@@ -14,6 +14,9 @@
 #import "PFLPuzzle.h"
 #import "PFLPuzzleSet.h"
 #import "PFLPuzzleState.h"
+#import "PFLGlyph.h"
+#import "PFLAudioResponderSprite.h"
+#import "PFLAudioPadSprite.h"
 
 NSString* const PFLNotificationStartSequence = @"PFLNotificationStartSequence";
 NSString* const PFLNotificationStepSequence = @"PFLNotificationStepSequence";
@@ -39,6 +42,7 @@ NSString* const kKeyLoop = @"loop";
 @property BOOL hasWon;
 @property BOOL lastStepWasLoop;
 @property (strong, nonatomic) NSMutableArray* loopedEvents;
+@property BOOL lastStepWasWarpIn;
 
 @end
 
@@ -60,6 +64,11 @@ NSString* const kKeyLoop = @"loop";
 - (void)addResponder:(id<PFLAudioResponder>)responder
 {
   [self.responders addObject:responder];
+}
+
+- (void)removeResponder:(id<PFLAudioResponder>)responder
+{
+  [self.responders removeObject:responder];
 }
 
 - (void)clearResponders
@@ -94,12 +103,34 @@ NSString* const kKeyLoop = @"loop";
   }
   
   BOOL loop = NO;
+  PFLCoord* warpToCell;
+  
   for (PFLEvent* e in events)
   {
     if (([e.eventType integerValue] == PFLEventTypeDirection) && e.direction)
     {
       self.currentDirection = e.direction;
     }
+
+    if ([e.eventType integerValue] == PFLEventTypeWarp && !self.lastStepWasWarpIn)
+    {
+      for (id r in self.responders)
+      {
+        if (![r isKindOfClass:[PFLAudioPadSprite class]])
+        {
+          continue;
+        }
+        PFLAudioPadSprite* audioPad = (PFLAudioPadSprite*)r;
+        if (audioPad.glyph.cell &&
+            [audioPad.glyph.warpChannel isEqualToNumber:e.warpChannel] &&
+            ![audioPad.glyph.cell isEqualToCoord:self.currentCell])
+        {
+          warpToCell = audioPad.cell;
+          break;
+        }
+      }
+    }
+    
     if ([e.eventType integerValue] == PFLEventTypeGoal)
     {
       loop = YES;
@@ -130,7 +161,18 @@ NSString* const kKeyLoop = @"loop";
   else
   {
     self.lastStepWasLoop = NO;
-    self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
+    
+    if (warpToCell)
+    {
+      self.lastStepWasWarpIn = YES;
+      self.currentCell = warpToCell;
+    }
+    else
+    {
+      self.lastStepWasWarpIn = NO;
+      self.currentCell = [self.currentCell stepInDirection:self.currentDirection];
+    }
+    
     self.userSequenceIndex++;
   }
   

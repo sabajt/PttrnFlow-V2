@@ -33,7 +33,7 @@
   {
     puzzleState = [[PFLPuzzleState alloc] init];
     puzzleState.fileName = fileName;
-    [puzzleState updateWithGlyphs:puzzle.glyphs];
+    [puzzleState updateWithGlyphs:puzzle.staticGlyphs];
   }
   else
   {

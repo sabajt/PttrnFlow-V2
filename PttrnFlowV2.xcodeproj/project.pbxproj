@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		332DED9919107EA5007F78AA /* PFLFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 332DED9819107EA5007F78AA /* PFLFonts.m */; };
+		334B08EF1943C63600BD4340 /* PFLWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B08EE1943C63600BD4340 /* PFLWarpSprite.m */; };
+		334B08F11943CA8100BD4340 /* sys_set_0_puz_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */; };
+		334B08F31944C84A00BD4340 /* sys_set_0_puz_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 334B08F21944C84A00BD4340 /* sys_set_0_puz_4.json */; };
 		338866511930FAC700DD024C /* PFLHudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 338866501930FAC700DD024C /* PFLHudLayer.m */; };
 		3391382318F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3391382218F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.m */; };
 		3399634118F0A8DE000F4522 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399634018F0A8DE000F4522 /* QuartzCore.framework */; };
@@ -278,6 +281,7 @@
 		33B868FF1900313D0071C2B9 /* tech-tonal3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F11900313D0071C2B9 /* tech-tonal3.caf */; };
 		33B869001900313D0071C2B9 /* tech-tonal4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F21900313D0071C2B9 /* tech-tonal4.caf */; };
 		33B869011900313D0071C2B9 /* tech-tonal5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33B868F31900313D0071C2B9 /* tech-tonal5.caf */; };
+		33C86D54193B8C8A00F21D8F /* PFLDragNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C86D53193B8C8A00F21D8F /* PFLDragNode.m */; };
 		33CFB6A41909E0A10058F289 /* PFLGoalSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */; };
 		33F0C9FC191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0C9FB191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.m */; };
 		33F0C9FF191BF2B70081CF77 /* PFLAudioResponderSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0C9FE191BF2B70081CF77 /* PFLAudioResponderSprite.m */; };
@@ -314,6 +318,10 @@
 /* Begin PBXFileReference section */
 		332DED9719107EA5007F78AA /* PFLFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLFonts.h; sourceTree = "<group>"; };
 		332DED9819107EA5007F78AA /* PFLFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLFonts.m; sourceTree = "<group>"; };
+		334B08ED1943C63600BD4340 /* PFLWarpSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLWarpSprite.h; sourceTree = "<group>"; };
+		334B08EE1943C63600BD4340 /* PFLWarpSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLWarpSprite.m; sourceTree = "<group>"; };
+		334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sys_set_0_puz_3.json; sourceTree = "<group>"; };
+		334B08F21944C84A00BD4340 /* sys_set_0_puz_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sys_set_0_puz_4.json; sourceTree = "<group>"; };
 		3388664F1930FAC700DD024C /* PFLHudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLHudLayer.h; sourceTree = "<group>"; };
 		338866501930FAC700DD024C /* PFLHudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLHudLayer.m; sourceTree = "<group>"; };
 		3391382118F4E32100B7B1E5 /* CCNode+PFLRecursiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+PFLRecursiveTouch.h"; sourceTree = "<group>"; };
@@ -844,6 +852,8 @@
 		33B868F11900313D0071C2B9 /* tech-tonal3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal3.caf"; sourceTree = "<group>"; };
 		33B868F21900313D0071C2B9 /* tech-tonal4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal4.caf"; sourceTree = "<group>"; };
 		33B868F31900313D0071C2B9 /* tech-tonal5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "tech-tonal5.caf"; sourceTree = "<group>"; };
+		33C86D52193B8C8A00F21D8F /* PFLDragNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLDragNode.h; sourceTree = "<group>"; };
+		33C86D53193B8C8A00F21D8F /* PFLDragNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLDragNode.m; sourceTree = "<group>"; };
 		33CFB6A21909E0A10058F289 /* PFLGoalSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLGoalSprite.h; sourceTree = "<group>"; };
 		33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFLGoalSprite.m; sourceTree = "<group>"; };
 		33F0C9FA191BEB3C0081CF77 /* PFLSwitchReceiverAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFLSwitchReceiverAttributes.h; sourceTree = "<group>"; };
@@ -1833,6 +1843,8 @@
 				33CFB6A31909E0A10058F289 /* PFLGoalSprite.m */,
 				33AB9CB3191E5BE600854B03 /* PFLSwitchSenderSprite.h */,
 				33AB9CB4191E5BE600854B03 /* PFLSwitchSenderSprite.m */,
+				334B08ED1943C63600BD4340 /* PFLWarpSprite.h */,
+				334B08EE1943C63600BD4340 /* PFLWarpSprite.m */,
 			);
 			name = "Audio Responders";
 			path = "Classes/Audio Responders";
@@ -1847,6 +1859,8 @@
 				3399663B18F0B60C000F4522 /* PFLTileSprite.m */,
 				3399663C18F0B60C000F4522 /* PFLToggleButton.h */,
 				3399663D18F0B60C000F4522 /* PFLToggleButton.m */,
+				33C86D52193B8C8A00F21D8F /* PFLDragNode.h */,
+				33C86D53193B8C8A00F21D8F /* PFLDragNode.m */,
 			);
 			name = "Generic Nodes";
 			path = "Classes/Generic Nodes";
@@ -1976,6 +1990,8 @@
 		339966D018F0DC8D000F4522 /* puzzles */ = {
 			isa = PBXGroup;
 			children = (
+				334B08F21944C84A00BD4340 /* sys_set_0_puz_4.json */,
+				334B08F01943CA8100BD4340 /* sys_set_0_puz_3.json */,
 				339D769F192EC44700B249A7 /* sys_set_0_puz_0.json */,
 				339D76A0192EC44700B249A7 /* sys_set_0_puz_1.json */,
 				339D76A1192EC44700B249A7 /* sys_set_0_puz_2.json */,
@@ -2043,6 +2059,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "John Saba";
+				TargetAttributes = {
+					3399633C18F0A8DE000F4522 = {
+						DevelopmentTeam = 586EB56567;
+					};
+				};
 			};
 			buildConfigurationList = 3399633818F0A8DE000F4522 /* Build configuration list for PBXProject "PttrnFlowV2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2084,6 +2105,7 @@
 				33F7146E1906CB9B00621616 /* tech-bongo4.caf in Resources */,
 				3399636A18F0A8DE000F4522 /* Icon-72@2x.png in Resources */,
 				33F714551906000900621616 /* userInterface-ipad.plist in Resources */,
+				334B08F31944C84A00BD4340 /* sys_set_0_puz_4.json in Resources */,
 				339D76AF192EC44700B249A7 /* sys_set_0.json in Resources */,
 				3399635B18F0A8DE000F4522 /* Default.png in Resources */,
 				339D76A8192EC44700B249A7 /* sys_set_0_puz_0.json in Resources */,
@@ -2128,6 +2150,7 @@
 				3399661F18F0B47A000F4522 /* userInterface-hd.png in Resources */,
 				3399662118F0B47A000F4522 /* userInterface.png in Resources */,
 				3399661E18F0B47A000F4522 /* userInterface-hd.plist in Resources */,
+				334B08F11943CA8100BD4340 /* sys_set_0_puz_3.json in Resources */,
 				3399636E18F0A8DE000F4522 /* Icon-76@2x.png in Resources */,
 				339965E218F0A8E0000F4522 /* LICENSE_Chipmunk.txt in Resources */,
 				339A29A51902B9300045CA1A /* audioObjects-ipadhd.plist in Resources */,
@@ -2265,10 +2288,12 @@
 				339963C018F0A8DE000F4522 /* ccFPSImages.m in Sources */,
 				3399649718F0A8DF000F4522 /* ccUtils.c in Sources */,
 				3399669118F0B60C000F4522 /* PFLMultiSample.m in Sources */,
+				334B08EF1943C63600BD4340 /* PFLWarpSprite.m in Sources */,
 				3399640818F0A8DF000F4522 /* CCPhysicsShape.m in Sources */,
 				3399641018F0A8DF000F4522 /* CCRenderTexture.m in Sources */,
 				3399639618F0A8DE000F4522 /* CCActionManager.m in Sources */,
 				3399643A18F0A8DF000F4522 /* CCSprite9Slice.m in Sources */,
+				33C86D54193B8C8A00F21D8F /* PFLDragNode.m in Sources */,
 				3399644C18F0A8DF000F4522 /* CCTextureAtlas.m in Sources */,
 				3399669F18F0B60C000F4522 /* PFLCoord.m in Sources */,
 				3399650D18F0A8DF000F4522 /* OALAudioFile.m in Sources */,
@@ -2461,6 +2486,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2478,6 +2505,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2487,6 +2515,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PttrnFlowV2/Supporting Files/Prefix.pch";
@@ -2503,6 +2533,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

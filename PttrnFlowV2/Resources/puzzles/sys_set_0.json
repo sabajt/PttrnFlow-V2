@@ -1,6 +1,6 @@
 {
 	"file" : "sys_set_0",
-	"name" : "L o o p    1",
+	"name" : "Loop 1",
 	"bpm" : 120,
 	"length" : 16,
 	"theme" : "purple_light",
@@ -8,6 +8,8 @@
 	[
 		"sys_set_0_puz_0",
 		"sys_set_0_puz_1",
-		"sys_set_0_puz_2"
+		"sys_set_0_puz_2",
+		"sys_set_0_puz_3",
+		"sys_set_0_puz_4"
 	]
 }

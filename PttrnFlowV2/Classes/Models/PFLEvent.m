@@ -121,6 +121,14 @@ NSString *const kChannelNone = @"ChannelNone";
   return event;
 }
 
++ (id)warpEventWithWarpChannel:(NSNumber*)warpChannel
+{
+  PFLEvent* event = [[PFLEvent alloc] init];
+  event.eventType = [NSNumber numberWithInteger:PFLEventTypeWarp];
+  event.warpChannel = warpChannel;
+  return event;
+}
+
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -138,6 +146,7 @@ NSString *const kChannelNone = @"ChannelNone";
     self.switchSenderChannel = [aDecoder decodeObjectForKey:@"switchSenderChannel"];
     self.synthType = [aDecoder decodeObjectForKey:@"synthType"];
     self.time = [aDecoder decodeObjectForKey:@"time"];
+    self.warpChannel = [aDecoder decodeObjectForKey:@"warpChannel"];
   }
   
   return self;
@@ -155,6 +164,7 @@ NSString *const kChannelNone = @"ChannelNone";
   [aCoder encodeObject:self.switchSenderChannel forKey:@"switchSenderChannel"];
   [aCoder encodeObject:self.synthType forKey:@"synthType"];
   [aCoder encodeObject:self.time forKey:@"time"];
+  [aCoder encodeObject:self.warpChannel forKey:@"warpChannel"];
 }
 
 #pragma mark - Accesors
