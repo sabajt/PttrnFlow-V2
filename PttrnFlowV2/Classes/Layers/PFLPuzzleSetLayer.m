@@ -40,8 +40,6 @@
   PFLPuzzleBackgroundLayer* background = [PFLPuzzleBackgroundLayer backgroundLayerWithColor:[PFLColorUtils backgroundWithTheme:puzzleSet.theme]];
   [scene addChild:background z:0];
   
-//  [CCLabelTTF labelWithString:puzzleSet.name fontName:@"ArialRoundedMTBold" fontSize:20];
-  
   // menu
   PFLPuzzleSetLayer* menuLayer = [[PFLPuzzleSetLayer alloc] initWithPuzzleSet:puzzleSet];
   menuLayer.contentSizeType = CCSizeTypeNormalized;
@@ -117,13 +115,9 @@
         for (NSInteger b = 0; b < self.puzzleSet.length; b++)
         {
           NSArray* eventsAtBeat;
-          if ([puzzleState.loopedEvents count] > b)
+          if (puzzleState.loopedEvents && [puzzleState.loopedEvents count] > b)
           {
             eventsAtBeat = puzzleState.loopedEvents[b];
-          }
-          else
-          {
-            eventsAtBeat = puzzleState.loopedEvents[b % [puzzleState.loopedEvents count]];
           }
           
           NSArray* existingEvents;
@@ -153,7 +147,10 @@
               }
             }
             
-            [self.combinedEventsLoop addObject:eventsAtBeat];
+            if (eventsAtBeat)
+            {
+              [self.combinedEventsLoop addObject:eventsAtBeat];
+            }
           }
         }
       }
