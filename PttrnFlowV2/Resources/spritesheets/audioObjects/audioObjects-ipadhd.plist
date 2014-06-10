@@ -7,7 +7,7 @@
             <key>arrow_up.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{464,166},{80,80}}</string>
+                <string>{{602,2},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>audio_box.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{284,582},{200,200}}</string>
+                <string>{{334,808},{200,200}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -56,10 +56,23 @@
                 <key>sourceSize</key>
                 <string>{296,296}</string>
             </dict>
+            <key>audio_box_switch.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{284,582},{224,224}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{224,224}}</string>
+                <key>sourceSize</key>
+                <string>{224,224}</string>
+            </dict>
             <key>audio_circle.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{290,862},{136,136}}</string>
+                <string>{{300,2},{136,136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -72,15 +85,15 @@
             <key>audio_unit.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{362,784},{72,72}}</string>
+                <string>{{284,808},{48,48}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{72,72}}</string>
+                <string>{{0,0},{48,48}}</string>
                 <key>sourceSize</key>
-                <string>{72,72}</string>
+                <string>{48,48}</string>
             </dict>
             <key>clear_rect_audio_batch.png</key>
             <dict>
@@ -98,7 +111,7 @@
             <key>drum_bullseye.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{436,822},{32,32}}</string>
+                <string>{{290,964},{32,32}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -111,7 +124,7 @@
             <key>drum_diamond.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,248},{24,24}}</string>
+                <string>{{290,998},{24,24}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +137,7 @@
             <key>entry_up.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{464,84},{80,80}}</string>
+                <string>{{546,84},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +150,7 @@
             <key>glyph_circle.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{284,784},{76,76}}</string>
+                <string>{{300,222},{76,76}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +163,7 @@
             <key>goal.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{464,2},{80,80}}</string>
+                <string>{{504,166},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -241,7 +254,7 @@
             <key>switch_receiver_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{290,1000},{18,36}}</string>
+                <string>{{290,944},{18,36}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -254,7 +267,7 @@
             <key>switch_receiver_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{470,822},{26,36}}</string>
+                <string>{{290,916},{26,36}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,11 +280,11 @@
             <key>switch_receiver_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{466,784},{26,36}}</string>
+                <string>{{290,888},{26,36}}</string>
                 <key>offset</key>
                 <string>{-1,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{6,2},{26,36}}</string>
                 <key>sourceSize</key>
@@ -280,11 +293,11 @@
             <key>switch_receiver_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{436,784},{28,36}}</string>
+                <string>{{290,858},{28,36}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{6,2},{28,36}}</string>
                 <key>sourceSize</key>
@@ -293,7 +306,7 @@
             <key>switch_sender_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{422,248},{80,80}}</string>
+                <string>{{422,468},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +319,7 @@
             <key>switch_sender_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{382,166},{80,80}}</string>
+                <string>{{422,386},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +332,7 @@
             <key>switch_sender_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{382,84},{80,80}}</string>
+                <string>{{422,304},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +345,7 @@
             <key>switch_sender_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{382,2},{80,80}}</string>
+                <string>{{520,2},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -345,7 +358,7 @@
             <key>warp_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,166},{80,80}}</string>
+                <string>{{464,84},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -358,7 +371,7 @@
             <key>warp_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,84},{80,80}}</string>
+                <string>{{422,222},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -371,7 +384,7 @@
             <key>warp_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{300,2},{80,80}}</string>
+                <string>{{438,2},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -384,7 +397,7 @@
             <key>warp_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{428,940},{80,80}}</string>
+                <string>{{382,140},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -397,7 +410,7 @@
             <key>warp_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{428,858},{80,80}}</string>
+                <string>{{300,140},{80,80}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -417,7 +430,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:4e7ba5eb679b11bdcc2dcb7d68cabc50:ecb3c3699329d3e255406615987f3d3a:82db5edfa4ea82b9933e5fa2170b080c$</string>
+            <string>$TexturePacker:SmartUpdate:bf7d4b80879bb6fae7d8c76772b4002f:b4dee5ddf0ebaf94846bc04c768cdf2c:82db5edfa4ea82b9933e5fa2170b080c$</string>
             <key>textureFileName</key>
             <string>audioObjects-ipadhd.png</string>
         </dict>
