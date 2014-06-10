@@ -26,9 +26,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{50,50}}</string>
+                <string>{{6,6},{50,50}}</string>
                 <key>sourceSize</key>
-                <string>{50,50}</string>
+                <string>{62,62}</string>
             </dict>
             <key>audio_box_empty.png</key>
             <dict>
@@ -61,13 +61,13 @@
                 <key>frame</key>
                 <string>{{192,2},{56,56}}</string>
                 <key>offset</key>
-                <string>{0,0}</string>
+                <string>{3,3}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{56,56}}</string>
+                <string>{{6,0},{56,56}}</string>
                 <key>sourceSize</key>
-                <string>{56,56}</string>
+                <string>{62,62}</string>
             </dict>
             <key>audio_circle.png</key>
             <dict>
@@ -430,7 +430,7 @@
             <key>size</key>
             <string>{256,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bf7d4b80879bb6fae7d8c76772b4002f:b4dee5ddf0ebaf94846bc04c768cdf2c:82db5edfa4ea82b9933e5fa2170b080c$</string>
+            <string>$TexturePacker:SmartUpdate:f6c2a0fbab3214b82036b3b0a982add6:583175f3c5afd40eb9d912a6a59c1f1d:82db5edfa4ea82b9933e5fa2170b080c$</string>
             <key>textureFileName</key>
             <string>audioObjects.png</string>
         </dict>

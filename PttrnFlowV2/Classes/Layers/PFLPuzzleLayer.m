@@ -405,7 +405,7 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   CGPoint cellCenter = [cell relativeMidpoint];
   
   // audio pad sprite
-  PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithImageNamed:@"audio_box.png" glyph:glyph cell:cell];
+  PFLAudioPadSprite* audioPad = [[PFLAudioPadSprite alloc] initWithGlyph:glyph cell:cell];
 
   audioPad.position = cellCenter;
   [self addAudioResponder:audioPad];

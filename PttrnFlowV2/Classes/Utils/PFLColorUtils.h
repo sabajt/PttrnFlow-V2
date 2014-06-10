@@ -22,6 +22,7 @@ FOUNDATION_EXPORT NSString *const kPFLColorUtilsLightPurpleTheme;
 + (CCColor*)defaultPurple;
 + (CCColor*)dimPurple;
 + (CCColor*)lightPurple;
++ (CCColor*)strawberry;
 + (CCColor*)translucentBlack;
 
 #pragma mark - Theme
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT NSString *const kPFLColorUtilsLightPurpleTheme;
 + (CCColor*)glyphDetailWithTheme:(NSString*)theme;
 + (CCColor*)padHighlightWithTheme:(NSString*)theme;
 + (CCColor*)padWithTheme:(NSString*)theme isStatic:(BOOL)isStatic;
++ (CCColor*)specialGlyphDetailWithTheme:(NSString*)theme;
 + (CCColor*)winLabelWithTheme:(NSString*)theme;
 
 @end

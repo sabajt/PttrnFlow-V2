@@ -34,7 +34,7 @@
     self.detailSprite = detailSprite;
     detailSprite.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     [self addChild:detailSprite];
-    detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    detailSprite.color = [PFLColorUtils specialGlyphDetailWithTheme:self.theme];
   }
   return self;
 }

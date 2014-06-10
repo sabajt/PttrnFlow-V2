@@ -39,7 +39,12 @@
     CGPoint center = ccp(self.contentSize.width / 2.0f, self.contentSize.height / 2.0f);
     
     // audio pad
-    CCSprite* audioPad = [CCSprite spriteWithImageNamed:@"audio_box.png"];
+    NSString* audioPadName = @"audio_box.png";
+    if (glyph.switchReceiverAttributes)
+    {
+      audioPadName = @"audio_box_switch.png";
+    }
+    CCSprite* audioPad = [CCSprite spriteWithImageNamed:audioPadName];
     audioPad.color = [PFLColorUtils padWithTheme:theme isStatic:NO];
     audioPad.position = center;
     self.audioPad = audioPad;

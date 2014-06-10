@@ -23,13 +23,26 @@
 
 @implementation PFLAudioPadSprite
 
-- (instancetype)initWithImageNamed:(NSString *)imageName glyph:(PFLGlyph *)glyph cell:(PFLCoord *)cell
+- (instancetype)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
 {
+  NSString* imageName = @"audio_box.png";
+  if (glyph.switchReceiverAttributes)
+  {
+    imageName = @"audio_box_switch.png";
+  }
   self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
   if (self)
   {
     self.isStatic = glyph.isStatic;
-    self.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    
+    if ([glyph.type isEqualToString:PFLGlyphTypeEntry] || [glyph.type isEqualToString:PFLGlyphTypeGoal])
+    {
+      self.color = [PFLColorUtils specialGlyphDetailWithTheme:self.theme];
+    }
+    else
+    {
+      self.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+    }
     
     if (glyph.switchReceiverAttributes && glyph.switchChannel)
     {

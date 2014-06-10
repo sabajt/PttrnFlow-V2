@@ -56,6 +56,11 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor colorWithCcColor3b:ccc3(227, 222, 238)];
 }
 
++ (CCColor*)strawberry
+{
+  return [CCColor colorWithCcColor3b:ccc3(216, 65, 121)];
+}
+
 + (CCColor*)translucentBlack
 {
   return [CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.2f];
@@ -175,7 +180,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)glyphDetailWithTheme:(NSString *)theme
++ (CCColor*)glyphDetailWithTheme:(NSString*)theme
 {
   if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
   {
@@ -189,7 +194,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)padHighlightWithTheme:(NSString *)theme
++ (CCColor*)padHighlightWithTheme:(NSString*)theme
 {
   if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
   {
@@ -203,7 +208,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)padWithTheme:(NSString *)theme isStatic:(BOOL)isStatic
++ (CCColor*)padWithTheme:(NSString*)theme isStatic:(BOOL)isStatic
 {
   if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
   {
@@ -225,7 +230,17 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor *)winLabelWithTheme:(NSString *)theme
++ (CCColor*)specialGlyphDetailWithTheme:(NSString*)theme
+{
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  {
+    return [PFLColorUtils strawberry];
+  }
+  CCLOG(@"Warning theme '%@' not recognized", theme);
+  return [CCColor blackColor];
+}
+
++ (CCColor*)winLabelWithTheme:(NSString*)theme
 {
   if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
@@ -234,6 +249,5 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];
 }
-
 
 @end
