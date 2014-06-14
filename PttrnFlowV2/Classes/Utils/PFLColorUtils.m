@@ -8,7 +8,6 @@
 
 #import "PFLColorUtils.h"
 
-NSString *const kPFLColorUtilsPurpleTheme = @"purple";
 NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 @implementation PFLColorUtils
@@ -70,11 +69,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor *)audioPanelEdgeWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils darkPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils dimPurple];
   }
@@ -84,11 +79,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor *)audioPanelFillWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils darkPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils darkCream];
   }
@@ -168,11 +159,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor *)glyphActiveWithTheme:(NSString *)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils activeYellow];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils activeYellow];
   }
@@ -182,11 +169,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor*)glyphDetailWithTheme:(NSString*)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils darkCream];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils darkCream];
   }
@@ -196,11 +179,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor*)padHighlightWithTheme:(NSString*)theme
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    return [PFLColorUtils activeYellow];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     return [PFLColorUtils darkPurple];
   }
@@ -210,15 +189,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 
 + (CCColor*)padWithTheme:(NSString*)theme isStatic:(BOOL)isStatic
 {
-  if ([theme isEqualToString:kPFLColorUtilsPurpleTheme])
-  {
-    if (isStatic)
-    {
-      return [PFLColorUtils dimPurple];
-    }
-    return [PFLColorUtils defaultPurple];
-  }
-  else if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
+  if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
     if (isStatic)
     {

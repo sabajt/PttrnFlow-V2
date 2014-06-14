@@ -9,6 +9,8 @@
 #import "PFLColorUtils.h"
 #import "PFLEvent.h"
 #import "PFLSwitchSenderSprite.h"
+#import "PFLPuzzle.h"
+#import "PFLPuzzleSet.h"
 
 @interface PFLSwitchSenderSprite ()
 
@@ -34,7 +36,7 @@
     [self addChild:detailSprite];
     detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
     
-    [self audioResponderSwitchToState:@0];
+    [self audioResponderSwitchToState:@0 animated:NO];
   }
   return self;
 }
@@ -43,33 +45,79 @@
 
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration
 {
-  self.color = self.activeColor;
-  
-  CCActionTintTo* tint = [CCActionTintTo actionWithDuration:beatDuration * 2.0 color:self.defaultColor];
-  [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
-  
-  // broadcast hit notification here so we don't have to for both touch and step controllers
-  // if notification needs touch or step distinction, move this into respective controllers
+  // toggle the state
+  NSNumber* nextState;
   if ([self.switchState integerValue] == 0)
   {
-    self.switchState = @1;
+    nextState = @1;
   }
   else
   {
-    self.switchState = @0;
+    nextState = @0;
   }
-  NSDictionary* userInfo = @{
+
+  // broadcast hit notification here so we don't have to for both touch and step controllers
+  // if notification needs touch or step distinction, move this into respective controllers
+  NSDictionary* userInfo =
+  @{
     PFLSwitchChannelKey : self.glyph.switchChannel,
-    PFLSwitchStateKey : self.switchState
+    PFLSwitchStateKey : nextState
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLSwitchSenderHitNotification object:nil userInfo:userInfo];
+  
+  // we listen to our own notification for the benefit of other senders of the same channel,
+  // but manually call switch on this instance to make sure state changes before the animation
+  [self audioResponderSwitchToState:nextState animated:YES];
   
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSNumber*)state
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
 {
+  if ([self.switchState isEqual:state])
+  {
+    return;
+  }
+  
   self.switchState = state;
+  
+  [self stopAllActions];
+  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
+  
+  if ([state isEqual:@0])
+  {
+    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
+    
+    if (animated)
+    {
+      CCActionTintTo* tintSelf = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];
+      [self runAction:[CCActionEaseSineOut actionWithAction:tintSelf]];
+      
+      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic]];
+      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
+    }
+    else
+    {
+      self.color = self.defaultColor;
+    }
+  }
+  else
+  {
+    self.defaultColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    
+    if (animated)
+    {
+      CCActionTintTo* tint = [CCActionTintTo actionWithDuration:self.glyph.puzzle.puzzleSet.beatDuration color:self.defaultColor];
+      [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
+      
+      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils glyphDetailWithTheme:self.theme]];
+      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
+    }
+    else
+    {
+      self.color = self.defaultColor;
+    }
+  }
 }
 
 @end

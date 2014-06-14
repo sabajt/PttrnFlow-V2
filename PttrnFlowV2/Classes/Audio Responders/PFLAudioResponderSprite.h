@@ -14,6 +14,7 @@
 FOUNDATION_EXPORT NSString* const PFLSwitchSenderHitNotification;
 FOUNDATION_EXPORT NSString* const PFLSwitchChannelKey;
 FOUNDATION_EXPORT NSString* const PFLSwitchStateKey;
+FOUNDATION_EXPORT NSString* const PFLSwitchCoordKey;
 
 @interface PFLAudioResponderSprite : CCSprite <PFLAudioResponder>
 

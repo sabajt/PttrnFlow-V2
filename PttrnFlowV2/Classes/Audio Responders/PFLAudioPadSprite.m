@@ -25,12 +25,7 @@
 
 - (instancetype)initWithGlyph:(PFLGlyph*)glyph cell:(PFLCoord*)cell
 {
-  NSString* imageName = @"audio_box.png";
-  if (glyph.switchReceiverAttributes)
-  {
-    imageName = @"audio_box_switch.png";
-  }
-  self = [super initWithImageNamed:imageName glyph:glyph cell:cell];
+  self = [super initWithImageNamed:@"audio_box.png" glyph:glyph cell:cell];
   if (self)
   {
     self.isStatic = glyph.isStatic;
@@ -46,12 +41,23 @@
     
     if (glyph.switchReceiverAttributes && glyph.switchChannel)
     {
-      static CGFloat channelIconPadding = 4.0f;
+      static CGFloat channelIconPadding = 0.0f;
+      
+      CCSprite* iconContainer = [CCSprite spriteWithImageNamed:@"audio_box_switch.png"];
+      iconContainer.anchorPoint = ccp(1.0f, 1.0f);
+      iconContainer.position = ccp(self.contentSize.width - channelIconPadding, self.contentSize.height - channelIconPadding);
+      iconContainer.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      [self addChild:iconContainer];
+      
+      CCSprite* containerBorder = [CCSprite spriteWithImageNamed:@"audio_box_switch_border.png"];
+      containerBorder.position = ccp(iconContainer.contentSize.width / 2.0f, iconContainer.contentSize.height / 2.0f);
+      containerBorder.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+      [iconContainer addChild:containerBorder];
+      
       CCSprite* channelIcon = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"switch_receiver_%i.png", [glyph.switchChannel integerValue] + 1]];
-      channelIcon.anchorPoint = ccp(1.0f, 1.0f);
-      channelIcon.position = ccp(self.contentSize.width - channelIconPadding, self.contentSize.height - channelIconPadding);
-      channelIcon.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
-      [self addChild:channelIcon];
+      channelIcon.position = containerBorder.position;
+      channelIcon.color = containerBorder.color;
+      [iconContainer addChild:channelIcon];
     }
   }
   return self;

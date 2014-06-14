@@ -42,7 +42,7 @@
     // TOOD: might need to load saved state?
     if (glyph.switchReceiverAttributes)
     {
-      [self audioResponderSwitchToState:@0];
+      [self audioResponderSwitchToState:@0 animated:NO];
     }
     else
     {
@@ -65,28 +65,109 @@
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSNumber*)state
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
 {
+  if ([self.switchState isEqual:state])
+  {
+    return;
+  }
+  
   self.switchState = state;
   PFLSwitchReceiverAttributes* attributes = self.glyph.switchReceiverAttributes[[state integerValue]];
+  
+  [self stopAllActions];
+  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
   
   self.active = attributes.active;
   if (self.active)
   {
-    self.detailSprite.opacity = 1.0f;
+    if (animated)
+    {
+      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:1.0f];
+      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+    }
+    else
+    {
+      self.detailSprite.opacity = 1.0f;
+    }
   }
   else
   {
-    self.detailSprite.opacity = 0.2f;
+    if (animated)
+    {
+      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:0.0f];
+      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+    }
+    else
+    {
+      self.detailSprite.opacity = 0.0f;
+    }
   }
   
   self.direction = attributes.direction;
   if (self.direction)
   {
-    self.rotation = [self.direction degrees];
+    if (animated)
+    {
+      CCActionRotateTo* rotate = [CCActionRotateTo actionWithDuration:beatDuration angle:[self.direction degrees]];
+      [self runAction:[CCActionEaseBackInOut actionWithAction:rotate]];
+    }
+    else
+    {
+      self.rotation = [self.direction degrees];
+    }
   }
   
   self.event = [PFLEvent directionEventWithDirection:self.direction];
 }
+
+//- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
+//{
+//  if ([self.switchState isEqual:state])
+//  {
+//    return;
+//  }
+//  
+//  self.switchState = state;
+//  
+//  [self stopAllActions];
+//  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
+//  
+//  if ([state isEqual:@0])
+//  {
+//    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
+//    
+//    if (animated)
+//    {
+//      CCActionTintTo* tintSelf = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];
+//      [self runAction:[CCActionEaseSineOut actionWithAction:tintSelf]];
+//      
+//      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic]];
+//      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
+//    }
+//    else
+//    {
+//      self.color = self.defaultColor;
+//    }
+//  }
+//  else
+//  {
+//    self.defaultColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+//    
+//    if (animated)
+//    {
+//      CCActionTintTo* tint = [CCActionTintTo actionWithDuration:self.glyph.puzzle.puzzleSet.beatDuration color:self.defaultColor];
+//      [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
+//      
+//      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils glyphDetailWithTheme:self.theme]];
+//      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
+//    }
+//    else
+//    {
+//      self.color = self.defaultColor;
+//    }
+//  }
+//}
+
 
 @end

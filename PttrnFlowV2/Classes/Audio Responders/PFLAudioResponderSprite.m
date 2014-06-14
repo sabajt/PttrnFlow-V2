@@ -17,6 +17,7 @@
 NSString* const PFLSwitchSenderHitNotification = @"PFLSwitchSenderHitNotification";
 NSString* const PFLSwitchChannelKey = @"PFLSwitchChannelKey";
 NSString* const PFLSwitchStateKey = @"PFLSwitchStateKey";
+NSString* const PFLSwitchCoordKey = @"PFLSwitchCoordKey";
 
 @implementation PFLAudioResponderSprite
 
@@ -54,16 +55,18 @@ NSString* const PFLSwitchStateKey = @"PFLSwitchStateKey";
 
 - (void)handleSwitchHit:(NSNotification*)notification
 {
+  if (![self respondsToSelector:@selector(audioResponderSwitchToState:animated:)])
+  {
+    return;
+  }
+  
   NSNumber* switchChannel = notification.userInfo[PFLSwitchChannelKey];
   NSNumber* switchState = notification.userInfo[PFLSwitchStateKey];
-  if ([switchChannel isEqualToNumber:self.glyph.switchChannel] &&
-      [self respondsToSelector:@selector(audioResponderSwitchToState:)])
+  PFLCoord* senderCell = notification.userInfo[PFLSwitchCoordKey];
+  
+  if ([switchChannel isEqualToNumber:self.glyph.switchChannel])
   {
-    [self audioResponderSwitchToState:switchState];
-  }
-  else
-  {
-    CCLOG(@"Warning: glyph with switch receiver attributes does not implement audioResponderSwitchState:channel:");
+    [self audioResponderSwitchToState:switchState animated:![senderCell isEqualToCoord:self.cell]];
   }
 }
 

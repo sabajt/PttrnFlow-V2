@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-FOUNDATION_EXPORT NSString *const kPFLColorUtilsPurpleTheme;
 FOUNDATION_EXPORT NSString *const kPFLColorUtilsLightPurpleTheme;
 
 @interface PFLColorUtils : NSObject
