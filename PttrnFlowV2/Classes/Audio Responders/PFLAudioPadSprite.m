@@ -17,6 +17,7 @@
 @interface PFLAudioPadSprite ()
 
 @property (strong, nonatomic) CCSprite* highlightSprite;
+@property CGFloat stateOpacity;
 
 @end
 
@@ -29,6 +30,7 @@
   if (self)
   {
     self.isStatic = glyph.isStatic;
+    self.stateOpacity = 1.0f;
     
     if ([glyph.type isEqualToString:PFLGlyphTypeEntry] || [glyph.type isEqualToString:PFLGlyphTypeGoal])
     {
@@ -75,6 +77,37 @@
   [self runAction:seq];
   
   return nil;
+}
+
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
+{
+  if ([self.switchState isEqualToNumber:state])
+  {
+    return;
+  }
+  
+  self.switchState = state;
+  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
+  
+  if ([state isEqualToNumber:@0])
+  {
+    self.stateOpacity = 1.0f;
+  }
+  else
+  {
+    self.stateOpacity = 0.5f;
+  }
+  
+  if (animated)
+  {
+    CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:self.stateOpacity];
+    [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+  }
+  
+  else
+  {
+    self.opacity = self.stateOpacity;
+  }
 }
 
 @end
