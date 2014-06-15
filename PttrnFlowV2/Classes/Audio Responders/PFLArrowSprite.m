@@ -78,32 +78,36 @@
   [self stopAllActions];
   CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
   
-  self.active = attributes.active;
-  if (self.active)
-  {
-    if (animated)
-    {
-      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:1.0f];
-      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
-    }
-    else
-    {
-      self.detailSprite.opacity = 1.0f;
-    }
-  }
-  else
-  {
-    if (animated)
-    {
-      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:0.0f];
-      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
-    }
-    else
-    {
-      self.detailSprite.opacity = 0.0f;
-    }
-  }
+  // ********
+  // TODO: figure out how to better do this, it's conflicting with other animations
+//  self.active = attributes.active;
+//  if (self.active)
+//  {
+//    if (animated)
+//    {
+//      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:1.0f];
+//      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+//    }
+//    else
+//    {
+//      self.detailSprite.opacity = 1.0f;
+//    }
+//  }
+//  else
+//  {
+//    if (animated)
+//    {
+//      CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:0.0f];
+//      [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+//    }
+//    else
+//    {
+//      self.detailSprite.opacity = 0.0f;
+//    }
+//  }
+  // ********
   
+  // direction
   self.direction = attributes.direction;
   if (self.direction)
   {
@@ -116,6 +120,30 @@
     {
       self.rotation = [self.direction degrees];
     }
+  }
+  
+  // color
+  CCColor* detailColor;
+  if ([state isEqualToNumber:@0])
+  {
+    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
+    detailColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+  }
+  else
+  {
+    self.defaultColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    detailColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
+  }
+  
+  if (animated)
+  {
+    [self runAction:[CCActionEaseSineOut actionWithAction:[CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor]]];
+    [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:[CCActionTintTo actionWithDuration:beatDuration color:detailColor]]];
+  }
+  else
+  {
+    self.color = self.defaultColor;
+    self.detailSprite.color = detailColor;
   }
   
   self.event = [PFLEvent directionEventWithDirection:self.direction];
