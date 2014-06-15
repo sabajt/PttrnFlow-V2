@@ -55,7 +55,7 @@ NSString* const PFLSwitchCoordKey = @"PFLSwitchCoordKey";
 
 - (void)handleSwitchHit:(NSNotification*)notification
 {
-  if (![self respondsToSelector:@selector(audioResponderSwitchToState:animated:)])
+  if (![self respondsToSelector:@selector(audioResponderSwitchToState:animated:senderCell:)])
   {
     return;
   }
@@ -66,7 +66,7 @@ NSString* const PFLSwitchCoordKey = @"PFLSwitchCoordKey";
   
   if ([switchChannel isEqualToNumber:self.glyph.switchChannel])
   {
-    [self audioResponderSwitchToState:switchState animated:![senderCell isEqualToCoord:self.cell]];
+    [self audioResponderSwitchToState:switchState animated:YES senderCell:senderCell];
   }
 }
 

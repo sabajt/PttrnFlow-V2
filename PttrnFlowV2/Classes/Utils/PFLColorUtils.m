@@ -181,7 +181,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
 {
   if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {
-    return [PFLColorUtils darkPurple];
+    return [PFLColorUtils activeYellow];
   }
   CCLOG(@"Warning theme '%@' not recognized", theme);
   return [CCColor blackColor];
@@ -201,7 +201,7 @@ NSString *const kPFLColorUtilsLightPurpleTheme = @"purple_light";
   return [CCColor blackColor];
 }
 
-+ (CCColor*)specialGlyphDetailWithTheme:(NSString*)theme
++ (CCColor*)specialPadWithTheme:(NSString*)theme
 {
   if ([theme isEqualToString:kPFLColorUtilsLightPurpleTheme])
   {

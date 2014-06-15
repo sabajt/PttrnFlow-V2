@@ -29,6 +29,6 @@
 
 // For use with puzzle states
 - (NSNumber*)audioResponderID;
-- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated;
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated senderCell:(PFLCoord*)senderCell;
 
 @end

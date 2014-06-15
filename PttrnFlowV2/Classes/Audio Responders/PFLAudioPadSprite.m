@@ -16,8 +16,10 @@
 
 @interface PFLAudioPadSprite ()
 
-@property (strong, nonatomic) CCSprite* highlightSprite;
-@property CGFloat stateOpacity;
+@property (nonatomic, weak) CCSprite* highlightSprite;
+@property (nonatomic, weak) CCSprite* switchIconContainer;
+@property (nonatomic, weak) CCSprite* switchContainerBorder;
+@property (nonatomic, weak) CCSprite* switchChannelLabel;
 
 @end
 
@@ -30,16 +32,7 @@
   if (self)
   {
     self.isStatic = glyph.isStatic;
-    self.stateOpacity = 1.0f;
-    
-    if ([glyph.type isEqualToString:PFLGlyphTypeEntry] || [glyph.type isEqualToString:PFLGlyphTypeGoal])
-    {
-      self.color = [PFLColorUtils specialGlyphDetailWithTheme:self.theme];
-    }
-    else
-    {
-      self.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
-    }
+    [self resetColor];
     
     if (glyph.switchReceiverAttributes && glyph.switchChannel)
     {
@@ -49,20 +42,51 @@
       iconContainer.anchorPoint = ccp(1.0f, 1.0f);
       iconContainer.position = ccp(self.contentSize.width - channelIconPadding, self.contentSize.height - channelIconPadding);
       iconContainer.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      self.switchIconContainer = iconContainer;
       [self addChild:iconContainer];
       
       CCSprite* containerBorder = [CCSprite spriteWithImageNamed:@"audio_box_switch_border.png"];
       containerBorder.position = ccp(iconContainer.contentSize.width / 2.0f, iconContainer.contentSize.height / 2.0f);
       containerBorder.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
+      self.switchContainerBorder = containerBorder;
       [iconContainer addChild:containerBorder];
       
       CCSprite* channelIcon = [CCSprite spriteWithImageNamed:[NSString stringWithFormat:@"switch_receiver_%i.png", [glyph.switchChannel integerValue] + 1]];
       channelIcon.position = containerBorder.position;
       channelIcon.color = containerBorder.color;
+      self.switchChannelLabel = channelIcon;
       [iconContainer addChild:channelIcon];
     }
   }
   return self;
+}
+
+- (void)resetColor
+{
+  if ([self.glyph.type isEqualToString:PFLGlyphTypeEntry] || [self.glyph.type isEqualToString:PFLGlyphTypeGoal])
+  {
+    // no switch states for entries and goals for now
+    self.color = [PFLColorUtils specialPadWithTheme:self.theme];
+  }
+  else
+  {
+    // audio pad sprite
+    self.color = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    
+    // switch colors
+    if ([self.switchState isEqual:@0])
+    {
+      self.switchIconContainer.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      self.switchContainerBorder.color = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+      self.switchChannelLabel.color = self.switchContainerBorder.color;
+    }
+    else
+    {
+      self.switchIconContainer.color = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+      self.switchContainerBorder.color = [PFLColorUtils glyphDetailWithTheme:self.theme];
+      self.switchChannelLabel.color = self.switchContainerBorder.color;
+    }
+  }
 }
 
 #pragma mark - PFLAudioResponder
@@ -79,7 +103,7 @@
   return nil;
 }
 
-- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated senderCell:(PFLCoord *)senderCell
 {
   if ([self.switchState isEqualToNumber:state])
   {
@@ -89,24 +113,50 @@
   self.switchState = state;
   CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
   
+  CCActionCallBlock* updateImage;
+  CCColor* switchContainerColor;
+  CCColor* containerBorderColor;
+  
   if ([state isEqualToNumber:@0])
   {
-    self.stateOpacity = 1.0f;
+    updateImage = [CCActionCallBlock actionWithBlock:^{
+      [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"audio_box.png"]];
+      self.color = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    }];
+    
+    switchContainerColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
+    containerBorderColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
   }
   else
   {
-    self.stateOpacity = 0.5f;
+    updateImage = [CCActionCallBlock actionWithBlock:^{
+      [self setSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"audio_box_border.png"]];
+      self.color = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    }];
+    
+    switchContainerColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
+    containerBorderColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
   }
   
   if (animated)
   {
-    CCActionFadeTo* fade = [CCActionFadeTo actionWithDuration:beatDuration opacity:self.stateOpacity];
-    [self runAction:[CCActionEaseSineOut actionWithAction:fade]];
+    CCActionEaseSineOut* fadeOut = [CCActionEaseSineOut actionWithAction:[CCActionFadeOut actionWithDuration:beatDuration / 2.0]];
+    CCActionEaseSineOut* fadeIn = [CCActionEaseSineOut actionWithAction:[CCActionFadeIn actionWithDuration:beatDuration / 2.0]];
+    [self runAction:[CCActionSequence actionWithArray:@[fadeOut, updateImage, fadeIn]]];
+   
+    CCActionEaseSineOut* tintSwitchContainer = [CCActionEaseSineOut actionWithAction:[CCActionTintTo actionWithDuration:beatDuration color:switchContainerColor]];
+    [self.switchIconContainer runAction:tintSwitchContainer];
+    
+    CCActionEaseSineOut* tintContainerBorder = [CCActionEaseSineOut actionWithAction:[CCActionTintTo actionWithDuration:beatDuration color:containerBorderColor]];
+    [self.switchContainerBorder runAction:tintContainerBorder];
+    
+    CCActionEaseSineOut* tintChannelLabel = [CCActionEaseSineOut actionWithAction:[CCActionTintTo actionWithDuration:beatDuration color:containerBorderColor]];
+    [self.switchChannelLabel runAction:tintChannelLabel];
   }
-  
   else
   {
-    self.opacity = self.stateOpacity;
+    [self runAction:updateImage];
+    [self resetColor];
   }
 }
 

@@ -36,7 +36,7 @@
     [self addChild:detailSprite];
     detailSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:glyph.isStatic];
     
-    [self audioResponderSwitchToState:@0 animated:NO];
+    [self audioResponderSwitchToState:@0 animated:NO senderCell:cell];
   }
   return self;
 }
@@ -61,18 +61,19 @@
   NSDictionary* userInfo =
   @{
     PFLSwitchChannelKey : self.glyph.switchChannel,
-    PFLSwitchStateKey : nextState
+    PFLSwitchStateKey : nextState,
+    PFLSwitchCoordKey : self.cell
   };
   [[NSNotificationCenter defaultCenter] postNotificationName:PFLSwitchSenderHitNotification object:nil userInfo:userInfo];
   
   // we listen to our own notification for the benefit of other senders of the same channel,
   // but manually call switch on this instance to make sure state changes before the animation
-  [self audioResponderSwitchToState:nextState animated:YES];
+  [self audioResponderSwitchToState:nextState animated:YES senderCell:self.cell];
   
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated senderCell:(PFLCoord *)senderCell
 {
   if ([self.switchState isEqual:state])
   {

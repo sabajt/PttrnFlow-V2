@@ -42,7 +42,7 @@
     // TOOD: might need to load saved state?
     if (glyph.switchReceiverAttributes)
     {
-      [self audioResponderSwitchToState:@0 animated:NO];
+      [self audioResponderSwitchToState:@0 animated:NO senderCell:cell];
     }
     else
     {
@@ -65,7 +65,7 @@
   return self.event;
 }
 
-- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated senderCell:(PFLCoord *)senderCell
 {
   if ([self.switchState isEqual:state])
   {
@@ -120,54 +120,5 @@
   
   self.event = [PFLEvent directionEventWithDirection:self.direction];
 }
-
-//- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated
-//{
-//  if ([self.switchState isEqual:state])
-//  {
-//    return;
-//  }
-//  
-//  self.switchState = state;
-//  
-//  [self stopAllActions];
-//  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
-//  
-//  if ([state isEqual:@0])
-//  {
-//    self.defaultColor = [PFLColorUtils glyphDetailWithTheme:self.theme];
-//    
-//    if (animated)
-//    {
-//      CCActionTintTo* tintSelf = [CCActionTintTo actionWithDuration:beatDuration color:self.defaultColor];
-//      [self runAction:[CCActionEaseSineOut actionWithAction:tintSelf]];
-//      
-//      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic]];
-//      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
-//    }
-//    else
-//    {
-//      self.color = self.defaultColor;
-//    }
-//  }
-//  else
-//  {
-//    self.defaultColor = [PFLColorUtils padWithTheme:self.theme isStatic:self.glyph.isStatic];
-//    
-//    if (animated)
-//    {
-//      CCActionTintTo* tint = [CCActionTintTo actionWithDuration:self.glyph.puzzle.puzzleSet.beatDuration color:self.defaultColor];
-//      [self runAction:[CCActionEaseSineOut actionWithAction:tint]];
-//      
-//      CCActionTintTo* tintDetail = [CCActionTintTo actionWithDuration:beatDuration color:[PFLColorUtils glyphDetailWithTheme:self.theme]];
-//      [self.detailSprite runAction:[CCActionEaseSineOut actionWithAction:tintDetail]];
-//    }
-//    else
-//    {
-//      self.color = self.defaultColor;
-//    }
-//  }
-//}
-
 
 @end

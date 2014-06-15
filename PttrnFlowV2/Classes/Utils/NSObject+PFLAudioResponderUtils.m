@@ -44,21 +44,24 @@
 
 - (NSArray *)hitResponders:(NSArray *)responders atCoord:(PFLCoord *)coord
 {
-    // collect events from all hit cells
-    NSArray *events = [NSArray array];
-    NSArray *hitResponders = [self responders:responders atCoord:coord];
-    for (id<PFLAudioResponder> responder in hitResponders) {
-        if (![responder conformsToProtocol:@protocol(PFLAudioResponder)]) {
-            CCLOG(@"warning: %@ does not conform to AudioResponder, aborting.", responder);
-            return nil;
-        }
-        
-        PFLEvent *event = [responder audioResponderHit:self.beatDuration];
-        if (event) {
-            events = [events arrayByAddingObject:event];
-        }
+  // collect events from all hit cells
+  NSArray *events = [NSArray array];
+  NSArray *hitResponders = [self responders:responders atCoord:coord];
+  for (id<PFLAudioResponder> responder in hitResponders)
+  {
+    if (![responder conformsToProtocol:@protocol(PFLAudioResponder)])
+    {
+      CCLOG(@"warning: %@ does not conform to AudioResponder, aborting.", responder);
+      return nil;
     }
-    return events;
+    
+    PFLEvent *event = [responder audioResponderHit:self.beatDuration];
+    if (event)
+    {
+      events = [events arrayByAddingObject:event];
+    }
+  }
+  return events;
 }
 
 @end
