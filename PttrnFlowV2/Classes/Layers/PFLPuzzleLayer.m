@@ -483,7 +483,8 @@ static CGFloat kPuzzleBoundsMargin = 10.0f;
   PFLGlyph* glyph;
   for (id<PFLAudioResponder> responder in iterateAudioResponders)
   {
-    if ([[responder audioResponderCell] isEqualToCoord:coord])
+    if ([responder respondsToSelector:@selector(audioResponderCell)] &&
+        [[responder audioResponderCell] isEqualToCoord:coord])
     {
       // get the glyph -- TODO: sloppy as this sets the same glyph a bunch of times
       if ([responder isKindOfClass:[PFLAudioResponderSprite class]])

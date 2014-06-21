@@ -7,6 +7,7 @@
 //
 
 #import "CCNode.h"
+#import "PFLAudioResponder.h"
 
 @class PFLDragNode, PFLGlyph, PFLPuzzle;
 
@@ -19,7 +20,7 @@
 
 @end
 
-@interface PFLDragNode : CCNode
+@interface PFLDragNode : CCNode <PFLAudioResponder>
 
 @property (weak, nonatomic) id<PFLDragNodeDelegate> delegate;
 @property (strong, nonatomic) PFLGlyph* glyph;

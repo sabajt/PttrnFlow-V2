@@ -13,7 +13,9 @@
 
 @protocol PFLAudioResponder <NSObject>
 
-// Responder must have a cell
+@optional
+
+// Any responder on the board must have a cell
 - (PFLCoord*)audioResponderCell;
 - (void)setAudioResponderCell:(PFLCoord*)coord;
 
@@ -21,8 +23,6 @@
 // Handle glyph actions here, like highlighting / animation
 // Responder may return and event to be processed as sound, or sequence logic
 - (PFLEvent*)audioResponderHit:(CGFloat)beatDuration;
-
-@optional
 
 // Triggered after touch up or after a step
 - (NSArray*)audioResponderRelease:(NSInteger)bpm;

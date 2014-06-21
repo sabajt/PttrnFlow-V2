@@ -15,11 +15,15 @@
 #import "PFLMultiSample.h"
 #import "PFLPuzzle.h"
 #import "PFLSample.h"
+#import "PFLSwitchReceiverAttributes.h"
+#import "PFLPuzzleSet.h"
 
 @interface PFLDragNode ()
 
 @property (copy, nonatomic) NSString* theme;
 @property (weak, nonatomic) CCSprite* audioPad;
+@property (strong, nonatomic) NSNumber* switchState;
+@property (copy, nonatomic) NSString* direction;
 
 @end
 
@@ -131,6 +135,14 @@
       warpSprite.color = [PFLColorUtils padWithTheme:self.theme isStatic:NO];
       [self addChild:warpSprite];
     }
+    
+    // switch state
+    // TOOD: might need to load saved state?
+    if (glyph.switchReceiverAttributes)
+    {
+      [self audioResponderSwitchToState:@0 animated:NO senderCell:nil];
+    }
+
   }
   return self;
 }
@@ -139,6 +151,43 @@
 {
   return self.audioPad.contentSize;
 }
+
+#pragma mark - PFLAudioResponder
+
+- (void)audioResponderSwitchToState:(NSNumber*)state animated:(BOOL)animated senderCell:(PFLCoord*)senderCell
+{
+  
+}
+//{
+//  if ([self.switchState isEqual:state])
+//  {
+//    return;
+//  }
+//  
+//  self.switchState = state;
+//  PFLSwitchReceiverAttributes* attributes = self.glyph.switchReceiverAttributes[[state integerValue]];
+//  
+//  [self stopAllActions];
+//  CCTime beatDuration = self.glyph.puzzle.puzzleSet.beatDuration;
+//  
+//  if ([self.glyph.type isEqualToString:PFLGlyphTypeArrow])
+//  {
+//    // direction
+//    self.direction = attributes.direction;
+//    if (self.direction)
+//    {
+//      if (animated)
+//      {
+//        CCActionRotateTo* rotate = [CCActionRotateTo actionWithDuration:beatDuration angle:[self.direction degrees]];
+//        [self runAction:[CCActionEaseBackInOut actionWithAction:rotate]];
+//      }
+//      else
+//      {
+//        self.rotation = [self.direction degrees];
+//      }
+//    }
+//  }
+//}
 
 #pragma mark - CCResponder
 

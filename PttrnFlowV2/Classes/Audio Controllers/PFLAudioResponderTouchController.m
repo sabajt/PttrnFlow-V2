@@ -105,7 +105,8 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
 {
   for (id<PFLAudioResponder> responder in self.responders)
   {
-    if (([cell isEqualToCoord:[responder audioResponderCell]]) &&
+    if ([responder respondsToSelector:@selector(audioResponderCell)] &&
+        ([cell isEqualToCoord:[responder audioResponderCell]]) &&
         [responder respondsToSelector:@selector(audioRelease:)])
     {
       [responder audioResponderRelease:1];
@@ -142,8 +143,11 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
       // move any non-static responders to available cell
       for (CCNode<PFLAudioResponder>* node in fromCellResponders)
       {
-        node.position = [toCell relativeMidpoint];
-        [node setAudioResponderCell:toCell];
+        if ([node respondsToSelector:@selector(setAudioResponderCell:)])
+        {
+          node.position = [toCell relativeMidpoint];
+          [node setAudioResponderCell:toCell];
+        }
       }
     }
     // pop glyph off if dragged off area
@@ -167,7 +171,9 @@ NSString* const PFLForwardTouchControllerTouchKey = @"PFLForwardTouchControllerT
   // start / stop the sequence instead of processing ourselves
   for (id<PFLAudioResponder> responder in self.responders)
   {
-    if ([[responder audioResponderCell] isEqualToCoord:cell] && [responder isKindOfClass:[PFLAudioResponderSprite class]])
+    if ([responder respondsToSelector:@selector(audioResponderCell)] &&
+        [[responder audioResponderCell] isEqualToCoord:cell] &&
+        [responder isKindOfClass:[PFLAudioResponderSprite class]])
     {
       PFLAudioResponderSprite* audioResponderSprite = (PFLAudioResponderSprite*)responder;
       if ([audioResponderSprite.glyph.type isEqualToString:PFLGlyphTypeEntry])

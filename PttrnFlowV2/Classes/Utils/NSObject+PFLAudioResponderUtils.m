@@ -17,29 +17,35 @@
 
 - (void)setBeatDuration:(CGFloat)beatDuration
 {
-    objc_setAssociatedObject(self, @selector(beatDuration), @(beatDuration), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  objc_setAssociatedObject(self, @selector(beatDuration), @(beatDuration), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGFloat)beatDuration
 {
-    return [objc_getAssociatedObject(self, @selector(beatDuration)) floatValue];
+  return [objc_getAssociatedObject(self, @selector(beatDuration)) floatValue];
 }
 
 - (NSArray *)responders:(NSArray *)responders atCoord:(PFLCoord *)coord
 {
-    NSMutableArray *results = [NSMutableArray array];
-    for (id<PFLAudioResponder> responder in responders) {
-        if (![responder conformsToProtocol:@protocol(PFLAudioResponder)]) {
-            CCLOG(@"warning: %@ does not conform to AudioResponder, aborting.", responder);
-            return nil;
-        }
-        
-        PFLCoord *responderCoord = [responder audioResponderCell];
-        if ([responderCoord isEqualToCoord:coord]) {
-            [results addObject:responder];
-        }
+  NSMutableArray *results = [NSMutableArray array];
+  for (id<PFLAudioResponder> responder in responders)
+  {
+    if (![responder conformsToProtocol:@protocol(PFLAudioResponder)])
+    {
+      CCLOG(@"warning: %@ does not conform to AudioResponder, aborting.", responder);
+      return nil;
     }
-    return [NSArray arrayWithArray:results];
+  
+    if ([responder respondsToSelector:@selector(audioResponderCell)])
+    {
+      PFLCoord *responderCoord = [responder audioResponderCell];
+      if ([responderCoord isEqualToCoord:coord])
+      {
+        [results addObject:responder];
+      }
+    }
+  }
+  return [NSArray arrayWithArray:results];
 }
 
 - (NSArray *)hitResponders:(NSArray *)responders atCoord:(PFLCoord *)coord
@@ -55,11 +61,15 @@
       return nil;
     }
     
-    PFLEvent *event = [responder audioResponderHit:self.beatDuration];
-    if (event)
+    if ([responder respondsToSelector:@selector(audioResponderHit:)])
     {
-      events = [events arrayByAddingObject:event];
+      PFLEvent *event = [responder audioResponderHit:self.beatDuration];
+      if (event)
+      {
+        events = [events arrayByAddingObject:event];
+      }
     }
+
   }
   return events;
 }
